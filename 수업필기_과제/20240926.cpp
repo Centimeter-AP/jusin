@@ -42,10 +42,9 @@ int main()
 	// 70~79 C
 	// 60~69 D
 	// F
-
-
-
 	// 빨리하고밥먹어야지~
+
+	
 
 	int iKor(0), iEng(0), iMat(0), iSum(0), iGrade(0);
 	float fAvg(0.0);
@@ -110,8 +109,6 @@ int main()
 		cout << "성적의 평균은 0 이상 100 이하여야 합니다." << endl;
 		break;
 	}
-
-
 
 	return 0;
 }
