@@ -4,6 +4,9 @@ using namespace std;
 
 int main()
 {
+	// 연산자 수업 함(자료 참고)
+
+
 	// 보수..
 	// 뺄셈
 	// A + (~A) + 1 == 0 (컴퓨터 동작방식)
@@ -31,9 +34,14 @@ int main()
 	// 몰랏당
 	// break가 되었던 경우는 보통 while이라던지.. 반복문 안에 if가 있었던 경우 
 
+
 	// switch문은 상수조건문이다
 	// case 뒤에 오는 숫자는 무조건 상수여야한다 case 변수: 같은건 안된다는 소리
 	// 근데 심볼릭 상수도 된다..? const 로 지정한 애들.....
+	// switch문 중괄호 내 case 이전에 변수선언이 안된다..
+	// case 내에서는 중괄호를 사용하면 (= 지역을 구분해주면) 변수 선언 후 사용이 가능
+	// 당연하지만 그렇게 지역을 구분해주면 다른 case에서 사용할 수 없음 !! 다른 지역의 지역변수니까
+
 
 
 	// 평균 값을 기준으로 성적 등급을 매기자
@@ -44,7 +52,7 @@ int main()
 	// F
 	// 빨리하고밥먹어야지~
 
-	
+
 
 	int iKor(0), iEng(0), iMat(0), iSum(0), iGrade(0);
 	float fAvg(0.0);
@@ -81,10 +89,14 @@ int main()
 		iGrade = 4;
 		// cout << "D 입니다." << endl;
 	}
-	else
+	else if (0.f <= fAvg && fAvg < 60.f)
 	{
 		iGrade = 5;
 		// cout << "F 입니다." << endl;
+	}
+	else
+	{
+		// cout << "\n!!성적의 평균은 0 이상 100 이하여야 합니다!!" << endl;
 	}
 
 	switch (iGrade)
@@ -106,7 +118,7 @@ int main()
 		break;
 	
 	default:
-		cout << "성적의 평균은 0 이상 100 이하여야 합니다." << endl;
+		cout << "\n!!성적의 평균은 0 이상 100 이하여야 합니다!!" << endl;
 		break;
 	}
 
