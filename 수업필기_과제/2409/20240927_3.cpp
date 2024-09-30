@@ -34,6 +34,7 @@ int main()
 		{
 			time(&tSeed);
 			srand(tSeed);
+			//srand(unsigned time(NULL));
 			iRand = rand();
 			cout << "1. 홀  2. 짝  3. 종료" << endl;
 			cin >> iInput;

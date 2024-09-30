@@ -42,5 +42,8 @@ int main()
 		cout << endl;
 	}
 
+	//숙제풀이는 while 안에 if조건문으로(while두번안하고)
+
+
 	return 0;
 }
