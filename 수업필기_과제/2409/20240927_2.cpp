@@ -89,7 +89,7 @@ int main()
 		// system("pause"); 윈도우용 pause
 		// getchar(); // 안타까운리눅스용
 		// char cGetchar;
-		// cin >> cGetchar; 이렇게도 될까?
+		// cin >> cGetchar; 이렇게도 될까? 이렇게밖에 안되네 왜 getchar가 \n을 못읽지?
 
 	}
 
