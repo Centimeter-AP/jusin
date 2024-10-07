@@ -27,6 +27,8 @@ void	SadLinuxPause();
 int		Purchase(int _iMoney, int _iInput, string _sMenu);
 //		들어온 _iInput값에 따라 구매 후 인자로 받은 메뉴 메세지 출력 후 잔액을 차감하고 차감된 잔액을 반환
 
+//		메인문에 실행코드를 줄줄쓰지말자 = maingame으로 가리기
+
 
 int main()
 {
