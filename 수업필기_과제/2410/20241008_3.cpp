@@ -52,13 +52,14 @@ void	BaseballGame(int *_iArr, int *_iAns, int _iIndex)
 
 	for (int iRound = 0; iRound < 9; ++iRound)
 	{
-		system("clear"); 	// windows는 cls가 맞음
+		// system("clear"); 	// windows는 cls가 맞음 와 이거 넣으니까 갑자기 암기력 게임 됨 당장 지워야함
 
-		cout << iRound + 1 << "라운드";
+		
 		if (iRound > 0)		// 첫 라운드에는 n스트라이크 m볼 출력 방지
 			cout << "\t\t" << iStrike << " 스트라이크 " << iBall << " 볼";
+		cout << '\n' << iRound + 1 << "라운드";
 		cout << endl;
-		PrintArray(_iArr, _iIndex); // 배열 출력 함수
+		// PrintArray(_iArr, _iIndex); // 배열 출력 함수
 
 		cout << "입력: ";
 		for (int i = 0; i < _iIndex; ++i)
@@ -89,8 +90,12 @@ void	BaseballGame(int *_iArr, int *_iAns, int _iIndex)
 			break;
 		}
 		else if(iRound + 1 == 9)		// 다음 조건 비교 시 iRound == 9라서 10라운드가 되는 경우(마지막라운드인경우)
-			cout << "\n패배!" << endl;	 // 9라운드인데도 위의 iStrike == _iIndex가 되지 못함 => 못맞췄다
+		{
+			cout << "\n패배!\n정답: ";
+			PrintArray(_iArr, _iIndex);
+		}						   	    // 9라운드인데도 위의 iStrike == _iIndex가 되지 못함 => 못맞췄다
 	}
 	// 윗부분 함수로 빼고싶은데 for문을 전부 넣으면 BaseballGame()이 너무 텅텅비고
 	// for문 안에서 기능을 뽑아 만들자니 매개변수로 넘길게 너무너무 많아짐..(배열 두개 + index, strike&ball, round...)
+	// iRound를 for문에서 선언하지 말고 나누기?
 }
