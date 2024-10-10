@@ -14,7 +14,7 @@ int main()
 	const int iCol(5); // 5개씩, 값 조절 가능
 	int iArr[25];
 	//int iArr[25] = {1,2,3,4,5,6,7,8,9,...} 어유귀찮아
-	for (int i = 0; i < sizeof(iArr) / sizeof(int); ++i)
+	for (int i = 0; i < sizeof(iArr) / sizeof(int); ++i) // 대신 i에 세로줄 j에 가로줄 조건
 		iArr[i] = i + 1;
 
 	for (int i = 0; i < sizeof(iArr) / sizeof(int); i += iCol)
@@ -25,6 +25,8 @@ int main()
 		}
 		cout << endl;
 	}
+
+	
 
 	return 0;
 }

@@ -13,6 +13,11 @@
 귀찮아서복붙함
 */
 
+// 난수를 뽑고 중복인지 확인하기(내방법)
+// 1~45 숫자를 넣은 배열 만들어서 뒤섞기 - 중복확인 할 필요없음(선생님)
+// 인덱스에난수넣고 swap()
+// 조건이 명확한 숫자면 .. 
+
 using namespace std;
 
 bool	IsDup(int *_iArr, int _iIndex);
@@ -32,7 +37,7 @@ int main()
 	return 0;
 }
 
-bool	IsDup(int *_iArr, int _iIndex)
+bool	IsDup(int *_iArr, int _iIndex) 
 {
 	for (int i = 0; _iArr[i] != 0 && i < _iIndex; ++i)
 	{
@@ -60,7 +65,7 @@ void	MakeLottoNum(int *_iArr)
 
 void	BubbleSort(int *_iArr)
 {
-	int iTmp(0);
+	int iTmp(0);	// swap();함수로 생략가능
 	for (int i = 6; i > 0; --i)
 	{
 		for (int j = 0; j < i - 1; ++j)  // 조건식에서 i에 -1을 해주지 않으면

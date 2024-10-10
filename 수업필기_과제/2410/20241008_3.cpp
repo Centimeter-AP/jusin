@@ -59,7 +59,7 @@ void	BaseballGame(int *_iArr, int *_iAns, int _iIndex)
 			cout << "\t\t" << iStrike << " 스트라이크 " << iBall << " 볼";
 		cout << '\n' << iRound + 1 << "라운드";
 		cout << endl;
-		// PrintArray(_iArr, _iIndex); // 배열 출력 함수
+		PrintArray(_iArr, _iIndex); // 배열 출력 함수
 
 		cout << "입력: ";
 		for (int i = 0; i < _iIndex; ++i)
