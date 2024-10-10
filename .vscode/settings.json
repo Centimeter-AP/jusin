@@ -5,6 +5,7 @@
 		"algorithm": "cpp",
 		"cstdlib": "cpp",
 		"__config": "c",
-		"bitset": "cpp"
+		"bitset": "cpp",
+		"string": "cpp"
 	}
 }
