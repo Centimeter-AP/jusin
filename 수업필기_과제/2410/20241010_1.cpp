@@ -16,15 +16,21 @@
 using namespace std;
 
 void	PrintArr(int (*_pArr)[3]);
+void	Rotate(int (*_pArr)[3], int (*_pRes)[3]);
 
 int main()
 {
-	int iArr[3][3] = {
-		{1,2,3},
-		{4,5,6},
-		{7,8,9}
-	};
+	int iArr[3][3] = {{1,2,3},{4,5,6},{7,8,9}};
+	int iRes[3][3] = {{},{5},{}};
 
+	PrintArr(iArr);
+	Rotate(iArr, iRes);
+	PrintArr(iArr);
+	Rotate(iArr, iRes);
+	PrintArr(iArr);
+	Rotate(iArr, iRes);
+	PrintArr(iArr);
+	Rotate(iArr, iRes);
 	PrintArr(iArr);
 
 	return 0;
@@ -39,11 +45,24 @@ void PrintArr(int (*_pArr)[3])
 		cout << endl;
 	}
 }
-/*
 
-1 2 3		7 4 1
-4 5 6		8 5 2
-7 8 9		9 6 3
-
-
-*/
+void Rotate(int (*_pArr)[3], int (*_pRes)[3])
+{
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			_pRes[j][2 - i] = _pArr[i][j];
+		}
+	}
+	
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			_pArr[i][j] = _pRes[i][j];
+		}
+	}
+	
+	cout << endl;
+}

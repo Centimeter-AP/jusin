@@ -11,32 +11,49 @@
 // 4  5	 6	-2입력>	 4	 5   6	->	 4	 5	 6
 // 7  8	 9			7	8	9		7	8	9
 
+// 컴퓨터까지 넣었더니 진짜 코드 너무 더럽고 끔찍한 최악의 스파게티 하드코딩이 됐는데...
+
 #include <iostream>
 
 using namespace std;
 
-void	PrintArr(int (*_pArr)[5], int _pInput[]);
+void	PrintArr(int (*_pArr)[5], int _pInput[], int _pCom[], int _iIndex);
 void	InitArr(int (*_pArr)[5]);
-int 	CheckInput(int _iRow, int _iCol, int _pInput[]);
+void	InitCom(int _pCom[25]);
+int 	CheckInput(int _iRow, int _iCol, int _pInput[], int _iIndex);
 void	InputNumber(int _pInput[], int _iIndex);
-int		IsBingo(int _pInput[]); // 빙고 판을 섞으면 사용불가....
-
+void	InputComputer(int _pCom[], int _iIndex);
+int		IsBingo(int _pInput[], int _iIndex); // 빙고 판을 섞으면 사용불가....
 
 int main()
 {
 	int iArr[5][5];
 	int iInput[25] = {}; // 입력받은 숫자 수용소
+	int iCom[25] = {};
+	int iMyBingo(0), iComBingo(0);
+
+	srand((unsigned int)(time(NULL)));
 
 	InitArr(iArr); // 배열 초기화
-	PrintArr(iArr, iInput);
+	InitCom(iCom); // 컴퓨터 행동 난수 생성
+	PrintArr(iArr, iInput, iCom, -1);
 
 	for (int i = 0; i < 25; ++i)
 	{
 		InputNumber(iInput, i);
-		PrintArr(iArr, iInput);
-		if (IsBingo(iInput) == 5)
+		PrintArr(iArr, iInput, iCom, i);
+		cout << "YOU\t\t\tCOMPUTER" << endl;
+		iMyBingo = IsBingo(iInput, i);
+		cout << "\t\t";
+		iComBingo = IsBingo(iCom, i);
+		if (iMyBingo >= 5)
 		{
 			cout << "\n승리!" << endl;
+			break;
+		}
+		else if (iComBingo >= 5)
+		{
+			cout << "\n패배!" << endl;
 			break;
 		}
 	}
@@ -50,7 +67,7 @@ void	InputNumber(int _pInput[], int _iIndex)
 
 	while(1)
 	{
-		cout << "1 ~ 25의 남아있는 숫자를 입력해주세요 : ";
+		cout << "\n1 ~ 25의 남아있는 숫자를 입력해주세요 : ";
 		cin >> _pInput[_iIndex];
 		if (_pInput[_iIndex] >= 1 && _pInput[_iIndex] <= 25)	// 범위 내인지
 		{
@@ -71,14 +88,42 @@ void	InputNumber(int _pInput[], int _iIndex)
 	}
 }
 
-void	PrintArr(int (*_pArr)[5], int _pInput[])
+void InputComputer(int _pCom[], int _iIndex)
+{
+	int i(0);
+
+	if (_pCom[_iIndex] >= 1 && _pCom[_iIndex] <= 25)	// 범위 내인지
+	{
+		for (i = 0; i < _iIndex; ++i)					// 이미 입력받은 숫자인지
+		{
+			if (_pCom[i] == _pCom[_iIndex])//중복이다!
+				break;
+		}
+		if (i == _iIndex) // 중복 검사 통과
+			return ;
+	}
+}
+
+void	PrintArr(int (*_pArr)[5], int _pInput[], int _pCom[], int _iIndex)
 {
 	system("clear");
 	for (int i = 0; i < 5; ++i)
 	{
 		for (int j = 0; j < 5 ; ++j)
 		{
-			if (CheckInput(i, j, _pInput)) // 받아온 값을 계속 확인해야해서 비효율적인 것 같음..
+			if (CheckInput(i, j, _pInput, _iIndex + 1)) // 받아온 값을 계속 확인해야해서 비효율적인 것 같음..
+			{
+				cout << " *  ";
+				continue ;
+			}
+			if (_pArr[i][j] < 10)		// 정렬
+				cout << ' ';
+			cout << _pArr[i][j] << "  ";
+		}
+		cout << '\t';
+		for (int j = 0; j < 5; ++j)
+		{
+			if (CheckInput(i, j, _pCom, _iIndex + 1)) // 받아온 값을 계속 확인해야해서 비효율적인 것 같음..
 			{
 				cout << " *  ";
 				continue ;
@@ -100,19 +145,32 @@ void InitArr(int (*_pArr)[5])
 	}
 }
 
-int CheckInput(int _iRow, int _iCol, int _pInput[]) // 5 * 5 배열만 고려됨 (수정가능)
+void InitCom(int _pCom[25])
 {
-	for (int i = 0; i < 25; ++i)
+	int dst(0), src(0);	
+	for (int i = 0; i < 25 ; ++i)
 	{
-		if (_pInput[i] == 0)
-			return 0;
+		_pCom[i] = i + 1;
+	}
+	for (int j = 0; j < 50; ++j)
+	{
+		dst = rand() % 25;
+		src = rand() % 25;
+		swap(_pCom[dst], _pCom[src]);
+	}
+}
+
+int CheckInput(int _iRow, int _iCol, int _pInput[], int _iIndex) // 5 * 5 배열만 고려됨 (수정가능)
+{
+	for (int i = 0; i < _iIndex; ++i)
+	{
 		if ((_pInput[i] - 1) / 5 == _iRow && (_pInput[i] - 1) % 5 == _iCol)
 			return 1;
 	}
 	return 0;
 }
 
-int		IsBingo(int _pInput[])
+int		IsBingo(int _pInput[], int _iIndex)
 {
 	int iBingo(0);
 	int iRow(0), iCol(0), iRDiag(0), iLDiag(0);
@@ -123,7 +181,7 @@ int		IsBingo(int _pInput[])
 		iRow = 0;
 		for (int j = 0; j < 5; ++j)
 		{
-			if (CheckInput(i, j, _pInput))
+			if (CheckInput(i, j, _pInput, _iIndex + 1))
 			{
 				if (i == j)
 					iLDiag++;
@@ -131,7 +189,7 @@ int		IsBingo(int _pInput[])
 					iRDiag++;
 				iCol++;
 			}
-			if (CheckInput(j, i, _pInput))
+			if (CheckInput(j, i, _pInput, _iIndex + 1))
 				iRow++;
 		}
 		if (iCol == 5)		iBingo++;		// 가로 줄 빙고
@@ -140,6 +198,6 @@ int		IsBingo(int _pInput[])
 		if (iRow == 5)		iBingo++;		// 세로 줄 빙고
 		// 대각선 빙고 어차피 2가지 경우의 수 밖에 없는데 하드코딩해도 괜찮지 않나...
 	}
-	cout << iBingo << " 빙고" << endl;
+	cout << '\t' << iBingo << " 빙고";
 	return iBingo;
 }
