@@ -27,7 +27,7 @@ int		IsBingo(int _pInput[], int _iIndex); // 빙고 판을 섞으면 사용불�
 
 int main()
 {
-	int iArr[5][5];
+	int iArr[5][5];		 //이차원배열왜배우냐고
 	int iInput[25] = {}; // 입력받은 숫자 수용소
 	int iCom[25] = {};
 	int iMyBingo(0), iComBingo(0);
@@ -107,6 +107,7 @@ void InputComputer(int _pCom[], int _iIndex)
 void	PrintArr(int (*_pArr)[5], int _pInput[], int _pCom[], int _iIndex)
 {
 	system("clear");
+
 	for (int i = 0; i < 5; ++i)
 	{
 		for (int j = 0; j < 5 ; ++j)

@@ -24,14 +24,12 @@ int main()
 	int iRes[3][3] = {{},{5},{}};
 
 	PrintArr(iArr);
-	Rotate(iArr, iRes);
-	PrintArr(iArr);
-	Rotate(iArr, iRes);
-	PrintArr(iArr);
-	Rotate(iArr, iRes);
-	PrintArr(iArr);
-	Rotate(iArr, iRes);
-	PrintArr(iArr);
+	for (int i = 0; i < 4; ++i)
+	{
+		Rotate(iArr, iRes);
+		PrintArr(iArr);
+	}
+
 
 	return 0;
 }
