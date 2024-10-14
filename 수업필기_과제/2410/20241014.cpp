@@ -83,6 +83,9 @@ int main()
 		};
 	};
 
+	//그러면 c++에서 struct가 class와 무엇이다르냐!
+	//글쎄요... 솔직히 크게 차이는 없지만서도...
+
 #pragma region 공용체,열거체
 
 struct t_info{
