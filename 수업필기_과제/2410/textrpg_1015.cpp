@@ -145,7 +145,8 @@ int main()
 				iEnemy = iInput - 1;
 				iStatus = Battle(tClass[iClass], *tEnemy[iEnemy]);
 				if (ALIVE == iStatus) {
-					system("clear"); continue;
+					system("clear");
+					continue;
 				}
 				else if (DEAD == iStatus)
 				{
@@ -174,8 +175,5 @@ int main()
 			break;
 		}
 	}
-
-
-
 	return 0;
 }
