@@ -27,7 +27,7 @@ void	SearchStudentGrade(REPORT *pArr);
 
 int main()
 {
-	REPORT	tStudent[30] = {};
+	REPORT	tStudent[3] = {};
 	int		iInput(0);
 
 	system("clear");
@@ -72,7 +72,7 @@ void	PrintStudentGrade(REPORT pRep)
 
 void	GetStudentGrade(REPORT *pArr)
 {	
-	for (int i = 0; i < 30; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
 		if (!(strcmp(pArr[i].sName,"")))
 		{
@@ -89,7 +89,7 @@ void	GetStudentGrade(REPORT *pArr)
 			return ;
 		}
 	}
-	cout << "성적표는 총 30개만 저장할 수 있습니다." << endl;
+	cout << "성적표는 총 3개만 저장할 수 있습니다." << endl;
 }
 
 void	SearchStudentGrade(REPORT *pArr)
@@ -98,7 +98,7 @@ void	SearchStudentGrade(REPORT *pArr)
 	cout << "찾으려는 학생 이름을 입력해주세요 : ";
 	cin >> sInput;
 	system("clear");
-	for (int i = 0; i < 30; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
 		if (!(strcmp(pArr[i].sName, sInput)))
 		{
