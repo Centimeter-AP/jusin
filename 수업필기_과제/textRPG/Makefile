@@ -1,6 +1,9 @@
 NAME		=	textRPG
 
-SRCS		=	textrpg.cpp
+SRCS		=	textrpg.cpp\
+				initializer.cpp\
+				gamesystem.cpp\
+				function.cpp
 
 OBJS		=	$(SRCS:%.cpp=%.o)
 

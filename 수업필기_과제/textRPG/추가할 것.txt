@@ -14,3 +14,5 @@
 	그냥 전체적으로 상승?
 	일정 레벨 이후 적 스탯도 상승?
 8. 장비(나중에)
+9. make함수 통일 (함수 오버로딩이나 디폴트 매개변수로)
+	INFO* InitInfo(const char* _sName, int _iHp, int _iAtk, int _iMob = 1)?
