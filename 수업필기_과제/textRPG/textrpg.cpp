@@ -1,4 +1,4 @@
-#include "textrpg.hpp"
+﻿#include "textrpg.hpp"
 
 
 int		Field(INFO *_tClass)
@@ -7,7 +7,7 @@ int		Field(INFO *_tClass)
 
 	while(1)
 	{
-		system("clear");
+		system("cls");
 		Print_Info(_tClass);
 		cout << DUNGEON << ". 사냥터  " << EXITGAME << ". 종료 : ";
 		cin >> iInput;
@@ -28,7 +28,7 @@ void	Battle(INFO *_tClass, int _iEnemyNum)
 
 	while(iFlag)
 	{
-		system("clear");
+		system("cls");
 		Print_Info(_tClass);
 		Print_Info(tEnemy);
 		cout << ATTACK << ". 공격  " << FLEE << ". 도망 : ";
@@ -54,14 +54,14 @@ void	Battle(INFO *_tClass, int _iEnemyNum)
 		{
 			cout << _tClass->sName << " 패배..." << endl;
 			Make_Hp_Full(_tClass);
-			sleep(1);
+			//sleep(1);
 			iFlag = 0;
 			break ;
 		}
 		else if (tEnemy->iHp <= 0)
 		{
 			cout << _tClass->sName << " 승리!" << endl;
-			sleep(1);
+			//sleep(1);
 			iFlag = 0;
 			break ;
 		}
@@ -78,7 +78,7 @@ void	Enter_Dungeon(INFO *_tClass)
 		rand() % 3 == 0 ? iHeal = 0 : iHeal = 1;
 		while(1)
 		{	
-			system("clear");
+			system("cls");
 			Print_Info(_tClass);
 			cout << EASY << ". 초급  ";
 			cout << NORMAL << ". 중급  ";

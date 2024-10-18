@@ -1,8 +1,11 @@
-#ifndef TEXTRPG_HPP
+﻿#ifndef TEXTRPG_HPP
 # define TEXTRPG_HPP
+
+# define _CRT_SECURE_NO_WARNINGS
 
 # include <iostream>
 # include <unistd.h>
+# include <stdlib.h>
 
 # define		STR_MIN		32
 # define		STR_MAX		256
@@ -11,16 +14,15 @@
 
 using namespace std;
 
-#pragma pack(push, 1)
+
 typedef struct s_player{
 	int		iLvl;
 	int		iExp;
 	int		iMaxExp;
 	int		iEquip;
 }PLAYER;
-#pragma pack(pop)
 
-#pragma pack(push, 1)
+
 typedef struct s_info{
 	char	sName[STR_MIN];
 	int		iHp;
@@ -29,7 +31,7 @@ typedef struct s_info{
 	int		iCritChance;
 	PLAYER	*tPlayerInfo;
 }INFO;
-#pragma pack(pop)
+
 
 enum CLASS{
 	WARRIOR = 1,

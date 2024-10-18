@@ -1,4 +1,4 @@
-#include "textrpg.hpp"
+﻿#include "textrpg.hpp"
 
 void	Init_info(INFO *tInfo, const char *_sName, int _iHp, int _iAtk, bool _isMob)
 {
@@ -26,7 +26,7 @@ INFO	*Make_Class()
 
 	while (1)
 	{
-		system("clear");
+		system("cls");
 		cout << "직업을 선택하세요(1. 전사 2. 마법사 3. 도적) : ";
 		cin >> iInput;
 		if (cin.fail() || iInput > 3 || iInput < 1) {
