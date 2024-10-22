@@ -1,4 +1,4 @@
-﻿#include "textrpg.hpp"
+﻿#include "textrpg.h"
 
 
 int		Field(INFO *_tClass)

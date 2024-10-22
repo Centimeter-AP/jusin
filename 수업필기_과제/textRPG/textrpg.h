@@ -36,7 +36,8 @@ typedef struct s_info{
 enum CLASS{
 	WARRIOR = 1,
 	MAGE,
-	ROGUE
+	ROGUE,
+	LOAD
 };
 
 enum MONSTER{

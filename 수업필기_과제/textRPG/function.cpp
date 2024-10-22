@@ -1,4 +1,4 @@
-﻿#include "textrpg.hpp"
+﻿#include "textrpg.h"
 
 
 void	Print_Info(INFO	*_tInfo)

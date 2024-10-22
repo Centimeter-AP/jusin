@@ -27,7 +27,7 @@ int main()
 	wchar_t szName[32] = L""; //유니코드임을 알려주는 L을 상수문자열 앞에 붙여줘야함
 	//위의 문자열 함수들 앞에 l만 붙여주면 또 쓸 수 있음 (lstrcpy...)
 
-	//string 컨테이너(namespace std를 꼭 쓰라는데 또 아무것도 못쓰게해주는 42의 로렐라이 행동)
+	//string 컨테이너(namespace std를 꼭 쓰라는데 또 아무것도 못쓰게해주는 42 행동)
 	//wstring(유니코드....으아악)
 	string strName = "";
 	wstring wstrName = L"";

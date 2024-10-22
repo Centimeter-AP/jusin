@@ -1,4 +1,4 @@
-﻿#include "textrpg.hpp"
+﻿#include "textrpg.h"
 
 void	Init_info(INFO *tInfo, const char *_sName, int _iHp, int _iAtk, bool _isMob)
 {
@@ -46,7 +46,10 @@ INFO	*Make_Class()
 		break;
 
 	case ROGUE:
-		// Init_info(tTmp, "도적", 115, 9);
+		Init_info(tTmp, "도적", 115, 9);
+		break;
+
+	case LOAD:
 		Load_Game(tTmp);
 		break;
 	

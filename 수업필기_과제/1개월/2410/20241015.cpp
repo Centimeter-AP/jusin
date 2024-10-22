@@ -33,6 +33,7 @@ int main()
 	//   실제 주소. 와 주소를 담는 변수.는 구분해서 생각!!
 	// 	 heap메모리는 할당 하고 프로그래머가 만든 포인터 변수에 담아서 사용할 수 밖에 없음
 
+	
 
 	// c++의 동적 할당
 	// new 연산자
@@ -40,7 +41,10 @@ int main()
 	int *a = new int(0);	// 동적 할당 및 초기화
 	int *b = new int[4];	// 동적 배열(대괄호 안에 변수 가능)
 	int input(10);			// 당연히 input을 cin으로 받아서 쓸 수도 있음
-	int *c = new int[input]{10, 20, 30}; // 동적 배열 초기화 가능
+	int *c = new int[input] {10, 20, 30}; // 동적 배열 초기화 가능 //안디ㅗ잖아 //c++11이상가능(flag필요..)
+	char *sName = new char[20] {'a','b','c'};
+
+	cout << sName<<endl;
 
 	// delete 연산자
 	delete p;			// 메모리 반환

@@ -1,5 +1,7 @@
 #include <iostream>
 
+// 숙제 풀이 보면 좋다 
+
 using namespace std;
 
 int main()

@@ -1,4 +1,4 @@
-﻿#include "textrpg.hpp"
+﻿#include "textrpg.h"
 
 void	CinFailException(bool i)
 {
@@ -14,20 +14,20 @@ void	CinFailException(bool i)
 
 void	Exit_Game() //금단의시스템콜(딱히금단은아니긴함)
 {
-	//write(1, "게임 종료", 14);
-	//usleep(500000);
-	//write(1, ".", 1);
-	//usleep(500000);
-	//write(1, ".", 1);
-	//usleep(500000);
-	//write(1, ".\n", 2);
+	write(1, "게임 종료", 14);
+	usleep(500000);
+	write(1, ".", 1);
+	usleep(500000);
+	write(1, ".", 1);
+	usleep(500000);
+	write(1, ".\n", 2);
 }
 
 void	Load_Game(INFO *tInfo)
 {
 	// INFO	*tTmp = new INFO;
 	FILE*	fLoadfile = nullptr;
-	fLoadfile = fopen("./Save.sav", "rb");
+	fLoadfile = fopen("./Data/Save.sav", "rb");
 	fread(tInfo->sName, sizeof(char), STR_MIN, fLoadfile);
 	fread(&(tInfo->iHp), sizeof(int), 1, fLoadfile);
 	fread(&(tInfo->iMaxHp), sizeof(int), 1, fLoadfile);
@@ -44,7 +44,7 @@ void	Load_Game(INFO *tInfo)
 void	Save_Game(INFO *tInfo)
 {
 	FILE*	fSavefile = nullptr;
-	fSavefile = fopen("./Save.sav", "wb");
+	fSavefile = fopen("./Data/Save.sav", "wb");
 	//fwrite(tInfo, sizeof(char), STR_MIN, fSavefile);
 	//fwrite(tInfo, sizeof(int), 4, fSavefile);
 	//fwrite(tInfo->tPlayerInfo, sizeof(int), 4, fSavefile);
@@ -58,8 +58,6 @@ void	Save_Game(INFO *tInfo)
 	fwrite(&(tInfo->tPlayerInfo->iExp), sizeof(int), 1, fSavefile);
 	fwrite(&(tInfo->tPlayerInfo->iMaxExp), sizeof(int), 1, fSavefile);
 	fwrite(&(tInfo->tPlayerInfo->iEquip), sizeof(int), 1, fSavefile);
-
-
 
 	// fwrite(tInfo->tPlayerInfo, sizeof(tInfo->tPlayerInfo), 1, fSavefile);
 	fclose(fSavefile);
