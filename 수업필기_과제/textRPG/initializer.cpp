@@ -9,14 +9,14 @@ void	Init_info(INFO *tInfo, const char *_sName, int _iHp, int _iAtk, bool _isMob
 	tInfo->iCritChance = 10;
 	if (!_isMob)
 	{
-		tInfo->tPlayerInfo = new PLAYER;
-		tInfo->tPlayerInfo->iExp = 0;
-		tInfo->tPlayerInfo->iLvl = 1;
-		tInfo->tPlayerInfo->iMaxExp = 100;
-		tInfo->tPlayerInfo->iEquip = 0;
+		// tInfo->tPlayerInfo = new PLAYER;
+		tInfo->tPlayerInfo.iExp = 0;
+		tInfo->tPlayerInfo.iLvl = 1;
+		tInfo->tPlayerInfo.iMaxExp = 100;
+		tInfo->tPlayerInfo.iEquip = 0;
 	}
-	else
-		tInfo->tPlayerInfo = nullptr;
+	// else
+	// 	tInfo->tPlayerInfo = nullptr;
 }
 
 INFO	*Make_Class()
@@ -26,10 +26,10 @@ INFO	*Make_Class()
 
 	while (1)
 	{
-		system("cls");
-		cout << "직업을 선택하세요(1. 전사 2. 마법사 3. 도적) : ";
+		system("clear");
+		cout << "직업을 선택하세요(1. 전사 2. 마법사 3. 도적 4. 불러오기) : ";
 		cin >> iInput;
-		if (cin.fail() || iInput > 3 || iInput < 1) {
+		if (cin.fail() || iInput > LOAD || iInput < 1) {
 			CinFailException(cin.fail()); continue;
 		}
 		break;
@@ -62,6 +62,7 @@ INFO	*Make_Class()
 INFO	*Make_Enemy(int _iInput)
 {
 	INFO	*tTmp = new INFO;
+	sleep(1);
 
 	switch (_iInput)
 	{

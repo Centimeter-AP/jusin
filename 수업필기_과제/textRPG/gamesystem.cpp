@@ -2,7 +2,7 @@
 
 void	CinFailException(bool i)
 {
-	// system("cls");
+	// system("clear");
 	cout << "잘못 입력하셨습니다." << endl;
 	// system("pause");
 	if (i)
@@ -33,11 +33,11 @@ void	Load_Game(INFO *tInfo)
 	fread(&(tInfo->iMaxHp), sizeof(int), 1, fLoadfile);
 	fread(&(tInfo->iAtk), sizeof(int), 1, fLoadfile);
 	fread(&(tInfo->iCritChance), sizeof(int), 1, fLoadfile);
-	tInfo->tPlayerInfo = new PLAYER;
-	fread(&(tInfo->tPlayerInfo->iLvl), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->tPlayerInfo->iExp), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->tPlayerInfo->iMaxExp), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->tPlayerInfo->iEquip), sizeof(int), 1, fLoadfile);
+	// tInfo->tPlayerInfo = new PLAYER;
+	fread(&(tInfo->tPlayerInfo.iLvl), sizeof(int), 1, fLoadfile);
+	fread(&(tInfo->tPlayerInfo.iExp), sizeof(int), 1, fLoadfile);
+	fread(&(tInfo->tPlayerInfo.iMaxExp), sizeof(int), 1, fLoadfile);
+	fread(&(tInfo->tPlayerInfo.iEquip), sizeof(int), 1, fLoadfile);
 	fclose(fLoadfile);
 }
 
@@ -54,10 +54,10 @@ void	Save_Game(INFO *tInfo)
 	fwrite(&(tInfo->iMaxHp), sizeof(int), 1, fSavefile);
 	fwrite(&(tInfo->iAtk), sizeof(int), 1, fSavefile);
 	fwrite(&(tInfo->iCritChance), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo->iLvl), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo->iExp), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo->iMaxExp), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo->iEquip), sizeof(int), 1, fSavefile);
+	fwrite(&(tInfo->tPlayerInfo.iLvl), sizeof(int), 1, fSavefile);
+	fwrite(&(tInfo->tPlayerInfo.iExp), sizeof(int), 1, fSavefile);
+	fwrite(&(tInfo->tPlayerInfo.iMaxExp), sizeof(int), 1, fSavefile);
+	fwrite(&(tInfo->tPlayerInfo.iEquip), sizeof(int), 1, fSavefile);
 
 	// fwrite(tInfo->tPlayerInfo, sizeof(tInfo->tPlayerInfo), 1, fSavefile);
 	fclose(fSavefile);

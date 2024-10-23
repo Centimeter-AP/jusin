@@ -6,6 +6,7 @@ void	Print_Info(INFO	*_tInfo)
 	cout << "============================" << endl;
 	cout << "이름 : " << _tInfo->sName << endl;
 	cout << "체력 : " << _tInfo->iHp << "  \t공격력 : " << _tInfo->iAtk << endl;
+	cout << "레벨 : " << _tInfo->tPlayerInfo.iLvl << "  \t다음 레벨까지 : " << (_tInfo->tPlayerInfo.iMaxExp - _tInfo->tPlayerInfo.iExp++) << endl;
 }
 
 void	Attack(INFO *_tClass, INFO *_tEnemy)
