@@ -55,7 +55,7 @@ INFO	*Make_Enemy(int _iInput);
 
 void	Print_Info(INFO	*_tInfo);
 void	Attack(INFO *_tClass, INFO *_tEnemy);
-void	Make_Hp_Full(INFO *_tClass);
+void	Heal_Hp(INFO *_tClass);
 
 
 void	Main_Game_Loop();

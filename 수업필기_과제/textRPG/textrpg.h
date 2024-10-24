@@ -15,18 +15,18 @@
 using namespace std;
 
 
-typedef struct s_lvlpoints{
-	int		iAtkPoint;
-	int		iHpPoint;
-	int		iEquipPoint;
-}POINTS;
+// typedef struct s_lvlpoints{
+// 	int		iAtkPoint;
+// 	int		iHpPoint;
+// 	int		iEquipPoint;
+// }POINTS;
 
 typedef struct s_player{
 	int		iLvl;
 	int		iExp;
 	int		iMaxExp;
 	int		iEquip;
-	POINTS	tPoints;
+	// POINTS	tPoints;
 }PLAYER;
 
 struct INFO{
@@ -35,11 +35,17 @@ struct INFO{
 	int		iMaxHp;
 	int		iAtk;
 	int		iCritChance;
+	bool	isMob;
 	PLAYER	tPlayerInfo;
-	INFO():iAtk(0)
-	{
-		cout << "INFO constructor called" << endl; 		// 진짜 class랑 다른게 뭐지?..
-	}
+};
+
+enum HPVALUE{
+	HPMAX = 1,
+	HPEIGHTYP,
+	HPHALF,
+	HPFOURTYP,
+	HPTWENTYP,
+	HPZEROP
 };
 
 enum CLASS{
@@ -85,12 +91,14 @@ void	Init_info(INFO *tInfo, const char *_sName, int _iHp, int _iAtk, bool _isMob
 //	function.cpp
 void	Print_Info(INFO	*_tInfo);
 void	Attack(INFO *_tClass, INFO *_tEnemy);
-void	Make_Hp_Full(INFO *_tClass);
+void	Heal_Hp(INFO *_tClass, int _iValue);
+void	Healing_Station(INFO *_tClass);
+void	imsi();
 
 //	textrpg.cpp
 void	Main_Game_Loop();
 int		Field(INFO *_tClass);
 void	Enter_Dungeon(INFO *_tClass);
-void	Battle(INFO *_tClass, int _iEnemyNum);
+void	Battle(INFO *_tClass, int _iEnemyNum, bool _isForced = false);
 
 #endif

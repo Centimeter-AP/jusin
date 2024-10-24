@@ -7,16 +7,14 @@ void	Init_info(INFO *tInfo, const char *_sName, int _iHp, int _iAtk, bool _isMob
 	tInfo->iHp = tInfo->iMaxHp;
 	tInfo->iAtk = _iAtk;
 	tInfo->iCritChance = 10;
+	tInfo->isMob = _isMob;
 	if (!_isMob)
 	{
-		// tInfo->tPlayerInfo = new PLAYER;
 		tInfo->tPlayerInfo.iExp = 0;
 		tInfo->tPlayerInfo.iLvl = 1;
 		tInfo->tPlayerInfo.iMaxExp = 100;
 		tInfo->tPlayerInfo.iEquip = 0;
 	}
-	// else
-	// 	tInfo->tPlayerInfo = nullptr;
 }
 
 INFO	*Make_Class()
@@ -62,7 +60,6 @@ INFO	*Make_Class()
 INFO	*Make_Enemy(int _iInput)
 {
 	INFO	*tTmp = new INFO;
-	sleep(1);
 
 	switch (_iInput)
 	{

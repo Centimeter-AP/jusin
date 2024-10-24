@@ -19,8 +19,9 @@ int		Field(INFO *_tClass)
 	return (iInput);
 }
 
-void	Battle(INFO *_tClass, int _iEnemyNum)
+void	Battle(INFO *_tClass, int _iEnemyNum, bool _isForced)
 {
+
 	INFO	*tEnemy = nullptr;
 	int		iInput(0), iFlag(1);
 
@@ -43,8 +44,17 @@ void	Battle(INFO *_tClass, int _iEnemyNum)
 			break;
 		
 		case FLEE:
-			iFlag = 0;
-			break ;
+			if (_isForced == true)
+			{
+				cout << "도망칠 수 없다!" << endl;
+				sleep(1);
+				continue;
+			}	
+			else
+			{
+				iFlag = 0;
+				break ;
+			}
 		
 		default:
 			iFlag = 0;
@@ -53,15 +63,15 @@ void	Battle(INFO *_tClass, int _iEnemyNum)
 		if (_tClass->iHp <= 0)
 		{
 			cout << _tClass->sName << " 패배..." << endl;
-			Make_Hp_Full(_tClass);
-			//sleep(1);
+			Heal_Hp(_tClass, HPMAX);
+			sleep(1);
 			iFlag = 0;
 			break ;
 		}
 		else if (tEnemy->iHp <= 0)
 		{
 			cout << _tClass->sName << " 승리!" << endl;
-			//sleep(1);
+			sleep(1);
 			iFlag = 0;
 			break ;
 		}
@@ -95,14 +105,10 @@ void	Enter_Dungeon(INFO *_tClass)
 		if (iInput == BACK - iHeal)
 			return ;
 		else if (iInput == HEAL)
-		{
-			cout << "휴식처를 발견했다." << endl;
-			Make_Hp_Full(_tClass);
-		}
+			Healing_Station(_tClass);
 		else
 			Battle(_tClass, iInput);
 	}
-		
 }
 
 void	Main_Game_Loop()

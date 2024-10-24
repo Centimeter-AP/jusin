@@ -4,6 +4,7 @@ void	CinFailException(bool i)
 {
 	// system("clear");
 	cout << "잘못 입력하셨습니다." << endl;
+	sleep(1);
 	// system("pause");
 	if (i)
 	{
@@ -25,40 +26,38 @@ void	Exit_Game() //금단의시스템콜(딱히금단은아니긴함)
 
 void	Load_Game(INFO *tInfo)
 {
-	// INFO	*tTmp = new INFO;
 	FILE*	fLoadfile = nullptr;
 	fLoadfile = fopen("./Data/Save.sav", "rb");
-	fread(tInfo->sName, sizeof(char), STR_MIN, fLoadfile);
-	fread(&(tInfo->iHp), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->iMaxHp), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->iAtk), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->iCritChance), sizeof(int), 1, fLoadfile);
-	// tInfo->tPlayerInfo = new PLAYER;
-	fread(&(tInfo->tPlayerInfo.iLvl), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->tPlayerInfo.iExp), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->tPlayerInfo.iMaxExp), sizeof(int), 1, fLoadfile);
-	fread(&(tInfo->tPlayerInfo.iEquip), sizeof(int), 1, fLoadfile);
-	fclose(fLoadfile);
+
+	if (fLoadfile)
+	{
+		fread(tInfo, sizeof(INFO), 1, fLoadfile);
+		fclose(fLoadfile);
+		cout << "불러오기 성공" << endl;
+		sleep(1);
+	}
+	else
+	{
+		cout << "불러오기에 실패했습니다." << endl;
+		sleep(1);
+	}
+		
 }
 
 void	Save_Game(INFO *tInfo)
 {
 	FILE*	fSavefile = nullptr;
 	fSavefile = fopen("./Data/Save.sav", "wb");
-	//fwrite(tInfo, sizeof(char), STR_MIN, fSavefile);
-	//fwrite(tInfo, sizeof(int), 4, fSavefile);
-	//fwrite(tInfo->tPlayerInfo, sizeof(int), 4, fSavefile);
-
-	fwrite(tInfo->sName, sizeof(char), STR_MIN, fSavefile);
-	fwrite(&(tInfo->iHp), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->iMaxHp), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->iAtk), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->iCritChance), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo.iLvl), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo.iExp), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo.iMaxExp), sizeof(int), 1, fSavefile);
-	fwrite(&(tInfo->tPlayerInfo.iEquip), sizeof(int), 1, fSavefile);
-
-	// fwrite(tInfo->tPlayerInfo, sizeof(tInfo->tPlayerInfo), 1, fSavefile);
-	fclose(fSavefile);
+	if (fSavefile)
+	{
+		fwrite(tInfo, sizeof(INFO), 1, fSavefile);
+		fclose(fSavefile);
+		cout << "저장 성공" << endl;
+		sleep(1);
+	}
+	else
+	{
+		cout << "저장에 실패했습니다." << endl;
+		sleep(1);
+	}
 }
