@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "Character.h"
 
 CCharacter::CCharacter()
 {
@@ -25,8 +26,16 @@ CCharacter::~CCharacter()
 	cout << "CCHARACTER "<< m_szName << " 소멸자 호출" << endl;
 	Release();
 }
+int CCharacter::Get_CritDamage()
+{
+	int	iCritical(1);
 
-void CCharacter::Damaged(int _iDmg)
+	rand() % 100 >= m_iCritChance ? iCritical = 1 : iCritical = 2;
+
+	return (m_iAtk * iCritical);
+}
+
+void CCharacter::Damaged(int _iDmg) 
 {
 	m_iHP -= _iDmg;
 }

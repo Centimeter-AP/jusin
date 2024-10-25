@@ -37,7 +37,6 @@ void CPlayer::RenderInfo()
 	cout << "======================================================" << endl;
 	cout << "직업 : " << m_szName << "\t레벨 : " << m_iLvl << "\t다음 레벨까지 : " << m_iMaxExp - m_iLvl << endl;
 	cout << "체력 : " << m_iHP << "\t공격력 : " << m_iAtk << endl;
-	cout << "";
 }
 
 void CPlayer::Initialize()
