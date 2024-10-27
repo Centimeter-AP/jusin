@@ -18,6 +18,7 @@ class CCharacter
 		CCharacter(const char* _szName, int _iAtk, int _iMaxHP);
 		virtual ~CCharacter();
 
+		void	PrintInfo();
 		int		Get_CritDamage();
 		void	Damaged(int _iDmg);
 		void	Initialize();

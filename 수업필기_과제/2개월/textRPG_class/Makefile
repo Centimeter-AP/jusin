@@ -1,12 +1,15 @@
-NAME		=	CtextRPG
+NAME		=	a.out
 
-SRCS		=	main.cpp\
-				MainGame.cpp
+SRCS		=	MainGame.cpp\
+				Character.cpp\
+				Monster.cpp\
+				Player.cpp\
+				textRPG_Class.cpp
 
 OBJS		=	$(SRCS:%.cpp=%.o)
 
 CC			=	c++
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	
 
 all			:	$(NAME)
 

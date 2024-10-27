@@ -3,6 +3,7 @@
 # define PLAYER_CPP
 
 # include "Character.h"
+# include "Monster.h"
 
 class CPlayer : public CCharacter
 {
