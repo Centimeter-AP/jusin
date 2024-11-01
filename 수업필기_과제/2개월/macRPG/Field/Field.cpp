@@ -1,9 +1,13 @@
 #include "./Field.h"
 
 CField::CField()
-{}
+{
+
+}
 CField::~CField()
-{}
+{
+	
+}
 
 void	CField::Initialize()
 {}

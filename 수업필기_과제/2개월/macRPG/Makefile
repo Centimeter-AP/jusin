@@ -4,12 +4,14 @@ SRCS		=	./MainGame/MainGame.cpp\
 				./Character/Character.cpp\
 				./Monster/Monster.cpp\
 				./Player/Player.cpp\
+				./System/System.cpp\
+				./Field/Field.cpp\
 				./main.cpp
 
 OBJS		=	$(SRCS:%.cpp=%.o)
 
 CC			=	c++
-FLAGS		=	
+FLAGS		=	-Wall -Wextra -Werror -std=c++11
 
 all			:	$(NAME)
 

@@ -18,6 +18,7 @@ class CPlayer : public CCharacter
 		void	Initialize();
 		void	Release();
 
+		void	Attack(CCharacter &obj)
 };
 
 #endif

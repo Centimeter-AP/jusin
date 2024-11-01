@@ -15,7 +15,13 @@ class CCharacter
 		
 		virtual void	Initialize();
 		virtual void	Release();
+	public:
+		INFO*	Get_Info(){ return &mInfo; }
+		int		Get_CritDamage();
 
+	public:
+		virtual void	Attack(CCharacter &obj) = 0;
+		
 };
 
 #endif
