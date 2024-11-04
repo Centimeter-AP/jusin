@@ -7,7 +7,7 @@
 class CField
 {
 	private:
-		
+		int iStep;
 	public:
 		CField();
 		~CField();
@@ -16,6 +16,9 @@ class CField
 		void	Update();
 		void	Release();
 
+		void		Search();
+		void		Find();
+		const char*	Text(int _iFlag);
 };
 
 #endif

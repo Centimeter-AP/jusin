@@ -7,14 +7,21 @@ CMainGame::CMainGame()
 {
 	Player = nullptr;
 	Field = nullptr;
-	cout << "CMainGame 생성자 호출" << endl;
+	cout << GREEN << "CMainGame" << NOCOLOR << " 생성자 호출" << endl;
 }
 
 CMainGame::~CMainGame()
 {
 	Release();
-	cout << "CMainGame 소멸자 호출" << endl;
+	cout << RED << "CMainGame" << NOCOLOR << " 소멸자 호출" << endl;
 }
+
+// 저게 오늘 디코에서 유경님이 
+// 아직 안알려줘서
+// 못쓰는거 아니냐고
+// ㄱ래서 다운캐스팅 해야하는거 아니냐고 하는거
+// 안배웟어요
+
 
 void	CMainGame::Initialize()
 {
@@ -35,28 +42,36 @@ void	CMainGame::Update()
 
 	while (1)
 	{
-		system("clear");
-		CCharacter *Monster = new CPlayer("테스트몬스터", 100, 5);
-		cout << "1. 공격\n";
+		// system("clear");
+		Player->Print_Info();
+		cout << "행선지를 정해주세요." << endl;
+		cout << "1. 필드  2. 상점  3. 저장  4. 종료" << endl;
+		cout << "입력 : ";
 		cin >> iInput;
-		if (iInput == 1)
-			Player->Attack(*Monster);
+		CINEXCEPTION(4);
+		switch (iInput)
+		{
+		case MENU::FIELD:
+			Field->Update();
+			break;
 		
-		delete Monster;
-		// cout << "행선지를 정해주세요." << endl;
-		// cout << "1. 필드  2. 상점  3. 저장  4. 종료" << endl;
-		// cout << "입력 : ";
-		// cin >> iInput;
-		// CINEXCEPTION(4);
-		// switch (iInput)
-		// {
-		// case MENU::FIELD:
-			
-		// 	break;
+		case MENU::SHOP:
+			cout << "공사중" << endl;
+			sleep(1);
+			break;
 		
-		// default:
-		// 	break;
-		// }
+		case MENU::SAVE:
+			cout << "선생님이 저장을 안알려줬지롱" << endl;
+			sleep(1);
+			break;
+		
+		case MENU::EXIT:
+			cout << "게임을 종료합니다." << endl;
+			return ;
+		
+		default:
+			break;
+		}
 	}
 }
 

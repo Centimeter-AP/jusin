@@ -16,6 +16,8 @@ class CMonster : public CCharacter
 		void	Initialize();
 		void	Release();
 
+		void	Print_Info();
+
 };
 
 #endif
@@ -37,3 +39,9 @@ void	CMonster::Initialize()
 }
 void	CMonster::Release()
 {}
+void 	CMonster::Print_Info()
+{
+	cout << "======================================================" << endl;
+	cout << "이름 : " << mInfo.szName << endl;
+	cout << "체력 : " << mInfo.iHP << "\t공격력 : " << mInfo.iAtk << endl;
+}

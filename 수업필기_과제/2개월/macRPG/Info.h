@@ -12,6 +12,7 @@ struct INFO{
 	int		iCritChance;
 	int		iCritical;
 	char	szName[32];
+	int		iGold;
 };
 
 struct PLAYERINFO{
@@ -21,7 +22,7 @@ struct PLAYERINFO{
 };
 
 struct MONSTERINFO{
-	int		iGiveExp;
+	int		iLvl;
 };
 
 
@@ -45,6 +46,25 @@ enum FIELD {
 	BACK,
 	HEAL
 };
+
+enum COMMENT{
+	RAND1 = 0,
+	RAND2,
+	RAND3,
+	RAND4,
+	NEARHEAL = 10,
+	NEARBOSS,
+	NEARITEM,
+	NEARGOLD
+};
+
+enum FFLAG{
+	CALM = 0,
+	TENSION,
+	DANGER,
+	
+};
+
 
 #define YELLOW		"\033[1;43m"
 #define GREEN		"\033[0;42m"

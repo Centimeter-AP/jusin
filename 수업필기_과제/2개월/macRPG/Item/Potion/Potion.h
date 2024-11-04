@@ -39,3 +39,9 @@ void	CPotion::Use(CCharacter *obj)
 		obj->Get_Info()->iHP = obj->Get_Info()->iMaxHP;
 	cout << "최대 체력의 40%가 회복되었습니다." << endl;
 }
+
+CItem*	CPotion::Clone()
+{
+	CItem *pNew = new CPotion;
+	return pNew;
+}
