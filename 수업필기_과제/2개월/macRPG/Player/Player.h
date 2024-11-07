@@ -18,6 +18,11 @@ class CPlayer : public CCharacter
 		void	Initialize();
 		void	Release();
 
+		PLAYERINFO*	Get_PInfo() { return &mPInfo; };
+		void	Level_Up();
+		void	Player_Lose();
+		void	Player_Win();
+
 		void	Print_Info();
 };
 

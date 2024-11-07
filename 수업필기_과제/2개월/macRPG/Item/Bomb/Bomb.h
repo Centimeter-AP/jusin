@@ -9,17 +9,11 @@ class CBomb : public CItem
 {
 	public:
 		CBomb(){strcpy(m_szName, "폭탄");};
-		~CBomb();
+		~CBomb(){};
 
-		void	Use();
+		void	Use(CCharacter *obj);
+		void	Explain();
 		CItem*	Clone();
-
 };
 
 #endif
-
-
-CBomb::CBomb()
-{}
-CBomb::~CBomb()
-{}

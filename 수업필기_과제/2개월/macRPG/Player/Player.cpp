@@ -71,7 +71,7 @@ void	CPlayer::Initialize()
 	mInfo.iCritChance = 10;
 	mInfo.iCritical = 1;
 	mInfo.iGold = 100;
-	mPInfo.iMaxExp = 10000;
+	mPInfo.iMaxExp = 30;
 	mPInfo.iLvl = 1;
 	mPInfo.iExp = 0;
 }
@@ -87,4 +87,35 @@ void	CPlayer::Print_Info()
 	cout << setw(55) << right << "소지 골드: " << mInfo.iGold << endl;
 	cout << left << "직업 : " << mInfo.szName << "\t레벨 : " << setw(3) << mPInfo.iLvl << right << setw(29) << "다음 레벨까지 : " << setw(5) << mPInfo.iMaxExp - mPInfo.iExp << endl;
 	cout << "체력 : " << mInfo.iHP << "\t공격력 : " << mInfo.iAtk << endl;
+	cout << "======================================================\n" << endl;
+}
+
+void	CPlayer::Level_Up()
+{
+	mPInfo.iLvl++;
+	mInfo.iAtk += 2;
+	mInfo.iMaxHP += 10;
+	mInfo.iHP = mInfo.iMaxHP;
+	system("clear");
+	Print_Info();
+	cout << "플레이어 레벨 업!" << endl;
+}
+
+void	CPlayer::Player_Lose()
+{
+	mPInfo.iExp -= mPInfo.iMaxExp / 3;
+	if (mPInfo.iExp < 0)
+		mPInfo.iExp = 0;
+	mInfo.iHP = mInfo.iMaxHP;
+}
+
+void	CPlayer::Player_Win()
+{
+	mPInfo.iExp += 15;
+	if (mPInfo.iExp >= mPInfo.iMaxExp)
+	{
+		mPInfo.iExp = 0;
+		mPInfo.iMaxExp += 10;
+		Level_Up();
+	}
 }

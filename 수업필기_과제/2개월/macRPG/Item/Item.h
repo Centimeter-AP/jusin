@@ -10,11 +10,12 @@ class CItem
 	protected:
 		char m_szName[32];
 	public:
-		CItem(){{strcpy(m_szName, "기본 아이템");};}
+		CItem(){};
 		virtual ~CItem() {};
 
 		virtual void	Use(CCharacter *obj) = 0;
 		virtual CItem*	Clone() = 0;
+		virtual void	Explain() = 0;
 };
 
 #endif

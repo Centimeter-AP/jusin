@@ -7,6 +7,7 @@ CMainGame::CMainGame()
 {
 	Player = nullptr;
 	Field = nullptr;
+	Shop = nullptr;
 	cout << GREEN << "CMainGame" << NOCOLOR << " 생성자 호출" << endl;
 }
 
@@ -16,13 +17,6 @@ CMainGame::~CMainGame()
 	cout << RED << "CMainGame" << NOCOLOR << " 소멸자 호출" << endl;
 }
 
-// 저게 오늘 디코에서 유경님이 
-// 아직 안알려줘서
-// 못쓰는거 아니냐고
-// ㄱ래서 다운캐스팅 해야하는거 아니냐고 하는거
-// 안배웟어요
-
-
 void	CMainGame::Initialize()
 {
 	if (Player == nullptr)
@@ -30,8 +24,18 @@ void	CMainGame::Initialize()
 		Player = new CPlayer;
 		Player->Initialize();
 	}
-	Field = new CField;
-	Field->Initialize();
+	if (Field == nullptr)
+	{
+		Field = new CField;
+		Field->Initialize();
+		Field->Set_Player(Player);
+	}
+	if (Shop == nullptr)
+	{
+		Shop = new CShop;
+		Shop->Initialize();
+		Shop->Set_Player(Player);
+	}
 }
 
 
@@ -42,7 +46,7 @@ void	CMainGame::Update()
 
 	while (1)
 	{
-		// system("clear");
+		system("clear");
 		Player->Print_Info();
 		cout << "행선지를 정해주세요." << endl;
 		cout << "1. 필드  2. 상점  3. 저장  4. 종료" << endl;
@@ -56,7 +60,7 @@ void	CMainGame::Update()
 			break;
 		
 		case MENU::SHOP:
-			cout << "공사중" << endl;
+			
 			sleep(1);
 			break;
 		
@@ -79,5 +83,6 @@ void	CMainGame::Release()
 {
 	SAFEDELETE(Player);
 	SAFEDELETE(Field);
+	SAFEDELETE(Shop);
 }
 

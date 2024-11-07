@@ -4,10 +4,17 @@
 
 # include <iostream>
 
+class CCharacter;
+
 class CField
 {
 	private:
-		int iStep;
+		int		iStep;
+		int		iMaxStep;
+		int		iEncounterFlag;
+		CCharacter *Player;
+		CCharacter *Monster;
+
 	public:
 		CField();
 		~CField();
@@ -15,6 +22,12 @@ class CField
 		void	Initialize();
 		void	Update();
 		void	Release();
+
+		void	Set_Player(CCharacter *pPlayer) { Player = pPlayer; }
+		void	Set_Step(int src) { iStep = src; };
+
+		void	Random_Encounter();
+		int		Battle();
 
 		void		Search();
 		void		Find();

@@ -23,6 +23,8 @@ struct PLAYERINFO{
 
 struct MONSTERINFO{
 	int		iLvl;
+	float	iInitHP;
+	float	iInitAtk;
 };
 
 

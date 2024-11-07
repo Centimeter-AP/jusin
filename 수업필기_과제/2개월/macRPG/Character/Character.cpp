@@ -18,13 +18,14 @@ int	CCharacter::Get_CritDamage()
 	return(mInfo.iAtk * mInfo.iCritical);
 }
 
-void	CCharacter::Attack(CCharacter &obj)
+void	CCharacter::Attack(CCharacter *obj)
 {
 	if (this->mInfo.iHP <= 0)
 		return;
 	cout << mInfo.szName << "의 공격!" << endl;
-	obj.Get_Info()->iHP -= this->mInfo.iAtk;
-	cout << obj.Get_Info()->szName << "에게 " << Get_CritDamage();
+	obj->Get_Info()->iHP -= this->mInfo.iAtk;
+	cout << obj->Get_Info()->szName << "에게 " << Get_CritDamage();
 	if (mInfo.iCritical == 2){ cout << " 크리티컬 "; }
 	cout << "대미지" << endl;
+	sleep(1);
 }

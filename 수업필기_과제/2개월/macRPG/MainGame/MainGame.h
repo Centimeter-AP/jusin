@@ -5,9 +5,8 @@
 #include "../Character/Character.h"
 #include "../Field/Field.h"
 #include "../Player/Player.h"
+#include "../Shop/Shop.h"
 
-class CCharacter;
-class CField;
 
 class CMainGame
 {
@@ -24,6 +23,7 @@ class CMainGame
 	private:
 		CCharacter	*Player;
 		CField		*Field;
+		CShop		*Shop;
 };
 
 #endif
