@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\CMAP\\Documents\\jusin\\241108 STL\uAC1C\uB860\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{204D5575-012A-4421-99A9-A7555A0F4842}|241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.vcxproj|C:\\Users\\CMAP\\Documents\\jusin\\241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{204D5575-012A-4421-99A9-A7555A0F4842}|241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.vcxproj|solutionrelative:241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "241108 STL\uAC1C\uB860.cpp",
+              "DocumentMoniker": "C:\\Users\\CMAP\\Documents\\jusin\\241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.cpp",
+              "RelativeDocumentMoniker": "241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.cpp",
+              "ToolTip": "C:\\Users\\CMAP\\Documents\\jusin\\241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.cpp",
+              "RelativeToolTip": "241108 STL\uAC1C\uB860\\241108 STL\uAC1C\uB860.cpp",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAADQAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-08T07:21:32.532Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

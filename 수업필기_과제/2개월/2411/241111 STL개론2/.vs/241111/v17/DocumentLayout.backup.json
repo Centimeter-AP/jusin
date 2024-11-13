@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\CMAP\\Documents\\jusin\\241111\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{776C93A1-8C9C-488A-AE29-13D111A9AA63}|241111\\241111.vcxproj|C:\\Users\\CMAP\\Documents\\jusin\\241111\\241111\\241111.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{776C93A1-8C9C-488A-AE29-13D111A9AA63}|241111\\241111.vcxproj|solutionrelative:241111\\241111.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{776C93A1-8C9C-488A-AE29-13D111A9AA63}|241111\\241111.vcxproj|C:\\Users\\CMAP\\Documents\\jusin\\241111\\241111\\pch.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{776C93A1-8C9C-488A-AE29-13D111A9AA63}|241111\\241111.vcxproj|solutionrelative:241111\\pch.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "pch.h",
+              "DocumentMoniker": "C:\\Users\\CMAP\\Documents\\jusin\\241111\\241111\\pch.h",
+              "RelativeDocumentMoniker": "241111\\pch.h",
+              "ToolTip": "C:\\Users\\CMAP\\Documents\\jusin\\241111\\241111\\pch.h",
+              "RelativeToolTip": "241111\\pch.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-11T07:31:48.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "241111.cpp",
+              "DocumentMoniker": "C:\\Users\\CMAP\\Documents\\jusin\\241111\\241111\\241111.cpp",
+              "RelativeDocumentMoniker": "241111\\241111.cpp",
+              "ToolTip": "C:\\Users\\CMAP\\Documents\\jusin\\241111\\241111\\241111.cpp",
+              "RelativeToolTip": "241111\\241111.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-11T07:27:39.712Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
