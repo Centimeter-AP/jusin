@@ -5,12 +5,14 @@
 # include "Info.h"
 
 class CItem;
+class CArmor;
 
 class CCharacter
 {
 protected:
 	INFO	mInfo;
-	CItem* pItem[4];
+	vector<CItem*> vecItemInv;
+	vector<CItem*> vecArmorSlot[ARMOR_END];
 
 public:
 	CCharacter();

@@ -49,11 +49,6 @@ void CMain::Update()
 	}
 }
 
-void CMain::Release()
-{
-	
-}
-
 void CMain::AddStudent()
 {
 	int iInput(0);
@@ -106,8 +101,7 @@ void CMain::SearchStudent()
 
 void CMain::DeleteStudent()
 {
-	//vector<vector<CReport>::iterator> res;
-	vector<int> res;
+	vector<vector<CReport>::iterator> res;
 	string		sInput;
 	int			iFound(0);
 
@@ -115,19 +109,16 @@ void CMain::DeleteStudent()
 	cout << "==============================================" << endl;
 	cout << "삭제 할 학생의 이름을 입력 해주세요.\n입력:";
 	cin >> sInput;
-	int i(0);
 	system("cls");
 	for (iter = vecStudent.begin(); iter != vecStudent.end(); ++iter)
 	{
 		if (iter->Get_Name() == sInput)
 		{
-			//res.push_back(iter);
+			res.push_back(iter);
 			cout << "==============================================" << endl;
-			res.push_back(i);
 			iter->Render();
 			iFound++;
 		}
-		i++;
 	}
 	if (!iFound)
 	{
@@ -140,7 +131,7 @@ void CMain::DeleteStudent()
 	{
 		cout << "==============================================" << endl;
 		cout << sInput << " 학생의 정보를 삭제합니다." << endl;
-		iter = vecStudent.begin() + *(res.begin());
+		iter = *(res.begin());
 		iter = vecStudent.erase(iter);
 		system("pause");
 	}
@@ -151,18 +142,34 @@ void CMain::DeleteStudent()
 			int iInput(0);
 			cout << "==============================================" << endl;
 			cout << "중복되는 학생이 있습니다. 어떤 학생의 정보를 삭제할까요?" << endl;
+			cout << "전부 삭제하려면 0을 입력하세요." << endl;
 			cout << "번호 입력 : ";
 			cin >> iInput;
-			CINEXCEPTION(iFound);
-			//vector<vector<CReport>::iterator>::iterator resIter = res.begin() + iInput - 1;
-			//vecStudent.erase(*resIter);
-			iter = vecStudent.begin() + *(res.begin() + iInput - 1);
-			iter = vecStudent.erase(iter);
-			cout << iInput << "번째 학생의 정보를 삭제합니다." << endl;
-			system("pause");
-			break;
+			if (cin.fail() || iInput > iFound || iInput < 0) { CinFailException(cin.fail()); continue; }
+
+
+			if (iInput == 0)
+			{
+				vector<vector<CReport>::iterator>::iterator resIter = res.begin();
+				for (vector<vector<CReport>::iterator>::iterator resIter = res.begin();
+					resIter != res.end(); ++resIter)
+				{
+					(**(resIter)).Render();
+					iter = vecStudent.erase(*resIter);  /******************************************************/
+				}
+				cout << "전부 삭제합니다." << endl;
+				system("pause");
+				break;
+			}
+			else
+			{
+				vector<vector<CReport>::iterator>::iterator resIter = res.begin() + iInput - 1;
+				iter = vecStudent.erase(*resIter);
+				cout << iInput << "번째 학생의 정보를 삭제합니다." << endl;
+				system("pause");
+				break;
+			}
 		}
-		
 	}
 }
 

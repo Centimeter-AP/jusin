@@ -7,10 +7,7 @@
 
 CShop::CShop()
 {
-	for (int i = 0; i < 4; ++i)
-	{
-		mSales[i] = nullptr;
-	}
+	vecSales.reserve(4);
 	Player = nullptr;
 }
 CShop::~CShop()
@@ -27,8 +24,8 @@ void CShop::View_List()
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		cout << i + 1 << ". " << mSales[i]->Get_Name();
-		cout << '\t' << endl;
+		cout << i + 1 << ". " << vecSales[i]->Get_Name();
+		cout << "\t\t" << vecSales[i]->Get_Price() << "원" << endl;
 	}
 }
 
@@ -38,10 +35,14 @@ void CShop::Select_Item(int idx)
 	
 	while (1)
 	{
-		//system("pause"); system("cls");
-
-		cout << idx + 1 << ". " << mSales[idx]->Get_Name() << endl;
-		dynamic_cast<CPotion*>(mSales[idx])->Explain();
+		system("cls");
+		Player->Print_Info();
+		cout << "======================================================" << endl;
+		cout << "상점" << endl;
+		cout << "======================================================" << endl;
+		cout << idx + 1 << ". " << vecSales[idx]->Get_Name() << "\t\t가격 : " << vecSales[idx]->Get_Price() << endl;
+		dynamic_cast<CPotion*>(vecSales[idx])->Explain();
+		cout << "======================================================" << endl;
 		cout << "1. 구입  2. 선택 취소" << endl;
 		cout << "입력 : ";
 		cin >> iInput;
@@ -50,18 +51,15 @@ void CShop::Select_Item(int idx)
 	}
 	if (iInput == 1)
 	{
-		Player->Set_Item(mSales[idx]);
-		cout << "구매하였습니다" << endl;
+		Player->Set_Item(vecSales[idx]);
 	}	
-
-	
 }
 
 void	CShop::Initialize()
 {
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < ITEMINVMAX; ++i)
 	{
-		mSales[i] = new CPotion;
+		vecSales.push_back(new CPotion);
 	}
 }
 
@@ -79,6 +77,7 @@ void	CShop::Update()
 		View_List();
 		cout << "======================================================" << endl;
 		cout << "상점을 나가려면 5 입력" << endl;
+		cout << "입력 : ";
 		cin >> iInput;
 		CINEXCEPTION(5);
 		if (iInput == 5)
@@ -91,6 +90,6 @@ void	CShop::Release()
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		SAFEDELETE(mSales[i]);
+		SAFEDELETE(vecSales[i]);
 	}
 }

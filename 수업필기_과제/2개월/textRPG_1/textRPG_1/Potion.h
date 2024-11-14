@@ -9,12 +9,12 @@ class CCharacter;
 class CPotion : public CItem
 {
 public:
-	CPotion() { strcpy_s(m_szName, size(m_szName), "포션"); };;
+	CPotion() { iPrice = 500; strcpy_s(m_szName, size(m_szName), "포션"); };;
 	~CPotion() {};	
 
 	void	Use(CCharacter* obj);
 	void	Explain();
-	CItem* Clone();
+	CItem*	Clone();
 
 	
 };

@@ -13,6 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="00. MainGame">
+      <UniqueIdentifier>{d8ee337b-a120-44ec-812d-c8a444d4f375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Character">
+      <UniqueIdentifier>{dc5387a7-ee08-405c-ba5f-dd9852856af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Character\01. Monster">
+      <UniqueIdentifier>{87891875-45e0-4336-bd24-b7938e9f552a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Character\00. Player">
+      <UniqueIdentifier>{e2f9579f-4ce7-4211-8189-1586dbf3e8a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Field">
+      <UniqueIdentifier>{ea347089-bfee-4e00-9019-9b59c9e391b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Shop">
+      <UniqueIdentifier>{802afb13-33f2-4f55-9139-ef1c60f6bc6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Item">
+      <UniqueIdentifier>{efec47f5-a789-4cef-b083-879157de354d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. System">
+      <UniqueIdentifier>{3fad6d43-3868-47ad-a3d7-a60b1d8902c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{28300a16-8f53-44fd-9a5b-0e578891c1ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="textRPG_1.cpp">
@@ -21,35 +48,38 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Field.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="MainGame.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>00. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>01. Character</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>01. Character\01. Monster</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Potion.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>01. Character\00. Player</Filter>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>04. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>04. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>04. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Potion.cpp">
+      <Filter>04. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>02. Field</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>03. Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>99. System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,35 +89,38 @@
     <ClInclude Include="Info.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Field.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="MainGame.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>00. MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>01. Character</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>01. Character\01. Monster</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>01. Character\00. Player</Filter>
     </ClInclude>
-    <ClInclude Include="Shop.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Potion.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Armor.h">
+      <Filter>04. Item</Filter>
     </ClInclude>
     <ClInclude Include="Bomb.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>04. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Potion.h">
+      <Filter>04. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>04. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>02. Field</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>03. Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>99. System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,13 +2,12 @@
 #ifndef SHOP_H
 # define SHOP_H
 
-
 class CItem;
 
 class CShop
 {
 private:
-	CItem* mSales[4];
+	vector<CItem*> vecSales;
 	CCharacter* Player;
 public:
 	CShop();

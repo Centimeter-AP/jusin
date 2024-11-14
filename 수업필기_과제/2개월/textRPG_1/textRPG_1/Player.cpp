@@ -8,6 +8,8 @@ CPlayer::CPlayer()
 	cout << GREEN << "CPLAYER" << NOCOLOR << " 생성자 호출" << endl;
 	memset(&mInfo, 0, sizeof(mInfo));
 	memset(&mPInfo, 0, sizeof(mPInfo));
+	vecArmorInv.reserve(5);
+	vecItemInv.reserve(4);
 }
 
 CPlayer::CPlayer(const char* szName, int _iHP, int _iAtk)

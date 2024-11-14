@@ -6,7 +6,7 @@
 
 void	CPotion::Explain()
 {
-	cout << "사용자의 체력을 약 40 % 회복시켜 줍니다.";
+	cout << "사용자의 체력을 약 40 % 회복시켜 줍니다." << endl;
 }
 void	CPotion::Use(CCharacter* obj)
 {

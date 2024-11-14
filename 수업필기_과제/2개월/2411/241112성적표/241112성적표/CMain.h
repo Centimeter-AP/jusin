@@ -11,7 +11,7 @@ public:
 public:
 	void	Initialize();
 	void	Update();
-	void	Release();
+	void	Release() {}
 
 public:
 	void	AddStudent();

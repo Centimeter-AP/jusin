@@ -6,10 +6,14 @@
 # include "Info.h"
 # include "pch.h"
 
+class CArmor;
+
 class CPlayer : public CCharacter
 {
 private:
 	PLAYERINFO	mPInfo;
+	vector<CArmor*> vecArmorInv;
+
 public:
 	CPlayer();
 	CPlayer(const char* szName, int _iHP, int _iAtk);
