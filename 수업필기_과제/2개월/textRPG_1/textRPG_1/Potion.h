@@ -9,7 +9,7 @@ class CCharacter;
 class CPotion : public CItem
 {
 public:
-	CPotion() { iPrice = 500; strcpy_s(m_szName, size(m_szName), "포션"); };;
+	CPotion() { iPrice = 500; m_sName = "포션"; };;
 	~CPotion() {};	
 
 	void	Use(CCharacter* obj);

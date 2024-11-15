@@ -8,10 +8,11 @@ class CCharacter;
 class CItem
 {
 protected:
-	char	m_szName[32];
+	string	m_sName;
 	int		iPrice;
+
 public:
-	CItem():iPrice(0) { strcpy_s(m_szName, strlen(m_szName) + 1, ""); };
+	CItem():iPrice(0) { m_sName = ""; };
 	CItem& operator =(const CItem& rhs)
 	{
 
@@ -21,7 +22,9 @@ public:
 	virtual void	Use(CCharacter* obj) = 0;
 	virtual CItem* Clone() = 0;
 	virtual void	Explain() = 0;
-	const char* Get_Name() const { return m_szName; }
+
+public:
+	string Get_Name() const { return m_sName; }
 	int	Get_Price() const { return iPrice; }
 };
 

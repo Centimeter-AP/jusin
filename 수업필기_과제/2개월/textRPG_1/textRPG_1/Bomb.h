@@ -8,12 +8,12 @@
 class CBomb : public CItem
 {
 public:
-	CBomb() { strcpy_s(m_szName, size(m_szName), "ÆøÅº"); };
+	CBomb() { iPrice = 500; m_sName = "ÆøÅº"; };
 	~CBomb() {};
 
 	void	Use(CCharacter* obj);
 	void	Explain();
-	CItem* Clone();
+	CItem*	Clone();
 };
 
 #endif

@@ -6,7 +6,7 @@
 
 void	CBomb::Explain()
 {
-	cout << "폭탄\n상대의 최대 체력의 약 30% 의 고정 피해를 줍니다." << endl;
+	cout << "상대의 최대 체력의 약 30% 의 고정 피해를 줍니다." << endl;
 }
 void	CBomb::Use(CCharacter* obj)
 {

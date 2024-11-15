@@ -44,14 +44,14 @@ void	CField::Update()
 			cout << "필드 보스까지 남은 걸음 수 : " << iMaxStep - iStep << endl;
 			cout << "======================================================" << endl;
 		}
-		else
-		{
-			// if (Boss_Encounter())
-			// {
+		//else
+		//{
+		//	// if (Boss_Encounter())
+		//	// {
 
-			// }
-			void;
-		}
+		//	// }
+		//	//void;
+		//}
 
 		cout << "1. 왼쪽으로  2. 직진한다  3. 레벨업  4. 돌아나온다" << endl;
 		cout << "입력 : ";

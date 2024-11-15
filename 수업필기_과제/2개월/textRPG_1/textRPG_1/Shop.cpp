@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Info.h"
 #include "Potion.h"
+#include "Bomb.h"
 #include "Player.h"
 #include "Shop.h"
 #include "System.h"
@@ -41,7 +42,7 @@ void CShop::Select_Item(int idx)
 		cout << "상점" << endl;
 		cout << "======================================================" << endl;
 		cout << idx + 1 << ". " << vecSales[idx]->Get_Name() << "\t\t가격 : " << vecSales[idx]->Get_Price() << endl;
-		dynamic_cast<CPotion*>(vecSales[idx])->Explain();
+		vecSales[idx]->Explain();
 		cout << "======================================================" << endl;
 		cout << "1. 구입  2. 선택 취소" << endl;
 		cout << "입력 : ";
@@ -59,7 +60,10 @@ void	CShop::Initialize()
 {
 	for (int i = 0; i < ITEMINVMAX; ++i)
 	{
-		vecSales.push_back(new CPotion);
+		if (i % 2)
+			vecSales.push_back(new CPotion);
+		else
+			vecSales.push_back(new CBomb);
 	}
 }
 

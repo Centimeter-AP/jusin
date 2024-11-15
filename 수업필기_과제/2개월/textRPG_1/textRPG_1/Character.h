@@ -3,16 +3,14 @@
 # define CHARACTER_H
 
 # include "Info.h"
+# include "Armor.h"
 
-class CItem;
-class CArmor;
 
 class CCharacter
 {
 protected:
 	INFO	mInfo;
 	vector<CItem*> vecItemInv;
-	vector<CItem*> vecArmorSlot[ARMOR_END];
 
 public:
 	CCharacter();

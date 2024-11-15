@@ -37,8 +37,17 @@
     <Filter Include="99. System">
       <UniqueIdentifier>{3fad6d43-3868-47ad-a3d7-a60b1d8902c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NewFilter1">
-      <UniqueIdentifier>{28300a16-8f53-44fd-9a5b-0e578891c1ed}</UniqueIdentifier>
+    <Filter Include="04. Item\00. Potion">
+      <UniqueIdentifier>{432deb9d-597f-4023-bca1-e3e383266abf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Item\01. Bomb">
+      <UniqueIdentifier>{6dc1b44f-85c6-423d-bee9-5873dd88dc77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Item\99. Armor">
+      <UniqueIdentifier>{b28492ca-6360-4634-86a6-b7f233786a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Inventory">
+      <UniqueIdentifier>{bfc3c1f2-996d-48e4-b06d-e9469d6f6e2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,16 +69,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>01. Character\00. Player</Filter>
     </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>04. Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Armor.cpp">
-      <Filter>04. Item</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>04. Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Potion.cpp">
       <Filter>04. Item</Filter>
     </ClCompile>
     <ClCompile Include="Field.cpp">
@@ -80,6 +80,18 @@
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>99. System</Filter>
+    </ClCompile>
+    <ClCompile Include="Potion.cpp">
+      <Filter>04. Item\00. Potion</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>04. Item\01. Bomb</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>04. Item\99. Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>05. Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,15 +113,6 @@
     <ClInclude Include="Player.h">
       <Filter>01. Character\00. Player</Filter>
     </ClInclude>
-    <ClInclude Include="Armor.h">
-      <Filter>04. Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>04. Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Potion.h">
-      <Filter>04. Item</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>04. Item</Filter>
     </ClInclude>
@@ -121,6 +124,18 @@
     </ClInclude>
     <ClInclude Include="System.h">
       <Filter>99. System</Filter>
+    </ClInclude>
+    <ClInclude Include="Potion.h">
+      <Filter>04. Item\00. Potion</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>04. Item\01. Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>04. Item\99. Armor</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>05. Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,8 @@ CMonster::CMonster(const char* szName, int _iLvl)
 {
 	strcpy_s(mInfo.szName, size(mInfo.szName), szName);
 
-	mMInfo.iInitHP = 50 + rand() % 10;
-	mMInfo.iInitAtk = 7 + rand() % 4;
+	mMInfo.iInitHP = (float)(50 + rand() % 10);
+	mMInfo.iInitAtk = (float)(7 + rand() % 4);
 	for (int i = 0; i < _iLvl; ++i) { mMInfo.iInitHP *= 1.1f; mMInfo.iInitAtk *= 1.1f; }
 	mInfo.iMaxHP = (int)(mMInfo.iInitHP);
 	mInfo.iHP = mInfo.iMaxHP;

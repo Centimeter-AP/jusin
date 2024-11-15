@@ -12,23 +12,30 @@ class CPlayer : public CCharacter
 {
 private:
 	PLAYERINFO	mPInfo;
-	vector<CArmor*> vecArmorInv;
+	vector<CItem*> vecArmorInv;
+	CItem* mArmorSlot[ARMOR_END];
 
 public:
 	CPlayer();
 	CPlayer(const char* szName, int _iHP, int _iAtk);
-	~CPlayer();
+	virtual ~CPlayer();
 
+public:
 	void	Initialize();
 	void	Release();
 
+public:
 	PLAYERINFO* Get_PInfo() { return &mPInfo; };
+	vector<CItem*>* Get_ArmorInv() { return &vecArmorInv; }
 
+public:
 	void	Level_Up();
 	void	Player_Lose();
 	void	Player_Win();
-
 	void	Print_Info();
+	void	Equip_Armor(CItem* pArmor);
+	void	Unequip_Armor(CItem* pArmor);
+
 };
 
 #endif

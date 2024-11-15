@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Character.h"
 #include "Info.h"
+#include "Item.h"
+#include "System.h"
 
 CCharacter::CCharacter()
 {
@@ -11,7 +13,7 @@ CCharacter::CCharacter()
 }
 CCharacter::~CCharacter()
 {
-
+	//for_each(vecItemInv.begin(), vecItemInv.end(), Safe_Delete<CItem*>);
 	cout << RED << "CCHARACTER " << mInfo.szName << NOCOLOR << " 소멸자 호출" << endl;
 }
 
@@ -26,7 +28,7 @@ void CCharacter::Set_Item(CItem* _pItem)
 {
 	if (vecItemInv.size() < ITEMINVMAX)
 	{
-		vecItemInv.push_back(_pItem);
+		vecItemInv.push_back(_pItem->Clone());
 		cout << "구매하였습니다" << endl;
 	}
 	else

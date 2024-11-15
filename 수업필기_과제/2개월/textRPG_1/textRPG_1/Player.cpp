@@ -1,7 +1,10 @@
+#pragma once
 #include "pch.h"
 #include "Player.h"
 #include "Info.h"
 #include "System.h"
+#include "Item.h"
+#include "Armor.h"
 
 CPlayer::CPlayer()
 {
@@ -10,6 +13,8 @@ CPlayer::CPlayer()
 	memset(&mPInfo, 0, sizeof(mPInfo));
 	vecArmorInv.reserve(5);
 	vecItemInv.reserve(4);
+	for (int i = 0; i < size(mArmorSlot); ++i)
+		mArmorSlot[i] = nullptr;
 }
 
 CPlayer::CPlayer(const char* szName, int _iHP, int _iAtk)
@@ -24,6 +29,8 @@ CPlayer::CPlayer(const char* szName, int _iHP, int _iAtk)
 	mPInfo.iMaxExp = 100;
 	mPInfo.iLvl = 1;
 	mPInfo.iExp = 0;
+	for (int i = 0; i < size(mArmorSlot); ++i)
+		mArmorSlot[i] = nullptr;
 }
 
 CPlayer::~CPlayer()
@@ -81,6 +88,12 @@ void	CPlayer::Initialize()
 
 void	CPlayer::Release()
 {
+	for_each(vecArmorInv.begin(), vecArmorInv.end(), Safe_Delete<CItem*>);
+	for (int i = 0; i < size(mArmorSlot); ++i)
+	{
+		if (mArmorSlot[i])
+			delete mArmorSlot[i];
+	}
 	return;
 }
 
@@ -92,6 +105,15 @@ void	CPlayer::Print_Info()
 	cout << "체력 : " << mInfo.iHP << "\t공격력 : " << mInfo.iAtk << endl;
 	cout << "======================================================\n" << endl;
 }
+
+void CPlayer::Equip_Armor(CItem* pArmor)
+{
+}
+
+void CPlayer::Unequip_Armor(CItem* pArmor)
+{
+}
+
 
 void	CPlayer::Level_Up()
 {

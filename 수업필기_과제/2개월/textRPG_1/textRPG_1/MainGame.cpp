@@ -79,7 +79,7 @@ void	CMainGame::Update()
 
 void	CMainGame::Release()
 {
-	SAFEDELETE(Player);
-	SAFEDELETE(Field);
-	SAFEDELETE(Shop);
+	Safe_Delete<CCharacter*>(Player);
+	Safe_Delete<CField*>(Field);
+	Safe_Delete<CShop*>(Shop);
 }

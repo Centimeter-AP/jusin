@@ -139,6 +139,7 @@
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Field.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Info.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Monster.h" />

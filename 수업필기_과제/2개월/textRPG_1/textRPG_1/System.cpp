@@ -12,3 +12,4 @@ void	CSystem::CinFailException(bool i)
 		while (cin.get() == '\n') continue;
 	}
 }
+

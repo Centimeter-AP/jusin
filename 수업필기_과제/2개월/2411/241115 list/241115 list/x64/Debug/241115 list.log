@@ -1,0 +1,20 @@
+﻿  241115 list.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\list(1677,17): error C2064: 항은 1개의 인수를 받아들이는 함수로 계산되지 않습니다.
+  (소스 파일 '/241115%20list.cpp'을(를) 컴파일하는 중)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\list(1677,17):
+      클래스에서 'operator()' 또는 사용자 정의 변환 연산자를 적절한 수의 인수를 취하는 함수 포인터 또는 함수 참조로 정의하지 않습니다.
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\list(1677,17):
+      인수 목록 '(_Value_type)'을(를) 일치시키는 동안
+          with
+          [
+              _Value_type=int
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\list(1677,17):
+      템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+          C:\Users\CMAP\Documents\github\jusin\수업필기_과제\2개월\2411\241115 list\241115 list\241115 list.cpp(67,10):
+          컴파일되는 함수 템플릿 인스턴스화 'auto std::list<int,std::allocator<int>>::remove_if<std::greater_equal<int>>(_Pr1)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Pr1=std::greater_equal<int>
+          ]
+  
