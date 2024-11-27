@@ -14,7 +14,7 @@ CCharacter::CCharacter()
 CCharacter::~CCharacter()
 {
 	//for_each(vecItemInv.begin(), vecItemInv.end(), Safe_Delete<CItem*>);
-	cout << RED << "CCHARACTER " << mInfo.szName << NOCOLOR << " 소멸자 호출" << endl;
+	cout << RED << "CCHARACTER " << mInfo.sName << NOCOLOR << " 소멸자 호출" << endl;
 }
 
 int	CCharacter::Get_CritDamage()
@@ -39,9 +39,9 @@ void	CCharacter::Attack(CCharacter* obj)
 {
 	if (this->mInfo.iHP <= 0)
 		return;
-	cout << mInfo.szName << "의 공격!" << endl;
+	cout << mInfo.sName << "의 공격!" << endl;
 	obj->Get_Info()->iHP -= this->mInfo.iAtk;
-	cout << obj->Get_Info()->szName << "에게 " << Get_CritDamage();
+	cout << obj->Get_Info()->sName << "에게 " << Get_CritDamage();
 	if (mInfo.iCritical == 2) { cout << " 크리티컬 "; }
 	cout << "대미지" << endl;
 }

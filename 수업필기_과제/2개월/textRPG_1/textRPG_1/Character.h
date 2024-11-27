@@ -20,9 +20,10 @@ public:
 	virtual void	Release() = 0;
 
 public:
-	INFO* Get_Info() { return &mInfo; }
+	INFO*	Get_Info() { return &mInfo; }
 	int		Get_CritDamage();
 	void	Set_Item(CItem* _pItem);
+	vector<CItem*>* Get_ItemInv() { return &vecItemInv; }
 
 public:
 	virtual void	Print_Info() = 0;

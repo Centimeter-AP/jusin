@@ -9,28 +9,26 @@ void CArmor::Use(CCharacter* obj)
 
 CItem* CArmor::Clone()
 {
-	CItem* pNew = new CArmor();
+	CItem* pNew = new CArmor(*this);
 	return pNew;
 }
 
 void CArmor::Explain()
 {
 	cout << "======================================================" << endl;
+	cout << "이름 : " << m_sName <<	(isEquip ? "(착용중)" : "") << endl;
 	cout << "장비 타입 : ";
 	switch (enType)
 	{
 	case ARMOR_HEAD: cout << "머리" << endl; break;
-	case ARMOR_BODY: cout << "몸" << endl; break;
+	case ARMOR_BODY: cout << "몸통" << endl; break;
 	case ARMOR_GLOVE: cout << "장갑" << endl; break;
 	case ARMOR_FEET: cout << "신발" << endl; break;
 	case ARMOR_WEAPON: cout << "무기" << endl; break;
 	case ARMOR_ACC: cout << "악세사리" << endl; break;
 	case ARMOR_END: cout << "정해지지 않음" << endl; break;
 	}
-	cout << "이름 : " << m_sName
-		 <<	"\t\t착용 여부: " << (isEquip ? "착용중" : "미착용")
-		 << endl;
-	cout << "공격력 : " << iAtk << " \t체력 : " << iHP << endl;
+	cout <<  "체력 : " << iHP << " \t공격력 : " << iAtk << endl;
 	cout << "======================================================" << endl;
 }
 

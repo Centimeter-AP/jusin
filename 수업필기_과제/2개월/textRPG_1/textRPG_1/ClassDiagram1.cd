@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMainGame" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAAAEAQBAAAAAAAAAAAAAAAAAIAAAIRABgAA=</HashCode>
+      <FileName>MainGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCharacter" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAkAAgBAQAABAAAAAAAAIIAAAAAAAAAIBAAAAA=</HashCode>
+      <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMonster" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAARAABAAAAAAAAAAAAAAAAAAAABIAAAA=</HashCode>
+      <FileName>Monster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPlayer" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAEAIAEAAAAQEABAAAAiIIgAoiAAgAAAAAABAAAAg=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CField" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQACAAAAAAAQQAAAAAACAAAEBAIAAACAgAACTAgAAE=</HashCode>
+      <FileName>Field.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CShop" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAgAAAAAgARAAAAAAgAAAAAABAAAAAAAAARAAAAA=</HashCode>
+      <FileName>Shop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CItemShop" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemShop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CArmorShop" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAiBAAARAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ArmorShop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CItem" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAACAAAAAgAgAAAAAAABAAEAAAABAAAAQAAABA=</HashCode>
+      <FileName>Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPotion" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAABACEAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Potion.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBomb" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAJAAEAAAAAAAAABAAABA=</HashCode>
+      <FileName>Bomb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CArmor" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAABAAIQAAAAAAAgAABAAFAAAgAEAAQKAAABg=</HashCode>
+      <FileName>Armor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSystem" Collapsed="true">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>System.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CInventory" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCQAAAAAAAQAAQAAAAAAAAUAAAAAAAAEAAAAARAAAgg=</HashCode>
+      <FileName>Inventory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="INFO" Collapsed="true">
+    <Position X="10.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAIAAAAAIBAAAAAAAAAAAAAAAABAAAAAACAAAAg=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PLAYERINFO" Collapsed="true">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MONSTERINFO" Collapsed="true">
+    <Position X="12" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="CLASS" Collapsed="true">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAgAAAAAAAAACAA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MENU" Collapsed="true">
+    <Position X="10.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQCAAAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FIELD" Collapsed="true">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAACAIAAgAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="COMMENT" Collapsed="true">
+    <Position X="13.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAgAAAAAAAAAEBAAAAIAAQAAAAAAAgAAABAAAAA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FFLAG" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAgAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MAXNUM" Collapsed="true">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAk=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ARMORSLOT" Collapsed="true">
+    <Position X="10.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAAAAAAAAAAAAAAAIAAAQAQAAAAAACAAAAAIAAAAA=</HashCode>
+      <FileName>Info.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

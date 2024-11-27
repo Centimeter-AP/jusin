@@ -10,7 +10,7 @@ void	CPotion::Explain()
 }
 void	CPotion::Use(CCharacter* obj)
 {
-	cout << obj->Get_Info()->szName << "이 포션을 사용합니다." << endl;
+	cout << obj->Get_Info()->sName << "이 포션을 사용합니다." << endl;
 	obj->Get_Info()->iHP += (int)((obj->Get_Info()->iMaxHP) * 0.4f);
 	if (obj->Get_Info()->iHP > obj->Get_Info()->iMaxHP)
 		obj->Get_Info()->iHP = obj->Get_Info()->iMaxHP;

@@ -3,6 +3,8 @@
 # define CSYSTEM_H
 
 # include "pch.h"
+# include "Item.h"
+# include "Item.h"
 
 class CSystem
 {
@@ -29,5 +31,7 @@ void	Safe_Delete_Arr(T& p)
 		p = nullptr;
 	}
 }
+
+
 #endif
 

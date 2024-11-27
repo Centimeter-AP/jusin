@@ -2,11 +2,11 @@
 #ifndef MAINGAME_H
 # define MAINGAME_H
 
-#include "Character.h"
-#include "Field.h"
-#include "Player.h"
-#include "Shop.h"
 
+class CInventory;
+class CField;
+class CShop;
+class CCharacter;
 
 class CMainGame
 {
@@ -18,12 +18,15 @@ public:
 	void	Update();
 	void	Release();
 
-	void	StartMenu();
+	//void	StartMenu();
+	void	Select_Shop();
 
 private:
-	CCharacter* Player;
-	CField* Field;
-	CShop* Shop;
+	CCharacter*	Player;
+	CInventory* Inven;
+	CField*		Field;
+	CShop*		ItemShop;
+	CShop*		ArmorShop;
 };
 
 #endif

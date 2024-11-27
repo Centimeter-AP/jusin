@@ -1,16 +1,19 @@
 #pragma once
 
+#include "System.h"
+
 #define SAFEDELETE(P) if(P){ delete P; P = nullptr; }
 #define CINEXCEPTION(P) if (cin.fail() || iInput > P || iInput < 1) {CSystem::CinFailException(cin.fail()); continue;}
 
 
 struct INFO {
+public:
+	string	sName;
 	int		iHP;
 	int		iMaxHP;
 	int		iAtk;
 	int		iCritChance;
 	int		iCritical;
-	char	szName[32];
 	int		iGold;
 };
 
@@ -36,7 +39,7 @@ enum CLASS {
 enum MENU {
 	FIELD = 1,
 	SHOP,
-	SAVE,
+	INVEN,
 	EXIT
 };
 

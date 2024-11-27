@@ -7,10 +7,9 @@ CMonster::CMonster()
 	memset(&mMInfo, 0, sizeof(mMInfo));
 }
 
-CMonster::CMonster(const char* szName, int _iLvl)
+CMonster::CMonster(string sName, int _iLvl)
 {
-	strcpy_s(mInfo.szName, size(mInfo.szName), szName);
-
+	mInfo.sName = sName;
 	mMInfo.iInitHP = (float)(50 + rand() % 10);
 	mMInfo.iInitAtk = (float)(7 + rand() % 4);
 	for (int i = 0; i < _iLvl; ++i) { mMInfo.iInitHP *= 1.1f; mMInfo.iInitAtk *= 1.1f; }
@@ -36,7 +35,7 @@ void	CMonster::Release()
 void 	CMonster::Print_Info()
 {
 	cout << "======================================================" << endl;
-	cout << "이름 : " << mInfo.szName << endl;
+	cout << "이름 : " << mInfo.sName << endl;
 	cout << "체력 : " << mInfo.iHP << "\t공격력 : " << mInfo.iAtk << endl;
 	cout << "======================================================" << endl;
 }

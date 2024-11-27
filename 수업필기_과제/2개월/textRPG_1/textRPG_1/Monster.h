@@ -12,7 +12,7 @@ private:
 	MONSTERINFO mMInfo;
 public:
 	CMonster();
-	CMonster(const char* szName, int _iLvl);
+	CMonster(string sName, int _iLvl);
 	~CMonster();
 
 	void	Initialize();

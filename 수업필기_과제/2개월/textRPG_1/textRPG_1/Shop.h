@@ -1,24 +1,27 @@
 #pragma once
 #ifndef SHOP_H
 # define SHOP_H
+# include "Character.h"
 
 class CItem;
 
 class CShop
 {
-private:
-	vector<CItem*> vecSales;
+protected:
 	CCharacter* Player;
+	string		sPlayerWeapon;
+
 public:
 	CShop();
-	~CShop();
+	virtual ~CShop();
 
-	void	Initialize();
-	void	Update();
-	void	Release();
+	virtual void	Initialize();
+	virtual void	Update();
+	virtual void	Release() {};
 
 	void	Set_Player(CCharacter* _Player);
-	void	View_List();
+	//virtual void	View_List();
+	//void	Render_Item(CItem* _Item);
 	void	Select_Item(int idx);
 };
 

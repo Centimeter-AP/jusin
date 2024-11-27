@@ -49,6 +49,12 @@
     <Filter Include="05. Inventory">
       <UniqueIdentifier>{bfc3c1f2-996d-48e4-b06d-e9469d6f6e2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Shop\00. ItemShop">
+      <UniqueIdentifier>{bbb46248-6793-499f-ba2b-8346cd8c7b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Shop\01. ArmorShop">
+      <UniqueIdentifier>{3a3de122-939d-4f84-9ee8-dac035332cc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="textRPG_1.cpp">
@@ -92,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>05. Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorShop.cpp">
+      <Filter>03. Shop\01. ArmorShop</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemShop.cpp">
+      <Filter>03. Shop\00. ItemShop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,8 +149,15 @@
     <ClInclude Include="Inventory.h">
       <Filter>05. Inventory</Filter>
     </ClInclude>
+    <ClInclude Include="ArmorShop.h">
+      <Filter>03. Shop\01. ArmorShop</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemShop.h">
+      <Filter>03. Shop\00. ItemShop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

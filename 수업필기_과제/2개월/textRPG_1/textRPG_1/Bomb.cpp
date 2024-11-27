@@ -10,7 +10,7 @@ void	CBomb::Explain()
 }
 void	CBomb::Use(CCharacter* obj)
 {
-	cout << obj->Get_Info()->szName << "¿¡°Ô ÆøÅºÀ» »ç¿ëÇÕ´Ï´Ù." << endl;
+	cout << obj->Get_Info()->sName << "¿¡°Ô ÆøÅºÀ» »ç¿ëÇÕ´Ï´Ù." << endl;
 	obj->Get_Info()->iHP -= (int)((obj->Get_Info()->iMaxHP) * 0.3f);
 	if (obj->Get_Info()->iHP < 0)
 		obj->Get_Info()->iHP = 0;

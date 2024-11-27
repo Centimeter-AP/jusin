@@ -17,7 +17,7 @@ private:
 
 public:
 	CPlayer();
-	CPlayer(const char* szName, int _iHP, int _iAtk);
+	CPlayer(string sName, int _iHP, int _iAtk);
 	virtual ~CPlayer();
 
 public:
@@ -27,6 +27,7 @@ public:
 public:
 	PLAYERINFO* Get_PInfo() { return &mPInfo; };
 	vector<CItem*>* Get_ArmorInv() { return &vecArmorInv; }
+	CItem* Get_TypeSlot(ARMORSLOT _TYPE) const { return mArmorSlot[_TYPE];}
 
 public:
 	void	Level_Up();
@@ -35,6 +36,10 @@ public:
 	void	Print_Info();
 	void	Equip_Armor(CItem* pArmor);
 	void	Unequip_Armor(CItem* pArmor);
+	void	Buy_Armor(CItem* pArmor);
+	void	Sell_Armor(CItem* pArmor);
+	void	Buy_Item(CItem* pItem);
+	void	Sell_Item(CItem* pItem);
 
 };
 
