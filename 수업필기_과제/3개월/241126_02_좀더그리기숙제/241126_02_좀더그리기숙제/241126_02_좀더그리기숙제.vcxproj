@@ -136,7 +136,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="241126_02_좀더그리기숙제.h" />
+    <ClInclude Include="asdf.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainGame.h" />
@@ -149,7 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="241126_02_좀더그리기숙제.cpp" />
+    <ClCompile Include="asdf.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Obj.cpp" />

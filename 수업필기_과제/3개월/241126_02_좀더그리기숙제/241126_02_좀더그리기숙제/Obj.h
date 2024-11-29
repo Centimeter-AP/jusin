@@ -8,6 +8,7 @@ public:
 
 public:
 	virtual void	Update()		 PURE;
+	virtual void	Late_Update()	 PURE;
 	virtual void	Render(HDC _hdc) PURE;
 	virtual void	Initialize()	 PURE;
 	virtual void	Release()		 PURE;
@@ -24,5 +25,6 @@ protected:
 	RECT		mRect;
 	LONG		m_lSpeed;
 	KDIRECTION	enKeyDir;
+	bool		isDead;
 };
 

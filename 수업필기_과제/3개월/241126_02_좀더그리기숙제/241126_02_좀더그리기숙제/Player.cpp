@@ -60,3 +60,7 @@ CObj* CPlayer::Make_Bullet()
 	res->Set_Dir(enKeyDir);
 	return res;
 }
+
+void CPlayer::Late_Update()
+{
+}

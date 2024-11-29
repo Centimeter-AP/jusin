@@ -8,11 +8,13 @@ public:
 	
 public:
 	void Update() override;
+	void Late_Update() override;
 	void Render(HDC _hdc) override;
 	void Initialize() override;
 	void Release() override;
 
 private:
 	bool isWall;
+
 };
 

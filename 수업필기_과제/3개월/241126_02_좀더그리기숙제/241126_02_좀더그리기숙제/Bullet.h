@@ -17,5 +17,9 @@ private:
     LONG    m_ldX, m_ldY;
 
 
+
+    // CObj을(를) 통해 상속됨
+    void Late_Update() override;
+
 };
 

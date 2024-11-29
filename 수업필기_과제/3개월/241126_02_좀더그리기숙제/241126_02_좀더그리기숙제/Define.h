@@ -6,6 +6,8 @@
 #define		PURE	= 0
 #define		PI		3.141592f
 
+#define		SQUARE(N)	((N) * (N))
+
 extern	HWND	g_hWnd;
 
 typedef struct tagInfo

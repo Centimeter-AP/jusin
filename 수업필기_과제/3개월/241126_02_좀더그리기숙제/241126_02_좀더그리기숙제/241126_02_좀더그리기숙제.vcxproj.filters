@@ -28,6 +28,9 @@
     <Filter Include="01. Obj\02. Monster">
       <UniqueIdentifier>{b615b6b2-4034-45c7-94bb-12732cfea7e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CollisionMgr">
+      <UniqueIdentifier>{74cd4f5c-bd50-45db-8691-1877c4b38cb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -61,6 +64,12 @@
       <Filter>01. Obj\01. Bullet</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="asdf.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -84,6 +93,12 @@
       <Filter>01. Obj\01. Bullet</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="asdf.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

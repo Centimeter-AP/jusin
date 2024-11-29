@@ -23,7 +23,7 @@ void CMonster::Update()
 
 void CMonster::Render(HDC _hdc)
 {
-	Rectangle(_hdc, mRect.left, mRect.top, mRect.right, mRect.bottom);
+	Ellipse(_hdc, mRect.left, mRect.top, mRect.right, mRect.bottom);
 }
 
 void CMonster::Initialize()
@@ -35,4 +35,9 @@ void CMonster::Initialize()
 
 void CMonster::Release()
 {
+}
+
+void CMonster::Late_Update()
+{
+
 }

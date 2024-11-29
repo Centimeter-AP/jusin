@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Obj.h"
 
+
 void CObj::Set_Rect()
 {
 	mRect.left   = static_cast<LONG>(mInfo.fX - (mInfo.fCX / 2));

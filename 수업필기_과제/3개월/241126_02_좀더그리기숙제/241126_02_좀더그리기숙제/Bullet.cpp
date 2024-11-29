@@ -35,3 +35,7 @@ void CBullet::Initialize()
 void CBullet::Release()
 {
 }
+
+void CBullet::Late_Update()
+{
+}
