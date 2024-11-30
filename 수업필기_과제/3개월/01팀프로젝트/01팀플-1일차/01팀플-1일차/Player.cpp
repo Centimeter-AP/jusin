@@ -57,6 +57,8 @@ void CPlayer::Get_KeyInput()
 		{
 			mInfo.fX -= m_fSpeed / sqrtf(2.0f);
 			mInfo.fY -= m_fSpeed / sqrtf(2.0f);
+			if (mInfo.fX < (WINCX + GAME_WINCX) / 2 - mInfo.fCX / 2)
+				mInfo.fX = (WINCX + GAME_WINCX) / 2 - mInfo.fCX / 2;
 		}
 		else if (GetAsyncKeyState('D'))
 		{
@@ -125,6 +127,21 @@ void CPlayer::Get_KeyInput()
 		++m_iFireRate;
 		if (m_iFireRate > 200)
 			m_iFireRate = 200;
+	}
+	if (GetAsyncKeyState(VK_RIGHT))
+	{
+		if (m_iDelay > m_iFireRate)
+		{
+			++m_fSpeed;
+			if (m_fSpeed > 30)
+				m_fSpeed = 30;
+		}
+	}
+	if (GetAsyncKeyState(VK_LEFT))
+	{
+		--m_fSpeed;
+		if (m_fSpeed < 0)
+			m_fSpeed = 1;
 	}
 }
 
