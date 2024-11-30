@@ -144,7 +144,7 @@ void CPlayer::Get_KeyInput()
 			m_fSpeed = 1;
 	}
 }
-
+//git
 void CPlayer::Set_Posin()
 {
 	float fWidth  = m_Mouse.x - mInfo.fX;
