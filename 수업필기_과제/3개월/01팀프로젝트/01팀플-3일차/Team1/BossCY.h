@@ -3,7 +3,7 @@
 class BossCY : public MonsterShoot
 {
 public:
-	BossCY() :m_bMovingPattern{0,}, m_ullMovingTick(GetTickCount64()), m_ullMovingInterval(0) {}
+	BossCY() :m_iTemp(0), m_bMovingPattern{0,}, m_ullMovingTick(GetTickCount64()), m_ullMovingInterval(0) {}
 	~BossCY() {}
 public:
 	virtual void	Initialize() override;
@@ -25,6 +25,7 @@ private:
 	ULONGLONG		m_ullMovingTick;
 	ULONGLONG		m_ullMovingInterval;
 	float			m_fCenterAngle;
+	int				m_iTemp;
 
 private:
 	void			MoveBoss(BOSSMOVE	_Type);

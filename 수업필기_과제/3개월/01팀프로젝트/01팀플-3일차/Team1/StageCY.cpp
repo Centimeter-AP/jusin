@@ -13,14 +13,13 @@ int StageCY::Update()
 	if (m_bStart)
 	{
 		m_ulStartTime = GetTickCount64();
-		m_ulStartTime += 500000;
+		m_ulStartTime += 30000;
 		m_bStart = false;
 		m_ObjList[OBJ_MONSTER].push_back(new BossCY());
 		m_ObjList[OBJ_MONSTER].back()->Initialize();
 		m_ObjList[OBJ_MONSTER].back()->Set_Target(m_ObjList[OBJ_PLAYER].front());
 		static_cast<BossCY*>(m_ObjList[OBJ_MONSTER].back())->Set_Bullet(&m_ObjList[OBJ_BULLET_MONSTER]);
 	}
-
 
 	for (size_t i = 0; i < OBJ_END; ++i) {
 		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end();) {

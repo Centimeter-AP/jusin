@@ -2,6 +2,7 @@
 #include "BossCY.h"
 #include "Define.h"
 #include "BulletCY.h"
+#include "BulletOne.h"
 
 void BossCY::Initialize()
 {
@@ -9,7 +10,7 @@ void BossCY::Initialize()
 	m_tInfo.fCY = 70.f;
 	m_fSpeed = 1.5f;
 
-	m_iHp = 10000;
+	m_iHp = 5000;
 	m_iDamage = 1;
 
 	m_tInfo.fY = 1;
@@ -118,7 +119,7 @@ void BossCY::MoveBoss(BOSSMOVE _Type)
 				else
 				{
 					m_bMovingPattern[FOLLOWPAT] = true;
-					m_fSpeed = 3.f;
+					m_fSpeed = 2.f;
 				}
 				m_ullMovingTick = GetTickCount64();
 			}
@@ -160,21 +161,32 @@ void BossCY::BulletPattern(BOSSMOVE _Type)
 	case BossCY::ROTATEPAT2:
 	case BossCY::ROTATEPAT3:
 	case BossCY::ROTATEPAT4:
-		m_pBulletList->push_back(new BulletCY);
-		m_pBulletList->back()->Initialize();
-		m_pBulletList->back()->Set_Angle(m_fAngle);
-		m_pBulletList->back()->Set_Pos(m_tInfo.fX, m_tInfo.fY);
-		dynamic_cast<Bullet*>(m_pBulletList->back())->Set_Type(BM_MONSTER);
+		if (m_ulTime + 500 < GetTickCount64())
+		{
+			for (int i = 0; i < 18; ++i)
+			{
+				m_pBulletList->push_back(new BulletOne);
+				m_pBulletList->back()->Initialize();
+				m_pBulletList->back()->Set_Angle(m_fAngle * (PI / 180.f) + i * 20);
+				m_pBulletList->back()->Set_Pos(m_tInfo.fX, m_tInfo.fY);
+				dynamic_cast<Bullet*>(m_pBulletList->back())->Set_Type(BM_MONSTER);
+			}
+			m_ulTime = GetTickCount64();
+		}
 		break;
 	case BossCY::FOLLOWPAT:
-		m_pBulletList->push_back(new BulletCY(3));
-		m_pBulletList->back()->Initialize();
-		m_pBulletList->back()->Set_Angle(m_fAngle);
-		m_pBulletList->back()->Set_Pos(m_tInfo.fX, m_tInfo.fY);
-		dynamic_cast<Bullet*>(m_pBulletList->back())->Set_Type(BM_MONSTER);
 		break;
 	case BossCY::CENTERPAT:
-
+		if (m_ulTime < GetTickCount64())
+		{
+			m_pBulletList->push_back(new BulletOne);
+			m_pBulletList->back()->Initialize();
+			m_pBulletList->back()->Set_Angle(m_fAngle * (PI / 180.f) + m_iTemp * 20);
+			m_pBulletList->back()->Set_Pos(m_tInfo.fX, m_tInfo.fY);
+			dynamic_cast<Bullet*>(m_pBulletList->back())->Set_Type(BM_MONSTER);
+			m_ulTime = GetTickCount64();
+		}
+		m_iTemp++;
 		break;
 	case BossCY::RETURNPAT:
 		break;
@@ -185,7 +197,7 @@ void BossCY::BulletPattern(BOSSMOVE _Type)
 
 void BossCY::FollowPlayer()
 {
-	
+	m_fSpeed = 2.f;
 	m_tInfo.fX += m_fSpeed * cosf(m_fAngle * (PI / 180.f));
 	m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * (PI / 180.f));
 	if (m_ullMovingTick + 5000 <= GetTickCount64())
@@ -281,12 +293,7 @@ void BossCY::Late_Update()
 				BulletPattern((BOSSMOVE)i);
 			}
 		}
-
-		if (m_ulTime + 100 < GetTickCount64())
-		{
-			BulletPattern(ROTATEPAT1);
-			m_ulTime = GetTickCount64();
-		}
+		
 		for (int i = 0; i < BOSSMOVEEND; ++i)
 		{
 			if (m_bMovingPattern[i])
