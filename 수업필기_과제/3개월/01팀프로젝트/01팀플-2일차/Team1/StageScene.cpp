@@ -72,7 +72,6 @@ int StageScene::Update()
 
 void StageScene::Late_Update()
 {
-
 	CollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER],   m_ObjList[OBJ_BULLET]); //몬스터 & 총알
 	CollisionMgr::Collision_Rect(  m_ObjList[OBJ_MONSTER],   m_ObjList[OBJ_PLAYER]); //몬스터 & 플레이어
 	CollisionMgr::Collision_Circle(m_ObjList[OBJ_SHIELD],    m_ObjList[OBJ_MONSTER]); //몬스터 & 쉴드
