@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BossCY.h" />
+    <ClInclude Include="BulletCY.h" />
     <ClInclude Include="BulletOne.h" />
     <ClInclude Include="BulletScrew.h" />
     <ClInclude Include="MonsterShoot.h" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BossCY.cpp" />
+    <ClCompile Include="BulletCY.cpp" />
     <ClCompile Include="BulletOne.cpp" />
     <ClCompile Include="BulletScrew.cpp" />
     <ClCompile Include="MonsterShoot.cpp" />

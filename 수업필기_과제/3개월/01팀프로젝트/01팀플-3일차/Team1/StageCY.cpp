@@ -2,6 +2,7 @@
 #include "StageCY.h"
 #include "BossCY.h"
 #include "Player.h"
+#include "CollisionMgr.h"
 
 
 int StageCY::Update()
@@ -46,4 +47,27 @@ int StageCY::Update()
 		}
 	}
 	return OBJ_NOEVENT;
+}
+
+void StageCY::Late_Update()
+{
+
+	CollisionMgr::Collision_Rect(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_PLAYER]); //몬스터 & 플레이어
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_BULLET_PLAYER]); //몬스터 & 총알
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_SHIELD], m_ObjList[OBJ_MONSTER]); //몬스터 & 쉴드
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_ITEM], m_ObjList[OBJ_PLAYER]); //아이템 & 플레이어
+
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_PLAYER], m_ObjList[OBJ_BULLET_MONSTER]); // 플레이어 & 총알
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_SHIELD], m_ObjList[OBJ_BULLET_MONSTER]); // 실드 & 총알
+
+
+	if (m_ObjList[OBJ_MONSTER].empty()) {
+		m_bFinish = true;
+	}
+
+	for (size_t i = 0; i < OBJ_END; ++i)
+	{
+		for (auto& pObj : m_ObjList[i])
+			pObj->Late_Update();
+	}
 }

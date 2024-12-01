@@ -244,6 +244,7 @@ Obj* Player::Create_Bullet(float _fAngle)
 	pBullet = new BulletOne(m_fAngle + _fAngle);
 	pBullet->Initialize();
 	pBullet->Set_Pos(float(m_tPosin.x), float(m_tPosin.y));
+	dynamic_cast<Bullet*>(pBullet)->Set_Type(BM_PLAYER);
 
 	return pBullet;
 }
@@ -255,5 +256,6 @@ Obj* Player::Create_BulletScrew(float _fAngle)
 	pBullet->Initialize();
 	pBullet->Set_Pos(float(m_tPosin.x), float(m_tPosin.y));
 	pBullet->Set_Damage(20);
+	dynamic_cast<Bullet*>(pBullet)->Set_Type(BM_PLAYER);
 	return pBullet;
 }

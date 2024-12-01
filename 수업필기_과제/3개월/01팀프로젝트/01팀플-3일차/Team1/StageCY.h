@@ -8,6 +8,7 @@ public:
 
 public:
 	int		Update();
+	void	Late_Update();
 
 };
 

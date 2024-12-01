@@ -28,9 +28,9 @@ void MainGame::Initialize()
 	}
 
 	m_SceneArray[START] = new StartScene;
-	m_SceneArray[STAGE_ONE] = new StageScene;
+	m_SceneArray[STAGE_ONE] = new StageCY;
 	m_SceneArray[STAGE_TWO] = new Stage1;
-	m_SceneArray[STAGE_CY] = new StageCY;
+	m_SceneArray[STAGE_CY] = new StageScene;
 	m_SceneArray[END] = new EndScene;
 
 	m_SceneArray[START]->Initialize(m_pPlayer);

@@ -119,4 +119,5 @@ void MonsterShoot::Shoot()
 	m_pBulletList->back()->Initialize();
 	m_pBulletList->back()->Set_Angle(m_fAngle);
 	m_pBulletList->back()->Set_Pos(m_tInfo.fX , m_tInfo.fY);
+	dynamic_cast<Bullet*>(m_pBulletList->back())->Set_Type(BM_MONSTER);
 }

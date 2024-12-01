@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "BossCY.h"
 #include "Define.h"
+#include "BulletCY.h"
 
 void BossCY::Initialize()
 {
@@ -8,7 +9,7 @@ void BossCY::Initialize()
 	m_tInfo.fCY = 70.f;
 	m_fSpeed = 1.5f;
 
-	m_iHp = 2000;
+	m_iHp = 10000;
 	m_iDamage = 1;
 
 	m_tInfo.fY = 1;
@@ -57,7 +58,7 @@ void BossCY::MoveBoss(BOSSMOVE _Type)
 			if (m_ullMovingTick + m_ullMovingInterval <= GetTickCount64())
 			{
 				m_bMovingPattern[ROTATEPAT1] = false;
-				m_bMovingPattern[CENTERPAT] = true;
+				m_bMovingPattern[ROTATEPAT2] = true;
 				m_fSpeed = 3.f;
 				m_ullMovingTick = GetTickCount64();
 			}
@@ -109,7 +110,7 @@ void BossCY::MoveBoss(BOSSMOVE _Type)
 			if (m_ullMovingTick + m_ullMovingInterval <= GetTickCount64())
 			{
 				m_bMovingPattern[ROTATEPAT4] = false;
-				if (m_iRotateNum < 1)
+				if (m_iRotateNum < 2)
 				{
 					m_bMovingPattern[ROTATEPAT1] = true;
 					m_fSpeed = 3.f;
@@ -149,11 +150,37 @@ void BossCY::MoveBoss(BOSSMOVE _Type)
 	default:
 		break;
 	}
-
 }
 
 void BossCY::BulletPattern(BOSSMOVE _Type)
 {
+	switch (_Type)
+	{
+	case BossCY::ROTATEPAT1:
+	case BossCY::ROTATEPAT2:
+	case BossCY::ROTATEPAT3:
+	case BossCY::ROTATEPAT4:
+		m_pBulletList->push_back(new BulletCY);
+		m_pBulletList->back()->Initialize();
+		m_pBulletList->back()->Set_Angle(m_fAngle);
+		m_pBulletList->back()->Set_Pos(m_tInfo.fX, m_tInfo.fY);
+		dynamic_cast<Bullet*>(m_pBulletList->back())->Set_Type(BM_MONSTER);
+		break;
+	case BossCY::FOLLOWPAT:
+		m_pBulletList->push_back(new BulletCY(3));
+		m_pBulletList->back()->Initialize();
+		m_pBulletList->back()->Set_Angle(m_fAngle);
+		m_pBulletList->back()->Set_Pos(m_tInfo.fX, m_tInfo.fY);
+		dynamic_cast<Bullet*>(m_pBulletList->back())->Set_Type(BM_MONSTER);
+		break;
+	case BossCY::CENTERPAT:
+
+		break;
+	case BossCY::RETURNPAT:
+		break;
+	default:
+		break;
+	}
 }
 
 void BossCY::FollowPlayer()
@@ -207,7 +234,6 @@ void BossCY::MoveToCenter()
 	}
 }
 
-
 int BossCY::Update()
 {
 	if (m_bDead) {
@@ -236,27 +262,6 @@ int BossCY::Update()
 		}
 	}
 
-
-	//float   fWidth(0.f), fHeight(0.f), fDiagonal(0.f), fRadian(0.f);
-
-	//fWidth = m_pTarget->Get_Info().fX - m_tInfo.fX;
-	//fHeight = m_pTarget->Get_Info().fY - m_tInfo.fY;
-
-	//fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
-
-	//fRadian = acosf(fWidth / fDiagonal);
-
-	//m_fAngle = fRadian * (180.f / PI);
-
-	//if (m_pTarget->Get_Info().fY > m_tInfo.fY)
-	//	m_fAngle *= -1.f;
-
-	//// degree to radian
-	//m_tInfo.fX += m_fSpeed * cosf(m_fAngle * (PI / 180.f));
-	//m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * (PI / 180.f));
-
-
-
 	Obj::Update_Rect();
 
 	return OBJ_NOEVENT;
@@ -269,9 +274,17 @@ void BossCY::Late_Update()
 	}
 	if (!m_bDead)
 	{
-		if (m_ulTime + 1000 < GetTickCount64())
+		for (int i = 0; i < BOSSMOVEEND; ++i)
 		{
-			Shoot();
+			if (m_bMovingPattern[i])
+			{
+				BulletPattern((BOSSMOVE)i);
+			}
+		}
+
+		if (m_ulTime + 100 < GetTickCount64())
+		{
+			BulletPattern(ROTATEPAT1);
 			m_ulTime = GetTickCount64();
 		}
 		for (int i = 0; i < BOSSMOVEEND; ++i)

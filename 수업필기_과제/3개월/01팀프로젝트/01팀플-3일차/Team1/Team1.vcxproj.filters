@@ -82,6 +82,9 @@
     <Filter Include="02_Object\Monster\ShotSpawner\BossCY">
       <UniqueIdentifier>{4c35c451-6842-4158-a30d-e570576298d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Object\Bullet\BulletCY">
+      <UniqueIdentifier>{b876d67f-1f0a-46eb-b333-aaf66839557d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -171,6 +174,9 @@
     <ClInclude Include="BossCY.h">
       <Filter>02_Object\Monster\ShotSpawner\BossCY</Filter>
     </ClInclude>
+    <ClInclude Include="BulletCY.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Team1.cpp">
@@ -247,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="BossCY.cpp">
       <Filter>02_Object\Monster\ShotSpawner\BossCY</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletCY.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
