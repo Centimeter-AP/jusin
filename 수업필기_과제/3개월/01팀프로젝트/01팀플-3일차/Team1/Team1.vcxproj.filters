@@ -76,6 +76,12 @@
     <Filter Include="02_Object\Monster\ShotSpawner">
       <UniqueIdentifier>{88878d8c-1232-46ca-8ad1-935e6399dad8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Scenes\2_Stage\StageCY">
+      <UniqueIdentifier>{895ec807-2889-4c9b-bd64-95f613219b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Object\Monster\ShotSpawner\BossCY">
+      <UniqueIdentifier>{4c35c451-6842-4158-a30d-e570576298d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -159,6 +165,12 @@
     <ClInclude Include="MonsterShoot.h">
       <Filter>02_Object\Monster\ShotSpawner</Filter>
     </ClInclude>
+    <ClInclude Include="StageCY.h">
+      <Filter>01_Scenes\2_Stage\StageCY</Filter>
+    </ClInclude>
+    <ClInclude Include="BossCY.h">
+      <Filter>02_Object\Monster\ShotSpawner\BossCY</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Team1.cpp">
@@ -229,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="MonsterShoot.cpp">
       <Filter>02_Object\Monster\ShotSpawner</Filter>
+    </ClCompile>
+    <ClCompile Include="StageCY.cpp">
+      <Filter>01_Scenes\2_Stage\StageCY</Filter>
+    </ClCompile>
+    <ClCompile Include="BossCY.cpp">
+      <Filter>02_Object\Monster\ShotSpawner\BossCY</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

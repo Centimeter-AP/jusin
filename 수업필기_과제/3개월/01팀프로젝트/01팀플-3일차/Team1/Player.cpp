@@ -4,7 +4,7 @@
 #include "BulletScrew.h"
 #include "Shield.h"
 
-Player::Player() :  m_tPosin({}), m_pBulletList(nullptr), m_iBulletLevel(BULLET_ONE), m_iFireRate(0), m_iTick(0), m_pShieldList(nullptr)
+Player::Player() : m_bShiftDown(false), m_tPosin({}), m_pBulletList(nullptr), m_iBulletLevel(BULLET_ONE), m_iFireRate(0), m_iTick(0), m_pShieldList(nullptr)
 {
 }
 
@@ -196,6 +196,22 @@ void Player::Key_Input()
 				break;
 			}
 			m_iTick = 0;
+		}
+	}
+	if (GetAsyncKeyState(VK_LSHIFT))
+	{
+		if (m_bShiftDown == false)
+		{
+			m_fSpeed *= 0.5f;
+			m_bShiftDown = true;
+		}
+	}
+	else
+	{
+		if (m_bShiftDown == true)
+		{
+			m_fSpeed *= 2.f;
+			m_bShiftDown = false;
 		}
 	}
 }

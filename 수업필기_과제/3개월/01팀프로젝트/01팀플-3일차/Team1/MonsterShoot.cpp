@@ -90,20 +90,14 @@ void MonsterShoot::Late_Update()
 	if (m_iHp <= 0) {
 		m_bDead = true;
 	}
-
 	if (!m_bDead)
 	{
-		if (m_ulTime + 500 < GetTickCount64())
+		if (m_ulTime + 1000 < GetTickCount64())
 		{
 			Shoot();
 			m_ulTime = GetTickCount64();
 		}
-		
-
-	}
-		
-			
-			
+	}	
 }
 
 void MonsterShoot::Render(HDC _hdc)
@@ -119,17 +113,10 @@ void MonsterShoot::Release()
 {
 }
 
-Obj* MonsterShoot::Create_Bullet()
-{
-	Obj* pBullet = new BulletOne();
-	pBullet->Initialize();
-	
-	return pBullet;
-}
-
 void MonsterShoot::Shoot()
 {
-	m_pBulletList->push_back(Create_Bullet());
+	m_pBulletList->push_back(new BulletOne);
+	m_pBulletList->back()->Initialize();
 	m_pBulletList->back()->Set_Angle(m_fAngle);
 	m_pBulletList->back()->Set_Pos(m_tInfo.fX , m_tInfo.fY);
 	

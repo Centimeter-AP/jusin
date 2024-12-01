@@ -1,18 +1,9 @@
 #include "pch.h"
-#include "Stage1.h"
-#include "Monster.h"
+#include "StageCY.h"
 #include "MonsterShoot.h"
 #include "Player.h"
 
-Stage1::Stage1()
-{
-}
-
-Stage1::~Stage1()
-{
-}
-
-void Stage1::SpawnMonster()
+void StageCY::SpawnMonster()
 {
 	if (m_ulTime + 700 < GetTickCount64()) {
 		m_ulTime = GetTickCount64();
@@ -20,10 +11,12 @@ void Stage1::SpawnMonster()
 		m_ObjList[OBJ_MONSTER].back()->Initialize();
 		m_ObjList[OBJ_MONSTER].back()->Set_Target(m_ObjList[OBJ_PLAYER].front());
 		static_cast<MonsterShoot*>(m_ObjList[OBJ_MONSTER].back())->Set_Bullet(&m_ObjList[OBJ_BULLET_MONSTER]);
+
 	}
+
 }
 
-int Stage1::Update()
+int StageCY::Update()
 {
 	if (m_bFinish) {
 		return OBJ_CLEAR;

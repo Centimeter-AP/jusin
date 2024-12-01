@@ -16,7 +16,7 @@ public:
 	virtual void Release() override;
 public: //아이템 관련 함수
 	void Upgrade_Bullet();
-	void Set_PSpeed(float _iSpeed) { m_fSpeed += _iSpeed; }
+	void Set_PSpeed(float _iSpeed) { m_fSpeed += _iSpeed; if (m_fSpeed > 10.f) m_fSpeed = 10.f; }
 	void Set_SSpeed(int _iRate);
 	void Add_Shield();
 private:
@@ -31,5 +31,6 @@ private:
 	int m_iBulletLevel;
 	int m_iFireRate; //총알 발사 속도
 	int m_iTick; 
+	bool	m_bShiftDown;
 };
 
