@@ -7,9 +7,7 @@ public:
 	virtual ~StageCY() {}
 
 public:
-	void	SpawnMonster();
 	int		Update();
-
 
 };
 

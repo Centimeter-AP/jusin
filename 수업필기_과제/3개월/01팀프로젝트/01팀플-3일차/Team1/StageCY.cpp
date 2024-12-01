@@ -1,20 +1,8 @@
 #include "pch.h"
 #include "StageCY.h"
-#include "MonsterShoot.h"
+#include "BossCY.h"
 #include "Player.h"
 
-void StageCY::SpawnMonster()
-{
-	if (m_ulTime + 700 < GetTickCount64()) {
-		m_ulTime = GetTickCount64();
-		m_ObjList[OBJ_MONSTER].push_back(new MonsterShoot());
-		m_ObjList[OBJ_MONSTER].back()->Initialize();
-		m_ObjList[OBJ_MONSTER].back()->Set_Target(m_ObjList[OBJ_PLAYER].front());
-		static_cast<MonsterShoot*>(m_ObjList[OBJ_MONSTER].back())->Set_Bullet(&m_ObjList[OBJ_BULLET_MONSTER]);
-
-	}
-
-}
 
 int StageCY::Update()
 {
@@ -24,11 +12,14 @@ int StageCY::Update()
 	if (m_bStart)
 	{
 		m_ulStartTime = GetTickCount64();
-		m_ulStartTime += 50000;
+		m_ulStartTime += 500000;
 		m_bStart = false;
+		m_ObjList[OBJ_MONSTER].push_back(new BossCY());
+		m_ObjList[OBJ_MONSTER].back()->Initialize();
+		m_ObjList[OBJ_MONSTER].back()->Set_Target(m_ObjList[OBJ_PLAYER].front());
+		static_cast<BossCY*>(m_ObjList[OBJ_MONSTER].back())->Set_Bullet(&m_ObjList[OBJ_BULLET_MONSTER]);
 	}
 
-	SpawnMonster();
 
 	for (size_t i = 0; i < OBJ_END; ++i) {
 		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end();) {

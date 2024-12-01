@@ -97,7 +97,7 @@ void MonsterShoot::Late_Update()
 			Shoot();
 			m_ulTime = GetTickCount64();
 		}
-	}	
+	}
 }
 
 void MonsterShoot::Render(HDC _hdc)
@@ -119,5 +119,4 @@ void MonsterShoot::Shoot()
 	m_pBulletList->back()->Initialize();
 	m_pBulletList->back()->Set_Angle(m_fAngle);
 	m_pBulletList->back()->Set_Pos(m_tInfo.fX , m_tInfo.fY);
-	
 }

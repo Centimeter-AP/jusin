@@ -5,6 +5,7 @@
 #include "EndScene.h"
 #include "Player.h"
 #include "Stage1.h"
+#include "StageCY.h"
 
 MainGame::MainGame() :m_hDC(nullptr), m_pPlayer(nullptr), m_iScene(NONE)
 {
@@ -29,6 +30,7 @@ void MainGame::Initialize()
 	m_SceneArray[START] = new StartScene;
 	m_SceneArray[STAGE_ONE] = new StageScene;
 	m_SceneArray[STAGE_TWO] = new Stage1;
+	m_SceneArray[STAGE_CY] = new StageCY;
 	m_SceneArray[END] = new EndScene;
 
 	m_SceneArray[START]->Initialize(m_pPlayer);

@@ -92,8 +92,6 @@ void StageScene::Late_Update()
 		for (auto& pObj : m_ObjList[i])
 			pObj->Late_Update();
 	}
-
-	
 }
 
 void StageScene::Render(HDC _hDC)

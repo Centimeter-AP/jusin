@@ -3,26 +3,33 @@
 class BossCY : public MonsterShoot
 {
 public:
-	BossCY() {}
+	BossCY() :m_bMovingPattern{0,}, m_ullMovingTick(GetTickCount64()), m_ullMovingInterval(0) {}
 	~BossCY() {}
 public:
 	virtual void	Initialize() override;
 	virtual int		Update() override;
 	virtual void	Late_Update() override;
 	virtual void	Render(HDC _hdc) override;
-	virtual void	Release() override;
 
 public:
 	virtual void    Set_Bullet(list<Obj*>* pBullet) { m_pBulletList = pBullet; }
-	virtual void	Shoot();
+	void			Set_Hp(int _iDamage);
 
 private:
-	void			RandomPattern1();
-	void			RandomPattern2();
-	void			RandomPattern3();
+	enum BOSSMOVE { BOSSMOVESTART,
+					ROTATEPAT1, ROTATEPAT2, ROTATEPAT3, ROTATEPAT4,
+					FOLLOWPAT,  CENTERPAT,  RETURNPAT,
+					BOSSMOVEEND };
+	bool			m_bMovingPattern[BOSSMOVEEND];
+	int				m_iRotateNum;
+	ULONGLONG		m_ullMovingTick;
+	ULONGLONG		m_ullMovingInterval;
+	float			m_fCenterAngle;
 
 private:
-	enum BOSSMOVE	{ MOVEPAT1, MOVEPAT2, MOVEPAT3, MOVEPAT4, MOVEPATEND };
-	bool			m_bMovingPattern[MOVEPATEND];
+	void			MoveBoss(BOSSMOVE	_Type);
+	void			BulletPattern(BOSSMOVE	_Type);
+	void			FollowPlayer();
+	void			MoveToCenter();
 };
 
