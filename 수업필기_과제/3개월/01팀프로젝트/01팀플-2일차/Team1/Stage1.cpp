@@ -2,14 +2,6 @@
 #include "Stage1.h"
 #include "Monster.h"
 
-Stage1::Stage1()
-{
-}
-
-Stage1::~Stage1()
-{
-}
-
 void Stage1::SpawnMonster()
 {
 	if (m_dwTime + 700 < GetTickCount64()) {

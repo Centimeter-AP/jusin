@@ -10,7 +10,7 @@
 #include "ShieldItem.h"
 #include "CollisionMgr.h"
 
-StageScene::StageScene() : m_dwTime(0), m_bFinish(false), m_bStart(true)
+StageScene::StageScene() : m_dwStartTime(0), m_dwTime(0), m_bFinish(false), m_bStart(true)
 {
 }
 
@@ -37,7 +37,7 @@ int StageScene::Update()
 	if (m_bStart)
 	{
 		m_dwStartTime =  GetTickCount64();
-		m_dwStartTime += 6000;
+		m_dwStartTime += 10000;
 		m_bStart = false;
 	}
 
@@ -73,10 +73,12 @@ int StageScene::Update()
 void StageScene::Late_Update()
 {
 
-	CollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_BULLET]); //몬스터 & 총알
-	CollisionMgr::Collision_Rect(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_PLAYER]); //몬스터 & 플레이어
-	CollisionMgr::Collision_Circle(m_ObjList[OBJ_SHIELD], m_ObjList[OBJ_MONSTER]); //몬스터 & 쉴드
-	CollisionMgr::Collision_Circle(m_ObjList[OBJ_ITEM], m_ObjList[OBJ_PLAYER]); //아이템 & 플레이어
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER],   m_ObjList[OBJ_BULLET]); //몬스터 & 총알
+	CollisionMgr::Collision_Rect(  m_ObjList[OBJ_MONSTER],   m_ObjList[OBJ_PLAYER]); //몬스터 & 플레이어
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_SHIELD],    m_ObjList[OBJ_MONSTER]); //몬스터 & 쉴드
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_ITEM],      m_ObjList[OBJ_PLAYER]); //아이템 & 플레이어
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_MONBULLET], m_ObjList[OBJ_PLAYER]); //몬스터총알 & 플레이어
+	CollisionMgr::Collision_Circle(m_ObjList[OBJ_MONBULLET], m_ObjList[OBJ_SHIELD]); //몬스터총알 & 쉴드
 
 	if ((m_dwStartTime - GetTickCount64()) / 1000 <= 0) {
 		m_bFinish = true;

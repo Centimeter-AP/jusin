@@ -79,6 +79,9 @@
     <Filter Include="02_Object\Bullet\BulletMonster">
       <UniqueIdentifier>{18e5d5a5-8278-4fa3-a50c-fe102c4b670d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Scenes\2_Stage\Stage2">
+      <UniqueIdentifier>{1704aebd-24bb-497f-9137-3b8ce635a714}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -159,11 +162,14 @@
     <ClInclude Include="Stage1.h">
       <Filter>01_Scenes\2_Stage\Stage1</Filter>
     </ClInclude>
-    <ClInclude Include="BulletMonster.h">
+    <ClInclude Include="MonBullet.h">
       <Filter>02_Object\Bullet\BulletMonster</Filter>
     </ClInclude>
-    <ClInclude Include="MonsterAtk.h">
+    <ClInclude Include="BMonster.h">
       <Filter>02_Object\Monster\MonsterAtk</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2.h">
+      <Filter>01_Scenes\2_Stage\Stage2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,11 +239,14 @@
     <ClCompile Include="Stage1.cpp">
       <Filter>01_Scenes\2_Stage\Stage1</Filter>
     </ClCompile>
-    <ClCompile Include="BulletMonster.cpp">
+    <ClCompile Include="MonBullet.cpp">
       <Filter>02_Object\Bullet\BulletMonster</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterAtk.cpp">
+    <ClCompile Include="BMonster.cpp">
       <Filter>02_Object\Monster\MonsterAtk</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2.cpp">
+      <Filter>01_Scenes\2_Stage\Stage2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

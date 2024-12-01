@@ -22,16 +22,14 @@ extern HWND		g_hWnd;
 
 enum SCENE { START, STAGE_ONE, STAGE_TWO, END, NONE };
 enum DIR { LEFT, TOP, RIGHT, BOTTOM, NODIR };
-enum OBJID { OBJ_PLAYER, OBJ_BULLET, OBJ_MONSTER, OBJ_ITEM, OBJ_SHIELD, OBJ_END };
+enum OBJID { OBJ_PLAYER, OBJ_BULLET, OBJ_MONSTER, OBJ_MONBULLET, OBJ_ITEM, OBJ_SHIELD, OBJ_END };
 enum BULLETTYPE {BULLET_ONE, BULLET_TWO, BULLET_THREE, BULLET_SCREW};
 
 typedef struct tagInfo
 {
 	float		fX, fY;
 	float		fCX, fCY;	// 가로, 세로 길이
-
 }INFO;
-
 
 template<typename T>
 void Safe_Delete(T& Temp)

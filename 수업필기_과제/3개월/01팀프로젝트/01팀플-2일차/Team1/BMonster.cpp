@@ -1,16 +1,7 @@
 #include "pch.h"
-#include "Monster.h"
+#include "BMonster.h"
 
-Monster::Monster():m_iDir(NODIR)
-{
-}
-
-Monster::~Monster()
-{
-	Release();
-}
-
-void Monster::Initialize()
+void BMonster::Initialize()
 {
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
@@ -50,54 +41,11 @@ void Monster::Initialize()
 		break;
 	}
 }
-
-int Monster::Update()
+void BMonster::Render(HDC _hdc)
 {
-	if (m_bDead) {
-		return OBJ_DEAD;
-	}
-
-	//m_fSpeed += 0.0005f;
-
-	float   fWidth(0.f), fHeight(0.f), fDiagonal(0.f), fRadian(0.f);
-
-	fWidth = m_pTarget->Get_Info().fX - m_tInfo.fX;
-	fHeight = m_pTarget->Get_Info().fY - m_tInfo.fY;
-
-	fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
-
-	fRadian = acosf(fWidth / fDiagonal);
-
-	m_fAngle = fRadian * (180.f / PI);
-
-	if (m_pTarget->Get_Info().fY > m_tInfo.fY)
-		m_fAngle *= -1.f;
-
-	// degree to radian
-	m_tInfo.fX += m_fSpeed * cosf(m_fAngle * (PI / 180.f));
-	m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * (PI / 180.f));
-
-	Obj::Update_Rect();
-
-	return OBJ_NOEVENT;
-}
-
-void Monster::Late_Update()
-{
-	if (m_iHp <= 0) {
-		m_bDead = true;
-	}
-}
-
-void Monster::Render(HDC _hdc)
-{
-	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(0, 103, 163));
+	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(0, 140, 140));
 	HBRUSH oldBrush = (HBRUSH)SelectObject(_hdc, myBrush);
 	Rectangle(_hdc, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 	SelectObject(_hdc, oldBrush);
 	DeleteObject(myBrush);
-}
-
-void Monster::Release()
-{
 }

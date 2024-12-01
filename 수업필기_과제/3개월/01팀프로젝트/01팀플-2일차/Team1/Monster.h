@@ -7,11 +7,11 @@ public:
 	virtual ~Monster();
 public:
 	virtual void Initialize() override;
-	virtual int Update() override;
+	virtual int  Update() override;
 	virtual void Late_Update() override;
 	virtual void Render(HDC _hdc) override;
 	virtual void Release() override;
-private:
+protected:
 	int m_iDir;
 };
 

@@ -33,7 +33,7 @@ protected:
 	float		m_fAngle;
 	float		m_fSpeed;
 	float		m_fDistance;
-	Obj* m_pTarget;
+	Obj*		m_pTarget;
 
 	bool		m_bDead;
 	int			m_iHp;
