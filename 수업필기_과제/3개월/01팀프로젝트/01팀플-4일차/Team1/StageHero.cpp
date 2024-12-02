@@ -28,13 +28,20 @@ void StageHero::Initialize(Obj* _pPlayer)
 
 int StageHero::Update()
 {
-	if (m_bFinish) {
+	if (GetAsyncKeyState(VK_SPACE)) {
+		if (m_bFinish)
+		{
+			m_IsNext = !m_IsNext;
+		}
+	}
+
+	if (m_IsNext) {
 		return OBJ_CLEAR;
 	}
 	if (m_bStart)
 	{
 		m_ulStartTime = GetTickCount64();
-		m_ulStartTime += 50000;
+		m_ulStartTime += 10000;
 		m_bStart = false;
 	}
 
