@@ -7,6 +7,7 @@
 #include "CKeyMgr.h"
 #include "CScrollMgr.h"
 #include "CBmpMgr.h"
+#include "CPebble.h"
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount()), m_iFPS(0)
@@ -26,6 +27,7 @@ void CMainGame::Initialize()
 	CLineMgr::Get_Instance()->Initialize();
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_OBSTACLE, CAbstractFactory<CPebble>::Create());
 
 	// for (int i = 0; i < 7; ++i)
 	// {

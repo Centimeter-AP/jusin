@@ -110,3 +110,50 @@ bool CCollisionMgr::Check_Rect(CObj* _Dst, CObj* _Src, float* pX, float* pY)
 
 	return false;
 }
+
+// Src가 player
+bool CCollisionMgr::Check_Near(CObj* _Dst, CObj* _Player, float* pX, float* pY)
+{
+	float		fOffsetX = 10.f;
+	float		fOffsetY = 0.f;
+	float		fX = abs(_Dst->Get_Info().fX - _Player->Get_Info().fX);
+	float		fY = abs(_Dst->Get_Info().fY - _Player->Get_Info().fY);
+
+	float		fRadiusX = (_Dst->Get_Info().fCX + _Player->Get_Info().fCX) * 0.5f;
+	float		fRadiusY = (_Dst->Get_Info().fCY) * 0.5f;
+
+	if ((fRadiusX + fOffsetX >= fX) && (fRadiusY >= fY))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool CCollisionMgr::Collision_RectNear(list<CObj*> _Dst, list<CObj*> _Src)
+{
+	float	fX(0.f), fY(0.f);
+
+	for (auto& Dst : _Dst)
+	{
+		for (auto& Pl : _Src)
+		{
+			if (Check_Near(Dst, Pl, &fX, &fY))
+			{
+				
+				// 좌 충돌
+				if (Dst->Get_Info().fX < Pl->Get_Info().fX)
+				{
+					if (Pl->Get_Direction() == DIR_LEFT)
+						return true;
+				}
+				// 우 충돌
+				else
+				{
+					if (Pl->Get_Direction() == DIR_RIGHT)
+						return true;
+				}
+			}
+		}
+	}
+	return false;
+}

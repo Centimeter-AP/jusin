@@ -9,13 +9,18 @@
 #define OBJ_NOEVENT			0
 #define OBJ_DEAD			1	
 
+#define G_FORCE                9.80665f
+#define SQUARE(X)            (X)*(X)
+#define RADIAN(Degree)        (Degree)*PI/180.f
+#define DEGREE(Radian)        (Radian)*180.f/PI
+
 #define VK_MAX				0xff
 
 extern HWND		g_hWnd;
 
 enum DIRECTION { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN, DIR_LU, DIR_RU, DIR_END };
 
-enum OBJID { OBJ_PLAYER, OBJ_BULLET, OBJ_MONSTER, OBJ_MOUSE, OBJ_SHIELD, OBJ_BUTTON, OBJ_END };
+enum OBJID { OBJ_PLAYER, OBJ_BULLET, OBJ_MONSTER, OBJ_MOUSE, OBJ_SHIELD, OBJ_BUTTON, OBJ_OBSTACLE, OBJ_END };
 
 typedef struct tagInfo
 {

@@ -76,6 +76,12 @@
     <Filter Include="01. Obj\05. Obstacle\00. Pebble">
       <UniqueIdentifier>{967668d8-c738-4cf9-83a4-91676f2a9708}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\05. Obstacle\01. Firewall">
+      <UniqueIdentifier>{a9aa32e5-a62b-4dc1-b99d-19a9214061c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\01. Bullet\PebbleBullet">
+      <UniqueIdentifier>{c8568b51-fed9-4e32-acc6-9e477ac9ca57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -150,6 +156,12 @@
     <ClInclude Include="CBmpMgr.h">
       <Filter>02. Design\BmpMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CObstacle.h">
+      <Filter>01. Obj\05. Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="CPebble.h">
+      <Filter>01. Obj\05. Obstacle\00. Pebble</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -208,6 +220,12 @@
     </ClCompile>
     <ClCompile Include="CBmpMgr.cpp">
       <Filter>02. Design\BmpMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle.cpp">
+      <Filter>01. Obj\05. Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="CPebble.cpp">
+      <Filter>01. Obj\05. Obstacle\00. Pebble</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

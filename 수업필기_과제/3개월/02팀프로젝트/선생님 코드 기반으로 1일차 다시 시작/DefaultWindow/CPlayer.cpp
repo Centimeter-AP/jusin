@@ -22,14 +22,14 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_tInfo  = { 100.f, WINCY / 2.f, 60.f, 60.f };
-	m_fSpeed = 10.f;
+	m_tInfo  = { 100.f, WINCY / 2.f, 24.f, 24.f };
+	m_fSpeed = 5.f;
 	m_fDistance = 100.f;
 
 	m_fJumpPower = 20.f;
 
 
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/maja2.bmp", L"Player");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/player_idle.bmp", L"Player");
 }
 
 int CPlayer::Update()
@@ -75,7 +75,7 @@ void CPlayer::Render(HDC hDC)
 		0,
 		(int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
 		(int)m_tInfo.fCY,
-		RGB(255, 255, 255));		// 제거할 색상
+		RGB(128, 0, 128));		// 제거할 색상
 }
 
 void CPlayer::Release()
@@ -88,11 +88,13 @@ void CPlayer::Key_Input()
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
 	{
+		m_eDir = DIR_LEFT;
 		m_tInfo.fX -= m_fSpeed;
 	}
 
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
+		m_eDir = DIR_RIGHT;
 		m_tInfo.fX += m_fSpeed;
 	}
 

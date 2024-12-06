@@ -83,6 +83,7 @@ void CObjMgr::Late_Update()
 	CCollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_BULLET]);
 	CCollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_MOUSE]);
 	CCollisionMgr::Collision_RectEx(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_PLAYER]);
+	CCollisionMgr::Collision_RectEx(m_ObjList[OBJ_OBSTACLE], m_ObjList[OBJ_PLAYER]);
 }
 
 void CObjMgr::Render(HDC hDC)
@@ -91,6 +92,12 @@ void CObjMgr::Render(HDC hDC)
 	{
 		for (auto& pObj : m_ObjList[i])
 			pObj->Render(hDC);
+	}
+	if (CCollisionMgr::Collision_RectNear(m_ObjList[OBJ_OBSTACLE], m_ObjList[OBJ_PLAYER]))
+	{
+		TCHAR szTitleText[32];
+		wsprintf(szTitleText, L"Rect Near?");
+		TextOut(hDC, WINCX / 2 - 130, WINCY / 2 - 150, szTitleText, lstrlen(szTitleText));
 	}
 }
 
