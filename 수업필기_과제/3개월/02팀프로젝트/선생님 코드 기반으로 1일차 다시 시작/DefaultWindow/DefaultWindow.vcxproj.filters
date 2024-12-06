@@ -73,14 +73,17 @@
     <Filter Include="01. Obj\05. Obstacle">
       <UniqueIdentifier>{9fafe5df-86f3-467b-97da-8a714cc14043}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\05. Obstacle\00. Pebble">
+    <Filter Include="01. Obj\01. Bullet\StoneBullet">
+      <UniqueIdentifier>{c8568b51-fed9-4e32-acc6-9e477ac9ca57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\05. Obstacle\00. Stone">
       <UniqueIdentifier>{967668d8-c738-4cf9-83a4-91676f2a9708}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\05. Obstacle\01. Firewall">
-      <UniqueIdentifier>{a9aa32e5-a62b-4dc1-b99d-19a9214061c3}</UniqueIdentifier>
+    <Filter Include="01. Obj\02. Monster\00. FireWall">
+      <UniqueIdentifier>{c941bf52-de7b-4393-9b99-0681b7b07e61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\01. Bullet\PebbleBullet">
-      <UniqueIdentifier>{c8568b51-fed9-4e32-acc6-9e477ac9ca57}</UniqueIdentifier>
+    <Filter Include="01. Obj\05. Obstacle\01. Door">
+      <UniqueIdentifier>{b54c335c-66e9-4f2a-92c8-33b78e1dd721}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,8 +162,14 @@
     <ClInclude Include="CObstacle.h">
       <Filter>01. Obj\05. Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="CPebble.h">
-      <Filter>01. Obj\05. Obstacle\00. Pebble</Filter>
+    <ClInclude Include="CStone.h">
+      <Filter>01. Obj\05. Obstacle\00. Stone</Filter>
+    </ClInclude>
+    <ClInclude Include="CFireWall.h">
+      <Filter>01. Obj\02. Monster\00. FireWall</Filter>
+    </ClInclude>
+    <ClInclude Include="CTemp.h">
+      <Filter>01. Obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,8 +233,14 @@
     <ClCompile Include="CObstacle.cpp">
       <Filter>01. Obj\05. Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="CPebble.cpp">
-      <Filter>01. Obj\05. Obstacle\00. Pebble</Filter>
+    <ClCompile Include="CStone.cpp">
+      <Filter>01. Obj\05. Obstacle\00. Stone</Filter>
+    </ClCompile>
+    <ClCompile Include="CFireWall.cpp">
+      <Filter>01. Obj\02. Monster\00. FireWall</Filter>
+    </ClCompile>
+    <ClCompile Include="CTemp.cpp">
+      <Filter>01. Obj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

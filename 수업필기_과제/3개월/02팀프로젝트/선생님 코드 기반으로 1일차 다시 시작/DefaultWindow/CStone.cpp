@@ -1,32 +1,33 @@
 #include "pch.h"
-#include "CPebble.h"
+#include "CStone.h"
 #include "CKeyMgr.h"
 #include "CObjMgr.h"
 #include "CScrollMgr.h"
 #include "CBmpMgr.h"
+#include "CCollisionMgr.h"
 
-CPebble::CPebble()
+CStone::CStone()
 {
 }
 
-CPebble::~CPebble()
+CStone::~CStone()
 {
     Release();
 }
 
-void CPebble::Initialize()
+void CStone::Initialize()
 {
     m_tInfo.fX = 400.f;
     m_tInfo.fY = 250.f;
-    m_tInfo.fCX = 32.f;
-    m_tInfo.fCY = 32.f;
+    m_tInfo.fCX = 16.f;
+    m_tInfo.fCY = 16.f;
     m_fSpeed = 3.f;
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/tile_imsi.bmp", L"Tile");
 
 }
 
-int CPebble::Update()
+int CStone::Update()
 {
     if (m_bDead)
         return OBJ_DEAD;
@@ -36,19 +37,12 @@ int CPebble::Update()
     return OBJ_NOEVENT;
 }
 
-void CPebble::Late_Update()
+void CStone::Late_Update()
 {
-    if (Is_Hold())
-    {
-        if (CKeyMgr::Get_Instance()->Key_Down('E'))
-        {
-
-            Throw();
-        }
-    }
+    
 }
 
-void CPebble::Render(HDC hDC)
+void CStone::Render(HDC hDC)
 {
     int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
     int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
@@ -77,17 +71,17 @@ void CPebble::Render(HDC hDC)
     }
 }
 
-void CPebble::Release()
+void CStone::Release()
 {
 }
 
-bool CPebble::Is_Hold()
+bool CStone::Is_Hold()
 {
     //m_pTarget(player)가 pebble을 선택 중인지 체크
     return false;
 }
 
-void CPebble::Throw()
+void CStone::Throw()
 {
 
     // 보는 방향 포물선 그리며 날아가기(점프?)

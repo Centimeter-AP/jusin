@@ -1,10 +1,10 @@
 #pragma once
 #include "CObstacle.h"
-class CPebble : public CObstacle
+class CStone : public CObstacle
 {
 public:
-	CPebble();
-	~CPebble();
+	CStone();
+	~CStone();
 public:
 	void Initialize() override;
 	int  Update() override;

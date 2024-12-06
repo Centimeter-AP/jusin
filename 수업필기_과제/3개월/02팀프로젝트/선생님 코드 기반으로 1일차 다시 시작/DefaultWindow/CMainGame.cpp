@@ -7,7 +7,8 @@
 #include "CKeyMgr.h"
 #include "CScrollMgr.h"
 #include "CBmpMgr.h"
-#include "CPebble.h"
+#include "CStone.h"
+#include "CFireWall.h"
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount()), m_iFPS(0)
@@ -27,13 +28,16 @@ void CMainGame::Initialize()
 	CLineMgr::Get_Instance()->Initialize();
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
-	CObjMgr::Get_Instance()->Add_Object(OBJ_OBSTACLE, CAbstractFactory<CPebble>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_OBSTACLE, CAbstractFactory<CStone>::Create());
 
-	// for (int i = 0; i < 7; ++i)
-	// {
-	// 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster>::Create(float(rand() % WINCX), float(rand() % WINCY), 0.f));
-	// 	CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
-	// }
+	 for (int i = 0; i < 50; ++i)
+	 {
+	 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster>::Create(i * 32, 400, 0.f));
+	 	CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
+	 }
+	 CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CFireWall>::Create());
+
+
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Back.bmp", L"Back");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Ground.bmp", L"Ground");

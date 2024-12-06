@@ -12,8 +12,8 @@ CMonster::~CMonster()
 
 void CMonster::Initialize()
 {
-    m_tInfo.fCX = 50.f;
-    m_tInfo.fCY = 50.f;
+    m_tInfo.fCX = 32.f;
+    m_tInfo.fCY = 32.f;
     m_fSpeed = 3.f;
 }
 

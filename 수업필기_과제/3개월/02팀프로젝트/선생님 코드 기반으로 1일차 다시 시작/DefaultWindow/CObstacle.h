@@ -12,7 +12,5 @@ public:
 	void Late_Update() PURE;
 	void Render(HDC hDC) PURE;
 	void Release() PURE;
-
-
 };
 

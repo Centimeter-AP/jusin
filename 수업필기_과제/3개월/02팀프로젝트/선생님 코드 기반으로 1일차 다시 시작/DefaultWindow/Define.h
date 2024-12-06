@@ -7,7 +7,8 @@
 #define PI			3.141592f
 
 #define OBJ_NOEVENT			0
-#define OBJ_DEAD			1	
+#define OBJ_DEAD			1
+#define OBJ_IGNORE			2
 
 #define G_FORCE                9.80665f
 #define SQUARE(X)            (X)*(X)

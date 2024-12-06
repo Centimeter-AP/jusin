@@ -47,7 +47,7 @@ bool CLineMgr::Collision_Line(float _fX, float* pY)
 
 void CLineMgr::Initialize()
 {
-	Load_Line();
+	//Load_Line();
 }
 
 void CLineMgr::Render(HDC hDC)

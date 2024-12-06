@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CObjMgr.h"
 #include "CCollisionMgr.h"
+#include "CKeyMgr.h"
 
 CObjMgr* CObjMgr::m_pInstance = nullptr;
 
@@ -82,8 +83,17 @@ void CObjMgr::Late_Update()
 	//CCollisionMgr::Collision_Rect(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_BULLET]);
 	CCollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_BULLET]);
 	CCollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_MOUSE]);
-	CCollisionMgr::Collision_RectEx(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_PLAYER]);
+	CCollisionMgr::Collision_RectEx(m_ObjList[OBJ_PLAYER],m_ObjList[OBJ_MONSTER]);
 	CCollisionMgr::Collision_RectEx(m_ObjList[OBJ_OBSTACLE], m_ObjList[OBJ_PLAYER]);
+	if (CCollisionMgr::Collision_RectNear(m_ObjList[OBJ_OBSTACLE], m_ObjList[OBJ_PLAYER]))
+	{
+		
+	}
+	for (size_t i = 0; i < OBJ_END; ++i)
+	{
+		for (auto& pObj : m_ObjList[i])
+			pObj->Update_Rect();
+	}
 }
 
 void CObjMgr::Render(HDC hDC)

@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "CCollisionMgr.h"
+#include "CKeyMgr.h"
+#include "CStone.h"
 
 void CCollisionMgr::Collision_Rect(list<CObj*> _Dst, list<CObj*> _Src)
 {
@@ -124,7 +126,9 @@ bool CCollisionMgr::Check_Near(CObj* _Dst, CObj* _Player, float* pX, float* pY)
 
 	if ((fRadiusX + fOffsetX >= fX) && (fRadiusY >= fY))
 	{
-		return true;
+		if (((_Dst->Get_Info().fX < _Player->Get_Info().fX) && (_Player->Get_Direction() == DIR_LEFT)) ||
+			((_Dst->Get_Info().fX > _Player->Get_Info().fX) && (_Player->Get_Direction() == DIR_RIGHT)))
+			return true;
 	}
 	return false;
 }
@@ -137,21 +141,22 @@ bool CCollisionMgr::Collision_RectNear(list<CObj*> _Dst, list<CObj*> _Src)
 	{
 		for (auto& Pl : _Src)
 		{
+			// 근접한지 체크
 			if (Check_Near(Dst, Pl, &fX, &fY))
 			{
-				
-				// 좌 충돌
-				if (Dst->Get_Info().fX < Pl->Get_Info().fX)
+				// 플레이어의 무기가 SUPERARM(GUTSMAN)이고 들어온 Obstacle이 Pebble일 경우
+				if (/*(Pl->Get_Bullet()) &&*/ (nullptr != dynamic_cast<CStone*>(Dst)))
 				{
-					if (Pl->Get_Direction() == DIR_LEFT)
-						return true;
+					// 이 모든!!! 조건을 만족하고 있을 때 상호작용키(공격키?)를 누르면
+					if (CKeyMgr::Get_Instance()->Key_Down('E'))
+					{
+						// Pebble삭제 후 
+						Dst->Set_Dead();
+						// player에 pebble bullet 추가
+						// Pl->Set_Bullet(SUPERARM?)
+					}
 				}
-				// 우 충돌
-				else
-				{
-					if (Pl->Get_Direction() == DIR_RIGHT)
-						return true;
-				}
+				return true;
 			}
 		}
 	}
