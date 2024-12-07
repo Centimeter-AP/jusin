@@ -19,12 +19,11 @@ void CStone::Initialize()
 {
     m_tInfo.fX = 400.f;
     m_tInfo.fY = 250.f;
-    m_tInfo.fCX = 16.f;
-    m_tInfo.fCY = 16.f;
+    m_tInfo.fCX = 32.f;
+    m_tInfo.fCY = 32.f;
     m_fSpeed = 3.f;
 
-    CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/tile_imsi.bmp", L"Tile");
-
+    CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/tile_cut.bmp", L"Tile");
 }
 
 int CStone::Update()
@@ -58,8 +57,8 @@ void CStone::Render(HDC hDC)
             (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
             (int)m_tInfo.fCY,
             hMemDC,						// 복사할 이미지 DC	
-            0,							// 비트맵 출력 시작 좌표(Left, top)
-            0,
+            34,							// 비트맵 출력 시작 좌표(Left, top)
+            1,
             (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
             (int)m_tInfo.fCY,
             RGB(128, 0, 128));		// 제거할 색상
@@ -73,6 +72,7 @@ void CStone::Render(HDC hDC)
 
 void CStone::Release()
 {
+
 }
 
 bool CStone::Is_Hold()

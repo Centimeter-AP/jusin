@@ -17,6 +17,10 @@
 
 #define VK_MAX				0xff
 
+#define PL_CX		42.f
+#define PL_CY		48.f
+#define TILE_CXY	32.f
+
 extern HWND		g_hWnd;
 
 enum DIRECTION { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN, DIR_LU, DIR_RU, DIR_END };
@@ -30,28 +34,34 @@ typedef struct tagInfo
 
 }INFO;
 
-typedef struct tagLinePoint
+typedef struct tagFloatPoint
 {
 	float		fX, fY;
 
-	tagLinePoint()	{ZeroMemory(this, sizeof(tagLinePoint));}
-		tagLinePoint(float _fX, float _fY)
+	tagFloatPoint()	{ZeroMemory(this, sizeof(tagFloatPoint));}
+	tagFloatPoint(float _fX, float _fY)
 		: fX(_fX), fY(_fY)
 	{	}
+	tagFloatPoint operator +(tagFloatPoint& rhs)
+	{
+		return (tagFloatPoint(fX + rhs.fX, fY + rhs.fY));
+	}
+	tagFloatPoint operator +(int i)
+	{
+		return (tagFloatPoint(fX + (float)i, fY + (float)i));
+	}
 
-}LINEPOINT;
+}FPOINT;
 
-typedef struct tagLine
+
+typedef struct tagAniInfo
 {
-	LINEPOINT	tLPoint;
-	LINEPOINT	tRPoint;
-
-	tagLine() { 	ZeroMemory(this, sizeof(tagLine));	}
-	tagLine(LINEPOINT& _tLPoint, LINEPOINT& _tRPoint)
-		: tLPoint(_tLPoint), tRPoint(_tRPoint) {	}
-
-}LINE;
-
+	FPOINT	tLT;
+	FPOINT	tSize;
+	INFO	tTargetInfo;
+	float	fDuration;
+	int		iFrameCount;
+}ANINFO;
 
 template<typename T>
 void Safe_Delete(T& Temp)

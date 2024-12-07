@@ -52,12 +52,6 @@
     <Filter Include="01. Obj\01. Bullet\GuideBullet">
       <UniqueIdentifier>{d0bc3b22-3ccb-4481-a360-7cd2d912e8b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Design\LineMgr">
-      <UniqueIdentifier>{3f637332-18dd-4a28-ad78-9e2077461dc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Design\LineMgr\Line">
-      <UniqueIdentifier>{328d590e-a613-4617-8155-0ed506d73f79}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Design\KeyMgr">
       <UniqueIdentifier>{35d39457-7602-4ce2-86e7-f6c882bdb56b}</UniqueIdentifier>
     </Filter>
@@ -84,6 +78,12 @@
     </Filter>
     <Filter Include="01. Obj\05. Obstacle\01. Door">
       <UniqueIdentifier>{b54c335c-66e9-4f2a-92c8-33b78e1dd721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\AnimMgr">
+      <UniqueIdentifier>{a7d5d86a-a848-4003-b5f7-26fe21c11d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\AnimMgr\Animation">
+      <UniqueIdentifier>{368833d3-fdb6-4cec-9075-8daa312b54f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -141,12 +141,6 @@
     <ClInclude Include="CGuideBullet.h">
       <Filter>01. Obj\01. Bullet\GuideBullet</Filter>
     </ClInclude>
-    <ClInclude Include="CLine.h">
-      <Filter>02. Design\LineMgr\Line</Filter>
-    </ClInclude>
-    <ClInclude Include="CLineMgr.h">
-      <Filter>02. Design\LineMgr</Filter>
-    </ClInclude>
     <ClInclude Include="CKeyMgr.h">
       <Filter>02. Design\KeyMgr</Filter>
     </ClInclude>
@@ -170,6 +164,12 @@
     </ClInclude>
     <ClInclude Include="CTemp.h">
       <Filter>01. Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimMgr.h">
+      <Filter>02. Design\AnimMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimation.h">
+      <Filter>02. Design\AnimMgr\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,12 +212,6 @@
     <ClCompile Include="CGuideBullet.cpp">
       <Filter>01. Obj\01. Bullet\GuideBullet</Filter>
     </ClCompile>
-    <ClCompile Include="CLine.cpp">
-      <Filter>02. Design\LineMgr\Line</Filter>
-    </ClCompile>
-    <ClCompile Include="CLineMgr.cpp">
-      <Filter>02. Design\LineMgr</Filter>
-    </ClCompile>
     <ClCompile Include="CKeyMgr.cpp">
       <Filter>02. Design\KeyMgr</Filter>
     </ClCompile>
@@ -241,6 +235,12 @@
     </ClCompile>
     <ClCompile Include="CTemp.cpp">
       <Filter>01. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimMgr.cpp">
+      <Filter>02. Design\AnimMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimation.cpp">
+      <Filter>02. Design\AnimMgr\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

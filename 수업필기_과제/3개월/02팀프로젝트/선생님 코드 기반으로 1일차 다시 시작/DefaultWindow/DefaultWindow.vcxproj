@@ -137,14 +137,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
+    <ClInclude Include="CAnimation.h" />
+    <ClInclude Include="CAnimMgr.h" />
     <ClInclude Include="CBmpMgr.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CFireWall.h" />
     <ClInclude Include="CGuideBullet.h" />
     <ClInclude Include="CKeyMgr.h" />
-    <ClInclude Include="CLine.h" />
-    <ClInclude Include="CLineMgr.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMouse.h" />
@@ -166,14 +166,14 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAnimation.cpp" />
+    <ClCompile Include="CAnimMgr.cpp" />
     <ClCompile Include="CBmpMgr.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CFireWall.cpp" />
     <ClCompile Include="CGuideBullet.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
-    <ClCompile Include="CLine.cpp" />
-    <ClCompile Include="CLineMgr.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMouse.cpp" />

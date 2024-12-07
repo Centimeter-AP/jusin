@@ -3,7 +3,6 @@
 #include "CBullet.h"
 #include "CAbstractFactory.h"
 #include "CObjMgr.h"
-#include "CLineMgr.h"
 #include "CKeyMgr.h"
 #include "CScrollMgr.h"
 #include "CBmpMgr.h"
@@ -107,26 +106,26 @@ void CPlayer::Key_Input()
 
 void CPlayer::Jumping()
 {
-	float	fY(0.f);
+	//float	fY(0.f);
 
-	bool	bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.fX, &fY);
+	////bool	bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.fX, &fY);
 
-	if (m_bJump)
-	{
-		m_tInfo.fY -= (m_fJumpPower * sinf(45.f) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-		m_fTime += 0.2f;
+	//if (m_bJump)
+	//{
+	//	m_tInfo.fY -= (m_fJumpPower * sinf(45.f) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
+	//	m_fTime += 0.2f;
 
-		if (bLineCol && (fY < m_tInfo.fY))
-		{
-			m_bJump = false;
-			m_fTime = 0.f;
-			m_tInfo.fY = fY;
-		}
-	}
-	else if (bLineCol)
-	{
-		m_tInfo.fY = fY;
-	}
+	//	if (bLineCol && (fY < m_tInfo.fY))
+	//	{
+	//		m_bJump = false;
+	//		m_fTime = 0.f;
+	//		m_tInfo.fY = fY;
+	//	}
+	//}
+	//else if (bLineCol)
+	//{
+	//	m_tInfo.fY = fY;
+	//}
 }
 
 void CPlayer::Offset()

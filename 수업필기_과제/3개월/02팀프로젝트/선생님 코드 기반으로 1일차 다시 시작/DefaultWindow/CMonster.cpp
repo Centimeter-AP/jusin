@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CMonster.h"
-
+#include "CScrollMgr.h"
+#include "CBmpMgr.h"
+#include "CAnimMgr.h"
 CMonster::CMonster()
 {
 }
@@ -15,6 +17,9 @@ void CMonster::Initialize()
     m_tInfo.fCX = 32.f;
     m_tInfo.fCY = 32.f;
     m_fSpeed = 3.f;
+
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/player_idle.bmp", L"Player");
+    //CAnimMgr::Get_Instance()->
 }
 
 int CMonster::Update()
@@ -31,19 +36,6 @@ int CMonster::Update()
 
     fRadian = acosf(fWidth / fDiagonal);
 
-  //   if (m_pTarget->Get_Info().fY > m_tInfo.fY)
-  //       fRadian = (2.f * PI) - fRadian;
-
-    // radian to degree
-    //m_fAngle = fRadian * (180.f / PI);
-    //
-    //if (m_pTarget->Get_Info().fY > m_tInfo.fY)
-    //    m_fAngle *= -1.f;
-    //
-    //// degree to radian
-    //m_tInfo.fX += m_fSpeed * cosf(m_fAngle * (PI / 180.f));
-    //m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * (PI / 180.f));
-
     __super::Update_Rect();
 
     return OBJ_NOEVENT;
@@ -57,11 +49,24 @@ void CMonster::Late_Update()
 
 void CMonster::Render(HDC hDC)
 {
-    Rectangle(hDC,
-        m_tRect.left,
-        m_tRect.top,
-        m_tRect.right,
-        m_tRect.bottom);
+    int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+    int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+
+    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Player");
+
+    //CAnimMgr::Get_Instance()->Render(hDC, hMemDC, FPOINT);
+
+    GdiTransparentBlt(hDC,			// 복사 받을 DC
+        m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
+        m_tRect.top + iScrollY,
+        (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
+        (int)m_tInfo.fCY,
+        hMemDC,						// 복사할 이미지 DC	
+        0,							// 비트맵 출력 시작 좌표(Left, top)
+        0,
+        (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
+        (int)m_tInfo.fCY,
+        RGB(128, 0, 128));		    // 제거할 색상
 }
 
 void CMonster::Release()
