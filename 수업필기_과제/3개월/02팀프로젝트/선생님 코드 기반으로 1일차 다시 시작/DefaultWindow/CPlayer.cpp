@@ -5,11 +5,11 @@
 #include "CObjMgr.h"
 #include "CKeyMgr.h"
 #include "CScrollMgr.h"
+#include "CAnimMgr.h"
 #include "CBmpMgr.h"
 
 CPlayer::CPlayer() 
 : m_bJump(false), m_fJumpPower(0.f), m_fTime(0.f)
-
 {
 	ZeroMemory(&m_tPosin, sizeof(POINT));
 }
@@ -28,7 +28,9 @@ void CPlayer::Initialize()
 	m_fJumpPower = 20.f;
 
 
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/player_idle.bmp", L"Player");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Fire_Storm_32_30.bmp", L"Player");
+	CAnimMgr::Get_Instance()->Insert_Animation(L"Player", CAbstractFactory<CAnimation>::Create(this, FPOINT(32.f, 30.f), 50, 3, L"Player"));
+
 }
 
 int CPlayer::Update()
@@ -53,6 +55,8 @@ void CPlayer::Render(HDC hDC)
 
 	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Player");
 
+	CAnimMgr::Get_Instance()->Render(hDC, L"Player");
+
 	// BitBlt(hDC,						// 복사 받을 DC
 	// 	m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
 	// 	m_tRect.top,
@@ -64,17 +68,17 @@ void CPlayer::Render(HDC hDC)
 	// 	SRCCOPY);					// 출력 효과 설정(그대로 출력)
 
 
-	GdiTransparentBlt(hDC,			// 복사 받을 DC
-		m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
-		m_tRect.top,
-		(int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
-		(int)m_tInfo.fCY,
-		hMemDC,						// 복사할 이미지 DC	
-		0,							// 비트맵 출력 시작 좌표(Left, top)
-		0,
-		(int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
-		(int)m_tInfo.fCY,
-		RGB(128, 0, 128));		// 제거할 색상
+	//GdiTransparentBlt(hDC,			// 복사 받을 DC
+	//	m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
+	//	m_tRect.top,
+	//	(int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
+	//	(int)m_tInfo.fCY,
+	//	hMemDC,						// 복사할 이미지 DC	
+	//	0,							// 비트맵 출력 시작 좌표(Left, top)
+	//	0,
+	//	(int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
+	//	(int)m_tInfo.fCY,
+	//	RGB(128, 0, 128));		// 제거할 색상
 }
 
 void CPlayer::Release()

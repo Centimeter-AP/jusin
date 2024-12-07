@@ -3,6 +3,8 @@
 #include "CScrollMgr.h"
 #include "CBmpMgr.h"
 #include "CAnimMgr.h"
+#include "CAbstractFactory.h"
+
 CMonster::CMonster()
 {
 }
@@ -18,8 +20,7 @@ void CMonster::Initialize()
     m_tInfo.fCY = 32.f;
     m_fSpeed = 3.f;
 
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/player_idle.bmp", L"Player");
-    //CAnimMgr::Get_Instance()->
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/tile_cut.bmp", L"Monster");
 }
 
 int CMonster::Update()
@@ -52,9 +53,7 @@ void CMonster::Render(HDC hDC)
     int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
     int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
-    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Player");
-
-    //CAnimMgr::Get_Instance()->Render(hDC, hMemDC, FPOINT);
+    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Monster");
 
     GdiTransparentBlt(hDC,			// 복사 받을 DC
         m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	

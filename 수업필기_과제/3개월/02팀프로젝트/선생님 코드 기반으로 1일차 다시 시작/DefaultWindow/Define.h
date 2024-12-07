@@ -56,11 +56,16 @@ typedef struct tagFloatPoint
 
 typedef struct tagAniInfo
 {
-	FPOINT	tLT;
+	FPOINT	tImgLT;
+	FPOINT	tPosLT;
 	FPOINT	tSize;
 	INFO	tTargetInfo;
-	float	fDuration;
-	int		iFrameCount;
+	int		iDuration;
+	int		iMaxFrame;
+
+	tagAniInfo() { ZeroMemory(this, sizeof(tagAniInfo)); }
+	tagAniInfo(FPOINT _tImgLT, FPOINT _tPosLT, FPOINT _tSize, INFO _tTargetInfo, float _fDuration, int _iMaxFrame)
+				 { tImgLT = _tImgLT; tPosLT = _tPosLT; tSize = _tSize; tTargetInfo = _tTargetInfo; iDuration = _fDuration; iMaxFrame = _iMaxFrame; }
 }ANINFO;
 
 template<typename T>

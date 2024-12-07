@@ -8,6 +8,7 @@
 #include "CBmpMgr.h"
 #include "CStone.h"
 #include "CFireWall.h"
+#include "CAnimMgr.h"
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount()), m_iFPS(0)
@@ -45,11 +46,13 @@ void CMainGame::Initialize()
 void CMainGame::Update()
 {
 	CObjMgr::Get_Instance()->Update();
+	CAnimMgr::Get_Instance()->Update();
 }
 
 void CMainGame::Late_Update()
 {
 	CObjMgr::Get_Instance()->Late_Update();
+	CAnimMgr::Get_Instance()->Late_Update();
 	CKeyMgr::Get_Instance()->Update();
 
 }

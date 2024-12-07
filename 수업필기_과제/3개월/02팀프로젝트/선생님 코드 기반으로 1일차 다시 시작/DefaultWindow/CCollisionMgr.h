@@ -15,5 +15,6 @@ public:
 	static bool	Check_Rect(CObj* _Dst, CObj* _Src, float* pX, float* pY);
 	static bool Check_Near(CObj* _Dst, CObj* _Src, float* pX, float* pY);
 	static bool Collision_RectNear(list<CObj*> _Dst, list<CObj*> _Src);
+	static void Collision_Boss_Box(CObj* _Boss, list<CObj*> _Src);
 };
 

@@ -18,7 +18,6 @@ void CCollisionMgr::Collision_Rect(list<CObj*> _Dst, list<CObj*> _Src)
 			}
 		}
 	}
-
 }
 
 void CCollisionMgr::Collision_Circle(list<CObj*> _Dst, list<CObj*> _Src)
