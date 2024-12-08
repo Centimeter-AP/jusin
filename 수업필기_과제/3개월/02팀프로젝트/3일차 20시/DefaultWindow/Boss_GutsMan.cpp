@@ -139,11 +139,6 @@ void CBoss_GutsMan::Render(HDC hDC)
 		m_tRect.right + iScrollX,
 		m_tRect.bottom + iScrollY);
 
-	// 보스 이름 출력
-	TCHAR box[32] = L"";
-	swprintf_s(box, L"보스");
-	TextOut(hDC, m_tInfo.fX + iScrollX - 17, m_tInfo.fY + iScrollY - 10, box, lstrlen(box));
-
 	// 체력 바 출력 (m_fSpeed 조건 확인)
 	if (m_fSpeed == 0)
 	{

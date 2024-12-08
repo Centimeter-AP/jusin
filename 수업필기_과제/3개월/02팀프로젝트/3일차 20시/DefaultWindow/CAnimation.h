@@ -19,6 +19,7 @@ public:
 	void	Set_Target(CObj* _Target) { m_pTarget = _Target; }
 	void	Set_hMemDC(HDC	_hMemDC) { m_hMemDC = _hMemDC; }
 	void	Set_Vector(ANINFO _AnInfo);
+	void	Set_Manual_Vector(FPOINT _ImgLT, FPOINT _ImgSize, int _FrameIdx);
 
 public:
 	//ANINFO	Get_AnInfo() const { return m_tAnInfo; };

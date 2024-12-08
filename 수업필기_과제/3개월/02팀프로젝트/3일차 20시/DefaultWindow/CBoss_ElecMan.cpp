@@ -30,7 +30,7 @@ void CBoss_ElecMan::Initialize()
 {
 	m_pTarget = CObjMgr::Get_Instance()->Get_Player();
 	m_p_Boss_Bullet = CObjMgr::Get_Instance()->Get_List(OBJ_BOSSBULLET);
-	m_tInfo = { 300, 350, 71, 71 };
+	m_tInfo = { 300, 450, 71, 71 };
 	m_fAttackRange = 150.f;
 	m_fChaseRange = 300.f;
 

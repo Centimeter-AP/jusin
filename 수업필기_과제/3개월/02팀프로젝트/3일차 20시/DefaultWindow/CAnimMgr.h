@@ -13,6 +13,7 @@ public:
 	void	Render(HDC _hDc, const TCHAR* _pImgKey);
 	void	Release();
 	void	Insert_Animation(const TCHAR* pImgKey, CAnimation* _pAnim);
+	void	Edit_Animation(const TCHAR* pImgKey, FPOINT _ImgLT, FPOINT _ImgSize, int _FrameIdx);
 
 public:
 	static CAnimMgr* Get_Instance()

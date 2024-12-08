@@ -3,6 +3,8 @@
 #include "CScrollMgr.h"
 #include "CAbstractFactory.h"
 #include "Boss_GutsMan.h"
+#include "CAnimMgr.h"
+#include "CBmpMgr.h"
 
 CSuper_Arm::CSuper_Arm()
 {
@@ -26,6 +28,9 @@ void CSuper_Arm::Initialize()
 	m_fJumpPower = 10.f; //기본 점프 파워
 	m_iHp = 1; // 플레이어 HP(은성)
 	m_fTime = 0.f;
+
+
+
 }
 
 int CSuper_Arm::Update()
