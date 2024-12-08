@@ -44,7 +44,7 @@ public:
 	virtual void		Late_Update()PURE;
 	virtual void		Render(HDC hDC)PURE;
 	virtual void		Release()PURE;
-	virtual void		OnCollision(CObj* _pOther, OBJID _eOtherID);//부딫혔을 때 실행 할 것
+	//virtual void		OnCollision(CObj* _pOther, OBJID _eOtherID);//부딫혔을 때 실행 할 것
 
 
 public:
@@ -65,5 +65,4 @@ protected:
 
 	bool		m_bGround;//영웅
 };
-
 

@@ -17,16 +17,12 @@ public :
 	virtual void Render(HDC _hDC);
 	virtual void Release() ;
 
-	
+
 
 	// CScene을(를) 통해 상속됨
 	void Initialize() override;
 
 	void LateUpdate() override;
 
-
-private:
-
-	bool bStart_On;
 };
 

@@ -7,6 +7,8 @@
 #include "CStage_Moo.h"
 #include "CStage_Silver.h"
 #include "CScrollMgr.h"
+#include "CObjMgr.h"
+#include "CKeyMgr.h"
 
 //SCENE_TYPE g_CurrentStage = SCENE_TYPE::STAGE_START; // 기본값 START
 
@@ -69,7 +71,14 @@ void CSceneMgr::Render(HDC hDC)
 
 	m_pCurScene->Render(hDC); // 현재 스테이지 렌더
 }
+void CSceneMgr::LateUpdate()
+{
 
+	if (0 != CScrollMgr::Get_Instance()->Get_Dir())
+		return;
+	CObjMgr::Get_Instance()->Late_Update();
+	CKeyMgr::Get_Instance()->Update();
+}
 
 
 

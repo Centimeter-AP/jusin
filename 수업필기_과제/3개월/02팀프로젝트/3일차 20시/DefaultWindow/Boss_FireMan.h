@@ -55,33 +55,9 @@ private:
 private:
     float MAX_Hp; // 기본 체력
     float Hp_Count; // 보스에 충돌할때마다 체크
-
-private: // 무결이코드
-    IMAGE    m_tIdle;
-    IMAGE   m_tAttack1;
-    IMAGE   m_tAttack2;
-    IMAGE   m_tNowState;
-    IMAGE   m_tChase;
     bool m_Boss_Ground;
 private:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     unsigned long long m_ullLast_Fire;
-    int Bullet_X;
- 
-
     bool                m_bJump; // 점프체크
     float               m_fJumpPower;//점프속도
     float               m_fTime; // 시간

@@ -133,6 +133,24 @@
     <Filter Include="01. Obj\08. Boss\Hero">
       <UniqueIdentifier>{51c09f80-447c-4076-b368-1034e86ec51f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\08. Boss\Hero\Boss_Bullet">
+      <UniqueIdentifier>{89621ad9-cf55-4fec-81a4-143f1d44a4b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Boss\Silver\Boss">
+      <UniqueIdentifier>{4e354e8f-a074-4465-a201-3e5bb972a4b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Boss\Silver\Boss_Bullet">
+      <UniqueIdentifier>{8650b39b-7808-4fba-959f-a3f44e9f82c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Boss\Hong\Boss">
+      <UniqueIdentifier>{f3b8892b-0766-444a-8c6c-e8e46ef8009a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Boss\Hong\Bullet">
+      <UniqueIdentifier>{c9a9cc57-303a-4060-a446-4160cd63d72f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Boss\Hero\Boss">
+      <UniqueIdentifier>{cec03ddf-2747-4cf9-9318-bd86cc2f989f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -158,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="CObj.h">
       <Filter>01. Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>01. Obj\00. Player</Filter>
     </ClInclude>
     <ClInclude Include="CMonster.h">
       <Filter>01. Obj\02. Monster</Filter>
@@ -191,12 +212,6 @@
     </ClInclude>
     <ClInclude Include="DummyMgr.h">
       <Filter>04. Design\DummyMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockMgr.h">
-      <Filter>04. Design\BlockMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="Block.h">
-      <Filter>01. Obj\05. Block</Filter>
     </ClInclude>
     <ClInclude Include="CBmpMgr.h">
       <Filter>04. Design\BmpMgr</Filter>
@@ -240,9 +255,6 @@
     <ClInclude Include="CAnimMgr.h">
       <Filter>04. Design\AnimationMgr</Filter>
     </ClInclude>
-    <ClInclude Include="Boss_FireMan.h">
-      <Filter>01. Obj\08. Boss\Hong</Filter>
-    </ClInclude>
     <ClInclude Include="CBoss_ElecMan.h">
       <Filter>01. Obj\08. Boss\Moo\Boss</Filter>
     </ClInclude>
@@ -252,23 +264,32 @@
     <ClInclude Include="CBullet_Normal.h">
       <Filter>01. Obj\01. Bullet\01_Player_Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="CRolling_Cutter.h">
-      <Filter>01. Obj\08. Boss\Silver</Filter>
+    <ClInclude Include="BlockMgr.h">
+      <Filter>04. Design\BlockMgr</Filter>
     </ClInclude>
-    <ClInclude Include="CBoss_CutMan.h">
-      <Filter>01. Obj\08. Boss\Silver</Filter>
-    </ClInclude>
-    <ClInclude Include="CRolling_Cutter_P.h">
-      <Filter>01. Obj\08. Boss\Silver</Filter>
+    <ClInclude Include="Block.h">
+      <Filter>01. Obj\05. Block</Filter>
     </ClInclude>
     <ClInclude Include="Boss_IceMan.h">
-      <Filter>01. Obj\08. Boss\Hero</Filter>
+      <Filter>01. Obj\08. Boss\Hero\Boss</Filter>
     </ClInclude>
     <ClInclude Include="Ice_Slasher.h">
-      <Filter>01. Obj\08. Boss\Hero</Filter>
+      <Filter>01. Obj\08. Boss\Hero\Boss_Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>01. Obj\01. Bullet</Filter>
+    <ClInclude Include="CBoss_CutMan.h">
+      <Filter>01. Obj\08. Boss\Silver\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CRolling_Cutter.h">
+      <Filter>01. Obj\08. Boss\Silver\Boss_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CRolling_Cutter_P.h">
+      <Filter>01. Obj\08. Boss\Silver\Boss_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_FireMan.h">
+      <Filter>01. Obj\08. Boss\Hong\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CFire_Storm.h">
+      <Filter>01. Obj\08. Boss\Hong\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -317,12 +338,6 @@
     <ClCompile Include="DummyMgr.cpp">
       <Filter>04. Design\DummyMgr</Filter>
     </ClCompile>
-    <ClCompile Include="BlockMgr.cpp">
-      <Filter>04. Design\BlockMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>01. Obj\05. Block</Filter>
-    </ClCompile>
     <ClCompile Include="CBmpMgr.cpp">
       <Filter>04. Design\BmpMgr</Filter>
     </ClCompile>
@@ -365,9 +380,6 @@
     <ClCompile Include="CAnimMgr.cpp">
       <Filter>04. Design\AnimationMgr</Filter>
     </ClCompile>
-    <ClCompile Include="Boss_FireMan.h.cpp">
-      <Filter>01. Obj\08. Boss\Hong</Filter>
-    </ClCompile>
     <ClCompile Include="CBoss_ElecMan.cpp">
       <Filter>01. Obj\08. Boss\Moo\Boss</Filter>
     </ClCompile>
@@ -377,20 +389,32 @@
     <ClCompile Include="CBullet_Normal.cpp">
       <Filter>01. Obj\01. Bullet\01_Player_Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="CRolling_Cutter.cpp">
-      <Filter>01. Obj\08. Boss\Silver</Filter>
+    <ClCompile Include="BlockMgr.cpp">
+      <Filter>04. Design\BlockMgr</Filter>
     </ClCompile>
-    <ClCompile Include="CBoss_CutMan.cpp">
-      <Filter>01. Obj\08. Boss\Silver</Filter>
-    </ClCompile>
-    <ClCompile Include="CRolling_Cutter_P.cpp">
-      <Filter>01. Obj\08. Boss\Silver</Filter>
-    </ClCompile>
-    <ClCompile Include="Ice_Slasher.cpp">
-      <Filter>01. Obj\08. Boss\Hero</Filter>
+    <ClCompile Include="Block.cpp">
+      <Filter>01. Obj\05. Block</Filter>
     </ClCompile>
     <ClCompile Include="Boss_IceMan.cpp">
-      <Filter>01. Obj\08. Boss\Hero</Filter>
+      <Filter>01. Obj\08. Boss\Hero\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Ice_Slasher.cpp">
+      <Filter>01. Obj\08. Boss\Hero\Boss_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoss_CutMan.cpp">
+      <Filter>01. Obj\08. Boss\Silver\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CRolling_Cutter.cpp">
+      <Filter>01. Obj\08. Boss\Silver\Boss_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CRolling_Cutter_P.cpp">
+      <Filter>01. Obj\08. Boss\Silver\Boss_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_FireMan.h.cpp">
+      <Filter>01. Obj\08. Boss\Hong\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CFire_Storm.cpp">
+      <Filter>01. Obj\08. Boss\Hong\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

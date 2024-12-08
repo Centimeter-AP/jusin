@@ -29,6 +29,8 @@ public:
 	void Update(); // 업데이트
 	void Render(HDC hDC); // 렌더
 
+	void LateUpdate();
+
 private:
 	static CSceneMgr* m_pInstance;  // 객체 담을 주소
 	CScene* m_arrScene[(UINT)SCENE_TYPE::SCENE_END]; // 모든씬

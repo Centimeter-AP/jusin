@@ -19,9 +19,8 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Initialize(CObj* _pPlayer)
 {
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Back.bmp", L"Back");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/Start/Bmp/Choice.bmp", L"Choice");
-	
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Ground.bmp", L"Ground");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/Start_1.bmp", L"Start_1");
 }
 
 void CScene_Start::Update() // 스테이지
@@ -41,7 +40,6 @@ void CScene_Start::Update() // 스테이지
 //case STAGE_MOO://5번 임무결
 //    filePath = L"../Data/Line_Moo.dat";
 //    break;
-
 
 	if (GetAsyncKeyState('1'))
 	{
@@ -96,11 +94,10 @@ void CScene_Start::Late_Update()
 void CScene_Start::Render(HDC _hDC)
 {
 
-	HDC hBackDC = CBmpMgr::Get_Instance()->Find_Image(L"Back");
-	HDC hStartDC = CBmpMgr::Get_Instance()->Find_Image(L"Choice");
+	HDC		hBckDC = CBmpMgr::Get_Instance()->Find_Image(L"Back");
+	HDC		hStartDC = CBmpMgr::Get_Instance()->Find_Image(L"Start_1");
 
-	// 배경 이미지를 _hDC에 출력
-
+	BitBlt(hStartDC, 0, 0, WINCX, WINCY, hBckDC, 0, 0, SRCCOPY);
 
 	BitBlt(_hDC,
 		0, 0, WINCX, WINCY,

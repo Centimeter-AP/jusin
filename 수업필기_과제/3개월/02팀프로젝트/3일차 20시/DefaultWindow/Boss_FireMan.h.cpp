@@ -5,11 +5,12 @@
 #include "CLineMgr.h"
 #include "BlockMgr.h"
 #include "CBmpMgr.h"
+#include "CAbstractFactory.h"
+#include "CFire_Storm.h"
+#include "CObjMgr.h"
 
 CBoss_FireMan::CBoss_FireMan()
-
 {
-
 	ZeroMemory(&m_p_Boss_Bullet, sizeof(m_p_Boss_Bullet));
 	ZeroMemory(&HP_INFO, sizeof(HP_INFO));
 	m_Boss_pPlayer = NULL;
@@ -20,7 +21,18 @@ CBoss_FireMan::CBoss_FireMan()
 	m_bJump = false;
 	m_fJumpPower=  0.f;
 	m_fTime = 0.f;
+	m_ullLast_Fire = 0;
 
+	////////////////////////
+	bool m_bMovingLeft;
+	int m_fJumpCooldown;
+	m_Boss_pPlayer = nullptr;
+	MAX_Hp = 0;
+	Hp_Count = 0;// 보스에 충돌할때마다 체크
+	m_Boss_Ground = true;
+
+
+	bool m_Boss_Ground;
 
 }
 
@@ -49,6 +61,7 @@ int CBoss_FireMan::Update()
 		if (m_tInfo.fX <= 200) // 왼쪽 경계
 		{
 			m_bMovingLeft = false; // 방향 전환
+		CObjMgr::Get_Instance()->Add_Object(OBJ_BOSSBULLET,Create_Bullet(1));
 		}
 	}
 	else
@@ -56,6 +69,7 @@ int CBoss_FireMan::Update()
 		m_tInfo.fX += m_fSpeed; // 오른쪽으로 이동
 		if (m_tInfo.fX >= 500) // 오른쪽 경계
 		{
+			Create_Bullet(2);
 			m_bMovingLeft = true; // 방향 전환
 		}
 	}
@@ -126,50 +140,32 @@ void CBoss_FireMan::Release()
 
 void CBoss_FireMan::Key_Input()
 {
-	if (GetAsyncKeyState('2')) // 오른쪽 벽 몰기 패턴
-	{
-		if (m_ullLast_Fire + 300 > GetTickCount64())
-		{
-			return;
-		}
-		m_ullLast_Fire = GetTickCount64();
-		m_p_Boss_Bullet->push_back(Create_Bullet(2));
-	}
-	if (GetAsyncKeyState('3')) // 왼쪽 벽 몰기 패턴
-	{
-		if (m_ullLast_Fire + 300 > GetTickCount64())
-		{
-			return;
-		}
-		m_ullLast_Fire = GetTickCount64();
-		m_p_Boss_Bullet->push_back(Create_Bullet(3));
-
-	}
-	if (GetAsyncKeyState('4'))  // 5개 유도탄
-	{
-		if (m_ullLast_Fire + 100 > GetTickCount64())
-		{
-			return;
-		}
-		m_ullLast_Fire = GetTickCount64();
-		m_p_Boss_Bullet->push_back(Create_Bullet(4));
-	}
-
-	if (m_ullLast_Fire + 800 > GetTickCount64())
-	{
-		return;
-	}
+	
+		
+	
 
 
 }
 
 CObj* CBoss_FireMan::Create_Bullet(int _type)
 {
-	CObj* pBullet = nullptr;
 
+	switch (_type)
+	{
+	case 1:
+		return CAbstractFactory<CFire_Storm>::Create(m_tInfo.fX, m_tInfo.fY, DIR_LEFT);
+		break;
+	case 2:
+		return CAbstractFactory<CFire_Storm>::Create(m_tInfo.fX, m_tInfo.fY, DIR_RIGHT);
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 	
 
-	return pBullet;
+
 }
 
 void CBoss_FireMan::Jumping()

@@ -29,8 +29,6 @@ private:
 	bool m_bShow_Start2;
 	ULONGLONG ullStart_Change_Time;
 
-	HDC		hStartDC;
-
 
 };
 

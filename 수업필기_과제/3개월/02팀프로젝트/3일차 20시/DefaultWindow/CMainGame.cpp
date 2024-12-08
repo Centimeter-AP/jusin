@@ -96,9 +96,9 @@ void CMainGame::Render()
     //BitBlt(m_hDC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 
     HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Back");
-    HDC		hStartDC = CBmpMgr::Get_Instance()->Find_Image(L"Start_1");
+    HDC		hGroundDC = CBmpMgr::Get_Instance()->Find_Image(L"Start_1");
 
-    BitBlt(hMemDC, 0, 0, WINCX, WINCY, hStartDC, 0, 0, SRCCOPY);
+    BitBlt(hMemDC, 0, 0, WINCX, WINCY, hGroundDC, 0, 0, SRCCOPY);
 
     CSceneMgr::Get_Instance()->Render(hMemDC);//?©¬¡Æ¢®??¡Æ?
     CBlockMgr::Get_Instance()->Render(hMemDC);
