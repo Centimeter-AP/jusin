@@ -4,6 +4,7 @@
 #include "CAnimation.h"
 #include "CBmpMgr.h"
 #include "CRolling_Cutter.h"
+#include "CSuper_Arm.h"
 
 template<typename T>
 class CAbstractFactory
@@ -58,7 +59,15 @@ public:
 		pObj->Initialize();
 		return pObj;
 	}
+	static CObj* Create(CObj* _rhs)
+	{
+		CObj* pObj = new T;
+		pObj->Set_Target(_rhs);
+		pObj->Initialize();
+		dynamic_cast<CSuper_Arm*>(pObj)->Set_JumpPower(10.f + float(rand() % 10));
 
+		return pObj;
+	}
 	static CAnimation* Create(CObj* _Target, FPOINT _tSize, int _iDuration, int _iMaxFrame, const TCHAR* _ImgKey)
 	{
 		CAnimation* pAnim = new T;

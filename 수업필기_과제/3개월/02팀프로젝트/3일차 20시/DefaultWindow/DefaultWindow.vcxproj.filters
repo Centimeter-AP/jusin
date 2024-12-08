@@ -151,6 +151,15 @@
     <Filter Include="01. Obj\08. Boss\Hero\Boss">
       <UniqueIdentifier>{cec03ddf-2747-4cf9-9318-bd86cc2f989f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\08. Boss\Chae">
+      <UniqueIdentifier>{3a0dd5d2-f176-49ad-8d8a-b42596b1a83f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Boss\Chae\Boss">
+      <UniqueIdentifier>{d6064d74-a63d-49c4-970e-766e0e5f0f33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Boss\Chae\Boss_Bullet">
+      <UniqueIdentifier>{2ea08fc4-37c8-487e-ac89-bfbaca5b0fa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -291,6 +300,12 @@
     <ClInclude Include="CFire_Storm.h">
       <Filter>01. Obj\08. Boss\Hong\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Boss_GutsMan.h">
+      <Filter>01. Obj\08. Boss\Chae\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CSuper_Arm.h">
+      <Filter>01. Obj\08. Boss\Chae\Boss_Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -415,6 +430,12 @@
     </ClCompile>
     <ClCompile Include="CFire_Storm.cpp">
       <Filter>01. Obj\08. Boss\Hong\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_GutsMan.cpp">
+      <Filter>01. Obj\08. Boss\Chae\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CSuper_Arm.cpp">
+      <Filter>01. Obj\08. Boss\Chae\Boss_Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

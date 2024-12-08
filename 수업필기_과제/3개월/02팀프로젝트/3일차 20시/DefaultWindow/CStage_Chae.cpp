@@ -9,6 +9,7 @@
 #include "BlockMgr.h"
 #include "CWall.h"
 #include "CScrollMgr.h"
+#include "Boss_GutsMan.h"
 
 CStage_Chae::CStage_Chae()
 {
@@ -29,6 +30,9 @@ void CStage_Chae::Initialize()
 	{
 		CObjMgr::Get_Instance()->Add_Object(OBJ_WALL, CAbstractFactory<CWall>::Create(float(50), float(i * 100), 0.f));
 	}
+	CObjMgr::Get_Instance()->Add_Object(OBJ_BOSS, CAbstractFactory<CBoss_GutsMan>::Create());
+
+
 }
 
 void CStage_Chae::Update()
