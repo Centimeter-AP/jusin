@@ -10,7 +10,7 @@
 #include "CBmpMgr.h"
 #include "CSceneMgr.h"
 #include "CWall.h"
-//
+#include "CAnimMgr.h"
 
 CMainGame::CMainGame()
 	: m_ullTime(GetTickCount64()), m_iFPS(0), m_hDC(nullptr)
@@ -34,20 +34,25 @@ CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Creat
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Back.bmp", L"Back");
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/Start/Bmp/Start_1.bmp", L"Start_1");
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/Start/Bmp/Start_2.bmp", L"Start_2");
+    CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/boss_elec_all.bmp", L"Boss_Elec");
+
+
 }
 
 
 void CMainGame::Update()
 {
-   
+    CAnimMgr::Get_Instance()->Update();
 		CSceneMgr::Get_Instance()->Update();// 추가한거
         CKeyMgr::Get_Instance()->Update();
+
 }
 
 void CMainGame::Late_Update()
 {
 	
-		CObjMgr::Get_Instance()->Late_Update();
+    CAnimMgr::Get_Instance()->Late_Update();
+    CObjMgr::Get_Instance()->Late_Update();
 		CKeyMgr::Get_Instance()->Update();
 	
 }
@@ -124,5 +129,6 @@ void CMainGame::Release()
 	CLineMgr::Destroy_Instance();
 	CBlockMgr::Destroy_Instance();
 	CObjMgr::DestroyInstance();
+    CAnimMgr::Destroy_Instance();
 	ReleaseDC(g_hWnd, m_hDC);
 }

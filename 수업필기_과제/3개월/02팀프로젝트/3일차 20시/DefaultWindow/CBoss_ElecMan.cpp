@@ -6,6 +6,8 @@
 #include "CCollisionMgr.h"
 #include "CAbstractFactory.h"
 #include "CBullet_Elec.h"
+#include "CAnimMgr.h"
+#include "CScrollMgr.h"
 
 CBoss_ElecMan::CBoss_ElecMan() 
 	: m_p_Boss_Bullet(nullptr), m_Boss_pPlayer(nullptr),Hp_Count(0),
@@ -42,7 +44,17 @@ void CBoss_ElecMan::Initialize()
 
 	MAX_Hp = 100;
 
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/boss_elec_all.bmp", L"Boss_Elec");
+	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/boss_elec_all.bmp", L"Boss_Elec"); // 이미지 하나만 불러오기
+	// 이거 MainGame에서 bmp 불러와도 상관 없어서 주석처리함 
+	CAnimMgr::Get_Instance()->Insert_Animation(L"Elec_Idle", CAbstractFactory<CAnimation>::Create(this, { 71, 71 }, 50, 1, L"Boss_Elec"));
+
+	CAnimMgr::Get_Instance()->Insert_Animation(L"Elec_Attack", CAbstractFactory<CAnimation>::Create(this, { 71, 71 }, 460, 2, L"Boss_Elec"));
+	CAnimMgr::Get_Instance()->Edit_Animation(L"Elec_Attack", { 413, 0 }, { 71,71}, 0);
+	CAnimMgr::Get_Instance()->Edit_Animation(L"Elec_Attack", { 486, 0 }, { 71,71}, 1);
+
+	CAnimMgr::Get_Instance()->Insert_Animation(L"Elec_Chase", CAbstractFactory<CAnimation>::Create(this, { 71, 71 }, 50, 1, L"Boss_Elec"));
+	CAnimMgr::Get_Instance()->Edit_Animation(L"Elec_Chase", { 280, 0 }, { 71,71 }, 0);
+	//하나의 이미지에서 원하는 애니메이션 분리해 제작 
 }
 
 int CBoss_ElecMan::Update()
@@ -72,6 +84,8 @@ int CBoss_ElecMan::Update()
 
 void CBoss_ElecMan::Late_Update()
 {
+	// 여기 ATTACK일 때 create_bullet이 있어서 주석처리를 못했음 ㅎㅎ;
+	
 	switch (m_BossState)
 	{
 	case IDLE:
@@ -112,13 +126,36 @@ void CBoss_ElecMan::Render(HDC hDC)
 {
 	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Boss_Elec");
 
-	GdiTransparentBlt(hDC,						// 복사 받을 DC
-		m_tInfo.fX, m_tInfo.fY,					// 복사 받을 위치 좌표 X, Y			
-		m_tInfo.fCX, m_tInfo.fCY,				// 복사 받을 이미지의 가로, 세로
-		hMemDC,									// 복사할 이미지 DC	
-		m_tNowState._iX, m_tNowState._iY,								// 비트맵 출력 시작 좌표(Left, top)
-		71, 71,									// 복사할 이미지의 가로, 세로
-		RGB(128, 0, 128));						// 출력 효과 설정(그대로 출력)
+	//GdiTransparentBlt(hDC,						// 복사 받을 DC
+	//	m_tInfo.fX, m_tInfo.fY,					// 복사 받을 위치 좌표 X, Y			
+	//	m_tInfo.fCX, m_tInfo.fCY,				// 복사 받을 이미지의 가로, 세로
+	//	hMemDC,									// 복사할 이미지 DC	
+	//	m_tNowState._iX, m_tNowState._iY,		// 비트맵 출력 시작 좌표(Left, top)
+	//	71, 71,									// 복사할 이미지의 가로, 세로
+	//	RGB(128, 0, 128));						// 출력 효과 설정(그대로 출력)
+	
+	switch (m_BossState)
+	{
+	case IDLE:
+		CAnimMgr::Get_Instance()->Render(hDC, L"Elec_Idle", this);
+		break;
+	case ATTACK:
+		GdiTransparentBlt(hDC,						// 복사 받을 DC
+			m_tRect.left, m_tRect.top,					// 복사 받을 위치 좌표 X, Y			
+			m_tInfo.fCX, m_tInfo.fCY,				// 복사 받을 이미지의 가로, 세로
+			hMemDC,									// 복사할 이미지 DC	
+			m_tNowState._iX, m_tNowState._iY,		// 비트맵 출력 시작 좌표(Left, top)
+			71, 71,									// 복사할 이미지의 가로, 세로
+			RGB(128, 0, 128));						// 출력 효과 설정(그대로 출력)
+		break;
+	case CHASE:
+		CAnimMgr::Get_Instance()->Render(hDC, L"Elec_Chase", this);
+
+		break;
+	default:
+		break;
+	}
+
 }
 
 void CBoss_ElecMan::Release()

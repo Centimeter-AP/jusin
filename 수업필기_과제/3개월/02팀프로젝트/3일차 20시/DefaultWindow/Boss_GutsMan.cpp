@@ -59,8 +59,9 @@ int CBoss_GutsMan::Update()
 	case CBoss_GutsMan::STATE_HOLD:
 		if (m_bHoldBullet == false)
 		{
-			CObjMgr::Get_Instance()->Add_Object(OBJ_BOSSBULLET, CAbstractFactory<CSuper_Arm>::Create(this));
 			m_bHoldBullet = true;
+
+			CObjMgr::Get_Instance()->Add_Object(OBJ_BOSSBULLET, CAbstractFactory<CSuper_Arm>::Create(this));
 		}
 		m_iStateCooldown--;
 		break;
