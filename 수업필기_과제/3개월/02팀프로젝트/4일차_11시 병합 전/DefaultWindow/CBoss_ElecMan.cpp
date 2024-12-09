@@ -149,7 +149,6 @@ void CBoss_ElecMan::Render(HDC hDC)
 		break;
 	case CHASE:
 		CAnimMgr::Get_Instance()->Render(hDC, L"Elec_Chase", this);
-
 		break;
 	default:
 		break;

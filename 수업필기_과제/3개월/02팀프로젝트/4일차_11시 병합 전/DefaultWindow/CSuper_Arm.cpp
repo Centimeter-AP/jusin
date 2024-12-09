@@ -5,6 +5,7 @@
 #include "Boss_GutsMan.h"
 #include "CAnimMgr.h"
 #include "CBmpMgr.h"
+#include "CPlayer.h"
 
 CSuper_Arm::CSuper_Arm()
 {
@@ -25,13 +26,13 @@ void CSuper_Arm::Initialize()
 
 	m_fSpeed = 10.f;//이동속도
 	m_fDistance = 100.f;//이동거리
-	m_fJumpPower = 10.f; //기본 점프 파워
+	if (dynamic_cast<CPlayer*>(m_pTarget) != nullptr)
+		m_fJumpPower = 10.f; //기본 점프 파워
 	m_iHp = 1; // 플레이어 HP(은성)
 	m_fTime = 0.f;
-
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/super_block.bmp", L"Super_Block");
 	CAnimMgr::Get_Instance()->Insert_Animation(L"Super_Block", CAbstractFactory<CAnimation>::Create(this, FPOINT(64.f, 64.f), 1, 1, L"Super_Block"));
-	m_eDir = dynamic_cast<CBoss_GutsMan*>(m_pTarget)->Get_Direction();
+	m_eDir = m_pTarget->Get_Direction();
 
 
 }
@@ -41,7 +42,10 @@ int CSuper_Arm::Update()
 	if (m_bDead)
 		return OBJ_DEAD;
 
-	if (dynamic_cast<CBoss_GutsMan*>(m_pTarget)->Get_HoldBullet() == true)
+	if (dynamic_cast<CPlayer*>(m_pTarget) != nullptr)
+		m_fJumpPower = 13.f; //기본 점프 파워
+
+	if ((m_pTarget->Get_HoldBullet()))
 	{
 		if (m_eDir == DIR_RIGHT)
 		{
@@ -83,12 +87,6 @@ void CSuper_Arm::Render(HDC hDC)
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 	CAnimMgr::Get_Instance()->Render(hDC, L"Super_Block", this);
-
-	//Rectangle(hDC,
-	//m_tRect.left + iScrollX,
-	//m_tRect.top + iScrollY,
-	//m_tRect.right + iScrollX,
-	//m_tRect.bottom + iScrollY);
 }
 
 void CSuper_Arm::Release()

@@ -160,6 +160,12 @@
     <Filter Include="01. Obj\08. Boss\Chae\Boss_Bullet">
       <UniqueIdentifier>{2ea08fc4-37c8-487e-ac89-bfbaca5b0fa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\02. Monster\Gut_Monster">
+      <UniqueIdentifier>{d321c39f-3ede-41d9-997f-5deb059ffe93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\Gut_Monster\Gut_M_Bullet">
+      <UniqueIdentifier>{01da4c64-f000-4288-a308-b3e03d3dc0a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -306,6 +312,18 @@
     <ClInclude Include="CSuper_Arm.h">
       <Filter>01. Obj\08. Boss\Chae\Boss_Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="CGut_Monster1.h">
+      <Filter>01. Obj\02. Monster\Gut_Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CGut_M1_Bullet.h">
+      <Filter>01. Obj\02. Monster\Gut_Monster\Gut_M_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CGut_Monster2.h">
+      <Filter>01. Obj\02. Monster\Gut_Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CGut_M2_Bullet.h">
+      <Filter>01. Obj\02. Monster\Gut_Monster\Gut_M_Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -436,6 +454,18 @@
     </ClCompile>
     <ClCompile Include="CSuper_Arm.cpp">
       <Filter>01. Obj\08. Boss\Chae\Boss_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CGut_Monster1.cpp">
+      <Filter>01. Obj\02. Monster\Gut_Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CGut_M1_Bullet.cpp">
+      <Filter>01. Obj\02. Monster\Gut_Monster\Gut_M_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CGut_Monster2.cpp">
+      <Filter>01. Obj\02. Monster\Gut_Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CGut_M2_Bullet.cpp">
+      <Filter>01. Obj\02. Monster\Gut_Monster\Gut_M_Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

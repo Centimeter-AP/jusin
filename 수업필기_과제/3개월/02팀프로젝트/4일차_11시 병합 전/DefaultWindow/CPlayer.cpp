@@ -10,6 +10,7 @@
 #include "CRolling_Cutter.h"
 #include "CAnimMgr.h"
 #include "CRolling_Cutter_P.h"
+#include "CSuper_Arm.h"
 
 CPlayer::CPlayer()
 	: m_bJump(false), m_fJumpPower(0.f), m_fTime(0.f)
@@ -23,7 +24,8 @@ CPlayer::CPlayer()
 	m_iBullet_Cooltime = 0;
 	m_ullLast_Bullet = 0;
 	m_iHp = 0;
-	m_eBullet_ID = BUL_NORMAL;
+	m_eBullet_ID = BUL_ARM;
+	m_bHoldBullet = false;
 }
 
 CPlayer::~CPlayer()
@@ -95,7 +97,6 @@ void CPlayer::Initialize_Animation()
 	ANIMATION_EDIT(L"player_damaged_right", 644 - 96 - 52, 83, t_size, 0);
 	ANIMATION_CREATE(L"player_damaged_left", this, t_size, 500, 1, L"Player_Left");
 	ANIMATION_EDIT(L"player_damaged_left", 96, 83, t_size, 0);
-
 }
 
 int CPlayer::Update()
@@ -222,6 +223,20 @@ void CPlayer::Create_Bullet()
 	case BUL_NORMAL:
 		CObjMgr::Get_Instance()->Add_Object(OBJ_BULLET, CAbstractFactory<CRolling_Cutter_P>::Create(m_tInfo.fX, m_tInfo.fY, m_eDir, this, nullptr));
 		break;
+	case BUL_ARM:
+		if (false == m_bHoldBullet)
+		{
+			if (!(CObjMgr::Get_Instance()->Get_List(OBJ_BULLET)->empty()))
+				break;
+			m_bHoldBullet = true;
+			CObjMgr::Get_Instance()->Add_Object(OBJ_BULLET, CAbstractFactory<CSuper_Arm>::Create(this));
+		}
+		else
+		{
+			m_bHoldBullet = false;
+		}
+		break;
+
 	default:
 		break;
 	}
@@ -238,6 +253,16 @@ void CPlayer::Set_Damaged(const DIRECTION& _eDir)
 	m_ullDamaged_Time = m_ullBlink = GetTickCount64();
 	m_eDir = _eDir;
 	m_iHp -= 10;
+}
+void CPlayer::Set_Fallen(const DIRECTION& _eDir)
+{
+	if (m_bDamaged) //데미지 2번들어올때
+		return;
+
+	m_fJumpPower = 0.f;
+	m_bDamaged = true;;
+	m_ullDamaged_Time = m_ullBlink = GetTickCount64();
+	m_eDir = _eDir;
 }
 
 void CPlayer::Key_Input()

@@ -21,6 +21,8 @@ public:
     void Create_Bullet(); // 篮己 内靛
     void Set_Damaged(const DIRECTION& _eDir); // 篮己内靛
 
+    void Set_Fallen(const DIRECTION& _eDir);
+
 public:
     void SetHeight(float _height) { m_pGroundHeight = _height; }//公搬
 

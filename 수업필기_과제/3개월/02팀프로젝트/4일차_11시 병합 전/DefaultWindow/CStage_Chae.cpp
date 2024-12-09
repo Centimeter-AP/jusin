@@ -10,6 +10,8 @@
 #include "CWall.h"
 #include "CScrollMgr.h"
 #include "Boss_GutsMan.h"
+#include "CGut_Monster1.h"
+#include "CGut_Monster2.h"
 
 CStage_Chae::CStage_Chae()
 {
@@ -31,6 +33,8 @@ void CStage_Chae::Initialize()
 		CObjMgr::Get_Instance()->Add_Object(OBJ_WALL, CAbstractFactory<CWall>::Create(float(50), float(i * 100), 0.f));
 	}
 	CObjMgr::Get_Instance()->Add_Object(OBJ_BOSS, CAbstractFactory<CBoss_GutsMan>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_BOSS, CAbstractFactory<CGut_Monster1>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_BOSS, CAbstractFactory<CGut_Monster2>::Create());
 
 
 }
@@ -59,7 +63,6 @@ void CStage_Chae::Release()
 		{
 			delete m_VecObj[i][j];
 		}
-
 	}
 }
 

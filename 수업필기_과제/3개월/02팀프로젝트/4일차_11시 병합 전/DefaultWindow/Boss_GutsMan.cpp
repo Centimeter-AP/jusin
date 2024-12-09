@@ -7,6 +7,8 @@
 #include "CAbstractFactory.h"
 #include "CSuper_Arm.h"
 #include "CObjMgr.h"
+#include "CAnimMgr.h"
+#include "CPlayer.h"
 // bullet이 key input 갖고
 // key input이 입력되면 발사?
 // 보스는?
@@ -14,10 +16,7 @@
 
 CBoss_GutsMan::CBoss_GutsMan()
 {
-	m_p_Boss_Bullet = nullptr;
 	ZeroMemory(&HP_INFO, sizeof(HP_INFO));
-	m_Boss_pPlayer = NULL;
-	m_ullLast_Fire = 0;
 
 	Bullet_X = 40;
 
@@ -25,7 +24,7 @@ CBoss_GutsMan::CBoss_GutsMan()
 	MAX_Hp = 10;
 
 	m_bJump = true;
-	m_fJumpPower = 10.f;
+	m_fJumpPower = 13.f;
 	m_fTime = 0.f;
 	m_enState = STATE_IDLE;
 	m_bHoldBullet = false;
@@ -36,9 +35,29 @@ CBoss_GutsMan::CBoss_GutsMan()
 
 void CBoss_GutsMan::Initialize()
 {
-	m_tInfo = { 500, 500, 42.f, 48.f };
+	m_tInfo = { 500, 550, 62.f, 64.f };
 	HP_INFO = { 200,200,200.f,200.f };
-	m_fSpeed = 3.f;
+	m_fSpeed = 1.f;
+	Initialize_Animation();
+}
+
+void CBoss_GutsMan::Initialize_Animation()
+{
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/boss_gut_all.bmp", L"Gut_Left");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Rock_Man/boss_gut_all_flip.bmp", L"Gut_Right");
+	FPOINT t_Size = { 62,64 };
+
+	ANIMATION_CREATE(L"gut_idle_left", this, t_Size, 500, 1, L"Gut_Left");
+	ANIMATION_CREATE(L"gut_hold_left", this, t_Size, 500, 1, L"Gut_Left");
+	ANIMATION_CREATE(L"gut_attack_left", this, t_Size, 500, 1, L"Gut_Left");
+	ANIMATION_CREATE(L"gut_jump_left", this, t_Size, 500, 1, L"Gut_Left");
+
+	ANIMATION_CREATE(L"gut_idle_right", this, t_Size, 500, 1, L"Gut_Right");
+	ANIMATION_CREATE(L"gut_hold_right", this, t_Size, 500, 1, L"Gut_Right");
+	ANIMATION_CREATE(L"gut_attack_right", this, t_Size, 500, 1, L"Gut_Right");
+	ANIMATION_CREATE(L"gut_jump_right", this, t_Size, 500, 1, L"Gut_Right");
+
+	
 
 }
 
@@ -60,20 +79,16 @@ int CBoss_GutsMan::Update()
 		if (m_bHoldBullet == false)
 		{
 			m_bHoldBullet = true;
-
 			CObjMgr::Get_Instance()->Add_Object(OBJ_BOSSBULLET, CAbstractFactory<CSuper_Arm>::Create(this));
 		}
 		m_iStateCooldown--;
 		break;
 	case CBoss_GutsMan::STATE_ATTACK:
-		//m_tInfo.fY += 0.1f;
 		if (m_bHoldBullet == true)
 			m_bHoldBullet = false;
-		//Attack();
 		m_iStateCooldown--;
 		break;
 	case CBoss_GutsMan::STATE_JUMP:
-		//m_tInfo.fY -= 0.1f;
 		Jump();
 		m_iStateCooldown--;
 		break;
@@ -86,19 +101,19 @@ int CBoss_GutsMan::Update()
 		switch (m_enState)
 		{
 		case CBoss_GutsMan::STATE_IDLE:
-			m_iStateCooldown = 40;
+			m_iStateCooldown = 100;
 			break;
 		case CBoss_GutsMan::STATE_MOVE:
-			m_iStateCooldown = 60;
+			m_iStateCooldown = 80;
 			break;
 		case CBoss_GutsMan::STATE_HOLD:
-			m_iStateCooldown = 30;
+			m_iStateCooldown = 36;
 			break;
 		case CBoss_GutsMan::STATE_ATTACK:
-			m_iStateCooldown = 60;
+			m_iStateCooldown = 100;
 			break;
 		case CBoss_GutsMan::STATE_JUMP:
-			m_iStateCooldown = 100;
+			m_iStateCooldown = 500;
 			break;
 		case CBoss_GutsMan::STATE_END:
 			break;
@@ -111,8 +126,8 @@ int CBoss_GutsMan::Update()
 		m_tInfo.fX = WINCX - 100;
 	else if (m_tInfo.fX <= 200)
 		m_tInfo.fX = 200;
-	if (m_tInfo.fY >= WINCY - 100)
-		m_tInfo.fY = WINCY - 100;
+	if (m_tInfo.fY >= 526)
+		m_tInfo.fY = 526;
 	Update_Rect();
 	return OBJ_NOEVENT;
 }
@@ -166,10 +181,6 @@ void CBoss_GutsMan::Release()
 {
 }
 
-void CBoss_GutsMan::Key_Input()
-{
-
-}
 
 CObj* CBoss_GutsMan::Create_Bullet()
 {
@@ -178,56 +189,20 @@ CObj* CBoss_GutsMan::Create_Bullet()
 	return nullptr;
 }
 
-void CBoss_GutsMan::Jumping()
-{
 
-	//if (m_bJump)
-	//{
-	//	// 포물선 계산에 따라 y 위치 변경
-	//	m_tInfo.fY -= (m_fJumpPower * sinf(45.f) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-	//	m_fTime += 0.2f;
-
-	//	if (bLineCol && (fY < m_tInfo.fY))
-	//	{
-	//		// 충돌 시 점프 종료
-	//		m_bJump = false;
-	//		m_fTime = 0.f;
-	//		m_tInfo.fY = fY;
-	//	}
-	//}
-	//else if (bLineCol)
-	//{
-	//	// 지면 충돌 시 위치 설정
-	//	m_tInfo.fY = fY;
-	//}
-	//else
-	//{
-	//	// 공중에서 중력 적용
-	//	m_tInfo.fY += 9.8f * m_fTime * m_fTime * 0.5f;
-	//	m_fTime += 0.2f;
-	//}
-}
 
 void CBoss_GutsMan::Jump()
 {
-	if (m_bJump)
-	{
-		// 포물선 계산에 따라 y 위치 변경
-		m_tInfo.fY -= (m_fJumpPower * sinf(45.f) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-		m_fTime += 0.2f;
+	m_tInfo.fY -= (m_fJumpPower * sinf(45.f) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
+	m_fTime += 0.03f;
 
-		if (500 <= m_tInfo.fY)
-		{
-			// 충돌 시 점프 종료
-			m_bJump = false;
-			m_fTime = 0.f;
-			m_tInfo.fY = 500.f;
-		}
-	}
-	else
+	if (m_tInfo.fY >= 526 )
 	{
-		// 공중에서 중력 적용
-		m_tInfo.fY = 500.f;
+		m_tInfo.fY = 526;
+		m_fTime = 0.f;
+		if (dynamic_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->GetJump() == false)
+			dynamic_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Set_Fallen(m_eDir == DIR_LEFT?DIR_RIGHT:DIR_LEFT);
+		m_iStateCooldown = 1;
 	}
 }
 //
