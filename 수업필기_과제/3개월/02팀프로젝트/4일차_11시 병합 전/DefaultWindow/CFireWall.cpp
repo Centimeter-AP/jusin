@@ -4,7 +4,7 @@
 
 void CFireWall::Initialize()
 {
-	m_tInfo = { 96, 432, 32, 96 };
+	m_tInfo = { 125, 532, 50, 150 };
 	m_fOrigY = m_tInfo.fY;
 	m_ullTime = GetTickCount64();
 }
@@ -12,7 +12,7 @@ void CFireWall::Initialize()
 int CFireWall::Update()
 {
 	if (m_bFrozen)
-		return OBJ_IGNORE;
+		return OBJ_DEAD;
 	if (!m_bIdle)
 	{
 		if (m_bMoveUp)

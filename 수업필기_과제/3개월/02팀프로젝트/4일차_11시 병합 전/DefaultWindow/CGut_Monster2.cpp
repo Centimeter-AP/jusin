@@ -18,6 +18,7 @@ CGut_Monster2::CGut_Monster2() : m_fAttackRange(0.f)
 
 	m_bJump = true;
 	m_fTime = 0.f;
+
 }
 
 void CGut_Monster2::Initialize()
@@ -39,12 +40,12 @@ void CGut_Monster2::Initialize_Animation()
 	ANIMATION_CREATE(L"gut2_idle_left", this, t_Size, 500, 1, L"Enemy_Left");
 	ANIMATION_EDIT(L"gut2_idle_left", 2, 74, t_Size, 0);
 	ANIMATION_CREATE(L"gut2_idle_right", this, t_Size, 500, 1, L"Enemy_Right");
-	ANIMATION_EDIT(L"gut2_idle_right", 1032 - 2 - 36, 74, t_Size, 0);
+	ANIMATION_EDIT(L"gut2_idle_right", 1032 - 2 - 48, 74, t_Size, 0);
 
 	ANIMATION_CREATE(L"gut2_attack_left", this, t_Size, 500, 1, L"Enemy_Left");
 	ANIMATION_EDIT(L"gut2_attack_left", 50, 74, t_Size, 0);
 	ANIMATION_CREATE(L"gut2_attack_right", this, t_Size, 500, 1, L"Enemy_Right");
-	ANIMATION_EDIT(L"gut2_attack_right", 1032 - 50 - 36, 74, t_Size, 0);
+	ANIMATION_EDIT(L"gut2_attack_right", 1032 - 50 - 48, 74, t_Size, 0);
 }
 
 int CGut_Monster2::Update()

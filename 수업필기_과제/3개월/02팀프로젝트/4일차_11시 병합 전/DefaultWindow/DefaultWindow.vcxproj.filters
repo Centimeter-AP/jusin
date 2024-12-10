@@ -324,6 +324,9 @@
     <ClInclude Include="CGut_M2_Bullet.h">
       <Filter>01. Obj\02. Monster\Gut_Monster\Gut_M_Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="CFireWall.h">
+      <Filter>01. Obj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -466,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="CGut_M2_Bullet.cpp">
       <Filter>01. Obj\02. Monster\Gut_Monster\Gut_M_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CFireWall.cpp">
+      <Filter>01. Obj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
