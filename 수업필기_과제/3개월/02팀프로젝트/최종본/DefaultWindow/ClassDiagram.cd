@@ -1,0 +1,718 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMainGame" Collapsed="true">
+    <Position X="85.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgQAAAAAAAAAAwBAAAAAAAAgAAABAAAAIBBQABAAAAA=</HashCode>
+      <FileName>CMainGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CObj" Collapsed="true">
+    <Position X="43.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQCYEgQAAsCSSEwQiIAMAgAAEMCBEoAIBDgBJIBIBA=</HashCode>
+      <FileName>CObj.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPlayer" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAgIEwAAQAQgBAgAAIAAAYgAAACEVBAIRIBsSI=</HashCode>
+      <FileName>CPlayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBullet" Collapsed="true">
+    <Position X="21.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQgAAIAAAAAAQAAAAAAgAAAAAAAEAAAQBBgABBAIEA=</HashCode>
+      <FileName>CBullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBullet_Normal" Collapsed="true">
+    <Position X="15.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAQAAAAEAAAAAAAAAAAAAABBAABAAAAA=</HashCode>
+      <FileName>CBullet_Normal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFire_Player_Bullet" Collapsed="true">
+    <Position X="17.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAQADAQAAAAAAAAAAAAAAAAAAABBAABAAAAA=</HashCode>
+      <FileName>CFire_Player_Bullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBullet_Monter_Elec" Collapsed="true">
+    <Position X="22.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAAAAEAQAAAAAAAEAAAIAAAAAAIBBAABAAAAw=</HashCode>
+      <FileName>CBullet_Monter_Elec.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMonster" Collapsed="true">
+    <Position X="56" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAAQAAAAAAAAAAAAAAAAAAABBAABIAAAA=</HashCode>
+      <FileName>CMonster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSilver_Mob2" Collapsed="true">
+    <Position X="60.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAgQAAAAAAAQAGAAEAAABAAJBQABAAIBg=</HashCode>
+      <FileName>CSilver_Mob2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSilver_Mob1" Collapsed="true">
+    <Position X="62.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAgQAAAAAAAQAGAAAAQAIAABBQABAAAFA=</HashCode>
+      <FileName>CSilver_Mob1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMonster_1" Collapsed="true">
+    <Position X="65" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAABAQAAAAAAAAACAAAAAAAAABJAABAIAAA=</HashCode>
+      <FileName>CMonster_1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMonster_2" Collapsed="true">
+    <Position X="47" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABBAAAAABAQAAAAAAAAAQAAAAAAAAABJAIBAAAAA=</HashCode>
+      <FileName>CMonster_2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CEggMonster" Collapsed="true">
+    <Position X="49.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAABAgAhAAQgACAQAACAAAACAAAAAYBBAQBIAAAw=</HashCode>
+      <FileName>CEggMonster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRepeat_Monster" Collapsed="true">
+    <Position X="51.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAgBAAAYQAEAABACAAAAAAAAAAYBBAQBAAAAA=</HashCode>
+      <FileName>CRepeat_Monster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CJumpingMonster" Collapsed="true">
+    <Position X="53.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAhAQAAAAAAAAgAAAEIAAAAIBBApBAAIAA=</HashCode>
+      <FileName>JumpingMonster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPenguin" Collapsed="true">
+    <Position X="56" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQJAAAAAAAAAQAAACQAAAAAAAAAAQAAABBAABAAAAA=</HashCode>
+      <FileName>Penguin.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMouse" Collapsed="true">
+    <Position X="38" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAAAQAAAAAAAAAAAAAAAAAAABBAABAAAAQ=</HashCode>
+      <FileName>CMouse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CShield" Collapsed="true">
+    <Position X="69.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAABBAABAAQAA=</HashCode>
+      <FileName>CShield.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBlock" Collapsed="true">
+    <Position X="76.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAgQAIAAAAAAgAAAIAAgAAABBAABAAAAA=</HashCode>
+      <FileName>Block.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBlock_Ice" Collapsed="true">
+    <Position X="78.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Block_Ice.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBlock_Elec" Collapsed="true">
+    <Position X="80.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Block_Elec.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBlock_Cut" Collapsed="true">
+    <Position X="71.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Block_Cut.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBlock_Gut" Collapsed="true">
+    <Position X="74" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Block_Gut.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBlock_Fire" Collapsed="true">
+    <Position X="76.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Block_Fire.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CWall" Collapsed="true">
+    <Position X="33.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAAAQAAAAAAAAAAAAAAAAAAABBAABAAEAA=</HashCode>
+      <FileName>CWall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBoss_FireMan" Collapsed="true">
+    <Position X="35.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>yASAAAggEAkBhQAEAIAEAAIAAAIAAAAAABBACFogAQA=</HashCode>
+      <FileName>Boss_FireMan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFire_Storm" Collapsed="true">
+    <Position X="20" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAIAABAQAAAAAAAAAAAAAAAABAABBAABAAAAA=</HashCode>
+      <FileName>CFire_Storm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBoss_ElecMan" Collapsed="true">
+    <Position X="40.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAwgAAkAQAAAgQAAAQQAAgAAAAAAAQAAABBABBoAAAw=</HashCode>
+      <FileName>CBoss_ElecMan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBullet_Elec" Collapsed="true">
+    <Position X="24.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAIAAAAAAAQAAAAQAAgAAAIAAAAAAABBAABAAAAA=</HashCode>
+      <FileName>CBullet_Elec.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBoss_CutMan" Collapsed="true">
+    <Position X="83" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAEABAgYwAACAAAAIGBAAAQAAoARFAAZAAhBA=</HashCode>
+      <FileName>CBoss_CutMan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRolling_Cutter" Collapsed="true">
+    <Position X="29" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAAgQAICAAAAgAGAgAASAIAAJBQABAAABA=</HashCode>
+      <FileName>CRolling_Cutter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRolling_Cutter_P" Collapsed="true">
+    <Position X="29" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAEAAQAAAAAAAAAAAAAAAAAAAYBAAAAAAAA=</HashCode>
+      <FileName>CRolling_Cutter_P.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBoss_IceMan" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAIAAhAQAAAAAAAAgAAAEMAAAAIBBABBAAIAA=</HashCode>
+      <FileName>Boss_IceMan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CIce_Slasher" Collapsed="true">
+    <Position X="11" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAIBBAABAAAAA=</HashCode>
+      <FileName>CIce_Slasher.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAbstractFactory&lt;T&gt;" Collapsed="true">
+    <Position X="85.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAEgAAAAAAAAAAAAAEAAAAAAAAACAAA=</HashCode>
+      <FileName>CAbstractFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCollisionMgr" Collapsed="true">
+    <Position X="85.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgACCAAAAAAAAAACAAgQAAAQQAABQEAA=</HashCode>
+      <FileName>CCollisionMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CObjMgr" Collapsed="true">
+    <Position X="89" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAEAAAACIACAAAEAQAQAAQQBBgABAEAAQ=</HashCode>
+      <FileName>CObjMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLineMgr" Collapsed="true">
+    <Position X="92.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAIAIAAAAEAAAAAAAAAAAAAAAQEABAEAAw=</HashCode>
+      <FileName>CLineMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLine" Collapsed="true">
+    <Position X="90.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAABIAAAAAQBAAAAAAAAA=</HashCode>
+      <FileName>CLine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKeyMgr" Collapsed="true">
+    <Position X="89" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAQAAAAAAAAAABEAAAEAAUAAAAEAAQ=</HashCode>
+      <FileName>CKeyMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CScrollMgr" Collapsed="true">
+    <Position X="92.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAgACAAQAAwAAAgIAACAAAQAAAQAAAAEgQw=</HashCode>
+      <FileName>CScrollMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDummyMgr" Collapsed="true">
+    <Position X="87.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAACAAAAAAAAAAAAAAACAQgABAAAAQ=</HashCode>
+      <FileName>DummyMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBmpMgr" Collapsed="true">
+    <Position X="92.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAEAAAAAIAAAAAAgAAAAAAARAABAEAAQ=</HashCode>
+      <FileName>CBmpMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMyBmp" Collapsed="true">
+    <Position X="87.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAgAAAAAIAAgAAAAgAAAAAAAAAAAAAAAAlAAAAA=</HashCode>
+      <FileName>CMyBmp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBlockMgr" Collapsed="true">
+    <Position X="90.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIACAAAIAAgQAABAAEEAAAAAgAEAAgQBVAABAEAAQ=</HashCode>
+      <FileName>BlockMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSceneMgr" Collapsed="true">
+    <Position X="90.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAACAAAAAgAAAAIAAAAABZAAAAMAAQ=</HashCode>
+      <FileName>CSceneMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAnimation" Collapsed="true">
+    <Position X="87.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACAAAAoQAAAQgAAAAAAAEAAABAABBQABABABA=</HashCode>
+      <FileName>CAnimation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAnimMgr" Collapsed="true">
+    <Position X="89" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAIAAAAAAAAAAAABgAAAABRAABAEIAQ=</HashCode>
+      <FileName>CAnimMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CWeaponsMenuMgr" Collapsed="true">
+    <Position X="87.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAEAACACCAAAAAgAOBAQAgAAAQBwgABEEIAQ=</HashCode>
+      <FileName>CWeaponsMenuMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CScene" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQAAAAAQAAAAAAIAAABAAAQAAAABAAABAAAAg=</HashCode>
+      <FileName>CScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CScene_Start" Collapsed="true">
+    <Position X="5.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgwAAQAAAABAAQQAIAAAIAAAAAAAAAAAABBAABAAAAQ=</HashCode>
+      <FileName>CScene_Start.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStage_Hong" Collapsed="true">
+    <Position X="7.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAIAAQAAAAAAAAABAAABAgAAA=</HashCode>
+      <FileName>CStage_Hong.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStage_Silver" Collapsed="true">
+    <Position X="10" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAABQAAAAQAAAAAAIAAAABAAAAAAABAAABAAAAA=</HashCode>
+      <FileName>CStage_Silver.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStage_Hero" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAIAAAAIAAAQAAABAAABAAAAA=</HashCode>
+      <FileName>CStage_Hero.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStage_Chae" Collapsed="true">
+    <Position X="1" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAQAAAAAAIAAAAAAAAABAABAQABAAAAA=</HashCode>
+      <FileName>CStage_Chae.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStage_Moo" Collapsed="true">
+    <Position X="3.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAIQAAAAAAAAAACBAAABAAAAA=</HashCode>
+      <FileName>CStage_Moo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBossHpBar" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAIAAAAAABAAAgAAAEAABBAAFR3AgA=</HashCode>
+      <FileName>CBossHpBar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CHpBar" Collapsed="true">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQgAAAAAAABAQAAAAAAAAAAAAAAAAAAADBAAFB3AAA=</HashCode>
+      <FileName>CHpBar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUI" Collapsed="true">
+    <Position X="1.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAAAAAAQEAAAAAAAAAQAAAAAAAABDBABAAAAA=</HashCode>
+      <FileName>CUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUIMgr" Collapsed="true">
+    <Position X="85.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAAAAAAAAAAQAACAAAAAAAAAhRAABAEAAQ=</HashCode>
+      <FileName>CUIMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBoss_GutsMan" Collapsed="true">
+    <Position X="42.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAgAAAQAAABAEAIAIAIMACIAAABBAgRIgAAA=</HashCode>
+      <FileName>Boss_GutsMan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFireWall" Collapsed="true">
+    <Position X="58.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAAAAAAQAAAAAAAAAAAACBACAAABBQBBAAYAA=</HashCode>
+      <FileName>CFireWall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGut_M1_Bullet" Collapsed="true">
+    <Position X="26.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAEAQRAAABAAAAAAAAIAAAAAABBgABAAAAA=</HashCode>
+      <FileName>CGut_M1_Bullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGut_M2_Bullet" Collapsed="true">
+    <Position X="31.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACEAQQAAABAAAAAABAIAAAAAABBAABAAAAA=</HashCode>
+      <FileName>CGut_M2_Bullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGut_Monster1" Collapsed="true">
+    <Position X="67.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAgAQAEAAQAAABAABIAIAAIAAAAAQBBAgVAgAAA=</HashCode>
+      <FileName>CGut_Monster1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGut_Monster2" Collapsed="true">
+    <Position X="44.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAgAQAEAAQAAABCAAIAIgAIAAAAAABBAgVAgAAA=</HashCode>
+      <FileName>CGut_Monster2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSuper_Arm" Collapsed="true">
+    <Position X="13.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAEAQQAAAAAAAAQAAAIEAAAAQBBAABAAAAA=</HashCode>
+      <FileName>CSuper_Arm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CEffect" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAgAAAAAQAABAAAAAAAAAAFAAAAABBAgBAAAAA=</HashCode>
+      <FileName>CEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="tagInfo" Collapsed="true">
+    <Position X="13.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAgAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagLinePoint" Collapsed="true">
+    <Position X="1.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAACAAAAAQA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagLine" Collapsed="true">
+    <Position X="14.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagBoxPoint" Collapsed="true">
+    <Position X="13.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagFinder" Collapsed="true">
+    <Position X="87.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="DeleteMap" Collapsed="true">
+    <Position X="85.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagBox" Collapsed="true">
+    <Position X="9.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAABAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagFloatPoint" Collapsed="true">
+    <Position X="5.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAiAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagAniInfo" Collapsed="true">
+    <Position X="1.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAQAAAAAAAAAAAAAQAAAAAAAAAAAQAAAIAAIA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagImage" Collapsed="true">
+    <Position X="10.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="tagImageInfo" Collapsed="true">
+    <Position X="6.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAwAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="INFO" Collapsed="true">
+    <Position X="13.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LINEPOINT" Collapsed="true">
+    <Position X="1.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LINE" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BOXPOINT" Collapsed="true">
+    <Position X="13.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BOX" Collapsed="true">
+    <Position X="9.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="FPOINT" Collapsed="true">
+    <Position X="5.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ANINFO" Collapsed="true">
+    <Position X="1.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="IMAGE" Collapsed="true">
+    <Position X="10.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="IMAGEINFO" Collapsed="true">
+    <Position X="6.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="BULLET_ID" Collapsed="true">
+    <Position X="90.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgEAIAAAgAAAAIAAgAAAAIAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DIRECTION" Collapsed="true">
+    <Position X="85.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQAAAAAAAAAAAAAoAAAAAAAAgAAAAAChAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DRAWPOINT" Collapsed="true">
+    <Position X="89" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DRAWDIR" Collapsed="true">
+    <Position X="87.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAQAAAAAAAAAAAAABAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BEHAVOR_STATE" Collapsed="true">
+    <Position X="85.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAEgAAAAAAAgAAAgAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="StateType" Collapsed="true">
+    <Position X="89" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAACAAQAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BLOCKTYPE" Collapsed="true">
+    <Position X="87.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABABAAAAAAAAAAAAAEEAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BOSSTYPE" Collapsed="true">
+    <Position X="89" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAIAAAEAAACAABAAAAAAAAAACA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="OBJID" Collapsed="true">
+    <Position X="85.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAQAACwAECAAAABQEAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GROUP_TYPE" Collapsed="true">
+    <Position X="90.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAABAAAAAAAAEAAAICAAgAECAAAAAQAAAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SCENE_TYPE" Collapsed="true">
+    <Position X="87.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAYCAAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="UI_TYPE" Collapsed="true">
+    <Position X="90.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Define.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Check_Bullet" Collapsed="true">
+    <Position X="92.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACQAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CBullet.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MonsterState" Collapsed="true">
+    <Position X="92.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAIAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMonster_2.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
