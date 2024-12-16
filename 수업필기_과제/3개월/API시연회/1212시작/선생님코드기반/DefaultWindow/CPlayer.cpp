@@ -7,12 +7,13 @@
 #include "CKeyMgr.h"
 #include "CScrollMgr.h"
 #include "CBmpMgr.h"
+#include "CSoundMgr.h"
 
-CPlayer::CPlayer() 
-: m_bJump(false), m_fJumpPower(0.f), m_fTime(0.f), m_dwTempTick(0)
+float	g_fVolume(1.f);
 
+CPlayer::CPlayer()
+: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f)
 {
-	ZeroMemory(&m_tPosin, sizeof(POINT));
 }
 
 CPlayer::~CPlayer()
@@ -22,16 +23,16 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_tInfo  = { WINCX * 0.5f + 24.f, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
+	m_tInfo = { WINCX * 0.5f + 24.f + WINCX % TILECX, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
 	m_fSpeed = 48.f;
 	m_fDistance = 100.f;
 
-	m_fJumpPower = 20.f;
 
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_head_left_.bmp",  L"Player_Head_L");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_head_right.bmp",  L"Player_Head_R");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_armor_left_.bmp",  L"Player_Armor_L");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_armor_right.bmp",  L"Player_Armor_R");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_head_left_.bmp", L"Player_Head_L");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_head_right.bmp", L"Player_Head_R");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_armor_left_.bmp", L"Player_Armor_L");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_armor_right.bmp", L"Player_Armor_R");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_Shadow.bmp", L"Player_Shadow");
 
 	m_pImgKey = L"Player_Head_L";
 	m_eCurState = IDLE;
@@ -45,10 +46,9 @@ void CPlayer::Initialize()
 	m_dwTempTick = GetTickCount();
 
 	m_eRender = RENDER_GAMEOBJECT;
+	//CSoundMgr::Get_Instance()->PlayBGM(L"Title.mp3", g_fVolume);
+
 }
-
-
-
 
 int CPlayer::Update()
 {
@@ -73,36 +73,50 @@ void CPlayer::Render(HDC hDC)
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 	HDC		hMemDChead = CBmpMgr::Get_Instance()->Find_Image(L"Player_Head_R");
 	HDC		hMemDCarmor = CBmpMgr::Get_Instance()->Find_Image(L"Player_Armor_R");
+	HDC		hMemDCshadow = CBmpMgr::Get_Instance()->Find_Image(L"Player_Shadow");				// 그림자 용 xy 좌표 따로?
+
 	if (m_eDir == DIR_LEFT)
 	{
 		hMemDChead = CBmpMgr::Get_Instance()->Find_Image(L"Player_Head_L");
 		hMemDCarmor = CBmpMgr::Get_Instance()->Find_Image(L"Player_Armor_L");
 	}
-	
-	GdiTransparentBlt(hDC,			// 복사 받을 DC
-		m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
-		m_tRect.top + iScrollY,
-		(int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
+
+	GdiTransparentBlt(hDC,
+		m_tRect.left + iScrollX,
+		m_tRect.top + iScrollY + 4, // 그림자 좀만 밑으로 지게
+		(int)m_tInfo.fCX,
 		(int)m_tInfo.fCY,
-		hMemDCarmor,						// 복사할 이미지 DC	
-		(int)m_tInfo.fCX * m_tFrame.iFrameStart,							// 비트맵 출력 시작 좌표(Left, top)
-		(int)m_tInfo.fCY * m_tFrame.iMotion,
-		PLAYERCX,			// 복사할 이미지의 가로, 세로
-		PLAYERCY,			// 복사할 이미지의 가로, 세로
-		RGB(255, 0, 255));		// 제거할 색상
+		hMemDCshadow,
+		0,
+		0,
+		PLAYERCX,
+		PLAYERCY,
+		RGB(255, 0, 255));
 
-
-	GdiTransparentBlt(hDC,			// 복사 받을 DC
-		m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
+	GdiTransparentBlt(hDC,
+		m_tRect.left + iScrollX,
 		m_tRect.top + iScrollY,
-		PLAYERCX,			// 복사 받을 이미지의 가로, 세로
+		(int)m_tInfo.fCX,
+		(int)m_tInfo.fCY,
+		hMemDCarmor,
+		(int)m_tInfo.fCX * m_tFrame.iFrameStart,
+		(int)m_tInfo.fCY * m_tFrame.iMotion,
+		PLAYERCX,
 		PLAYERCY,
-		hMemDChead,						// 복사할 이미지 DC	
-		PLAYERCX * m_tFrame.iFrameStart,			// 비트맵 출력 시작 좌표(Left, top)
+		RGB(255, 0, 255));
+
+
+	GdiTransparentBlt(hDC,					// 복사 받을 DC
+		m_tRect.left + iScrollX,			// 복사 받을 위치 좌표 X, Y	
+		m_tRect.top + iScrollY,
+		PLAYERCX,							// 복사 받을 이미지의 가로, 세로
+		PLAYERCY,
+		hMemDChead,							// 복사할 이미지 DC	
+		PLAYERCX * m_tFrame.iFrameStart,	// 비트맵 출력 시작 좌표(Left, top)
 		PLAYERCY * m_tFrame.iMotion,
-		PLAYERCX,			// 복사할 이미지의 가로, 세로
+		PLAYERCX,							// 복사할 이미지의 가로, 세로
 		PLAYERCY,
-		RGB(255, 0, 255));		// 제거할 색상
+		RGB(255, 0, 255));					// 제거할 색상
 }
 
 void CPlayer::Release()
@@ -123,7 +137,6 @@ void CPlayer::Key_Input()
 			m_tInfo.fX -= m_fSpeed;
 			m_eDir = DIR_LEFT;
 			m_tFrame.iFrameStart = 0;
-			m_eCurState = WALK;
 		}
 
 		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
@@ -131,45 +144,48 @@ void CPlayer::Key_Input()
 			m_tInfo.fX += m_fSpeed;
 			m_eDir = DIR_RIGHT;
 			m_tFrame.iFrameStart = 0;
-			m_eCurState = WALK;
 		}
 
 		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
 		{
 			m_tInfo.fY -= m_fSpeed;
+			m_eDir = DIR_UP;
 			m_tFrame.iFrameStart = 0;
 		}
 
 		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
 		{
 			m_tInfo.fY += m_fSpeed;
+			m_eDir = DIR_DOWN;
 			m_tFrame.iFrameStart = 0;
 		}
 		m_dwTempTick = GetTickCount();
+	}
+	if (CKeyMgr::Get_Instance()->Key_Up(VK_SPACE))
+	{
+		CSoundMgr::Get_Instance()->PlaySound(L"Title.mp3", SOUND_EFFECT, g_fVolume);
 	}
 }
 
 void CPlayer::Jumping()
 {
-	float	fY(0.f);
-
-	bool	bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.fX, &fY);
-
-	if (m_bJump)
+	if (player == moving) // 실제로 타일을 이동했는가
 	{
-		m_tInfo.fY -= (m_fJumpPower * sinf(45.f) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-		m_fTime += 0.2f;
-
-		if (bLineCol && (fY < m_tInfo.fY))
+		switch (m_eDir)
 		{
-			m_bJump = false;
-			m_fTime = 0.f;
-			m_tInfo.fY = fY;
+		case DIR_LEFT:
+			//Left == Right
+			break;
+		case DIR_RIGHT:
+			break;
+		case DIR_UP:
+
+			break;
+		case DIR_DOWN:
+			break;
+		default:
+			break;
 		}
-	}
-	else if (bLineCol)
-	{
-		m_tInfo.fY = fY;
 	}
 }
 
@@ -201,11 +217,7 @@ void CPlayer::Offset()
 
 CObj* CPlayer::Create_Shield()
 {
-	CObj* pShield = CAbstractFactory<CShield>::Create();
-	
-	pShield->Set_Target(this);
-
-	return pShield;
+	return nullptr;
 }
 
 void CPlayer::Change_Motion()
@@ -246,13 +258,6 @@ void CPlayer::Change_Motion()
 			m_tFrame.dwTime = GetTickCount();
 			break;
 
-		case CPlayer::DEAD:
-			m_tFrame.iFrameStart = 0;
-			m_tFrame.iFrameEnd = 3;
-			m_tFrame.iMotion = 4;
-			m_tFrame.dwSpeed = 200;
-			m_tFrame.dwTime = GetTickCount();
-			break;	
 		}
 
 		m_ePreState = m_eCurState;

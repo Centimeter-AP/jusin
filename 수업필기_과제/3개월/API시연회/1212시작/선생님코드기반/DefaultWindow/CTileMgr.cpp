@@ -22,11 +22,11 @@ void CTileMgr::Initialize()
 		for (int j = 0; j < TILEX; ++j)
 		{
 			if (j == 0)
-				float fX = (float)(j * TILECX) + (TILECX >> 1) + 2;
-			float fX = (float)(j * TILECX) + (TILECX >> 1) + 4;
+				float fX = (float)(j * TILECX) + (TILECX >> 1);
+			float fX = (float)(j * TILECX) + (TILECX >> 1);
 			if (i == 0)
-				float fY = (float)(i * TILECY) + (TILECY >> 1) + 2;
-			float fY = (float)(i * TILECY) + (TILECY >> 1) + 4;
+				float fY = (float)(i * TILECY) + (TILECY >> 1);
+			float fY = (float)(i * TILECY) + (TILECY >> 1);
 
 			CObj* pTile = CAbstractFactory<CTile>::Create(fX, fY);
 			m_vecTile.push_back(pTile);

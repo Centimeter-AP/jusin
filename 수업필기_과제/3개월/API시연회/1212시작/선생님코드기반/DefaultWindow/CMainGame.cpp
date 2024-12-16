@@ -11,6 +11,8 @@
 #include "CBmpMgr.h"
 #include "CSceneMgr.h"
 #include "CTileMgr.h"
+#include "CSoundMgr.h"
+
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount()), m_iFPS(0)
@@ -27,9 +29,10 @@ void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 	
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Back.bmp", L"Back");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Title/Buffer_Back.bmp", L"Back");
 
 	CSceneMgr::Get_Instance()->Set_Scene(SC_LOGO);
+	CSoundMgr::Get_Instance()->Initialize();
 
 }
 
@@ -84,5 +87,6 @@ void CMainGame::Release()
 	CLineMgr::Destroy_Instance();
 	CSceneMgr::Destroy_Instance();
 	CObjMgr::DestroyInstance();
+	CSoundMgr::Destroy_Instance();
 	ReleaseDC(g_hWnd, m_hDC);
 }

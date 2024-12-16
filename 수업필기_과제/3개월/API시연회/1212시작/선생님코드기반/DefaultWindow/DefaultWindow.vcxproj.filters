@@ -103,6 +103,15 @@
     <Filter Include="01. Obj\06. Wall">
       <UniqueIdentifier>{7b7b07ce-afee-4b9f-bdd0-539504725fce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Design\BeatMgr">
+      <UniqueIdentifier>{3e83505b-44c0-4b14-9ae1-303e2f78d278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Design\UIMgr">
+      <UniqueIdentifier>{23b8657e-8dab-416c-b666-c20d9b8212b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Design\SoundMgr">
+      <UniqueIdentifier>{a4957904-a2f0-4954-842e-8bb609f3820b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -207,6 +216,18 @@
     <ClInclude Include="CAnimation.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CWall.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CBeatMgr.h">
+      <Filter>03. Design\BeatMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMgr.h">
+      <Filter>03. Design\UIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundMgr.h">
+      <Filter>03. Design\SoundMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -295,6 +316,18 @@
     </ClCompile>
     <ClCompile Include="CAnimation.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CWall.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CBeatMgr.cpp">
+      <Filter>03. Design\BeatMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMgr.cpp">
+      <Filter>03. Design\UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundMgr.cpp">
+      <Filter>03. Design\SoundMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

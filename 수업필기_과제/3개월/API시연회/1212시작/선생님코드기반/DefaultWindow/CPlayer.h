@@ -29,17 +29,18 @@ private:
     void        Change_Motion();
 
 private:
-    POINT               m_tPosin;
+    float       m_fJumpX;
+    float       m_fJumpY;
 
-    bool                m_bJump;
+    float       m_fTime;
 
-    float               m_fJumpPower;
-    float               m_fTime;
+    STATE       m_eCurState;
+    STATE       m_ePreState;
 
-    STATE               m_eCurState;
-    STATE               m_ePreState;
+    DWORD       m_dwTempTick;
 
-    DWORD               m_dwTempTick;
+    bool        m_bBeatCorrect;
+    bool        m_bTemp;
 
 };
 
