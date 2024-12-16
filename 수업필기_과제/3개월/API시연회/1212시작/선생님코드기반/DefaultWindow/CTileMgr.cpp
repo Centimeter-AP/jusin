@@ -67,7 +67,8 @@ void CTileMgr::Render(HDC hDC)
 
 			if (0 > iIndex || m_vecTile.size() <= (size_t)iIndex)
 				continue;
-
+			if (iIndex %2)
+				dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(1);
 			m_vecTile[iIndex]->Render(hDC);
 		}
 	}

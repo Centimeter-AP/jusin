@@ -216,9 +216,6 @@
     <ClInclude Include="CAnimation.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CWall.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CBeatMgr.h">
       <Filter>03. Design\BeatMgr</Filter>
     </ClInclude>
@@ -227,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="CSoundMgr.h">
       <Filter>03. Design\SoundMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CWall.h">
+      <Filter>01. Obj\06. Wall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -317,9 +317,6 @@
     <ClCompile Include="CAnimation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CWall.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CBeatMgr.cpp">
       <Filter>03. Design\BeatMgr</Filter>
     </ClCompile>
@@ -328,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="CSoundMgr.cpp">
       <Filter>03. Design\SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CWall.cpp">
+      <Filter>01. Obj\06. Wall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

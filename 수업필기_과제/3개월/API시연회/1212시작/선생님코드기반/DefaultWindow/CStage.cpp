@@ -6,6 +6,7 @@
 #include "CAbstractFactory.h"
 #include "CScrollMgr.h"
 #include "CTileMgr.h"
+#include "CBeatMgr.h"
 
 CStage::CStage()
 {
@@ -34,6 +35,7 @@ void CStage::Initialize()
 
 int CStage::Update()
 {
+	CBeatMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 	CTileMgr::Get_Instance()->Update();
 

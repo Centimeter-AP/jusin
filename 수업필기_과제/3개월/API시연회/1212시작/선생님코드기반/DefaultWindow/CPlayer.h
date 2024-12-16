@@ -31,6 +31,10 @@ private:
 private:
     float       m_fJumpX;
     float       m_fJumpY;
+    float       m_fJumpPower;
+    float       m_OrigfX;
+    float       m_OrigfY;
+    bool        m_bMove;
 
     float       m_fTime;
 
@@ -38,9 +42,15 @@ private:
     STATE       m_ePreState;
 
     DWORD       m_dwTempTick;
-
+    
     bool        m_bBeatCorrect;
     bool        m_bTemp;
+
+    vector<CObj*>*	m_pvecTile;
+    int       m_iCurTileIdx;
+    int       m_iHeadTileIdx;
+
+    
 
 };
 

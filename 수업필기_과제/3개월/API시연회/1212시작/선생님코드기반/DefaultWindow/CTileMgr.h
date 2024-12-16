@@ -16,6 +16,7 @@ public:
 	void Release() ;
 
 	void		Picking_Tile(POINT pt, int iDrawID, int iOption);
+	vector<CObj*>* Get_TileVec() { return &m_vecTile; }
 
 	void		Save_Tile();
 	void		Load_Tile();
