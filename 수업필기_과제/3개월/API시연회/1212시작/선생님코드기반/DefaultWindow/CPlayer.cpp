@@ -123,7 +123,7 @@ void CPlayer::Render(HDC hDC)
 			RGB(255, 0, 255));
 	}
 	else
-	{
+	{// 좌우 이동 때 그림자 y축 이동 제거 
 		GdiTransparentBlt(hDC,
 			m_tRect.left + iScrollX,
 			m_OrigfY - (m_tInfo.fCY * 0.5f) + iScrollY + 4, // 그림자 좀만 밑으로 지게
@@ -175,7 +175,6 @@ void CPlayer::Key_Input()
 
 	if (m_bBeatCorrect)
 	{
-
 		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
 		{
 			m_eDir = DIR_LEFT;
@@ -183,6 +182,7 @@ void CPlayer::Key_Input()
 			--m_iHeadTileIdx;
 			m_bMove = true;
 			m_tFrame.iFrameStart = 0;
+			CTileMgr::Get_Instance()->Tile_Shine();
 
 #ifdef  _DEBUG
 
@@ -199,6 +199,7 @@ void CPlayer::Key_Input()
 			++m_iHeadTileIdx;
 			m_bMove = true;
 			m_tFrame.iFrameStart = 0;
+			CTileMgr::Get_Instance()->Tile_Shine();
 
 #ifdef  _DEBUG
 
@@ -215,6 +216,7 @@ void CPlayer::Key_Input()
 			m_iHeadTileIdx - TILEX;
 			m_bMove = true;
 			m_tFrame.iFrameStart = 0;
+			CTileMgr::Get_Instance()->Tile_Shine();
 
 #ifdef  _DEBUG
 
@@ -232,6 +234,7 @@ void CPlayer::Key_Input()
 			m_bMove = true;
 			m_tFrame.iFrameStart = 0;
 
+			CTileMgr::Get_Instance()->Tile_Shine();
 #ifdef  _DEBUG
 
 			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
@@ -357,39 +360,45 @@ void CPlayer::Jumping()
 void CPlayer::Offset()
 {
 
-	//int		iOffSetminX = 100;
-	//int		iOffSetmaxX = 700;
-
-	//int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-
-	//if (iOffSetminX > m_tInfo.fX + iScrollX)
-	//	CScrollMgr::Get_Instance()->Set_ScrollX(m_fSpeed);
-
-	//if (iOffSetmaxX < m_tInfo.fX + iScrollX)
-	//	CScrollMgr::Get_Instance()->Set_ScrollX(-m_fSpeed);
-
-	//int		iOffSetminY = 100;
-	//int		iOffSetmaxY = 500;
-
-	//int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
-
-	//if (iOffSetminY > m_tInfo.fY + iScrollY)
-	//	CScrollMgr::Get_Instance()->Set_ScrollY(m_fSpeed);
-
-	//if (iOffSetmaxY < m_tInfo.fY + iScrollY)
-	//	CScrollMgr::Get_Instance()->Set_ScrollY(-m_fSpeed);
-
-
-
-	int		iOffSetX = WINCX >> 1;
+	int		iOffSetminX = (WINCX >> 1) - 10;
+	int		iOffSetmaxX = (WINCX >> 1) + 10;
 
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 
-	if (iOffSetX > m_tInfo.fX + iScrollX)
-		CScrollMgr::Get_Instance()->Set_ScrollX(m_fSpeed);
+	if (m_eDir == DIR_RIGHT || m_eDir == DIR_LEFT)
+	{
+		if (iOffSetminX > m_tInfo.fX + iScrollX)
+			CScrollMgr::Get_Instance()->Set_ScrollX(m_fSpeed);
 
-	if (iOffSetX < m_tInfo.fX + iScrollX)
-		CScrollMgr::Get_Instance()->Set_ScrollX(-m_fSpeed);
+		if (iOffSetmaxX < m_tInfo.fX + iScrollX)
+			CScrollMgr::Get_Instance()->Set_ScrollX(-m_fSpeed);
+	}
+
+	int		iOffSetminY = (WINCY >> 1) - 10;
+	int		iOffSetmaxY = (WINCY >> 1) + 10;
+	
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	if (m_eDir == DIR_UP || m_eDir == DIR_DOWN)
+	{
+		if (iOffSetminY > m_tInfo.fY + iScrollY)
+			CScrollMgr::Get_Instance()->Set_ScrollY(m_fSpeed);
+
+		if (iOffSetmaxY < m_tInfo.fY + iScrollY)
+			CScrollMgr::Get_Instance()->Set_ScrollY(-m_fSpeed);
+	}
+
+
+
+	//int		iOffSetX = WINCX >> 1;
+
+	//int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+
+	//if (iOffSetX > m_tInfo.fX + iScrollX)
+	//	CScrollMgr::Get_Instance()->Set_ScrollX(m_fSpeed);
+
+	//if (iOffSetX < m_tInfo.fX + iScrollX)
+	//	CScrollMgr::Get_Instance()->Set_ScrollX(-m_fSpeed);
 }
 
 CObj* CPlayer::Create_Shield()

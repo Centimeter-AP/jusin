@@ -1,7 +1,10 @@
 #include "pch.h"
 #include "CObj.h"
 
-CObj::CObj() : m_fSpeed(0.f), m_eDir(DIR_END), m_bDead(false), m_fAngle(0.f), m_fDistance(0.f), m_pTarget(nullptr), m_pImgKey(nullptr)
+CObj::CObj()
+	: m_fSpeed(0.f), m_eDir(DIR_END), m_bDead(false), m_fAngle(0.f)
+	, m_fDistance(0.f), m_pTarget(nullptr), m_pImgKey(nullptr)
+	, m_iHP(0), m_iArmor(0)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	ZeroMemory(&m_tRect, sizeof(RECT));

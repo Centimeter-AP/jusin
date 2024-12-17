@@ -25,5 +25,6 @@ public:
 private:
 	int		m_iDrawID;
 	int		m_iOption;
+	
 };
 

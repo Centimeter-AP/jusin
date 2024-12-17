@@ -100,9 +100,6 @@
     <Filter Include="정리용\03. Mouse">
       <UniqueIdentifier>{d6dccbdc-b8ff-4078-9255-600f278d61ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\06. Wall">
-      <UniqueIdentifier>{7b7b07ce-afee-4b9f-bdd0-539504725fce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Design\BeatMgr">
       <UniqueIdentifier>{3e83505b-44c0-4b14-9ae1-303e2f78d278}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,15 @@
     </Filter>
     <Filter Include="03. Design\SoundMgr">
       <UniqueIdentifier>{a4957904-a2f0-4954-842e-8bb609f3820b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Design\WallMgr">
+      <UniqueIdentifier>{de5acb31-5e27-4757-84ed-f2a4121ead96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\07. Shovel">
+      <UniqueIdentifier>{7f1b88cd-470f-490a-84e3-180d7e5cbb46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Design\WallMgr\06. Wall">
+      <UniqueIdentifier>{7b7b07ce-afee-4b9f-bdd0-539504725fce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -226,7 +232,25 @@
       <Filter>03. Design\SoundMgr</Filter>
     </ClInclude>
     <ClInclude Include="CWall.h">
-      <Filter>01. Obj\06. Wall</Filter>
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="CShovel.h">
+      <Filter>01. Obj\07. Shovel</Filter>
+    </ClInclude>
+    <ClInclude Include="CWallMgr.h">
+      <Filter>03. Design\WallMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CShopWall.h">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="CBedrock.h">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="CDirtWall.h">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="CStoneWall.h">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -327,7 +351,25 @@
       <Filter>03. Design\SoundMgr</Filter>
     </ClCompile>
     <ClCompile Include="CWall.cpp">
-      <Filter>01. Obj\06. Wall</Filter>
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="CShovel.cpp">
+      <Filter>01. Obj\07. Shovel</Filter>
+    </ClCompile>
+    <ClCompile Include="CWallMgr.cpp">
+      <Filter>03. Design\WallMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CShopWall.cpp">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="CStoneWall.cpp">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="CDirtWall.cpp">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="CBedrock.cpp">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

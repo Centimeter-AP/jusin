@@ -18,6 +18,7 @@ void CTile::Initialize()
 	m_tInfo.fCY = TILECY;
 
 	m_pImgKey = L"Tile";
+	m_eRender = RENDER_BACKGROUND;
 
 }
 

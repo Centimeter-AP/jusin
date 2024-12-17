@@ -47,8 +47,8 @@ private:
     bool        m_bTemp;
 
     vector<CObj*>*	m_pvecTile;
-    int       m_iCurTileIdx;
-    int       m_iHeadTileIdx;
+    int         m_iCurTileIdx;
+    int         m_iHeadTileIdx;
 
     
 

@@ -20,7 +20,7 @@ CStage::~CStage()
 void CStage::Initialize()
 {
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Ground.bmp", L"Ground");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile.bmp", L"Tile");
+	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile.bmp", L"Tile");
 
 	//CLineMgr::Get_Instance()->Initialize();
 

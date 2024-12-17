@@ -12,7 +12,6 @@
 #include "CSceneMgr.h"
 #include "CTileMgr.h"
 #include "CSoundMgr.h"
-#include "CBeatMgr.h"
 
 
 CMainGame::CMainGame()
@@ -34,19 +33,18 @@ void CMainGame::Initialize()
 
 	CSceneMgr::Get_Instance()->Set_Scene(SC_LOGO);
 	CSoundMgr::Get_Instance()->Initialize();
-	CBeatMgr::Get_Instance()->Initialize();
 
 
 #ifdef _DEBUG
 
-	if (::AllocConsole() == TRUE)
-	{
-		FILE* nfp[3];
-		freopen_s(nfp + 0, "CONOUT$", "rb", stdin);
-		freopen_s(nfp + 1, "CONOUT$", "wb", stdout);
-		freopen_s(nfp + 2, "CONOUT$", "wb", stderr);
-		std::ios::sync_with_stdio();
-	}
+	//if (::AllocConsole() == TRUE)
+	//{
+	//	FILE* nfp[3];
+	//	freopen_s(nfp + 0, "CONOUT$", "rb", stdin);
+	//	freopen_s(nfp + 1, "CONOUT$", "wb", stdout);
+	//	freopen_s(nfp + 2, "CONOUT$", "wb", stderr);
+	//	std::ios::sync_with_stdio();
+	//}
 
 #endif // _DEBUG
 
@@ -100,7 +98,7 @@ void CMainGame::Release()
 {
 #ifdef _DEBUG
 
-	FreeConsole();
+	//FreeConsole();
 
 #endif // _DEBUG
 

@@ -15,6 +15,7 @@ CBeatMgr::~CBeatMgr()
 
 int CBeatMgr::Update()
 {
+	// 결국 박자는 시간체크 말고 노트충돌처리로..
 	return 0;
 }
 

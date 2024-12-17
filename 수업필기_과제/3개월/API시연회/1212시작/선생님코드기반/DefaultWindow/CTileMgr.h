@@ -16,7 +16,11 @@ public:
 	void Release() ;
 
 	void		Picking_Tile(POINT pt, int iDrawID, int iOption);
+	void		Tile_Shine();
 	vector<CObj*>* Get_TileVec() { return &m_vecTile; }
+
+	void		Make_Object(POINT pt, int iDrawID, int iOption);
+	void		Delete_Object(POINT pt, int iOption);
 
 	void		Save_Tile();
 	void		Load_Tile();
@@ -43,6 +47,10 @@ private:
 	static CTileMgr* m_pInstance;
 
 	vector<CObj*>	m_vecTile;
+	vector<CObj*>	m_vecWall;
+
+private:
+	//vector<CObj*>* m_pvecWall;
 
 };
 

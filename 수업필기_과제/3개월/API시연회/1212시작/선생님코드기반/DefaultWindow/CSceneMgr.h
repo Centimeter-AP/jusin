@@ -19,6 +19,7 @@ public:
 	void		Late_Update();
 	void		Render(HDC hDC);
 	void		Release();
+	SCENEID		Get_CurSceneID() { return m_eCurScene; }
 
 public:
 	static CSceneMgr* Get_Instance()
