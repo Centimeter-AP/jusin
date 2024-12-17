@@ -90,7 +90,7 @@ void CTileMgr::Render(HDC hDC)
 	}
 
 	/*** Wall Render ***/
-	sort(m_vecWall.begin(), m_vecWall.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
+	//sort(m_vecWall.begin(), m_vecWall.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
 	for (auto& pWall : m_vecWall)
 	{
 		if (pWall->Get_Info().fX / TILECX >= iScrollX
@@ -153,6 +153,20 @@ void CTileMgr::Tile_Shine()
 	}
 }
 
+bool CTileMgr::Is_Wall_Exist(float	fx, float fy)
+{
+	if (!m_vecWall.empty())
+	{
+		auto iter = find_if(m_vecWall.begin(), m_vecWall.end(), [fx, fy](CObj* pWall) {return ((pWall->Get_Info().fX == fx) && (pWall->Get_Info().fY == fy)); });
+		if (iter == m_vecWall.end())
+			return false;
+		else
+			return true;
+	}
+	else
+		return false;
+}
+
 void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 {
 	int		x = pt.x / TILECX;
@@ -171,29 +185,39 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 		float fx = m_vecTile[iIndex]->Get_Info().fX;
 		float fy = m_vecTile[iIndex]->Get_Info().fY;
 		CObj* pWall(nullptr);
-		switch (iDrawID)
+		auto iter = find_if(m_vecWall.begin(), m_vecWall.end(), [fx, fy](CObj* pWall) {return ((pWall->Get_Info().fX == fx) && (pWall->Get_Info().fY == fy)); });
+		if ((m_vecWall.end() == iter) || dynamic_cast<CWall*>(*iter)->Get_WallType() != iDrawID)
 		{
-		//case WALLTYPE::DIRT_WALL:
-		//	pWall = CAbstractFactory<CDirtWall>::Create(fx, fy);
-		//	m_vecWall.push_back(pWall);
-		//	break;
-		case WALLTYPE::SHOP_WALL:
-			pWall = CAbstractFactory<CShopWall>::Create(fx, fy);
-			m_vecWall.push_back(pWall);
-			break;
-		//case WALLTYPE::STONE_WALL:
-		//	pWall = CAbstractFactory<CStoneWall>::Create(fx, fy);
-		//	m_vecWall.push_back(pWall);
-		//	break;
-		//case WALLTYPE::BEDROCK:
-		//	pWall = CAbstractFactory<CBedrock>::Create(fx, fy);
-		//	m_vecWall.push_back(pWall);
-		//	break;
-		default:
-			break;
+			if (iter != m_vecWall.end())
+			{
+				Safe_Delete<CObj*>((*iter));
+				iter = m_vecWall.erase(iter);
+			}
+			switch (iDrawID)
+			{
+			case WALLTYPE::DIRT_WALL:
+				pWall = CAbstractFactory<CDirtWall>::Create(fx, fy);
+				m_vecWall.push_back(pWall);
+				break;
+			case WALLTYPE::SHOP_WALL:
+				pWall = CAbstractFactory<CShopWall>::Create(fx, fy);
+				m_vecWall.push_back(pWall);
+				break;
+			case WALLTYPE::STONE_WALL:
+				pWall = CAbstractFactory<CStoneWall>::Create(fx, fy);
+				m_vecWall.push_back(pWall);
+				break;
+			case WALLTYPE::BEDROCK:
+				pWall = CAbstractFactory<CBedrock>::Create(fx, fy);
+				m_vecWall.push_back(pWall);
+				break;
+			default:
+				break;
+			}
 		}
 		break;
 	}
+	sort(m_vecWall.begin(), m_vecWall.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
 	//dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(iDrawID);
 	//dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_Option(iOption);
 }
@@ -221,21 +245,82 @@ void CTileMgr::Save_Tile()
 		WriteFile(hFile, &iDrawID, sizeof(int), &dwByte, NULL);
 		WriteFile(hFile, &iOption, sizeof(int), &dwByte, NULL);
 	}
-
-	//for (auto& pWall : CWallMgr::Get_Instance()->m_vecWall)
-	//{
-	//	iDrawID = dynamic_cast<CWall*>(pWall)->Get_DrawID();
-	//	iOption = dynamic_cast<CWall*>(pWall)->Get_Option();
-
-	//	WriteFile(hFile, pWall->Get_Info_Pointer(), sizeof(INFO), &dwByte, NULL);
-	//	WriteFile(hFile, &iDrawID, sizeof(int), &dwByte, NULL);
-	//	WriteFile(hFile, &iOption, sizeof(int), &dwByte, NULL);
-	//}
-
 	CloseHandle(hFile);
+
 	MessageBox(g_hWnd, L"Tile Save", L"성공", MB_OK);
 
 }
+
+
+void CTileMgr::Save_Wall()
+{
+	HANDLE hFile = CreateFile(L"../Data/Wall.dat", GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD	dwByte(0);
+
+	for (auto& pWall : m_vecWall)
+	{
+		WriteFile(hFile, pWall, sizeof(CWall), &dwByte, NULL);
+	}
+	CloseHandle(hFile);
+
+	MessageBox(g_hWnd, L"Wall Save", L"성공", MB_OK);
+
+}
+
+
+void CTileMgr::Load_Wall()
+{
+	HANDLE hFile = CreateFile(L"../Data/Wall.dat", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD	dwByte(0);
+	CWall	Wall;
+
+
+	while (true)
+	{
+		int iRes = ReadFile(hFile, &Wall, sizeof(CWall), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+		
+		CObj* pWall(nullptr);
+
+		switch (Wall.Get_WallType())
+		{
+		case WALLTYPE::DIRT_WALL:
+			pWall = CAbstractFactory<CDirtWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::SHOP_WALL:
+			pWall = CAbstractFactory<CShopWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::STONE_WALL:
+			pWall = CAbstractFactory<CStoneWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::BEDROCK:
+			pWall = CAbstractFactory<CBedrock>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		default:
+			break;
+		}
+	}
+	CloseHandle(hFile);
+	MessageBox(g_hWnd, L"Load Wall", L"성공", MB_OK);
+
+}
+
+
+
 
 void CTileMgr::Load_Tile()
 {
@@ -252,9 +337,9 @@ void CTileMgr::Load_Tile()
 
 	while (true)
 	{
-		ReadFile(hFile, &tTile, sizeof(INFO), &dwByte, NULL);
-		ReadFile(hFile, &iDrawID, sizeof(int), &dwByte, NULL);
-		ReadFile(hFile, &iOption, sizeof(int), &dwByte, NULL);
+		int iRes = ReadFile(hFile, &tTile, sizeof(INFO), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iDrawID, sizeof(int), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iOption, sizeof(int), &dwByte, NULL);
 
 		if (0 == dwByte)
 			break;

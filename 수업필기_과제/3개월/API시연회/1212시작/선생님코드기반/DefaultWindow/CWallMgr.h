@@ -5,8 +5,8 @@ class CWallMgr
 {
 private:
 	friend class CTileMgr;
-	CWallMgr();
-	~CWallMgr();
+	CWallMgr() {}
+	virtual ~CWallMgr() {}
 
 public:
 	void Initialize();

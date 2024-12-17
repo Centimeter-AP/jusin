@@ -20,6 +20,8 @@ public:
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
 
+    bool Can_Move();
+
 private:
     void        Key_Input();
     void        Jumping();
@@ -41,7 +43,7 @@ private:
     STATE       m_eCurState;
     STATE       m_ePreState;
 
-    DWORD       m_dwTempTick;
+    ULONGLONG       m_dwTempTick;
     
     bool        m_bBeatCorrect;
     bool        m_bTemp;
@@ -50,6 +52,7 @@ private:
     int         m_iCurTileIdx;
     int         m_iHeadTileIdx;
 
+    DIRECTION   m_ePrevDir;
     
 
 };

@@ -141,12 +141,14 @@ void CMyEdit::Key_Input()
 	if (CKeyMgr::Get_Instance()->Key_Down('S'))
 	{
 		CTileMgr::Get_Instance()->Save_Tile();
+		CTileMgr::Get_Instance()->Save_Wall();
 		return;
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('L'))
 	{
 		CTileMgr::Get_Instance()->Load_Tile();
+		CTileMgr::Get_Instance()->Load_Wall();
 		return;
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down('1'))

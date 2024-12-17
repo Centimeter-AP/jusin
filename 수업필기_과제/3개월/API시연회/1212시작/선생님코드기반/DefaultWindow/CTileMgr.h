@@ -17,12 +17,15 @@ public:
 
 	void		Picking_Tile(POINT pt, int iDrawID, int iOption);
 	void		Tile_Shine();
+	bool		Is_Wall_Exist(float fx, float fy);
 	vector<CObj*>* Get_TileVec() { return &m_vecTile; }
 
 	void		Make_Object(POINT pt, int iDrawID, int iOption);
 	void		Delete_Object(POINT pt, int iOption);
 
 	void		Save_Tile();
+	void		Save_Wall();
+	void		Load_Wall();
 	void		Load_Tile();
 
 public:

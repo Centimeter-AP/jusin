@@ -495,7 +495,6 @@ void CBlockMgr::Save_Block()
 			&dwByte, nullptr);
 	}
 
-
 	CloseHandle(hFile);
 
 	MessageBox(g_hWnd, _T("Save 완료"), L"성공", MB_OK);

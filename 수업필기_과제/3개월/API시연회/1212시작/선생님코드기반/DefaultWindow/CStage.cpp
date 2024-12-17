@@ -25,6 +25,7 @@ void CStage::Initialize()
 	//CLineMgr::Get_Instance()->Initialize();
 
 	CTileMgr::Get_Instance()->Load_Tile();
+	CTileMgr::Get_Instance()->Load_Wall();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 
 	//for (int i = 0; i < 3; ++i)
@@ -35,7 +36,7 @@ void CStage::Initialize()
 
 int CStage::Update()
 {
-	CBeatMgr::Get_Instance()->Update();
+	//CBeatMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 	CTileMgr::Get_Instance()->Update();
 

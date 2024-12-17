@@ -15,7 +15,7 @@
 
 
 CMainGame::CMainGame()
-	: m_dwTime(GetTickCount()), m_iFPS(0)
+	: m_dwTime(GetTickCount64()), m_iFPS(0)
 {
 	ZeroMemory(m_szFPS, sizeof(m_szFPS));
 }
@@ -37,14 +37,14 @@ void CMainGame::Initialize()
 
 #ifdef _DEBUG
 
-	//if (::AllocConsole() == TRUE)
-	//{
-	//	FILE* nfp[3];
-	//	freopen_s(nfp + 0, "CONOUT$", "rb", stdin);
-	//	freopen_s(nfp + 1, "CONOUT$", "wb", stdout);
-	//	freopen_s(nfp + 2, "CONOUT$", "wb", stderr);
-	//	std::ios::sync_with_stdio();
-	//}
+	if (::AllocConsole() == TRUE)
+	{
+		FILE* nfp[3];
+		freopen_s(nfp + 0, "CONOUT$", "rb", stdin);
+		freopen_s(nfp + 1, "CONOUT$", "wb", stdout);
+		freopen_s(nfp + 2, "CONOUT$", "wb", stderr);
+		std::ios::sync_with_stdio();
+	}
 
 #endif // _DEBUG
 
@@ -71,14 +71,14 @@ void CMainGame::Render()
 #pragma region  FPS Ãâ·Â
 	++m_iFPS;
 
-	if (m_dwTime + 1000 < GetTickCount())
+	if (m_dwTime + 1000 < GetTickCount64())
 	{
 		swprintf_s(m_szFPS, L"FPS : %d", m_iFPS);
 
 		SetWindowText(g_hWnd, m_szFPS);
 
 		m_iFPS = 0;
-		m_dwTime = GetTickCount();
+		m_dwTime = GetTickCount64();
 	}
 #pragma endregion
 	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Back");
@@ -98,9 +98,9 @@ void CMainGame::Release()
 {
 #ifdef _DEBUG
 
-	//FreeConsole();
+	FreeConsole();
 
-#endif // _DEBUG
+#endif // 
 
 
 	CTileMgr::Destroy_Instance();

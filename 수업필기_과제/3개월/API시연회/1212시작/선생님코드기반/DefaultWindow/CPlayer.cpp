@@ -14,7 +14,7 @@ float	g_fVolume(1.f);
 
 CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f), m_OrigfY(0.f),
-	m_iCurTileIdx(0), m_iHeadTileIdx(0), m_bMove(false)
+	m_iCurTileIdx(0), m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT)
 {
 }
 
@@ -25,10 +25,16 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_tInfo = { WINCX * 0.5f + 24.f + WINCX % TILECX, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
+	//m_tInfo = { WINCX * 0.5f + 24.f + WINCX % TILECX, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
+	m_tInfo = { 600, 385, PLAYERCX, PLAYERCY };
+	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
+
+	m_iCurTileIdx = (m_tInfo.fY / TILECY) * TILEX + (m_tInfo.fX / TILECX);
+	m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
+	m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+
 	m_fSpeed = 6.f;
 	m_fDistance = 100.f;
-
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_head_left_.bmp", L"Player_Head_L");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_head_right.bmp", L"Player_Head_R");
@@ -44,43 +50,44 @@ void CPlayer::Initialize()
 	m_tFrame.iFrameEnd = 3;
 	m_tFrame.iMotion = 0;
 	m_tFrame.dwSpeed = 100;
-	m_tFrame.dwTime = GetTickCount();
-	m_dwTempTick = GetTickCount();
+	m_tFrame.dwTime = GetTickCount64();
+	m_dwTempTick = GetTickCount64();
 
 	m_eRender = RENDER_GAMEOBJECT;
 	m_fJumpPower = 9.5f;
 	m_OrigfX = m_tInfo.fX;
 	m_OrigfY = m_tInfo.fY;
-	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
 
-	m_iCurTileIdx = (m_tInfo.fY / TILECY) * TILEX + (m_tInfo.fX / TILECX);
+	
 	m_iHeadTileIdx = m_iCurTileIdx;
+
+
 }
 
 int CPlayer::Update()
 {
 	Key_Input();
-	Change_Motion();
-	if (m_dwTempTick + 500 < GetTickCount())
+	//Change_Motion();
+	if (m_dwTempTick + 500 < GetTickCount64())
 	{
 		m_bBeatCorrect = true;
-		m_dwTempTick = GetTickCount();
+		m_dwTempTick = GetTickCount64();
 	}
 
 
 	__super::Update_Rect();
 
 
-//#ifdef  _DEBUG
-//
-//	if (m_dwTime + 1000 < GetTickCount())
-//	{
-//		cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-//		m_dwTime = GetTickCount();
-//	}
-//
-//
-//#endif //  _DEBUG
+#ifdef  _DEBUG
+
+	//if (m_dwTime + 1000 < GetTickCount64())
+	//{
+	//	cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
+	//	m_dwTime = GetTickCount64();
+	//}
+
+
+#endif //  _DEBUG
 
 
 
@@ -103,7 +110,7 @@ void CPlayer::Render(HDC hDC)
 	HDC		hMemDCarmor = CBmpMgr::Get_Instance()->Find_Image(L"Player_Armor_R");
 	HDC		hMemDCshadow = CBmpMgr::Get_Instance()->Find_Image(L"Player_Shadow");				// 그림자 용 xy 좌표 따로?
 
-	if (m_eDir == DIR_LEFT)
+	if (m_ePrevDir == DIR_LEFT)
 	{
 		hMemDChead = CBmpMgr::Get_Instance()->Find_Image(L"Player_Head_L");
 		hMemDCarmor = CBmpMgr::Get_Instance()->Find_Image(L"Player_Armor_L");
@@ -167,22 +174,51 @@ void CPlayer::Release()
 {
 }
 
+bool CPlayer::Can_Move()
+{
+	float	fHeadX(0.f), fHeadY(0.f);
+	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+
+	if (CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY))
+		return false;
+	else
+		return true;
+
+}
+/*
 void CPlayer::Key_Input()
 {
 	float	fY(0.f);
 
 	// 여기에 박자Mgr->겟박자? 겟..트루?
 
-	if (m_bBeatCorrect)
+	//if (m_bBeatCorrect)
 	{
-		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
+		if (Can_Move())
+		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
 		{
 			m_eDir = DIR_LEFT;
-			//m_OrigfX = m_tInfo.fX;
+			m_ePrevDir = DIR_LEFT;
+			if (m_bMove == true)
+			{
+				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+				m_iCurTileIdx = m_iHeadTileIdx;
+			}
 			--m_iHeadTileIdx;
-			m_bMove = true;
-			m_tFrame.iFrameStart = 0;
+			if (Can_Move())
+			{
+				m_bMove = true;
+				m_tFrame.iFrameStart = 0;
+			}
+			else
+				m_iHeadTileIdx = m_iCurTileIdx;
+
 			CTileMgr::Get_Instance()->Tile_Shine();
+
+
+			//m_OrigfX = m_tInfo.fX;
 
 #ifdef  _DEBUG
 
@@ -192,9 +228,10 @@ void CPlayer::Key_Input()
 #endif //  _DEBUG
 		}
 
-		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
+		else if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
 		{
 			m_eDir = DIR_RIGHT;
+			m_ePrevDir = DIR_RIGHT;
 			//m_OrigfX = m_tInfo.fX;
 			++m_iHeadTileIdx;
 			m_bMove = true;
@@ -209,7 +246,7 @@ void CPlayer::Key_Input()
 #endif //  _DEBUG
 		}
 
-		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
+		else if (CKeyMgr::Get_Instance()->Key_Down(VK_UP))
 		{
 			m_tInfo.fY -= m_fSpeed;
 			m_eDir = DIR_UP;
@@ -226,7 +263,7 @@ void CPlayer::Key_Input()
 #endif //  _DEBUG
 		}
 
-		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
+		else if (CKeyMgr::Get_Instance()->Key_Down(VK_DOWN))
 		{
 			m_tInfo.fY += m_fSpeed;
 			m_eDir = DIR_DOWN;
@@ -250,73 +287,103 @@ void CPlayer::Key_Input()
 		CSoundMgr::Get_Instance()->PlaySound(L"Title.mp3", SOUND_EFFECT, g_fVolume);
 	}
 }
-
+*/
 void CPlayer::Jumping()
 {
 	if (m_bMove) // 실제로 타일을 이동했는가
 	{
+		float fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+		float fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+		float fCurX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
+		float fCurY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY;
+
 		switch (m_eDir)
 		{
 		case DIR_LEFT:
 			m_fJumpPower = 9.5f;
-			
-			//Left == Right
-			if (m_OrigfY < m_tInfo.fY)
+			// origfy가 이제 m_Curidx고
+			// 오른쪽은 m_headidx로 비교
+			if (fCurY < m_tInfo.fY)
 			{
-				m_tInfo.fY = m_OrigfY;
+				m_tInfo.fY = fCurY - 24.f;
 				m_bMove = false;
 				m_fTime = 0.f;
+				m_iCurTileIdx = m_iHeadTileIdx;
 			}
 			else
 			{
 				m_tInfo.fX -= (m_fSpeed * cosf(45.f * PI / 180) * m_fTime);
-				if (m_OrigfX - TILECX > m_tInfo.fX)
-					m_tInfo.fX = m_OrigfX - TILECX;
+				if (fHeadX > m_tInfo.fX)
+					m_tInfo.fX = fHeadX;
 				m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
 			}
 			break;
 		case DIR_RIGHT:
 			m_fJumpPower = 9.5f;
-			if (m_OrigfY < m_tInfo.fY)
+			if (fCurY < m_tInfo.fY)
 			{
-				m_tInfo.fY = m_OrigfY;
+				m_tInfo.fY = fCurY - 24.f;
 				m_bMove = false;
 				m_fTime = 0.f;
+				m_iCurTileIdx = m_iHeadTileIdx;
 			}
 			else
 			{
 				m_tInfo.fX += (m_fSpeed * cosf(45.f * PI / 180) * m_fTime);
-				if (m_OrigfX + TILECX < m_tInfo.fX)
-					m_tInfo.fX = m_OrigfX + TILECX;
+				if (fHeadX < m_tInfo.fX)
+					m_tInfo.fX = fHeadX;
 				m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
 			}
 			break;
 		case DIR_UP:
 			m_fJumpPower = 20.f;
-			if (m_OrigfY - TILECY > m_tInfo.fY)
+			if (fHeadY > m_tInfo.fY)
 			{
-				m_tInfo.fY = m_OrigfY - TILECY;
+				m_tInfo.fY = fHeadY - 24.f;
 				m_bMove = false;
+				m_iCurTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			else
 			{
-				m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
+				m_tInfo.fY -= 12.f;
+				//m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
 			}
+			//if (m_OrigfY - TILECY > m_tInfo.fY)
+			//{
+			//	m_tInfo.fY = m_OrigfY - TILECY;
+			//	m_bMove = false;
+			//	m_fTime = 0.f;
+			//}
+			//else
+			//{
+			//	m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
+			//}
 			break;
 		case DIR_DOWN:
 			m_fJumpPower = 20.f;
-			if (m_OrigfY + TILECY < m_tInfo.fY)
+			//if (m_OrigfY + TILECY < m_tInfo.fY)
+			//{
+			//	m_tInfo.fY = m_OrigfY + TILECY;
+			//	m_bMove = false;
+			//	m_fTime = 0.f;
+			//}
+			//else
+			//{
+			//	m_tInfo.fY += (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
+			//}
+
+			if (fHeadY < m_tInfo.fY)
 			{
-				m_tInfo.fY = m_OrigfY + TILECY;
+				m_tInfo.fY = fHeadY - 24.f;
 				m_bMove = false;
+				m_iCurTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			else
 			{
 				m_tInfo.fY += (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
 			}
-			break;
 			break;
 		default:
 			break;
@@ -417,7 +484,7 @@ void CPlayer::Change_Motion()
 			m_tFrame.iFrameEnd = 3;
 			m_tFrame.iMotion = 0;
 			m_tFrame.dwSpeed = 100;
-			m_tFrame.dwTime = GetTickCount();
+			m_tFrame.dwTime = GetTickCount64();
 			break;
 
 		case CPlayer::WALK:
@@ -425,7 +492,7 @@ void CPlayer::Change_Motion()
 			m_tFrame.iFrameEnd = 3;
 			m_tFrame.iMotion = 0;
 			m_tFrame.dwSpeed = 100;
-			m_tFrame.dwTime = GetTickCount();
+			m_tFrame.dwTime = GetTickCount64();
 			break;
 
 		case CPlayer::ATTACK:
@@ -433,7 +500,7 @@ void CPlayer::Change_Motion()
 			m_tFrame.iFrameEnd = 3;
 			m_tFrame.iMotion = 2;
 			m_tFrame.dwSpeed = 200;
-			m_tFrame.dwTime = GetTickCount();
+			m_tFrame.dwTime = GetTickCount64();
 			break;
 
 		case CPlayer::HIT:
@@ -441,7 +508,7 @@ void CPlayer::Change_Motion()
 			m_tFrame.iFrameEnd = 1;
 			m_tFrame.iMotion = 3;
 			m_tFrame.dwSpeed = 200;
-			m_tFrame.dwTime = GetTickCount();
+			m_tFrame.dwTime = GetTickCount64();
 			break;
 
 		}
@@ -452,3 +519,144 @@ void CPlayer::Change_Motion()
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+void CPlayer::Key_Input()
+{
+	float	fY(0.f);
+
+	// 여기에 박자Mgr->겟박자? 겟..트루?
+
+	//if (m_bBeatCorrect)
+	{
+		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
+		{
+			m_eDir = DIR_LEFT;
+			m_ePrevDir = DIR_LEFT;
+			if (m_bMove == true)
+			{
+				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+				m_iCurTileIdx = m_iHeadTileIdx;
+			}
+			--m_iHeadTileIdx;
+			if (Can_Move())
+			{
+				m_bMove = true;
+				m_tFrame.iFrameStart = 0;
+			}
+			else
+				m_iHeadTileIdx = m_iCurTileIdx;
+
+			CTileMgr::Get_Instance()->Tile_Shine();
+
+#ifdef  _DEBUG
+
+			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
+			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+
+#endif //  _DEBUG
+		}
+
+		else if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
+		{
+			m_eDir = DIR_RIGHT;
+			m_ePrevDir = DIR_RIGHT;
+			if (m_bMove == true)
+			{
+				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+				m_iCurTileIdx = m_iHeadTileIdx;
+			}
+			++m_iHeadTileIdx;
+			if (Can_Move())
+			{
+				m_bMove = true;
+				m_tFrame.iFrameStart = 0;
+			}
+			else
+				m_iHeadTileIdx = m_iCurTileIdx;
+			CTileMgr::Get_Instance()->Tile_Shine();
+
+#ifdef  _DEBUG
+
+			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
+			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+
+#endif //  _DEBUG
+		}
+
+		else if (CKeyMgr::Get_Instance()->Key_Down(VK_UP))
+		{
+			//m_tInfo.fY -= m_fSpeed;
+			m_eDir = DIR_UP;
+
+			if (m_bMove == true)
+			{
+				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+				m_iCurTileIdx = m_iHeadTileIdx;
+			}
+			m_iHeadTileIdx -= TILEX;
+			if (Can_Move())
+			{
+				m_bMove = true;
+				m_tFrame.iFrameStart = 0;
+			}
+			else
+				m_iHeadTileIdx = m_iCurTileIdx;
+
+			CTileMgr::Get_Instance()->Tile_Shine();
+
+#ifdef  _DEBUG
+
+			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
+			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+
+#endif //  _DEBUG
+		}
+
+		else if (CKeyMgr::Get_Instance()->Key_Down(VK_DOWN))
+		{
+			//m_tInfo.fY += m_fSpeed;
+			m_eDir = DIR_DOWN;
+			if (m_bMove == true)
+			{
+				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+				m_iCurTileIdx = m_iHeadTileIdx;
+			}
+			m_iHeadTileIdx += TILEX;
+			if (Can_Move())
+			{
+				m_bMove = true;
+				m_tFrame.iFrameStart = 0;
+			}
+			else
+				m_iHeadTileIdx = m_iCurTileIdx;
+
+			CTileMgr::Get_Instance()->Tile_Shine();
+#ifdef  _DEBUG
+
+			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
+			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+
+#endif //  _DEBUG
+		}
+		m_bBeatCorrect = false;
+
+	}
+	if (CKeyMgr::Get_Instance()->Key_Up(VK_SPACE))
+	{
+		CSoundMgr::Get_Instance()->PlaySound(L"Title.mp3", SOUND_EFFECT, g_fVolume);
+	}
+}
