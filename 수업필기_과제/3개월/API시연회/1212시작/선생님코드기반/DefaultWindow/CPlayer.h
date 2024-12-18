@@ -20,7 +20,8 @@ public:
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
 
-    bool Can_Move();
+    int         Get_CurTileIdx() { return m_iCurTileIdx; }
+
 
 private:
     void        Key_Input();
@@ -30,13 +31,14 @@ private:
     CObj*       Create_Shield();
     void        Change_Motion();
 
+    bool        Can_Move();
+
 private:
     float       m_fJumpX;
     float       m_fJumpY;
     float       m_fJumpPower;
     float       m_OrigfX;
     float       m_OrigfY;
-    bool        m_bMove;
 
     float       m_fTime;
 
@@ -54,6 +56,13 @@ private:
 
     DIRECTION   m_ePrevDir;
     
+    bool        m_bMove;
 
+    float       m_fShadowY;
+
+
+
+private:
+    list<CObj*> m_Itemlist[ITEM_END];
 };
 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CObjMgr.h"
 #include "CCollisionMgr.h"
+#include "CTileMgr.h"
 
 CObjMgr* CObjMgr::m_pInstance = nullptr;
 
@@ -39,6 +40,24 @@ CObj* CObjMgr::Get_Target(OBJID eID, CObj* pDst)
 	}		
 
 	return pTarget;
+}
+
+CObj* CObjMgr::Is_Item_Exist(float fx, float fy)
+{
+
+	//if (!m_ObjList[OBJ_ITEM].empty())
+	//{
+	//	auto iter = find_if(m_ObjList[OBJ_ITEM].begin(), m_ObjList[OBJ_ITEM].end(),
+	//		[fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY - 8.f <= fy && pItem->Get_Info().fY >= fy)); });
+	//	// 8.f
+	//	if (iter == m_ObjList[OBJ_ITEM].end())
+	//		return nullptr;
+	//	else
+	//		return (*iter);
+	//}
+	//else
+		return nullptr;
+	//return false;
 }
 
 void CObjMgr::Add_Object(OBJID eID, CObj* pObj)
@@ -86,11 +105,10 @@ void CObjMgr::Late_Update()
 			m_RenderList[eID].push_back(pObj);
 		}
 	}
-
-	////CCollisionMgr::Collision_Rect(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_BULLET]);
-	//CCollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_BULLET]);
-	//CCollisionMgr::Collision_Circle(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_MOUSE]);
-	//CCollisionMgr::Collision_RectEx(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_PLAYER]);
+	for (auto& pWall : CTileMgr::Get_Instance()->Get_WallVec())
+	{
+		m_RenderList[RENDER_GAMEOBJECT].push_back(pWall);
+	}
 }
 
 void CObjMgr::Render(HDC hDC)

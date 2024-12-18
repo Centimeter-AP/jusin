@@ -12,6 +12,7 @@ public:
 	INFO				Get_Info() { return m_tInfo; }
 	const INFO*			Get_Info_Pointer() { return &m_tInfo; }
 	const RECT*			Get_Rect() { return &m_tRect; }
+	DIRECTION			Get_Direction() { return m_eDir; }
 
 	void		Set_Pos(float _fX, float _fY)
 	{

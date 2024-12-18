@@ -15,9 +15,21 @@ public:
 
 public:
 	WALLTYPE	Get_WallType() { return m_enWallType; }
+	void		Set_Hp(int _hp) { m_iHP += _hp; }
+	void		Set_Damage(int _iShovPow, int _iDmg)
+	{
+		if (m_iPowerNeeded <= _iShovPow)
+			m_iHP -= _iDmg;
+		if (m_iHP <= 0)
+		{
+			m_iHP = 0;
+			m_bDead = true;
+		}
+	}
+	int			Get_PowerNeed() { return m_iPowerNeeded; }
+
 
 protected:
-	//int		m_iHP;				// 내구도 (HP)
 	int		m_iPowerNeeded;		// 부수기 위해 필요한 힘 (삽 위력 최소컷)
 	
 	int		m_iImgPosX;

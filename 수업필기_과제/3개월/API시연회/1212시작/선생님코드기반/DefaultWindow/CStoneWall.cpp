@@ -19,17 +19,21 @@ void CStoneWall::Initialize()
 	m_tInfo.fCX = 48.f;
 	m_tInfo.fCY = 78.f;
 	m_pImgKey = L"Wall";
-	m_eRender = RENDER_WALL;
+	m_eRender = RENDER_GAMEOBJECT;
 
 	m_enWallType = STONE_WALL;
 	// 벽 별로 imgpos 설정
 	m_iImgPosX = 1392;
 	m_iImgPosY = 0;
+
+	m_iHP = 2;
+	m_iPowerNeeded = POWER_TWO;
 }
 
 int CStoneWall::Update()
 {
-
+	if (m_bDead)
+		return OBJ_DEAD;
 
 	__super::Update_Rect();
 	return OBJ_NOEVENT;

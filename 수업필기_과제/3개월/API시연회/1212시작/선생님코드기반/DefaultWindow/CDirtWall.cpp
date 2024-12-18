@@ -19,17 +19,21 @@ void CDirtWall::Initialize()
 	m_tInfo.fCX = 48.f;
 	m_tInfo.fCY = 78.f;
 	m_pImgKey = L"Wall";
-	m_eRender = RENDER_WALL;
+	m_eRender = RENDER_GAMEOBJECT;
 
 	m_enWallType = DIRT_WALL;
 	// 벽 별로 imgpos 설정
 	m_iImgPosX = 0;
 	m_iImgPosY = 0;
+
+	m_iHP = 1;
+	m_iPowerNeeded = POWER_ONE;
 }
 
 int CDirtWall::Update()
 {
-
+	if (m_bDead)
+		return OBJ_DEAD;
 
 	__super::Update_Rect();
 	return OBJ_NOEVENT;

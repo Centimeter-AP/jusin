@@ -14,8 +14,11 @@ private:
 public:
 	CObj* Get_Player()		{ return m_ObjList[OBJ_PLAYER].front(); }
 	CObj* Get_LastMonster() { return m_ObjList[OBJ_MONSTER].back(); }
-
+	CObj* Get_LastItem()	{ return m_ObjList[OBJ_ITEM].back(); }
 	CObj* Get_Target(OBJID eID, CObj* pDst);
+
+	CObj* Is_Item_Exist(float fx, float fy);
+
 
 public:
 	void		Add_Object(OBJID eID, CObj* pObj);

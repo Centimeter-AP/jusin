@@ -7,6 +7,8 @@
 #include "CScrollMgr.h"
 #include "CTileMgr.h"
 #include "CBeatMgr.h"
+#include "CNormalShovel.h"
+#include "CDagger.h"
 
 CStage::CStage()
 {
@@ -27,6 +29,12 @@ void CStage::Initialize()
 	CTileMgr::Get_Instance()->Load_Tile();
 	CTileMgr::Get_Instance()->Load_Wall();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CNormalShovel>::Create_Item(true, 552 , 385));
+	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 500 , 385));
+	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
+
+	//CObjMgr::Get_Instance()->
 
 	//for (int i = 0; i < 3; ++i)
 	//{

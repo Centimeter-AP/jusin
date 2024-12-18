@@ -25,11 +25,16 @@ void CBedrock::Initialize()
 	// 벽 별로 imgpos 설정
 	m_iImgPosX = 192;
 	m_iImgPosY = 576;
+
+
+	m_iHP = 999;
+	m_iPowerNeeded = POWER_NOEXCEPTION;
 }
 
 int CBedrock::Update()
 {
-
+	if (m_bDead)
+		return OBJ_DEAD;
 
 	__super::Update_Rect();
 	return OBJ_NOEVENT;

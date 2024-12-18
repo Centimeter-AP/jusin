@@ -9,6 +9,7 @@
 #include "CShopWall.h"
 #include "CBedrock.h"
 #include "CStoneWall.h"
+#include "CShovel.h"
 
 CTileMgr* CTileMgr::m_pInstance = nullptr;
 
@@ -91,19 +92,19 @@ void CTileMgr::Render(HDC hDC)
 
 	/*** Wall Render ***/
 	//sort(m_vecWall.begin(), m_vecWall.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
-	for (auto& pWall : m_vecWall)
-	{
-		if (pWall->Get_Info().fX / TILECX >= iScrollX
-			&& pWall->Get_Info().fX / TILECX <= iMaxX)
-		{
-			if (pWall->Get_Info().fY / TILECY >= iScrollY
-				&& pWall->Get_Info().fY / TILECY <= iMaxY)
-			{
-				
-				pWall->Render(hDC);
-			}
-		}
-	}
+	//for (auto& pWall : m_vecWall)
+	//{
+	//	if (pWall->Get_Info().fX / TILECX >= iScrollX
+	//		&& pWall->Get_Info().fX / TILECX <= iMaxX)
+	//	{
+	//		if (pWall->Get_Info().fY / TILECY >= iScrollY
+	//			&& pWall->Get_Info().fY / TILECY <= iMaxY)
+	//		{
+	//			
+	//			pWall->Render(hDC);
+	//		}
+	//	}
+	//}
 	/*******************/
 }
 
@@ -153,18 +154,33 @@ void CTileMgr::Tile_Shine()
 	}
 }
 
-bool CTileMgr::Is_Wall_Exist(float	fx, float fy)
+CObj* CTileMgr::Is_Wall_Exist(float	fx, float fy)
 {
 	if (!m_vecWall.empty())
 	{
 		auto iter = find_if(m_vecWall.begin(), m_vecWall.end(), [fx, fy](CObj* pWall) {return ((pWall->Get_Info().fX == fx) && (pWall->Get_Info().fY == fy)); });
 		if (iter == m_vecWall.end())
-			return false;
+			return nullptr;
 		else
-			return true;
+			return (*iter);
 	}
 	else
-		return false;
+		return nullptr;
+}
+
+void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
+{
+	auto iter = find_if(m_vecWall.begin(), m_vecWall.end(),
+		[_pTargetWall](CObj* pWall) { return pWall == _pTargetWall; });
+	if (iter != m_vecWall.end())
+	{
+		if (dynamic_cast<CWall*>(_pTargetWall)->Get_PowerNeed() <= _pShovel->Get_Power())
+		{
+			Safe_Delete<CObj*>((*iter));
+			iter = m_vecWall.erase(iter);
+		}
+	}
+	_pShovel->Set_Using(true);
 }
 
 void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)

@@ -2,6 +2,7 @@
 
 #include "CTile.h"
 
+class CShovel;
 class CTileMgr
 {
 private:
@@ -17,8 +18,10 @@ public:
 
 	void		Picking_Tile(POINT pt, int iDrawID, int iOption);
 	void		Tile_Shine();
-	bool		Is_Wall_Exist(float fx, float fy);
+	CObj*		Is_Wall_Exist(float fx, float fy);
+	void		Break_Wall(CObj* _pTargetWall, CShovel* _pShovel);
 	vector<CObj*>* Get_TileVec() { return &m_vecTile; }
+	vector<CObj*>& Get_WallVec() { return m_vecWall; }
 
 	void		Make_Object(POINT pt, int iDrawID, int iOption);
 	void		Delete_Object(POINT pt, int iOption);

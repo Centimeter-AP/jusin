@@ -112,11 +112,17 @@
     <Filter Include="03. Design\WallMgr">
       <UniqueIdentifier>{de5acb31-5e27-4757-84ed-f2a4121ead96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\07. Shovel">
-      <UniqueIdentifier>{7f1b88cd-470f-490a-84e3-180d7e5cbb46}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Design\WallMgr\06. Wall">
       <UniqueIdentifier>{7b7b07ce-afee-4b9f-bdd0-539504725fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item">
+      <UniqueIdentifier>{8023b116-1da5-4332-b222-0453c4ec241e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item\01. Shovel">
+      <UniqueIdentifier>{7f1b88cd-470f-490a-84e3-180d7e5cbb46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item\00. Weapon">
+      <UniqueIdentifier>{e30e6c67-eafd-466a-ad02-4836ef314285}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,10 +241,7 @@
       <Filter>03. Design\WallMgr\06. Wall</Filter>
     </ClInclude>
     <ClInclude Include="CShovel.h">
-      <Filter>01. Obj\07. Shovel</Filter>
-    </ClInclude>
-    <ClInclude Include="CWallMgr.h">
-      <Filter>03. Design\WallMgr</Filter>
+      <Filter>01. Obj\08. Item\01. Shovel</Filter>
     </ClInclude>
     <ClInclude Include="CShopWall.h">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
@@ -251,6 +254,18 @@
     </ClInclude>
     <ClInclude Include="CStoneWall.h">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="CNormalShovel.h">
+      <Filter>01. Obj\08. Item\01. Shovel</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>01. Obj\08. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CWeapon.h">
+      <Filter>01. Obj\08. Item\00. Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="CDagger.h">
+      <Filter>01. Obj\08. Item\00. Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -354,10 +369,7 @@
       <Filter>03. Design\WallMgr\06. Wall</Filter>
     </ClCompile>
     <ClCompile Include="CShovel.cpp">
-      <Filter>01. Obj\07. Shovel</Filter>
-    </ClCompile>
-    <ClCompile Include="CWallMgr.cpp">
-      <Filter>03. Design\WallMgr</Filter>
+      <Filter>01. Obj\08. Item\01. Shovel</Filter>
     </ClCompile>
     <ClCompile Include="CShopWall.cpp">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
@@ -370,6 +382,18 @@
     </ClCompile>
     <ClCompile Include="CBedrock.cpp">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="CNormalShovel.cpp">
+      <Filter>01. Obj\08. Item\01. Shovel</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>01. Obj\08. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CWeapon.cpp">
+      <Filter>01. Obj\08. Item\00. Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="CDagger.cpp">
+      <Filter>01. Obj\08. Item\00. Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

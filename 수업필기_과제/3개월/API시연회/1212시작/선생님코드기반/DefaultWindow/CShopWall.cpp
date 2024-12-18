@@ -25,11 +25,15 @@ void CShopWall::Initialize()
 	// 벽 별로 imgpos 설정
 	m_iImgPosX = 0;
 	m_iImgPosY = 576;
+
+	m_iHP = 1;
+	m_iPowerNeeded = POWER_BOMB;
 }
 
 int CShopWall::Update()
 {
-
+	if (m_bDead)
+		return OBJ_DEAD;
 
 	__super::Update_Rect();
 	return OBJ_NOEVENT;

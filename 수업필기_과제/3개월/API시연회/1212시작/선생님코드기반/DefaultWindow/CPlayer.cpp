@@ -9,12 +9,15 @@
 #include "CBmpMgr.h"
 #include "CSoundMgr.h"
 #include "CTileMgr.h"
+#include "CNormalShovel.h"
+#include "CBedrock.h"
+#include "CDagger.h"
 
 float	g_fVolume(1.f);
 
 CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f), m_OrigfY(0.f),
-	m_iCurTileIdx(0), m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT)
+	m_iCurTileIdx(0), m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f)
 {
 }
 
@@ -25,14 +28,15 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	//m_tInfo = { WINCX * 0.5f + 24.f + WINCX % TILECX, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
-	m_tInfo = { 600, 385, PLAYERCX, PLAYERCY };
+	//m_tInfo = { WINCX * 0.5f + 24.f, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
+	m_tInfo = { 500, 385, PLAYERCX, PLAYERCY };
 	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
 
-	m_iCurTileIdx = (m_tInfo.fY / TILECY) * TILEX + (m_tInfo.fX / TILECX);
+	m_iCurTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
 	m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
 	m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
-
+	m_fShadowY = m_tInfo.fY - (m_tInfo.fCY * 0.5f) + 4.f;
+	
 	m_fSpeed = 6.f;
 	m_fDistance = 100.f;
 
@@ -45,7 +49,7 @@ void CPlayer::Initialize()
 	m_pImgKey = L"Player_Head_L";
 	m_eCurState = IDLE;
 	m_ePreState = IDLE;
-	m_eDir = DIR_LEFT;
+	m_eDir = DIR_UP;
 	m_tFrame.iFrameStart = 0;
 	m_tFrame.iFrameEnd = 3;
 	m_tFrame.iMotion = 0;
@@ -62,6 +66,16 @@ void CPlayer::Initialize()
 	m_iHeadTileIdx = m_iCurTileIdx;
 
 
+	// 최초 플레이어 init할 때 필수로 들고있어야 하는 아이템들 여기서 생성 후 아이템리스트에 별도로 보관?
+	// 좀 비효율적인 것 같긴 한데 고민하느니 일단 만들기..
+	// 플레이어말고 오브젝트매니저에서 관리하므로 release에서 관리 필요xxxx
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CNormalShovel>::Create_Item(false));
+	m_Itemlist[ITEM_SHOVEL].push_back(CObjMgr::Get_Instance()->Get_LastItem());
+	m_Itemlist[ITEM_SHOVEL].back()->Set_Target(this);
+
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(false));
+	m_Itemlist[ITEM_WEAPON].push_back(CObjMgr::Get_Instance()->Get_LastItem());
+	m_Itemlist[ITEM_WEAPON].back()->Set_Target(this);
 }
 
 int CPlayer::Update()
@@ -119,7 +133,7 @@ void CPlayer::Render(HDC hDC)
 	{
 		GdiTransparentBlt(hDC,
 			m_tRect.left + iScrollX,
-			m_tRect.top + iScrollY + 4, // 그림자 좀만 밑으로 지게
+			m_fShadowY + iScrollY, // 그림자 좀만 밑으로 지게
 			(int)m_tInfo.fCX,
 			(int)m_tInfo.fCY,
 			hMemDCshadow,
@@ -133,7 +147,7 @@ void CPlayer::Render(HDC hDC)
 	{// 좌우 이동 때 그림자 y축 이동 제거 
 		GdiTransparentBlt(hDC,
 			m_tRect.left + iScrollX,
-			m_OrigfY - (m_tInfo.fCY * 0.5f) + iScrollY + 4, // 그림자 좀만 밑으로 지게
+			m_fShadowY + iScrollY, // 그림자 좀만 밑으로 지게
 			(int)m_tInfo.fCX,
 			(int)m_tInfo.fCY,
 			hMemDCshadow,
@@ -172,6 +186,7 @@ void CPlayer::Render(HDC hDC)
 
 void CPlayer::Release()
 {
+
 }
 
 bool CPlayer::Can_Move()
@@ -180,122 +195,38 @@ bool CPlayer::Can_Move()
 	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 
-	if (CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY))
+	CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
+	CObj* pHeadItem = CObjMgr::Get_Instance()->Is_Item_Exist(fHeadX, fHeadY);
+	if (pHeadWall != nullptr)		// 벽 검사
+	{
+		CTileMgr::Get_Instance()->Break_Wall(pHeadWall, static_cast<CShovel*>(m_Itemlist[ITEM_SHOVEL].front()));
+
 		return false;
+	}
+	else if (pHeadItem != nullptr) // 아이템 검사
+	{
+		//Get_Item(pHeadItem);
+		return true;
+	}
 	else
 		return true;
 
 }
-/*
-void CPlayer::Key_Input()
-{
-	float	fY(0.f);
 
-	// 여기에 박자Mgr->겟박자? 겟..트루?
-
-	//if (m_bBeatCorrect)
-	{
-		if (Can_Move())
-		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
-		{
-			m_eDir = DIR_LEFT;
-			m_ePrevDir = DIR_LEFT;
-			if (m_bMove == true)
-			{
-				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
-			}
-			--m_iHeadTileIdx;
-			if (Can_Move())
-			{
-				m_bMove = true;
-				m_tFrame.iFrameStart = 0;
-			}
-			else
-				m_iHeadTileIdx = m_iCurTileIdx;
-
-			CTileMgr::Get_Instance()->Tile_Shine();
+//void CPlayer::Get_Item()
+//{
+//
+//}
 
 
-			//m_OrigfX = m_tInfo.fX;
-
-#ifdef  _DEBUG
-
-			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
-
-#endif //  _DEBUG
-		}
-
-		else if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
-		{
-			m_eDir = DIR_RIGHT;
-			m_ePrevDir = DIR_RIGHT;
-			//m_OrigfX = m_tInfo.fX;
-			++m_iHeadTileIdx;
-			m_bMove = true;
-			m_tFrame.iFrameStart = 0;
-			CTileMgr::Get_Instance()->Tile_Shine();
-
-#ifdef  _DEBUG
-
-			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
-
-#endif //  _DEBUG
-		}
-
-		else if (CKeyMgr::Get_Instance()->Key_Down(VK_UP))
-		{
-			m_tInfo.fY -= m_fSpeed;
-			m_eDir = DIR_UP;
-			m_iHeadTileIdx - TILEX;
-			m_bMove = true;
-			m_tFrame.iFrameStart = 0;
-			CTileMgr::Get_Instance()->Tile_Shine();
-
-#ifdef  _DEBUG
-
-			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
-
-#endif //  _DEBUG
-		}
-
-		else if (CKeyMgr::Get_Instance()->Key_Down(VK_DOWN))
-		{
-			m_tInfo.fY += m_fSpeed;
-			m_eDir = DIR_DOWN;
-			m_iHeadTileIdx + TILEX;
-			m_bMove = true;
-			m_tFrame.iFrameStart = 0;
-
-			CTileMgr::Get_Instance()->Tile_Shine();
-#ifdef  _DEBUG
-
-			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
-
-#endif //  _DEBUG
-		}
-		m_bBeatCorrect = false;
-
-	}
-	if (CKeyMgr::Get_Instance()->Key_Up(VK_SPACE))
-	{
-		CSoundMgr::Get_Instance()->PlaySound(L"Title.mp3", SOUND_EFFECT, g_fVolume);
-	}
-}
-*/
 void CPlayer::Jumping()
 {
 	if (m_bMove) // 실제로 타일을 이동했는가
 	{
 		float fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-		float fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+		float fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
 		float fCurX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-		float fCurY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY;
+		float fCurY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
 
 		switch (m_eDir)
 		{
@@ -305,7 +236,7 @@ void CPlayer::Jumping()
 			// 오른쪽은 m_headidx로 비교
 			if (fCurY < m_tInfo.fY)
 			{
-				m_tInfo.fY = fCurY - 24.f;
+				m_tInfo.fY = fCurY;
 				m_bMove = false;
 				m_fTime = 0.f;
 				m_iCurTileIdx = m_iHeadTileIdx;
@@ -322,7 +253,7 @@ void CPlayer::Jumping()
 			m_fJumpPower = 9.5f;
 			if (fCurY < m_tInfo.fY)
 			{
-				m_tInfo.fY = fCurY - 24.f;
+				m_tInfo.fY = fCurY;
 				m_bMove = false;
 				m_fTime = 0.f;
 				m_iCurTileIdx = m_iHeadTileIdx;
@@ -337,53 +268,47 @@ void CPlayer::Jumping()
 			break;
 		case DIR_UP:
 			m_fJumpPower = 20.f;
+
 			if (fHeadY > m_tInfo.fY)
 			{
-				m_tInfo.fY = fHeadY - 24.f;
+				m_tInfo.fY = fHeadY;
+				m_fShadowY = fHeadY - 20.f;
 				m_bMove = false;
 				m_iCurTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			else
 			{
-				m_tInfo.fY -= 12.f;
-				//m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
+				m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.1f;
+				if ((m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.2f < 0)
+				{
+					m_tInfo.fY = fHeadY - 5.f;
+					//m_fShadowY = fHeadY - 20.f;
+					//m_bMove = false;
+					m_iCurTileIdx = m_iHeadTileIdx;
+					m_fTime = 0.f;
+				}
 			}
-			//if (m_OrigfY - TILECY > m_tInfo.fY)
-			//{
-			//	m_tInfo.fY = m_OrigfY - TILECY;
-			//	m_bMove = false;
-			//	m_fTime = 0.f;
-			//}
-			//else
-			//{
-			//	m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-			//}
+
+			m_fShadowY += -2.f * m_fTime - (9.8f * m_fTime * m_fTime) * 0.45f;
+
 			break;
 		case DIR_DOWN:
 			m_fJumpPower = 20.f;
-			//if (m_OrigfY + TILECY < m_tInfo.fY)
-			//{
-			//	m_tInfo.fY = m_OrigfY + TILECY;
-			//	m_bMove = false;
-			//	m_fTime = 0.f;
-			//}
-			//else
-			//{
-			//	m_tInfo.fY += (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-			//}
 
-			if (fHeadY < m_tInfo.fY)
+			m_tInfo.fY += (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime);
+			if ((m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) < 0)
 			{
-				m_tInfo.fY = fHeadY - 24.f;
+				m_tInfo.fY = fHeadY;
 				m_bMove = false;
+				m_fShadowY = fHeadY - 20.f;
 				m_iCurTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
-			else
-			{
-				m_tInfo.fY += (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-			}
+			m_fShadowY -= -6.f * m_fTime - (9.8f * m_fTime * m_fTime);
+			if (m_fShadowY > fHeadY - 20.f)
+				m_fShadowY = fHeadY - 20.f;
+
 			break;
 		default:
 			break;
@@ -399,29 +324,6 @@ void CPlayer::Jumping()
 
 	}
 
-	//float	fY(0.f);
-
-	//bool	bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.fX, &fY);
-
-	//if (m_bJump)
-	//{
-	//	m_tInfo.fY -= (m_fJumpPower * sinf(45.f) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.5f;
-	//	m_fTime += 0.2f;
-
-	//	if (bLineCol && (fY < m_tInfo.fY))
-	//	{
-	//		m_bJump = false;
-	//		m_fTime = 0.f;
-	//		m_tInfo.fY = fY;
-	//	}
-	//}
-	//else if (bLineCol)
-	//{
-	//	m_tInfo.fY = fY;
-	//}
-
-
-
 }
 
 void CPlayer::Offset()
@@ -432,7 +334,7 @@ void CPlayer::Offset()
 
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 
-	if (m_eDir == DIR_RIGHT || m_eDir == DIR_LEFT)
+	//if (m_eDir == DIR_RIGHT || m_eDir == DIR_LEFT)
 	{
 		if (iOffSetminX > m_tInfo.fX + iScrollX)
 			CScrollMgr::Get_Instance()->Set_ScrollX(m_fSpeed);
@@ -446,14 +348,14 @@ void CPlayer::Offset()
 	
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	if (m_eDir == DIR_UP || m_eDir == DIR_DOWN)
-	{
-		if (iOffSetminY > m_tInfo.fY + iScrollY)
+	//if (m_eDir == DIR_UP || m_eDir == DIR_DOWN)
+	//{
+		if (iOffSetminY > m_fShadowY - 20.f + iScrollY)
 			CScrollMgr::Get_Instance()->Set_ScrollY(m_fSpeed);
 
-		if (iOffSetmaxY < m_tInfo.fY + iScrollY)
+		if (iOffSetmaxY < m_fShadowY - 20.f + iScrollY)
 			CScrollMgr::Get_Instance()->Set_ScrollY(-m_fSpeed);
-	}
+	//}
 
 
 
@@ -520,16 +422,6 @@ void CPlayer::Change_Motion()
 
 
 
-
-
-
-
-
-
-
-
-
-
 void CPlayer::Key_Input()
 {
 	float	fY(0.f);
@@ -542,6 +434,11 @@ void CPlayer::Key_Input()
 		{
 			m_eDir = DIR_LEFT;
 			m_ePrevDir = DIR_LEFT;
+			m_fShadowY = m_tRect.top + 4.f;
+
+			//m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+
+
 			if (m_bMove == true)
 			{
 				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
@@ -571,6 +468,9 @@ void CPlayer::Key_Input()
 		{
 			m_eDir = DIR_RIGHT;
 			m_ePrevDir = DIR_RIGHT;
+			m_fShadowY = m_tRect.top + 4.f;
+
+
 			if (m_bMove == true)
 			{
 				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
@@ -599,6 +499,8 @@ void CPlayer::Key_Input()
 		{
 			//m_tInfo.fY -= m_fSpeed;
 			m_eDir = DIR_UP;
+			m_fShadowY = m_tRect.top + 4.f;
+
 
 			if (m_bMove == true)
 			{
@@ -629,6 +531,8 @@ void CPlayer::Key_Input()
 		{
 			//m_tInfo.fY += m_fSpeed;
 			m_eDir = DIR_DOWN;
+			m_fShadowY = m_tRect.top + 4.f;
+
 			if (m_bMove == true)
 			{
 				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
@@ -657,6 +561,6 @@ void CPlayer::Key_Input()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Up(VK_SPACE))
 	{
-		CSoundMgr::Get_Instance()->PlaySound(L"Title.mp3", SOUND_EFFECT, g_fVolume);
+		//CSoundMgr::Get_Instance()->PlaySound(L"Title.mp3", SOUND_EFFECT, g_fVolume);
 	}
 }

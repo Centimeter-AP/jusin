@@ -1,13 +1,25 @@
 #pragma once
-#include "CObj.h"
+#include "CItem.h"
 class CShovel :
-    public CObj
+    public CItem
 {
-    // CObj을(를) 통해 상속됨
-    void Initialize() override;
-    int Update() override;
-    void Late_Update() override;
-    void Render(HDC hDC) override;
-    void Release() override;
+public:
+    CShovel() : m_iPower(0){}
+    virtual ~CShovel() {}
+public:
+    virtual void Initialize()       PURE;
+    virtual int Update()            PURE;
+    virtual void Late_Update()      PURE;
+    virtual void Render(HDC hDC)    PURE;
+    virtual void Release()          PURE;
+
+public:
+    int     Get_Power() { return m_iPower; }
+
+protected:
+    void    Get_RenderPos();
+
+protected:
+    int     m_iPower;
 };
 
