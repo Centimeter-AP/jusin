@@ -9,7 +9,8 @@
 #include "CShopWall.h"
 #include "CBedrock.h"
 #include "CStoneWall.h"
-#include "CShovel.h"
+#include "CNormalShovel.h"
+#include "CDagger.h"
 
 CTileMgr* CTileMgr::m_pInstance = nullptr;
 
@@ -48,7 +49,8 @@ int CTileMgr::Update()
 		pTile->Update();
 	for (auto& pWall : m_vecWall)
 		pWall->Update();
-
+	for (auto& pItem : m_vecItem)
+		pItem->Update();
 	return 0;
 }
 
@@ -58,6 +60,8 @@ void CTileMgr::Late_Update()
 		pTile->Late_Update();
 	for (auto& pWall : m_vecWall)
 		pWall->Late_Update();
+	for (auto& pItem : m_vecItem)
+		pItem->Late_Update();
 }
 
 void CTileMgr::Render(HDC hDC)
@@ -90,21 +94,42 @@ void CTileMgr::Render(HDC hDC)
 		}
 	}
 
-	/*** Wall Render ***/
-	//sort(m_vecWall.begin(), m_vecWall.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
-	//for (auto& pWall : m_vecWall)
-	//{
-	//	if (pWall->Get_Info().fX / TILECX >= iScrollX
-	//		&& pWall->Get_Info().fX / TILECX <= iMaxX)
-	//	{
-	//		if (pWall->Get_Info().fY / TILECY >= iScrollY
-	//			&& pWall->Get_Info().fY / TILECY <= iMaxY)
-	//		{
-	//			
-	//			pWall->Render(hDC);
-	//		}
-	//	}
-	//}
+	
+	if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_EDIT)
+	{
+		/*** Wall Render ***/
+		sort(m_vecWall.begin(), m_vecWall.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
+		for (auto& pWall : m_vecWall)
+		{
+			if (pWall->Get_Info().fX / TILECX >= iScrollX
+				&& pWall->Get_Info().fX / TILECX <= iMaxX)
+			{
+				if (pWall->Get_Info().fY / TILECY >= iScrollY
+					&& pWall->Get_Info().fY / TILECY <= iMaxY)
+				{
+
+					pWall->Render(hDC);
+				}
+			}
+		}
+
+		/*** Item Render ***/
+		sort(m_vecItem.begin(), m_vecItem.end(), [](CObj* pDst, CObj* pSrc)->bool{return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
+		for (auto& pItem : m_vecItem)
+		{
+			if (pItem->Get_Info().fX / TILECX >= iScrollX
+				&& pItem->Get_Info().fX / TILECX <= iMaxX)
+			{
+				if (pItem->Get_Info().fY / TILECY >= iScrollY
+					&& pItem->Get_Info().fY / TILECY <= iMaxY)
+				{
+					pItem->Render(hDC);
+				}
+			}
+		}
+
+	}
+
 	/*******************/
 }
 
@@ -117,6 +142,10 @@ void CTileMgr::Release()
 	for_each(m_vecWall.begin(), m_vecWall.end(), Safe_Delete<CObj*>);
 	m_vecWall.clear();
 	m_vecWall.shrink_to_fit();
+
+	for_each(m_vecItem.begin(), m_vecItem.end(), Safe_Delete<CObj*>);
+	m_vecItem.clear();
+	m_vecItem.shrink_to_fit();
 }
 
 void CTileMgr::Picking_Tile(POINT pt, int iDrawID, int iOption)
@@ -198,6 +227,7 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 		//dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(iDrawID);
 		break;
 	case OPT_WALL:
+	{
 		float fx = m_vecTile[iIndex]->Get_Info().fX;
 		float fy = m_vecTile[iIndex]->Get_Info().fY;
 		CObj* pWall(nullptr);
@@ -231,11 +261,42 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 				break;
 			}
 		}
-		break;
 	}
-	sort(m_vecWall.begin(), m_vecWall.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
-	//dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(iDrawID);
-	//dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_Option(iOption);
+		break;
+	case OPT_ITEM:
+	{
+		float fx = m_vecTile[iIndex]->Get_Info().fX;
+		float fy = m_vecTile[iIndex]->Get_Info().fY;
+		CObj* pItem(nullptr);
+		auto iter = find_if(m_vecItem.begin(), m_vecItem.end(), [fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY == fy)); });
+		
+		/*****여기 벽인거 고치기 !!! **/
+		if ((m_vecItem.end() == iter) || dynamic_cast<CWall*>(*iter)->Get_WallType() != iDrawID)
+		{
+			if (iter != m_vecItem.end())
+			{
+				Safe_Delete<CObj*>((*iter));
+				iter = m_vecItem.erase(iter);
+			}
+			switch (iDrawID)
+			{
+			case 0:
+				pItem = CAbstractFactory<CDagger>::Create_Item(fx, fy);
+				m_vecItem.push_back(pItem);
+				break;
+			case 1:
+				pItem = CAbstractFactory<CNormalShovel>::Create_Item(fx, fy);
+				m_vecItem.push_back(pItem);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	break;
+	}
+	sort(m_vecItem.begin(), m_vecItem.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
+
 }
 
 void CTileMgr::Delete_Object(POINT pt, int iOption)

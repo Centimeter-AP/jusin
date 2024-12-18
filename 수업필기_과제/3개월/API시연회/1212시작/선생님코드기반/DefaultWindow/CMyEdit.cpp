@@ -63,11 +63,15 @@ void CMyEdit::Render_InfoText(HDC hDC)
 		else
 			wsprintf(szNum, L"번호: X");
 		break;
-	case OPT_ENTITY:
-		wsprintf(szText, L"타입: 엔티티");
-		break;
 	case OPT_ITEM:
 		wsprintf(szText, L"타입: 아이템");
+		if (m_iNum == 0)
+			wsprintf(szNum, L"번호: 단검");
+		else if (m_iNum == 1)
+			wsprintf(szNum, L"번호: 기본삽");
+		break;
+	case OPT_ENTITY	:
+		wsprintf(szText, L"타입: 엔티티");
 		break;
 	case OPT_TRAP:
 		wsprintf(szText, L"타입: 트랩");
@@ -159,10 +163,10 @@ void CMyEdit::Key_Input()
 	{
 		m_enType = OPT_WALL;
 	}
-	//if (CKeyMgr::Get_Instance()->Key_Down('2'))
-	//{
-	//	m_enType = OPT_ENTITY;
-	//}
+	if (CKeyMgr::Get_Instance()->Key_Down('3'))
+	{
+		m_enType = OPT_ITEM;
+	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_OEM_MINUS))
 	{
 		if (m_iNum == 0)

@@ -45,12 +45,20 @@ public:
 		pObj->Initialize();
 		if (_isOnMap)
 			dynamic_cast<CItem*>(pObj)->Set_OnMap(_isOnMap);
-		int iTileIdx = (_fY / TILECY) * TILEX + (_fX / TILECX);
+		int iTileIdx = ((int)_fY / TILECY) * TILEX + ((int)_fX / TILECX);
 		pObj->Set_Pos(
 			(*(CTileMgr::Get_Instance()->Get_TileVec()))[iTileIdx]->Get_Info().fX,
 			(*(CTileMgr::Get_Instance()->Get_TileVec()))[iTileIdx]->Get_Info().fY - 24.f
 						);
 		//pObj->Set_Target(CObjMgr::Get_Instance()->Get_Player());
+		return pObj;
+	}
+	static CObj* Create_Item(float _fX, float _fY)
+	{
+		CObj* pObj = new T;
+		pObj->Initialize();
+		dynamic_cast<CItem*>(pObj)->Set_OnMap(true);
+		pObj->Set_Pos(_fX, _fY);
 		return pObj;
 	}
 };

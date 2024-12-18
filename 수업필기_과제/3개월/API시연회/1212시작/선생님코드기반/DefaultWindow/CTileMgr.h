@@ -54,6 +54,7 @@ private:
 
 	vector<CObj*>	m_vecTile;
 	vector<CObj*>	m_vecWall;
+	vector<CObj*>	m_vecItem;
 
 private:
 	//vector<CObj*>* m_pvecWall;
