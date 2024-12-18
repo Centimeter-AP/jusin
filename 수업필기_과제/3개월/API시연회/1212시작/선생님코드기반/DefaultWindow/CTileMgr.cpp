@@ -232,6 +232,7 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 		float fy = m_vecTile[iIndex]->Get_Info().fY;
 		CObj* pWall(nullptr);
 		auto iter = find_if(m_vecWall.begin(), m_vecWall.end(), [fx, fy](CObj* pWall) {return ((pWall->Get_Info().fX == fx) && (pWall->Get_Info().fY == fy)); });
+
 		if ((m_vecWall.end() == iter) || dynamic_cast<CWall*>(*iter)->Get_WallType() != iDrawID)
 		{
 			if (iter != m_vecWall.end())
@@ -271,20 +272,20 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 		auto iter = find_if(m_vecItem.begin(), m_vecItem.end(), [fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY == fy)); });
 		
 		/*****여기 벽인거 고치기 !!! **/
-		if ((m_vecItem.end() == iter) || dynamic_cast<CWall*>(*iter)->Get_WallType() != iDrawID)
+		if ((m_vecItem.end() == iter))
 		{
-			if (iter != m_vecItem.end())
+			if (iter != m_vecItem.end() || static_cast<CItem*>(*iter)->Get_ItemType() != iDrawID)
 			{
 				Safe_Delete<CObj*>((*iter));
 				iter = m_vecItem.erase(iter);
 			}
 			switch (iDrawID)
 			{
-			case 0:
+			case ITEM_WEAPON:
 				pItem = CAbstractFactory<CDagger>::Create_Item(fx, fy);
 				m_vecItem.push_back(pItem);
 				break;
-			case 1:
+			case ITEM_SHOVEL:
 				pItem = CAbstractFactory<CNormalShovel>::Create_Item(fx, fy);
 				m_vecItem.push_back(pItem);
 				break;
