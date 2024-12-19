@@ -27,12 +27,15 @@ public:
 
 	void		Set_Direction(DIRECTION eDir) { m_eDir = eDir; }
 	void		Set_Dead() { m_bDead = true; }
+	void		Set_HP(int	_iDmg) { m_iHP -= _iDmg; }
 	void		Set_Angle(float _fAngle) { m_fAngle = _fAngle; }
 
 	void		Set_Target(CObj* pTarget) { m_pTarget = pTarget; }
 	bool		Get_Dead() { return m_bDead; }
 
 	void		Set_ImgKey(const TCHAR* pImgKey) { m_pImgKey = pImgKey; }
+
+	int			Get_TileIdx() { return m_iTileIdx; }
 
 public:
 	virtual void		Initialize()PURE;
@@ -64,5 +67,6 @@ protected:
 
 	int			m_iHP;
 	int			m_iArmor;
+	int			m_iTileIdx;
 };
 

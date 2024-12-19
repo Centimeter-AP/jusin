@@ -267,6 +267,15 @@
     <ClInclude Include="CDagger.h">
       <Filter>01. Obj\08. Item\00. Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="CSkeleton.h">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CLobby.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageOne.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -394,6 +403,15 @@
     </ClCompile>
     <ClCompile Include="CDagger.cpp">
       <Filter>01. Obj\08. Item\00. Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkeleton.cpp">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CLobby.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageOne.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

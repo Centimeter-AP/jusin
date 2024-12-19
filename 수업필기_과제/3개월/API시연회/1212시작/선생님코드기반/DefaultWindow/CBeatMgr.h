@@ -12,6 +12,13 @@ public:
 	void		Release();
 
 public:
+	//bool		Check_PlayerMove();
+	bool		Get_PlayerActed() { return m_bIsPlayerActed; }
+	bool		Get_BeatMissed() { return m_bIsBeatMissed; }
+	void		Set_PlayerActed(bool _bAct) { m_bIsPlayerActed = _bAct; }
+	void		Set_BeatMissed(bool _bMiss) { m_bIsBeatMissed = _bMiss; }
+
+public:
 	static CBeatMgr* Get_Instance()
 	{
 		if (nullptr == m_pInstance)
@@ -34,4 +41,7 @@ private:
 	
 	ULONGLONG	m_ullTimeChecker;
 	ULONGLONG	m_ullTimeTicker;
+
+	bool		m_bIsPlayerActed;
+	bool		m_bIsBeatMissed;
 };

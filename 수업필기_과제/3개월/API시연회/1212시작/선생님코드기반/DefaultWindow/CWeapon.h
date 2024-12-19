@@ -3,7 +3,7 @@
 class CWeapon : public CItem
 {
 public:
-	CWeapon() {}
+	CWeapon() : m_iDamage(0){}
 	virtual ~CWeapon(){}
 
 public:
@@ -13,9 +13,9 @@ public:
 	virtual void Render(HDC hDC)	PURE;
 	virtual void Release()			PURE;
 
-
+	int		Get_Damage() { return m_iDamage; }
 protected:
-
+	int		m_iDamage
 	
 };
 

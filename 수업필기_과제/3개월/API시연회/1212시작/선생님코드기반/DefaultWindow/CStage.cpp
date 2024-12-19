@@ -9,6 +9,7 @@
 #include "CBeatMgr.h"
 #include "CNormalShovel.h"
 #include "CDagger.h"
+#include "CSoundMgr.h"
 
 CStage::CStage()
 {
@@ -34,6 +35,10 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 500 , 385));
 	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 
+
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster>::Create(452,385));
+
+	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
 	//CObjMgr::Get_Instance()->
 
 	//for (int i = 0; i < 3; ++i)

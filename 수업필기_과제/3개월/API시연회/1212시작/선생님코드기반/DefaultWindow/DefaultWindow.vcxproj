@@ -150,6 +150,7 @@
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CLine.h" />
     <ClInclude Include="CLineMgr.h" />
+    <ClInclude Include="CLobby.h" />
     <ClInclude Include="CLogo.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
@@ -169,8 +170,10 @@
     <ClInclude Include="CShield.h" />
     <ClInclude Include="CShopWall.h" />
     <ClInclude Include="CShovel.h" />
+    <ClInclude Include="CSkeleton.h" />
     <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CStage.h" />
+    <ClInclude Include="CStageOne.h" />
     <ClInclude Include="CStoneWall.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTileMgr.h" />
@@ -198,6 +201,7 @@
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CLine.cpp" />
     <ClCompile Include="CLineMgr.cpp" />
+    <ClCompile Include="CLobby.cpp" />
     <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
@@ -217,8 +221,10 @@
     <ClCompile Include="CShield.cpp" />
     <ClCompile Include="CShopWall.cpp" />
     <ClCompile Include="CShovel.cpp" />
+    <ClCompile Include="CSkeleton.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CStage.cpp" />
+    <ClCompile Include="CStageOne.cpp" />
     <ClCompile Include="CStoneWall.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTileMgr.cpp" />

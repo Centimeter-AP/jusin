@@ -60,6 +60,33 @@ CObj* CObjMgr::Is_Item_Exist(float fx, float fy)
 	//return false;
 }
 
+CObj* CObjMgr::Is_Monster_Exist(float fx, float fy)
+{
+	if (!m_ObjList[OBJ_MONSTER].empty())
+	{
+		auto iter = find_if(m_ObjList[OBJ_MONSTER].begin(), m_ObjList[OBJ_MONSTER].end(),
+			[fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY == fy)); });
+		if (iter == m_ObjList[OBJ_MONSTER].end())
+			return nullptr;
+		else
+			return (*iter);
+	}
+}
+
+CObj* CObjMgr::Is_Monster_Exist(int	_iTileIdx)
+{
+	if (!m_ObjList[OBJ_MONSTER].empty())
+	{
+		auto iter = find_if(m_ObjList[OBJ_MONSTER].begin(), m_ObjList[OBJ_MONSTER].end(),
+			[_iTileIdx](CObj* pItem) {return (pItem->Get_TileIdx() == _iTileIdx); });
+		if (iter == m_ObjList[OBJ_MONSTER].end())
+			return nullptr;
+		else
+			return (*iter);
+	}
+}
+
+
 void CObjMgr::Add_Object(OBJID eID, CObj* pObj)
 {
 	if (OBJ_END <= eID || nullptr == pObj)

@@ -12,8 +12,8 @@
 #include "CNormalShovel.h"
 #include "CBedrock.h"
 #include "CDagger.h"
+#include "CBeatMgr.h"
 
-float	g_fVolume(1.f);
 
 CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f), m_OrigfY(0.f),
@@ -197,10 +197,18 @@ bool CPlayer::Can_Move()
 
 	CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
 	CObj* pHeadItem = CObjMgr::Get_Instance()->Is_Item_Exist(fHeadX, fHeadY);
+	CObj* pHeadMonster = CObjMgr::Get_Instance()->Is_Monster_Exist(m_iHeadTileIdx);
 	if (pHeadWall != nullptr)		// 벽 검사
 	{
 		CTileMgr::Get_Instance()->Break_Wall(pHeadWall, static_cast<CShovel*>(m_Itemlist[ITEM_SHOVEL].front()));
-
+		return false;
+	}
+	else if (pHeadMonster != nullptr)
+	{
+		//Attack
+		{
+			pHeadMonster->Set_HP(static_cast<CWeapon*>(m_Itemlist[ITEM_WEAPON].front())->Get_Damage());
+		}
 		return false;
 	}
 	else if (pHeadItem != nullptr) // 아이템 검사
@@ -438,7 +446,7 @@ void CPlayer::Key_Input()
 
 			//m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
 
-
+			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 			if (m_bMove == true)
 			{
 				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
@@ -470,6 +478,7 @@ void CPlayer::Key_Input()
 			m_ePrevDir = DIR_RIGHT;
 			m_fShadowY = m_tRect.top + 4.f;
 
+			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 
 			if (m_bMove == true)
 			{
@@ -501,6 +510,7 @@ void CPlayer::Key_Input()
 			m_eDir = DIR_UP;
 			m_fShadowY = m_tRect.top + 4.f;
 
+			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 
 			if (m_bMove == true)
 			{
@@ -532,6 +542,7 @@ void CPlayer::Key_Input()
 			//m_tInfo.fY += m_fSpeed;
 			m_eDir = DIR_DOWN;
 			m_fShadowY = m_tRect.top + 4.f;
+			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 
 			if (m_bMove == true)
 			{

@@ -13,6 +13,7 @@
 #include "CTileMgr.h"
 #include "CSoundMgr.h"
 
+float	g_fVolume(0.5f);
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount64()), m_iFPS(0)

@@ -150,3 +150,11 @@ void CSoundMgr::LoadSoundFile()
 
 	_findclose(handle);
 }
+
+void CSoundMgr::PlaySound_DigVoice()
+{
+	TCHAR szKey[32];
+	wsprintf(szKey, L"vo_cad_dig_0%d.wav", rand() % 4 + 1);
+	CSoundMgr::Get_Instance()->StopSound(SOUND_VOCAL);
+	CSoundMgr::Get_Instance()->PlaySound(szKey, SOUND_VOCAL, 0.32f);
+}

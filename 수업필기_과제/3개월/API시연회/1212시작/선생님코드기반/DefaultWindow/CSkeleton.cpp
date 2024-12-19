@@ -1,22 +1,14 @@
 #include "pch.h"
-#include "CMonster.h"
+#include "CSkeleton.h"
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CTileMgr.h"
+#include "CBeatMgr.h"
 
-CMonster::CMonster()
-{
-}
-
-CMonster::~CMonster()
-{
-    Release();
-}
-
-void CMonster::Initialize()
+void CSkeleton::Initialize()
 {
     m_tInfo.fCX = 48.f;
-    m_tInfo.fCY = 48.f;
+    m_tInfo.fCY = 50.f;
     m_fSpeed = 3.f;
 
     //CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Monster/Monster.bmp", L"Monster");
@@ -30,23 +22,40 @@ void CMonster::Initialize()
     m_eRender = RENDER_GAMEOBJECT;
 }
 
-int CMonster::Update()
+int CSkeleton::Update()
 {
     if (m_bDead)
         return OBJ_DEAD;
-
-   
+    if (CBeatMgr::Get_Instance()->Get_PlayerActed() || CBeatMgr::Get_Instance()->Get_BeatMissed())
+    {
+        if (m_eCurState == AFTER_JUMP)
+            m_eCurState = BEFORE_JUMP;
+        else
+            m_eCurState = AFTER_JUMP;
+    }
     __super::Update_Rect();
 
     return OBJ_NOEVENT;
 }
 
-void CMonster::Late_Update()
+void CSkeleton::Late_Update()
 {
- 
+    switch (m_eCurState)
+    {
+    case CSkeleton::BEFORE_JUMP:
+
+        break;
+    case CSkeleton::AFTER_JUMP:
+
+        break;
+    default:
+        break;
+    }
+
+    
 }
 
-void CMonster::Render(HDC hDC)
+void CSkeleton::Render(HDC hDC)
 {
     HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
 
@@ -69,6 +78,6 @@ void CMonster::Render(HDC hDC)
     //    RGB(255, 255, 255));		// 제거할 색상
 }
 
-void CMonster::Release()
+void CSkeleton::Release()
 {
 }

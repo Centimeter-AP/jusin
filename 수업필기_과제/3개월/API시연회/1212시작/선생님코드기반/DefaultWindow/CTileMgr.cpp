@@ -11,6 +11,7 @@
 #include "CStoneWall.h"
 #include "CNormalShovel.h"
 #include "CDagger.h"
+#include "CSoundMgr.h"
 
 CTileMgr* CTileMgr::m_pInstance = nullptr;
 
@@ -207,7 +208,17 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 		{
 			Safe_Delete<CObj*>((*iter));
 			iter = m_vecWall.erase(iter);
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"mov_dig_dirt.wav", SOUND_EFFECT, g_fVolume);
+			CSoundMgr::Get_Instance()->PlaySound_DigVoice();
+
 		}
+		else
+		{
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"mov_dig_fail.wav", SOUND_EFFECT, g_fVolume);
+		}
+		
 	}
 	_pShovel->Set_Using(true);
 }
@@ -271,7 +282,6 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 		CObj* pItem(nullptr);
 		auto iter = find_if(m_vecItem.begin(), m_vecItem.end(), [fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY - 8 <= fy && pItem->Get_Info().fY >= fy)); });
 		
-		/*****여기 벽인거 고치기 !!! **/
 		if ((m_vecItem.end() == iter) || dynamic_cast<CItem*>(*iter)->Get_ItemType() != iDrawID)
 		{
 			if (iter != m_vecItem.end())

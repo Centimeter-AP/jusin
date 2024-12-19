@@ -19,6 +19,10 @@ public:
 
 	CObj* Is_Item_Exist(float fx, float fy);
 
+	CObj* Is_Monster_Exist(float fx, float fy);
+
+	CObj* Is_Monster_Exist(int _iTileIdx);
+
 
 public:
 	void		Add_Object(OBJID eID, CObj* pObj);

@@ -3,7 +3,7 @@
 class CItem : public CObj
 {
 public:
-	CItem() : m_eItemType(ITEM_END),m_bOnMap(false), m_bUsing(false), m_iShowFrame(20), m_iIdleFrame(100), m_iFrameTicker(0), m_iTileIdx(0), m_bIsPlayerOnTile(false) {}
+	CItem() : m_eItemType(ITEM_END),m_bOnMap(false), m_bUsing(false), m_iShowFrame(20), m_iIdleFrame(100), m_iFrameTicker(0), m_bIsPlayerOnTile(false) {}
 	virtual ~CItem() { }
 public:
     virtual void Initialize()       PURE;
@@ -30,7 +30,6 @@ protected:
     int     m_iShowFrame;
     int     m_iIdleFrame;
     int     m_iFrameTicker;
-    int     m_iTileIdx;
     ITEMLIST    m_eItemType;
 };
 

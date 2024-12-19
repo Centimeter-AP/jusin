@@ -38,8 +38,8 @@ void CMyEdit::Late_Update()
 void CMyEdit::Render_InfoText(HDC hDC)
 {
 	TCHAR szText[32];
-	TCHAR szNum[32];
 	wsprintf(szText, L"타입: X");
+	TCHAR szNum[32];
 	wsprintf(szNum, L"번호: X");
 	switch (m_enType)
 	{
