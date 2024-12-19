@@ -269,12 +269,12 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 		float fx = m_vecTile[iIndex]->Get_Info().fX;
 		float fy = m_vecTile[iIndex]->Get_Info().fY;
 		CObj* pItem(nullptr);
-		auto iter = find_if(m_vecItem.begin(), m_vecItem.end(), [fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY == fy)); });
+		auto iter = find_if(m_vecItem.begin(), m_vecItem.end(), [fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY - 8 <= fy && pItem->Get_Info().fY >= fy)); });
 		
 		/*****여기 벽인거 고치기 !!! **/
-		if ((m_vecItem.end() == iter))
+		if ((m_vecItem.end() == iter) || dynamic_cast<CItem*>(*iter)->Get_ItemType() != iDrawID)
 		{
-			if (iter != m_vecItem.end() || static_cast<CItem*>(*iter)->Get_ItemType() != iDrawID)
+			if (iter != m_vecItem.end())
 			{
 				Safe_Delete<CObj*>((*iter));
 				iter = m_vecItem.erase(iter);
@@ -296,6 +296,7 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 	}
 	break;
 	}
+
 	sort(m_vecItem.begin(), m_vecItem.end(), [](CObj* pDst, CObj* pSrc)->bool {return pDst->Get_Info().fY < pSrc->Get_Info().fY; });
 
 }
