@@ -1,8 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,c++
 
-!fmodL_vc.lib
-!fmod_vc.lib
 ### C++ ###
 # Prerequisites
 *.d
@@ -437,3 +435,5 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,c++
+/수업필기_과제/3개월/API시연회/1212시작/선생님코드기반/DefaultWindow/fmodL_vc.lib
+/수업필기_과제/3개월/API시연회/1212시작/선생님코드기반/DefaultWindow/fmod_vc.lib

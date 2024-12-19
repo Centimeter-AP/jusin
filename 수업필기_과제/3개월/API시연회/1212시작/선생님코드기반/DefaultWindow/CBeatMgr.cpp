@@ -23,9 +23,12 @@ int CBeatMgr::Update()
 	m_llTimeChecker = std::chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - m_tBGMStart);
 	if (m_llTimeChecker.count() >= 521)
 	{
-		m_tBGMStart = chrono::system_clock::now();
-		m_tTimeStart = chrono::system_clock::now();
-		m_bRightTimeBeat = true;
+		if (m_bRightTimeBeat == false)
+		{
+			m_tBGMStart = chrono::system_clock::now();
+			m_tTimeStart = chrono::system_clock::now();
+			m_bRightTimeBeat = true;
+		}
 	}
 	if (std::chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - m_tTimeStart).count() > 100)
 	{

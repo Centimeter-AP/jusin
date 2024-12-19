@@ -481,4 +481,12 @@
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="fmod_vc.lib">
+      <Filter>소스 파일</Filter>
+    </Library>
+    <Library Include="fmodL_vc.lib">
+      <Filter>소스 파일</Filter>
+    </Library>
+  </ItemGroup>
 </Project>
