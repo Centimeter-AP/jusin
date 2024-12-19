@@ -19,6 +19,7 @@ void CSkeleton::Initialize()
 
     m_pImgKey = L"Monster";
 
+    m_eDir = DIR_END;
     m_eRender = RENDER_GAMEOBJECT;
 }
 

@@ -15,7 +15,7 @@ public:
 
 	int		Get_Damage() { return m_iDamage; }
 protected:
-	int		m_iDamage
+	int		m_iDamage;
 	
 };
 

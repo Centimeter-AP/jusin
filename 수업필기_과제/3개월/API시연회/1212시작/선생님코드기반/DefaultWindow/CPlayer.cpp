@@ -29,7 +29,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	//m_tInfo = { WINCX * 0.5f + 24.f, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
-	m_tInfo = { 500, 385, PLAYERCX, PLAYERCY };
+	m_tInfo = { 404, 337, PLAYERCX, PLAYERCY };
 	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
 
 	m_iCurTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
@@ -207,7 +207,11 @@ bool CPlayer::Can_Move()
 	{
 		//Attack
 		{
-			pHeadMonster->Set_HP(static_cast<CWeapon*>(m_Itemlist[ITEM_WEAPON].front())->Get_Damage());
+			//pHeadMonster->Set_HP(static_cast<CWeapon*>(m_Itemlist[ITEM_WEAPON].front())->Get_Damage());
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"sfx_general_hit.wav", SOUND_EFFECT, g_fVolume);
+			CSoundMgr::Get_Instance()->PlaySound_AttackVoice();
+
 		}
 		return false;
 	}
