@@ -19,6 +19,8 @@ public:
 
 	CObj* Is_Item_Exist(float fx, float fy);
 
+	CObj* Is_Item_Exist(int _iTileIdx);
+
 	CObj* Is_Monster_Exist(float fx, float fy);
 
 	CObj* Is_Monster_Exist(int _iTileIdx);

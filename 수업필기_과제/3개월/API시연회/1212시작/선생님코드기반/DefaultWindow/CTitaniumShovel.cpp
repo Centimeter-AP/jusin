@@ -1,11 +1,11 @@
 #include "pch.h"
-#include "CNormalShovel.h"
+#include "CTitaniumShovel.h"
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CObjMgr.h"
 #include "CTileMgr.h"
 
-void CNormalShovel::Initialize()
+void CTitaniumShovel::Initialize()
 {
     m_tInfo.fCX = 48.f;
     m_tInfo.fCY = 78.f;
@@ -19,12 +19,11 @@ void CNormalShovel::Initialize()
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/Shovels.bmp", L"Shovels");
     m_eRender = RENDER_EFFECT;
-    m_iPower = POWER_ONE;
+    m_iPower = POWER_TWO;
     m_eItemType = ITEM_SHOVEL;
-
 }
 
-int CNormalShovel::Update()
+int CTitaniumShovel::Update()
 {
     if (m_bUsing)
     {
@@ -61,7 +60,7 @@ int CNormalShovel::Update()
     return OBJ_NOEVENT;
 }
 
-void CNormalShovel::Late_Update()
+void CTitaniumShovel::Late_Update()
 {
     if (m_bUsing)
     {
@@ -78,7 +77,7 @@ void CNormalShovel::Late_Update()
     }
 }
 
-void CNormalShovel::Render(HDC hDC)
+void CTitaniumShovel::Render(HDC hDC)
 {
     HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
 
@@ -95,7 +94,7 @@ void CNormalShovel::Render(HDC hDC)
                 (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
                 (int)m_tInfo.fCY,
                 hMemDC,						// 복사할 이미지 DC	
-                0,							// 비트맵 출력 시작 좌표(Left, top)
+                48,							// 비트맵 출력 시작 좌표(Left, top)
                 0,
                 (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
                 (int)m_tInfo.fCY,
@@ -110,7 +109,7 @@ void CNormalShovel::Render(HDC hDC)
             (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
             (int)m_tInfo.fCY,
             hMemDC,						// 복사할 이미지 DC	
-            0,							// 비트맵 출력 시작 좌표(Left, top)
+            48,							// 비트맵 출력 시작 좌표(Left, top)
             0,
             (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
             (int)m_tInfo.fCY,
@@ -120,6 +119,6 @@ void CNormalShovel::Render(HDC hDC)
         return;
 }
 
-void CNormalShovel::Release()
+void CTitaniumShovel::Release()
 {
 }

@@ -45,17 +45,32 @@ CObj* CObjMgr::Get_Target(OBJID eID, CObj* pDst)
 CObj* CObjMgr::Is_Item_Exist(float fx, float fy)
 {
 
-	//if (!m_ObjList[OBJ_ITEM].empty())
-	//{
-	//	auto iter = find_if(m_ObjList[OBJ_ITEM].begin(), m_ObjList[OBJ_ITEM].end(),
-	//		[fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY - 8.f <= fy && pItem->Get_Info().fY >= fy)); });
-	//	// 8.f
-	//	if (iter == m_ObjList[OBJ_ITEM].end())
-	//		return nullptr;
-	//	else
-	//		return (*iter);
-	//}
-	//else
+	if (!m_ObjList[OBJ_ITEM].empty())
+	{
+		auto iter = find_if(m_ObjList[OBJ_ITEM].begin(), m_ObjList[OBJ_ITEM].end(), [fx, fy](CObj* pItem) {return ((pItem->Get_Info().fX == fx) && (pItem->Get_Info().fY - 8 <= fy && pItem->Get_Info().fY >= fy)); });
+		// 8.f
+		if (iter == m_ObjList[OBJ_ITEM].end())
+			return nullptr;
+		else
+			return (*iter);
+	}
+	else
+		return nullptr;
+	//return false;
+}
+CObj* CObjMgr::Is_Item_Exist(int	_iTileIdx)
+{
+
+	if (!m_ObjList[OBJ_ITEM].empty())
+	{
+		auto iter = find_if(m_ObjList[OBJ_ITEM].begin(), m_ObjList[OBJ_ITEM].end(),
+			[_iTileIdx](CObj* pItem) {return (pItem->Get_TileIdx() == _iTileIdx); });		// 8.f
+		if (iter == m_ObjList[OBJ_ITEM].end())
+			return nullptr;
+		else
+			return (*iter);
+	}
+	else
 		return nullptr;
 	//return false;
 }

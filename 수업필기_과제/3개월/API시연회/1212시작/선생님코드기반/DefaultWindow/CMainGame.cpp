@@ -2,9 +2,7 @@
 #include "CMainGame.h"
 #include "CAbstractFactory.h"
 #include "CObjMgr.h"
-
 #include "CCollisionMgr.h"
-
 #include "CLineMgr.h"
 #include "CKeyMgr.h"
 #include "CScrollMgr.h"
@@ -13,7 +11,7 @@
 #include "CTileMgr.h"
 #include "CSoundMgr.h"
 
-float	g_fVolume(0.5f);
+float	g_fVolume(0.3f);
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount64()), m_iFPS(0)
@@ -92,7 +90,6 @@ void CMainGame::Render()
 		0,
 		0,
 		SRCCOPY);
-
 }
 
 void CMainGame::Release()
@@ -102,7 +99,6 @@ void CMainGame::Release()
 	FreeConsole();
 
 #endif // 
-
 
 	CTileMgr::Destroy_Instance();
 	CBmpMgr::Destroy_Instance();

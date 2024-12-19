@@ -124,6 +124,48 @@
     <Filter Include="01. Obj\08. Item\00. Weapon">
       <UniqueIdentifier>{e30e6c67-eafd-466a-ad02-4836ef314285}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\08. Item\01. Shovel\Normal">
+      <UniqueIdentifier>{3e72fc79-b7b5-494a-b42c-ad90fb13689a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item\01. Shovel\Titanium">
+      <UniqueIdentifier>{1456c33d-aa33-466e-bb74-f7ff71b520ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI">
+      <UniqueIdentifier>{6ca8b8d2-30a1-4b87-9f7c-66d0b7443407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\PlayerUI">
+      <UniqueIdentifier>{9b2de9f5-0917-4eeb-ba54-a42c0087094d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\PlayerUI\PlayerHP">
+      <UniqueIdentifier>{d39d1a93-e318-4262-850e-33255a75ad53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem">
+      <UniqueIdentifier>{16a7b0a3-22a9-4143-bd95-8414c2c22947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerShovel">
+      <UniqueIdentifier>{0979c26c-6378-4368-904c-6719b6e0cca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerWeapon">
+      <UniqueIdentifier>{e72396c7-cd87-43ad-a5c7-f7ba14a9310e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerBomb">
+      <UniqueIdentifier>{d03d84ca-9d08-4559-8511-2ddd11dfd46a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney">
+      <UniqueIdentifier>{9bfdabc9-e28f-46f2-b0f5-3b727fcd6323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\BeatUI">
+      <UniqueIdentifier>{8dba1075-e4d3-4d31-86cb-adb5c0ec3e50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\BeatUI\Heartbeat">
+      <UniqueIdentifier>{60c51846-8d6e-4593-87a1-5458849e7ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\BeatUI\LeftBar">
+      <UniqueIdentifier>{6d3d5dfd-c871-426c-86d3-0e5ae3eb405f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\BeatUI\RightBar">
+      <UniqueIdentifier>{9ed4d684-f7d9-4a64-9e57-3852516ca046}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -255,9 +297,6 @@
     <ClInclude Include="CStoneWall.h">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
     </ClInclude>
-    <ClInclude Include="CNormalShovel.h">
-      <Filter>01. Obj\08. Item\01. Shovel</Filter>
-    </ClInclude>
     <ClInclude Include="CItem.h">
       <Filter>01. Obj\08. Item</Filter>
     </ClInclude>
@@ -275,6 +314,12 @@
     </ClInclude>
     <ClInclude Include="CStageOne.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CNormalShovel.h">
+      <Filter>01. Obj\08. Item\01. Shovel\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="CTitaniumShovel.h">
+      <Filter>01. Obj\08. Item\01. Shovel\Titanium</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -392,9 +437,6 @@
     <ClCompile Include="CBedrock.cpp">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
     </ClCompile>
-    <ClCompile Include="CNormalShovel.cpp">
-      <Filter>01. Obj\08. Item\01. Shovel</Filter>
-    </ClCompile>
     <ClCompile Include="CItem.cpp">
       <Filter>01. Obj\08. Item</Filter>
     </ClCompile>
@@ -412,6 +454,12 @@
     </ClCompile>
     <ClCompile Include="CStageOne.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CNormalShovel.cpp">
+      <Filter>01. Obj\08. Item\01. Shovel\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="CTitaniumShovel.cpp">
+      <Filter>01. Obj\08. Item\01. Shovel\Titanium</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@
 #include "CSoundMgr.h"
 #include "CTileMgr.h"
 #include "CNormalShovel.h"
+#include "CTitaniumShovel.h"
 #include "CBedrock.h"
 #include "CDagger.h"
 #include "CBeatMgr.h"
@@ -69,7 +70,7 @@ void CPlayer::Initialize()
 	// 최초 플레이어 init할 때 필수로 들고있어야 하는 아이템들 여기서 생성 후 아이템리스트에 별도로 보관?
 	// 좀 비효율적인 것 같긴 한데 고민하느니 일단 만들기..
 	// 플레이어말고 오브젝트매니저에서 관리하므로 release에서 관리 필요xxxx
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CNormalShovel>::Create_Item(false));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(false));
 	m_Itemlist[ITEM_SHOVEL].push_back(CObjMgr::Get_Instance()->Get_LastItem());
 	m_Itemlist[ITEM_SHOVEL].back()->Set_Target(this);
 
@@ -196,7 +197,7 @@ bool CPlayer::Can_Move()
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 
 	CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
-	CObj* pHeadItem = CObjMgr::Get_Instance()->Is_Item_Exist(fHeadX, fHeadY);
+	CObj* pHeadItem = CObjMgr::Get_Instance()->Is_Item_Exist(m_iHeadTileIdx);
 	CObj* pHeadMonster = CObjMgr::Get_Instance()->Is_Monster_Exist(m_iHeadTileIdx);
 	if (pHeadWall != nullptr)		// 벽 검사
 	{
@@ -217,7 +218,8 @@ bool CPlayer::Can_Move()
 	}
 	else if (pHeadItem != nullptr) // 아이템 검사
 	{
-		//Get_Item(pHeadItem);
+		CItem* pItem = static_cast<CItem*>(pHeadItem);
+		Get_Item(pItem);
 		return true;
 	}
 	else
@@ -225,10 +227,43 @@ bool CPlayer::Can_Move()
 
 }
 
-//void CPlayer::Get_Item()
-//{
-//
-//}
+void CPlayer::Get_Item(CItem* _pItem)
+{
+	ITEMLIST	eItemType = _pItem->Get_ItemType();
+	switch (eItemType)
+	{
+	case ITEM_WEAPON:
+		break;
+	case ITEM_SHOVEL:
+		if (!m_Itemlist[ITEM_SHOVEL].empty())
+		{
+			float	fHeadX(0.f), fHeadY(0.f);
+			fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+			fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+			static_cast<CItem*>(m_Itemlist[ITEM_SHOVEL].back())->Set_OnMap(true);
+			m_Itemlist[ITEM_SHOVEL].back()->Set_Pos(fHeadX, fHeadY - 24.f);
+			m_Itemlist[ITEM_SHOVEL].pop_back();
+			m_Itemlist[ITEM_SHOVEL].push_back(_pItem);
+			_pItem->Set_OnMap(false);
+		}
+		else
+		{
+			m_Itemlist[ITEM_SHOVEL].push_back(_pItem);
+			_pItem->Set_OnMap(false);
+		}
+		break;
+	case ITEM_ARMOR:
+		break;
+	case ITEM_HEAL:
+		break;
+	case ITEM_BOMB:
+		break;
+	case ITEM_END:
+		break;
+	default:
+		break;
+	}
+}
 
 
 void CPlayer::Jumping()

@@ -4,6 +4,7 @@
 #include "CScrewBullet.h"
 #include "CGuideBullet.h"
 
+class CItem;
 class CPlayer :    public CObj
 {
 public:
@@ -32,6 +33,8 @@ private:
     void        Change_Motion();
 
     bool        Can_Move();
+
+    void        Get_Item(CItem* _pItem);
 
 private:
     float       m_fJumpX;

@@ -177,6 +177,7 @@
     <ClInclude Include="CStoneWall.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTileMgr.h" />
+    <ClInclude Include="CTitaniumShovel.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWeapon.h" />
     <ClInclude Include="DefaultWindow.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="CStoneWall.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTileMgr.cpp" />
+    <ClCompile Include="CTitaniumShovel.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWeapon.cpp" />
     <ClCompile Include="DefaultWindow.cpp" />
