@@ -321,6 +321,9 @@
     <ClInclude Include="CTitaniumShovel.h">
       <Filter>01. Obj\08. Item\01. Shovel\Titanium</Filter>
     </ClInclude>
+    <ClInclude Include="CHeartbeat.h">
+      <Filter>01. Obj\UI\BeatUI\Heartbeat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -460,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="CTitaniumShovel.cpp">
       <Filter>01. Obj\08. Item\01. Shovel\Titanium</Filter>
+    </ClCompile>
+    <ClCompile Include="CHeartbeat.cpp">
+      <Filter>01. Obj\UI\BeatUI\Heartbeat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

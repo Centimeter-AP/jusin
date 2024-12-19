@@ -146,6 +146,7 @@
     <ClInclude Include="CDagger.h" />
     <ClInclude Include="CDirtWall.h" />
     <ClInclude Include="CGuideBullet.h" />
+    <ClInclude Include="CHeartbeat.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CLine.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="CDagger.cpp" />
     <ClCompile Include="CDirtWall.cpp" />
     <ClCompile Include="CGuideBullet.cpp" />
+    <ClCompile Include="CHeartbeat.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CLine.cpp" />

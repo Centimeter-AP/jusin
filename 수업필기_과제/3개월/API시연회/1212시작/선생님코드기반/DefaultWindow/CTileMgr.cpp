@@ -404,7 +404,7 @@ void CTileMgr::Load_Wall()
 		}
 	}
 	CloseHandle(hFile);
-	MessageBox(g_hWnd, L"Load Wall", L"己傍", MB_OK);
+	//MessageBox(g_hWnd, L"Load Wall", L"己傍", MB_OK);
 
 }
 
@@ -443,6 +443,6 @@ void CTileMgr::Load_Tile()
 
 
 	CloseHandle(hFile);
-	MessageBox(g_hWnd, L"Load Save", L"己傍", MB_OK);
+	//MessageBox(g_hWnd, L"Load Save", L"己傍", MB_OK);
 
 }

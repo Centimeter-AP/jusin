@@ -10,6 +10,7 @@
 #include "CSceneMgr.h"
 #include "CTileMgr.h"
 #include "CSoundMgr.h"
+#include "CBeatMgr.h"
 
 float	g_fVolume(0.3f);
 
@@ -54,6 +55,7 @@ void CMainGame::Initialize()
 void CMainGame::Update()
 {
 	CSceneMgr::Get_Instance()->Update();
+	CBeatMgr::Get_Instance()->Update();
 }
 
 void CMainGame::Late_Update()
