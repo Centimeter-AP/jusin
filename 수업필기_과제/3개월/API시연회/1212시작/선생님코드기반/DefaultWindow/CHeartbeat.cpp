@@ -17,12 +17,38 @@ void CHeartbeat::Initialize()
 
 int CHeartbeat::Update()
 {
-	if (CBeatMgr::Get_Instance()->Get_RightTimeBeat())
-	{
-		m_iBeat = 1;
+
+
+
+	m_llTimeChecker = (chrono::system_clock::now() - m_tBGMStart);
+	if (m_llTimeChecker.count() >= 60.0 / 115.0)
+	{ /*115bpm¾îÂ¿°Å¾ß ½Ã ¹ú*/
+		if (m_iBeat == 0)
+		{
+			m_tBGMStart = chrono::system_clock::now();
+			m_tTimeStart = chrono::system_clock::now();
+			m_iBeat = 1;
+		}
 	}
-	else
+	if (std::chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - m_tTimeStart).count() > 100)
+	{
 		m_iBeat = 0;
+	}
+
+
+
+
+
+
+
+
+
+	//if (CBeatMgr::Get_Instance()->Get_RightTimeBeat())
+	//{
+	//	m_iBeat = 1;
+	//}
+	//else
+	//	m_iBeat = 0;
 	__super::Update_Rect();
     return OBJ_NOEVENT;
 }

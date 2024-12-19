@@ -54,5 +54,5 @@ private:
 
 	chrono::system_clock::time_point m_tBGMStart;
 	chrono::system_clock::time_point m_tTimeStart;
-	chrono::milliseconds m_llTimeChecker;
+	chrono::microseconds m_llTimeChecker;
 };
