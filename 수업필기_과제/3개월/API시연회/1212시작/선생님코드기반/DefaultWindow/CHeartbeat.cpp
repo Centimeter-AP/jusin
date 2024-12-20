@@ -19,7 +19,9 @@ int CHeartbeat::Update()
 {
 
 
-
+	// 박자 안맞는거 고치고
+	// 박자 바 ui추가하고
+	// 플레이어
 	m_llTimeChecker = (chrono::system_clock::now() - m_tBGMStart);
 	if (m_llTimeChecker.count() >= 60.0 / 115.0)
 	{ /*115bpm어쩔거야 시 벌*/

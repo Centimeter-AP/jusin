@@ -12,6 +12,7 @@
 #include "CDagger.h"
 #include "CSoundMgr.h"
 #include "CHeartbeat.h"
+#include "CPlayerHP.h"
 
 CStage::CStage()
 {
@@ -37,6 +38,7 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 452 , 385));
 	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster>::Create(356,385));
 	CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());

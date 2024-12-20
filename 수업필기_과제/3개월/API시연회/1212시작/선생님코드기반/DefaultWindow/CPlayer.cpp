@@ -62,10 +62,10 @@ void CPlayer::Initialize()
 	m_fJumpPower = 9.5f;
 	m_OrigfX = m_tInfo.fX;
 	m_OrigfY = m_tInfo.fY;
-
-	
 	m_iHeadTileIdx = m_iCurTileIdx;
 
+	m_iMaxHP = 10;
+	m_iHP = 5;
 
 	// 최초 플레이어 init할 때 필수로 들고있어야 하는 아이템들 여기서 생성 후 아이템리스트에 별도로 보관?
 	// 좀 비효율적인 것 같긴 한데 고민하느니 일단 만들기..

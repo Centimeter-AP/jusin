@@ -32,6 +32,8 @@ public:
 
 	void		Set_Target(CObj* pTarget) { m_pTarget = pTarget; }
 	bool		Get_Dead() { return m_bDead; }
+	int			Get_HP() { return m_iHP; }
+	int			Get_MaxHP() { return m_iMaxHP; }
 
 	void		Set_ImgKey(const TCHAR* pImgKey) { m_pImgKey = pImgKey; }
 
@@ -66,6 +68,7 @@ protected:
 	const TCHAR*		m_pImgKey;
 
 	int			m_iHP;
+	int			m_iMaxHP;
 	int			m_iArmor;
 	int			m_iTileIdx;
 };

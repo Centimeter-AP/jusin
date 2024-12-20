@@ -324,6 +324,9 @@
     <ClInclude Include="CHeartbeat.h">
       <Filter>01. Obj\UI\BeatUI\Heartbeat</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayerHP.h">
+      <Filter>01. Obj\UI\PlayerUI\PlayerHP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -466,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="CHeartbeat.cpp">
       <Filter>01. Obj\UI\BeatUI\Heartbeat</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerHP.cpp">
+      <Filter>01. Obj\UI\PlayerUI\PlayerHP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
