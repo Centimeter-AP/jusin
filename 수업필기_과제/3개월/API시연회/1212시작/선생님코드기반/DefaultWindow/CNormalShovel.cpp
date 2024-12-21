@@ -11,6 +11,7 @@ void CNormalShovel::Initialize()
     m_tInfo.fCY = 78.f;
     m_pImgKey = L"Shovels";
     m_fSpeed = 2.f;
+    m_iImgPosX = 0;
 
 
     m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);

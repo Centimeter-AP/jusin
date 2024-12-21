@@ -7,12 +7,14 @@
 
 void CPlayerHP::Initialize()
 {
-    m_tInfo = { (float)WINCX - 70.f, 70.f, 48.f, 48.f };
-    m_pImgKey = L"PlayerHP";
+    m_tInfo = { (float)WINCX - 50.f, 50.f, 48.f, 44.f };
+    m_pImgKey = L"Heart_Full";
     m_iHP = CObjMgr::Get_Instance()->Get_Player()->Get_HP();
     m_iMaxHP = CObjMgr::Get_Instance()->Get_Player()->Get_MaxHP();
 
-    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heartbeat.bmp", L"Heartbeat");
+    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Full.bmp", L"Heart_Full");
+    //CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Half.bmp", L"Heart_Half");
+    //CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Empty.bmp", L"Heart_Empty");
     m_eRender = RENDER_UI;
 
 }
@@ -32,7 +34,7 @@ void CPlayerHP::Late_Update()
 
 void CPlayerHP::Render(HDC hDC)
 {
-    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"PlayerHP");
+    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Heart_Full");
 
     if (m_iHP % 2)
     {
@@ -53,8 +55,20 @@ void CPlayerHP::Render(HDC hDC)
     {
         for (int i = 0; i < m_iMaxHP / 2; ++i)
         {
-            Rectangle(hDC, m_tRect.left - 50.f * i, m_tRect.top,
-                m_tRect.right - 50.f * i, m_tRect.bottom);
+            //Rectangle(hDC, m_tRect.left - 50.f * i, m_tRect.top,
+            //    m_tRect.right - 50.f * i, m_tRect.bottom);
+
+            GdiTransparentBlt(hDC,					// 복사 받을 DC
+                m_tRect.left - 50.f * i,			// 복사 받을 위치 좌표 X, Y	
+                m_tRect.top,
+                m_tInfo.fCX,							// 복사 받을 이미지의 가로, 세로
+                m_tInfo.fCY,
+                hMemDC,								// 복사할 이미지 DC	
+                0,	// 비트맵 출력 시작 좌표(Left, top)
+                0,
+                m_tInfo.fCX,							// 복사할 이미지의 가로, 세로
+                m_tInfo.fCY,
+                RGB(255, 0, 255));					// 제거할 색상
         }
     }
 }

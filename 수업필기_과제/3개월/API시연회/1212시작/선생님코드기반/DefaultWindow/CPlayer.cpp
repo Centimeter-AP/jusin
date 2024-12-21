@@ -64,8 +64,8 @@ void CPlayer::Initialize()
 	m_OrigfY = m_tInfo.fY;
 	m_iHeadTileIdx = m_iCurTileIdx;
 
-	m_iMaxHP = 10;
-	m_iHP = 5;
+	m_iMaxHP = 6;
+	m_iHP = 6;
 
 	// 최초 플레이어 init할 때 필수로 들고있어야 하는 아이템들 여기서 생성 후 아이템리스트에 별도로 보관?
 	// 좀 비효율적인 것 같긴 한데 고민하느니 일단 만들기..
@@ -245,6 +245,9 @@ void CPlayer::Get_Item(CItem* _pItem)
 			m_Itemlist[ITEM_SHOVEL].pop_back();
 			m_Itemlist[ITEM_SHOVEL].push_back(_pItem);
 			_pItem->Set_OnMap(false);
+			_pItem->Set_Pos(0, 0);
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
 		}
 		else
 		{
@@ -611,6 +614,7 @@ void CPlayer::Key_Input()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Up(VK_SPACE))
 	{
-		//CSoundMgr::Get_Instance()->PlaySound(L"Title.mp3", SOUND_EFFECT, g_fVolume);
+		//CSoundMgr::Get_Instance()->StopAll();
 	}
+
 }

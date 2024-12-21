@@ -149,6 +149,7 @@
     <ClInclude Include="CHeartbeat.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CKeyMgr.h" />
+    <ClInclude Include="CLeftBar.h" />
     <ClInclude Include="CLine.h" />
     <ClInclude Include="CLineMgr.h" />
     <ClInclude Include="CLobby.h" />
@@ -165,6 +166,9 @@
     <ClInclude Include="CObjMgr.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CPlayerHP.h" />
+    <ClInclude Include="CPlayerItemUI.h" />
+    <ClInclude Include="CPlayerShovelUI.h" />
+    <ClInclude Include="CPlayerWeaponUI.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CScrewBullet.h" />
@@ -203,6 +207,7 @@
     <ClCompile Include="CHeartbeat.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
+    <ClCompile Include="CLeftBar.cpp" />
     <ClCompile Include="CLine.cpp" />
     <ClCompile Include="CLineMgr.cpp" />
     <ClCompile Include="CLobby.cpp" />
@@ -219,6 +224,9 @@
     <ClCompile Include="CObjMgr.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CPlayerHP.cpp" />
+    <ClCompile Include="CPlayerItemUI.cpp" />
+    <ClCompile Include="CPlayerShovelUI.cpp" />
+    <ClCompile Include="CPlayerWeaponUI.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScrewBullet.cpp" />

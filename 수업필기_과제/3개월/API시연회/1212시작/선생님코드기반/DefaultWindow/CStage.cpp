@@ -13,8 +13,11 @@
 #include "CSoundMgr.h"
 #include "CHeartbeat.h"
 #include "CPlayerHP.h"
+#include "CLeftBar.h"
+#include "CPlayerShovelUI.h"
+#include "CPlayerWeaponUI.h"
 
-CStage::CStage()
+CStage::CStage() : m_bBeatOne(false)
 {
 }
 
@@ -37,8 +40,13 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 452 , 385));
 	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
+
+
+
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster>::Create(356,385));
 	CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
@@ -58,6 +66,22 @@ int CStage::Update()
 	//CBeatMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 	CTileMgr::Get_Instance()->Update();
+
+	if (CBeatMgr::Get_Instance()->Get_RightTimeBeat())
+	{
+		if (m_bBeatOne == true)
+		{
+			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(true));
+			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(false));
+			//CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CRightBar>::Create());
+		}
+		m_bBeatOne = false;
+	}
+	else
+	{
+		m_bBeatOne = true;
+	}
+
 
 	return 0;
 }

@@ -327,6 +327,18 @@
     <ClInclude Include="CPlayerHP.h">
       <Filter>01. Obj\UI\PlayerUI\PlayerHP</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayerShovelUI.h">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerShovel</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerItemUI.h">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerWeaponUI.h">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerWeapon</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftBar.h">
+      <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -472,6 +484,18 @@
     </ClCompile>
     <ClCompile Include="CPlayerHP.cpp">
       <Filter>01. Obj\UI\PlayerUI\PlayerHP</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerShovelUI.cpp">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerShovel</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerItemUI.cpp">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerWeaponUI.cpp">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerWeapon</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftBar.cpp">
+      <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

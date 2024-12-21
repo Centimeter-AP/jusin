@@ -38,6 +38,9 @@ public:
 	void		Set_ImgKey(const TCHAR* pImgKey) { m_pImgKey = pImgKey; }
 
 	int			Get_TileIdx() { return m_iTileIdx; }
+	float		Get_Speed() { return m_fSpeed; }
+	void		Set_Speed(float _speed) { m_fSpeed = _speed; }
+	void		Set_SpeedReverse() { m_fSpeed *= -1.f; }
 
 public:
 	virtual void		Initialize()PURE;

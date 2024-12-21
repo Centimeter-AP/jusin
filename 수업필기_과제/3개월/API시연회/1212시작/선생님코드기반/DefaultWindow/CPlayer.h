@@ -22,7 +22,8 @@ public:
     virtual void Release() override;
 
     int         Get_CurTileIdx() { return m_iCurTileIdx; }
-
+    CObj*       Get_CurShovel() { return m_Itemlist[ITEM_SHOVEL].front(); }
+    CObj*       Get_CurWeapon() { return m_Itemlist[ITEM_WEAPON].front(); }
 
 private:
     void        Key_Input();

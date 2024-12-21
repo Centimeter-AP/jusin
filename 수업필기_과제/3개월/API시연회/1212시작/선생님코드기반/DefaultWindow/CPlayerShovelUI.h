@@ -1,14 +1,10 @@
 #pragma once
-#include "CScene.h"
-#include "CPlayer.h"
-#include "CMonster.h"
-#include "CMouse.h"
-
-class CStage : public CScene
+#include "CPlayerItemUI.h"
+class CPlayerShovelUI : public CPlayerItemUI
 {
 public:
-	CStage();
-	virtual ~CStage();
+	CPlayerShovelUI() : m_pCurShov(nullptr) {}
+	~CPlayerShovelUI() { Release(); }
 
 public:
 	void Initialize() override;
@@ -18,6 +14,6 @@ public:
 	void Release() override;
 
 private:
-	bool m_bBeatOne;
+	CObj* m_pCurShov;
 };
 

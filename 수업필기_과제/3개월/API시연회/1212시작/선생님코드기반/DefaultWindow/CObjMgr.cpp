@@ -2,6 +2,7 @@
 #include "CObjMgr.h"
 #include "CCollisionMgr.h"
 #include "CTileMgr.h"
+#include "CBeatMgr.h"
 
 CObjMgr* CObjMgr::m_pInstance = nullptr;
 
@@ -118,6 +119,7 @@ int CObjMgr::Update()
 			iter != m_ObjList[i].end(); )
 		{
 			int iResult = (*iter)->Update();
+			CBeatMgr::Get_Instance()->Update();
 
 			if (OBJ_DEAD == iResult)
 			{

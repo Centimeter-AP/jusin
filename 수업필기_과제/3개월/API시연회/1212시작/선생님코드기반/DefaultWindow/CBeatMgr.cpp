@@ -21,7 +21,7 @@ int CBeatMgr::Update()
 	// 결국 박자는 시간체크 말고 노트충돌처리로..
 	// ... 시간체크로?
 	m_llTimeChecker = std::chrono::duration_cast<std::chrono::microseconds>(chrono::system_clock::now() - m_tBGMStart);
-	if (m_llTimeChecker.count() >= 522000)
+	if (m_llTimeChecker.count() >= 521500)
 	{
 		if (m_bRightTimeBeat == false)
 		{

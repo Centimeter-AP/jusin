@@ -8,7 +8,7 @@
 void CDagger::Initialize()
 {
     m_tInfo.fCX = 26.f;
-    m_tInfo.fCY = 48.f;
+    m_tInfo.fCY = 26.f;
     m_pImgKey = L"Dagger";
     m_fSpeed = 2.f;
 

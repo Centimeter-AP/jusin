@@ -61,5 +61,17 @@ public:
 		pObj->Set_Pos(_fX, _fY);
 		return pObj;
 	}
+	static CObj* Create_Bar(bool _isLeft)
+	{
+		CObj* pObj = new T;
+		pObj->Initialize();
+		if (_isLeft == false)
+		{
+			pObj->Set_SpeedReverse();
+			pObj->Set_Pos((float)WINCX - 50.f, (float)WINCY - 70.f);
+		}
+		return pObj;
+	}
+
 };
 

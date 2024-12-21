@@ -3,7 +3,7 @@
 class CItem : public CObj
 {
 public:
-	CItem() : m_eItemType(ITEM_END),m_bOnMap(false), m_bUsing(false), m_iShowFrame(20), m_iIdleFrame(100), m_iFrameTicker(0), m_bIsPlayerOnTile(false) {}
+	CItem() : m_iImgPosX(0),m_eItemType(ITEM_END),m_bOnMap(false), m_bUsing(false), m_iShowFrame(20), m_iIdleFrame(100), m_iFrameTicker(0), m_bIsPlayerOnTile(false) {}
 	virtual ~CItem() { }
 public:
     virtual void Initialize()       PURE;
@@ -19,11 +19,13 @@ public:
     bool    Get_Using() { return m_bUsing; }
     int     Get_TileIdx() { return m_iTileIdx; }
     ITEMLIST Get_ItemType() { return m_eItemType; }
+    int     Get_ImgPosX() { return m_iImgPosX; }
 
     void    Find_TileIdx_OnMap();
     void    Find_Player_OnSameTile();
 
 protected:
+    int     m_iImgPosX;
     bool    m_bOnMap;
     bool    m_bUsing;
     bool    m_bIsPlayerOnTile;
