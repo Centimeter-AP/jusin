@@ -19,6 +19,27 @@
 #define PLAYERCX			TILECX
 #define PLAYERCY			TILECY
 
+#define G_FORCE                9.80665f
+#define SQUARE(X)            (X)*(X)
+#define RADIAN(Degree)        (Degree)*PI/180.f
+#define DEGREE(Radian)        (Radian)*180.f/PI
+
+#define KEY_DOWN(X)        CKeyMgr::Get_Instance()->Key_Down(X)
+#define KEY_PRESSING(X)        CKeyMgr::Get_Instance()->Key_Pressing(X)
+#define KEY_UP(X)        CKeyMgr::Get_Instance()->Key_Up(X)
+
+#define GET_IMAGE(X) CBmpMgr::Get_Instance()->Find_Image(X)
+#define INSERT_BMP CBmpMgr::Get_Instance()->Insert_Bmp
+
+#define SCROLLX CScrollMgr::Get_Instance()->Get_ScrollX()
+#define SCROLLY CScrollMgr::Get_Instance()->Get_ScrollY()
+
+#define ADD_OBJ CObjMgr::Get_Instance()->Add_Object
+#define CREATE_OBJ(X) CAbstractFactory< X >::Create_Obj
+#define GET_PLAYER CObjMgr::Get_Instance()->Get_Player()
+
+
+
 extern HWND		g_hWnd;
 extern float	g_fVolume;
 

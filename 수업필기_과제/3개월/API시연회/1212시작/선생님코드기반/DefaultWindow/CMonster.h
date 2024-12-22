@@ -12,5 +12,7 @@ public:
     virtual void Late_Update() override;
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
+protected:
+    enum MONSTATE { MON_IDLE, MON_AGGRO, MON_ATTACK, MON_END };
 };
 

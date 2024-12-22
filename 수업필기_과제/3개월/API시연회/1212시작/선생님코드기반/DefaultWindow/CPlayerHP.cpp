@@ -71,6 +71,27 @@ void CPlayerHP::Render(HDC hDC)
                 RGB(255, 0, 255));					// 제거할 색상
         }
     }
+
+    //int health = playerHealth; 
+    //for (int i = 0; i < MAX_HEALTH / 2; i++) 
+    //{ 
+    //    int iconX = x - (i * ICON_SIZE); 
+    //    if (health >= 2) 
+    //    {
+    //        graphics.DrawImage(fullHealthImage, iconX, y, ICON_SIZE, ICON_SIZE);
+    //        health -= 2; 
+    //    } 
+    //    else if (health == 1) 
+    //    { 
+    //        graphics.DrawImage(halfHealthImage, iconX, y, ICON_SIZE, ICON_SIZE);
+    //        health -= 1; 
+    //    } 
+    //    else 
+    //    {
+    //        graphics.DrawImage(emptyHealthImage, iconX, y, ICON_SIZE, ICON_SIZE);
+    //    } 
+    //}
+
 }
 
 void CPlayerHP::Release()

@@ -20,8 +20,9 @@ public:
 	bool		Get_RightTimeBeat() { return m_bRightTimeBeat; }
 	void		Set_PlayerActed(bool _bAct) { m_bIsPlayerActed = _bAct; }
 	void		Set_BeatMissed(bool _bMiss) { m_bIsBeatMissed = _bMiss; }
-	void		Set_BGMStart() { m_tBGMStart = chrono::system_clock::now(); }
-	void		Set_TimeStart() { m_tTimeStart = chrono::system_clock::now(); }
+	void		Set_BeatStart() { m_tBeatStart = chrono::system_clock::now(); }
+	void		Set_TimeStart() { m_tTimerRightTime = chrono::system_clock::now(); }
+	void		Set_MusicStart() { m_tMusicStart = chrono::system_clock::now(); m_tBeatStart = m_tMusicStart; }
 	
 
 public:
@@ -52,7 +53,8 @@ private:
 	bool		m_bIsBeatMissed;
 	bool		m_bRightTimeBeat;
 
-	chrono::system_clock::time_point m_tBGMStart;
-	chrono::system_clock::time_point m_tTimeStart;
+	chrono::system_clock::time_point m_tBeatStart;
+	chrono::system_clock::time_point m_tTimerRightTime;
+	chrono::system_clock::time_point m_tMusicStart;
 	chrono::microseconds m_llTimeChecker;
 };

@@ -52,7 +52,7 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 
 	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
-	CBeatMgr::Get_Instance()->Set_BGMStart();
+	CBeatMgr::Get_Instance()->Set_MusicStart();
 	//CObjMgr::Get_Instance()->
 
 	//for (int i = 0; i < 3; ++i)

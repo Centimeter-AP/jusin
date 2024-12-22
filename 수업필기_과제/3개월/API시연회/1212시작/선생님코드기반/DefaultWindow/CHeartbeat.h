@@ -19,7 +19,7 @@ private:
 	ULONGLONG m_ullBPM;
 
 	chrono::system_clock::time_point m_tBGMStart;
-	chrono::system_clock::time_point m_tTimeStart;
+	chrono::system_clock::time_point m_tTimerRightTime;
 	chrono::duration<double> m_llTimeChecker;
 
 };
