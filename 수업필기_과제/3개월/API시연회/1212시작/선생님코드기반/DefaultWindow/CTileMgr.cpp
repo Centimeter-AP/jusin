@@ -169,17 +169,17 @@ void CTileMgr::Tile_Shine()
 	{
 		if(i % 2)
 		{
-			if (dynamic_cast<CTile*>(m_vecTile[i])->Get_DrawID() == 0)
-				dynamic_cast<CTile*>(m_vecTile[i])->Set_DrawID(2);
+			if (static_cast<CTile*>(m_vecTile[i])->Get_DrawID() == 0)
+				static_cast<CTile*>(m_vecTile[i])->Set_DrawID(2);
 			else
-				dynamic_cast<CTile*>(m_vecTile[i])->Set_DrawID(0);
-		}
-		else
-		{
-			if (dynamic_cast<CTile*>(m_vecTile[i])->Get_DrawID() == 0)
-				dynamic_cast<CTile*>(m_vecTile[i])->Set_DrawID(1);
+				static_cast<CTile*>(m_vecTile[i])->Set_DrawID(0);
+		}		
+		else	
+		{		
+			if (static_cast<CTile*>(m_vecTile[i])->Get_DrawID() == 0)
+				static_cast<CTile*>(m_vecTile[i])->Set_DrawID(1);
 			else
-				dynamic_cast<CTile*>(m_vecTile[i])->Set_DrawID(0);
+				static_cast<CTile*>(m_vecTile[i])->Set_DrawID(0);
 		}
 	}
 }
@@ -211,7 +211,6 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"mov_dig_dirt.wav", SOUND_EFFECT, g_fVolume);
 			CSoundMgr::Get_Instance()->PlaySound_DigVoice();
-
 		}
 		else
 		{
@@ -221,6 +220,40 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 		
 	}
 	_pShovel->Set_Using(true);
+}
+
+CObj* CTileMgr::Check_TileObject(int _tileIdx)
+{
+	if (!m_vecTile.empty())
+	{
+		CObj** pTemp = static_cast<CTile*>(m_vecTile[_tileIdx])->Get_TileObj();
+
+		int i(0);
+		for (i = 0; i < TOBJ_END; ++i)
+		{
+			if (pTemp[i] != nullptr)
+			{
+				break;
+			}
+		}
+		switch (i)
+		{
+		case TOBJ_ENTITY:
+			
+			break;
+		case TOBJ_ITEM:
+			break;
+		case TOBJ_WALL:
+			break;
+		case TOBJ_TRAP:
+			break;
+		case TOBJ_END:
+			break;
+		default:
+			break;
+		}
+	}
+	return nullptr;
 }
 
 void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)

@@ -14,9 +14,9 @@ void CNormalShovel::Initialize()
     m_iImgPosX = 0;
 
 
-    m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
+    m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/Shovels.bmp", L"Shovels");
     m_eRender = RENDER_EFFECT;
@@ -35,6 +35,11 @@ int CNormalShovel::Update()
     }
     else if (m_bOnMap)
     {
+
+        m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
+        m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
+        m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
+
         Find_Player_OnSameTile();
 
         m_eRender = RENDER_MAPITEM;
@@ -75,7 +80,11 @@ void CNormalShovel::Late_Update()
     }
     if (m_bOnMap)
     {
-        Find_TileIdx_OnMap();
+        m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
+
+        m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
+        m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
+        //Find_TileIdx_OnMap();
     }
 }
 

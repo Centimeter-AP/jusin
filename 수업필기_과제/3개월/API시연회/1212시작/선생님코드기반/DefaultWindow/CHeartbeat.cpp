@@ -22,24 +22,32 @@ int CHeartbeat::Update()
 	// 박자 안맞는거 고치고
 	// 박자 바 ui추가하고
 	// 플레이어
-	m_llTimeChecker = (chrono::system_clock::now() - m_tBeatStart);
-	if (m_llTimeChecker.count() >= 60.0 / 115.0)
-	{ /*115bpm어쩔거야 시 벌*/
+	//m_llTimeChecker = (chrono::system_clock::now() - m_tBeatStart);
+	//if (m_llTimeChecker.count() >= 60.0 / 115.0)
+	//{ /*115bpm어쩔거야 시 벌*/
+	//	if (m_iBeat == 0)
+	//	{
+	//		m_tBeatStart = chrono::system_clock::now();
+	//		m_tTimerRightTime = chrono::system_clock::now();
+	//		m_iBeat = 1;
+	//	}
+	//}
+	//if (std::chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - m_tTimerRightTime).count() > 100)
+	//{
+	//	m_iBeat = 0;
+	//}
+
+	if (CBeatMgr::Get_Instance()->Get_RightTimeBeat())
+	{
 		if (m_iBeat == 0)
 		{
-			m_tBeatStart = chrono::system_clock::now();
-			m_tTimerRightTime = chrono::system_clock::now();
 			m_iBeat = 1;
 		}
 	}
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - m_tTimerRightTime).count() > 100)
+	else
 	{
 		m_iBeat = 0;
 	}
-
-
-
-
 
 
 

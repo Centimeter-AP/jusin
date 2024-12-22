@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "CBeatMgr.h"
+#include "Define.h"
 
 CBeatMgr* CBeatMgr::m_pInstance = nullptr;
 
+using namespace std::chrono;
 
 CBeatMgr::CBeatMgr()
 	: m_ullTimeChecker(GetTickCount64()), m_ullTimeTicker(GetTickCount64())
@@ -39,11 +41,14 @@ int CBeatMgr::Update()
 
 void CBeatMgr::Late_Update()
 {
-	if ((m_tBeatStart - m_tMusicStart).count() % (60.0 / 115.0) * 1000000.0)
-	{
+	//double dTemp = (std::chrono::duration_cast<system_clock::duration>(m_tBeatStart - m_tMusicStart)).count() / (60.0 / (double)STAGE1BPM);
+	//duration<double> dRes = duration<double>(dTemp - (double)((int)dTemp));
 
-	}
-
+	//if (dTemp - (double)((int)dTemp) > 0.150)
+	//{
+	//	m_tBeatStart = system_clock::now() - duration_cast<system_clock::duration>(dRes);
+	//	//auto temp = system_clock::now() - duration_cast<system_clock::duration>(dRes);
+	//}
 }
 
 void CBeatMgr::Render(HDC hDC)

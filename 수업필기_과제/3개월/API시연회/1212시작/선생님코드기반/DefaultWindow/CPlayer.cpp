@@ -192,6 +192,21 @@ void CPlayer::Release()
 
 bool CPlayer::Can_Move()
 {
+	CObj* pTileObj = CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
+
+	if (pTileObj == nullptr)
+	{
+		return true;
+	}
+	else if (dynamic_cast<CItem*>(pTileObj) != nullptr)
+	{
+		return true;
+	}
+	else if (dynamic_cast<CWall*>(pTileObj) != nullptr)
+	{
+
+	}
+
 	float	fHeadX(0.f), fHeadY(0.f);
 	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
@@ -241,7 +256,8 @@ void CPlayer::Get_Item(CItem* _pItem)
 			fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 			fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 			static_cast<CItem*>(m_Itemlist[ITEM_SHOVEL].back())->Set_OnMap(true);
-			m_Itemlist[ITEM_SHOVEL].back()->Set_Pos(fHeadX, fHeadY - 24.f);
+			m_Itemlist[ITEM_SHOVEL].back()->Set_TileIdx(416);
+			//m_Itemlist[ITEM_SHOVEL].back()->Set_Pos(fHeadX, fHeadY - 24.f);
 			m_Itemlist[ITEM_SHOVEL].pop_back();
 			m_Itemlist[ITEM_SHOVEL].push_back(_pItem);
 			_pItem->Set_OnMap(false);

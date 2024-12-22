@@ -5,6 +5,7 @@
 
 CTile::CTile() : m_iDrawID(0), m_iOption(0)
 {
+	ZeroMemory(m_pObject, sizeof(m_pObject));
 }
 
 CTile::~CTile()
@@ -32,6 +33,7 @@ int CTile::Update()
 
 void CTile::Late_Update()
 {
+	
 }
 
 void CTile::Render(HDC hDC)

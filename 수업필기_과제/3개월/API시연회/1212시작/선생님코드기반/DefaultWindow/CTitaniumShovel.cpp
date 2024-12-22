@@ -62,6 +62,8 @@ int CTitaniumShovel::Update()
 
 void CTitaniumShovel::Late_Update()
 {
+    m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
+    m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
     if (m_bUsing)
     {
         ++m_iFrameTicker;

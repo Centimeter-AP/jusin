@@ -18,7 +18,7 @@ private:
 	ULONGLONG m_ullTimeTick;
 	ULONGLONG m_ullBPM;
 
-	chrono::system_clock::time_point m_tBGMStart;
+	chrono::system_clock::time_point m_tBeatStart;
 	chrono::system_clock::time_point m_tTimerRightTime;
 	chrono::duration<double> m_llTimeChecker;
 
