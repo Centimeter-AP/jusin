@@ -222,7 +222,7 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 	_pShovel->Set_Using(true);
 }
 
-CObj* CTileMgr::Check_TileObject(int _tileIdx)
+bool CTileMgr::Check_TileObject(int _tileIdx)
 {
 	if (!m_vecTile.empty())
 	{
@@ -242,19 +242,41 @@ CObj* CTileMgr::Check_TileObject(int _tileIdx)
 			
 			break;
 		case TOBJ_ITEM:
+		{
+
+			list<CObj*>& temp = static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(static_cast<CItem*>(pTemp[i])->Get_ItemType());
+			static_cast<CItem*>(temp.back())->Set_OnMap(true);
+			temp.back()->Set_TileIdx(_tileIdx);
+			temp.back()->Initialize();
+			swap(temp.back(), pTemp[i]);
+
+			//temp.pop_back();
+			//temp.push_back(pTemp[i]);
+			static_cast<CItem*>(temp.back())->Set_OnMap(false);
+			temp.back()->Set_Pos(0, 0);
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+			return true;
+		}
+
 			break;
 		case TOBJ_WALL:
+			Break_Wall(pTemp[i], static_cast<CShovel*>(static_cast<CPlayer*>(GET_PLAYER)->Get_CurShovel()));
+			return false;
 			break;
 		case TOBJ_TRAP:
 			break;
 		case TOBJ_END:
+			return true;
 			break;
 		default:
 			break;
 		}
 	}
-	return nullptr;
+	return true;
 }
+
+
 
 void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 {

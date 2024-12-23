@@ -19,5 +19,7 @@ public:
 
 private:
 	bool m_bBeatOne;
+	int		m_iFrameCount;
+
 };
 

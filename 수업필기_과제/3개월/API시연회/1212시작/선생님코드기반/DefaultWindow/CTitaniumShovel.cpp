@@ -11,11 +11,12 @@ void CTitaniumShovel::Initialize()
     m_tInfo.fCY = 78.f;
     m_pImgKey = L"Shovels";
     m_fSpeed = 2.f;
-
     m_iImgPosX = 48;
-    m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
+
+
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
+    //m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/Shovels.bmp", L"Shovels");
     m_eRender = RENDER_EFFECT;
@@ -62,8 +63,6 @@ int CTitaniumShovel::Update()
 
 void CTitaniumShovel::Late_Update()
 {
-    m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
-    m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
     if (m_bUsing)
     {
         ++m_iFrameTicker;
@@ -96,7 +95,7 @@ void CTitaniumShovel::Render(HDC hDC)
                 (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
                 (int)m_tInfo.fCY,
                 hMemDC,						// 복사할 이미지 DC	
-                48,							// 비트맵 출력 시작 좌표(Left, top)
+                m_iImgPosX,							// 비트맵 출력 시작 좌표(Left, top)
                 0,
                 (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
                 (int)m_tInfo.fCY,
@@ -111,7 +110,7 @@ void CTitaniumShovel::Render(HDC hDC)
             (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
             (int)m_tInfo.fCY,
             hMemDC,						// 복사할 이미지 DC	
-            48,							// 비트맵 출력 시작 좌표(Left, top)
+            m_iImgPosX,							// 비트맵 출력 시작 좌표(Left, top)
             0,
             (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
             (int)m_tInfo.fCY,

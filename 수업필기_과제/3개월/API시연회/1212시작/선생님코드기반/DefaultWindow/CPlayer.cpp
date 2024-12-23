@@ -116,7 +116,6 @@ void CPlayer::Late_Update()
 	__super::Move_Frame();
 }
 
-
 void CPlayer::Render(HDC hDC)
 {
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
@@ -192,20 +191,24 @@ void CPlayer::Release()
 
 bool CPlayer::Can_Move()
 {
-	CObj* pTileObj = CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
+	//return CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
 
-	if (pTileObj == nullptr)
-	{
-		return true;
-	}
-	else if (dynamic_cast<CItem*>(pTileObj) != nullptr)
-	{
-		return true;
-	}
-	else if (dynamic_cast<CWall*>(pTileObj) != nullptr)
-	{
+	//오브젝트 확인시키고
+	//플레이어랑 상호작용 시키고
+	//리턴값... 그쪽으로 갈 수 있는지 없는지 bool로?
 
-	}
+	//if (pTileObj == nullptr)
+	//{
+	//	return true;
+	//}
+	//else if (dynamic_cast<CItem*>(pTileObj) != nullptr)
+	//{
+	//	return true;
+	//}
+	//else if (dynamic_cast<CWall*>(pTileObj) != nullptr)
+	//{
+
+	//}
 
 	float	fHeadX(0.f), fHeadY(0.f);
 	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
@@ -233,18 +236,17 @@ bool CPlayer::Can_Move()
 	}
 	else if (pHeadItem != nullptr) // 아이템 검사
 	{
-		CItem* pItem = static_cast<CItem*>(pHeadItem);
-		Get_Item(pItem);
+		Get_Item(pHeadItem);
 		return true;
 	}
 	else
 		return true;
-
+	return true;
 }
 
-void CPlayer::Get_Item(CItem* _pItem)
+void CPlayer::Get_Item(CObj* _pItem)
 {
-	ITEMLIST	eItemType = _pItem->Get_ItemType();
+	ITEMLIST	eItemType = dynamic_cast<CItem*>(_pItem)->Get_ItemType();
 	switch (eItemType)
 	{
 	case ITEM_WEAPON:
@@ -252,26 +254,30 @@ void CPlayer::Get_Item(CItem* _pItem)
 	case ITEM_SHOVEL:
 		if (!m_Itemlist[ITEM_SHOVEL].empty())
 		{
-			float	fHeadX(0.f), fHeadY(0.f);
-			fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-			fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+			//float	fHeadX(0.f), fHeadY(0.f);
+			//fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+			//fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 			static_cast<CItem*>(m_Itemlist[ITEM_SHOVEL].back())->Set_OnMap(true);
-			m_Itemlist[ITEM_SHOVEL].back()->Set_TileIdx(416);
-			//m_Itemlist[ITEM_SHOVEL].back()->Set_Pos(fHeadX, fHeadY - 24.f);
-			m_Itemlist[ITEM_SHOVEL].pop_back();
-			m_Itemlist[ITEM_SHOVEL].push_back(_pItem);
-			_pItem->Set_OnMap(false);
+			m_Itemlist[ITEM_SHOVEL].back()->Set_TileIdx(m_iHeadTileIdx);
+			m_Itemlist[ITEM_SHOVEL].back()->Initialize();
+			dynamic_cast<CItem*>(_pItem)->Set_OnMap(false);
 			_pItem->Set_Pos(0, 0);
+			swap(m_Itemlist[ITEM_SHOVEL].back(), _pItem);
+
+			/*m_Itemlist[ITEM_SHOVEL].pop_back();
+			m_Itemlist[ITEM_SHOVEL].push_back(_pItem);*/
+			
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
 		}
 		else
 		{
 			m_Itemlist[ITEM_SHOVEL].push_back(_pItem);
-			_pItem->Set_OnMap(false);
+			dynamic_cast<CItem*>(_pItem)->Set_OnMap(false);
 		}
 		break;
 	case ITEM_ARMOR:
+
 		break;
 	case ITEM_HEAL:
 		break;
@@ -498,6 +504,7 @@ void CPlayer::Key_Input()
 	{
 		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
 		{
+			CBeatMgr::Get_Instance()->Delete_Bar_Act();
 			m_eDir = DIR_LEFT;
 			m_ePrevDir = DIR_LEFT;
 			m_fShadowY = m_tRect.top + 4.f;
@@ -532,6 +539,7 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
 		{
+			CBeatMgr::Get_Instance()->Delete_Bar_Act();
 			m_eDir = DIR_RIGHT;
 			m_ePrevDir = DIR_RIGHT;
 			m_fShadowY = m_tRect.top + 4.f;
@@ -564,6 +572,7 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_UP))
 		{
+			CBeatMgr::Get_Instance()->Delete_Bar_Act();
 			//m_tInfo.fY -= m_fSpeed;
 			m_eDir = DIR_UP;
 			m_fShadowY = m_tRect.top + 4.f;
@@ -597,6 +606,7 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_DOWN))
 		{
+			CBeatMgr::Get_Instance()->Delete_Bar_Act();
 			//m_tInfo.fY += m_fSpeed;
 			m_eDir = DIR_DOWN;
 			m_fShadowY = m_tRect.top + 4.f;
@@ -628,9 +638,9 @@ void CPlayer::Key_Input()
 		m_bBeatCorrect = false;
 
 	}
-	if (CKeyMgr::Get_Instance()->Key_Up(VK_SPACE))
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		//CSoundMgr::Get_Instance()->StopAll();
+		CBeatMgr::Get_Instance()->Delete_Bar_Act();
 	}
 
 }

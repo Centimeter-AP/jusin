@@ -21,9 +21,10 @@ public:
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
 
-    int         Get_CurTileIdx() { return m_iCurTileIdx; }
-    CObj*       Get_CurShovel() { return m_Itemlist[ITEM_SHOVEL].front(); }
-    CObj*       Get_CurWeapon() { return m_Itemlist[ITEM_WEAPON].front(); }
+    int          Get_CurTileIdx() { return m_iCurTileIdx; }
+    CObj*        Get_CurShovel() { return m_Itemlist[ITEM_SHOVEL].front(); }
+    CObj*        Get_CurWeapon() { return m_Itemlist[ITEM_WEAPON].front(); }
+    list<CObj*>& Get_ItemSlot(int _iItemlist) { return m_Itemlist[_iItemlist]; }
 
 private:
     void        Key_Input();
@@ -35,7 +36,9 @@ private:
 
     bool        Can_Move();
 
-    void        Get_Item(CItem* _pItem);
+    void Get_Item(CObj* _pItem);
+
+    //void        Get_Item(CItem* _pItem);
 
 private:
     float       m_fJumpX;

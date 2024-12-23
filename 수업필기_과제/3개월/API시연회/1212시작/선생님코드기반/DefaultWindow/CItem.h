@@ -13,26 +13,26 @@ public:
     virtual void Release()          PURE;
 
 public:
-    void    Set_OnMap(bool _bOnMap) { m_bOnMap = _bOnMap; }
-    void    Set_Using(bool _bUsing) { m_bUsing = _bUsing; }
-    bool    Get_OnMap() { return m_bOnMap; }
-    bool    Get_Using() { return m_bUsing; }
-    int     Get_TileIdx() { return m_iTileIdx; }
-    ITEMLIST Get_ItemType() { return m_eItemType; }
-    int     Get_ImgPosX() { return m_iImgPosX; }
+    void        Set_OnMap(bool _bOnMap) { m_bOnMap = _bOnMap; }
+    void        Set_Using(bool _bUsing) { m_bUsing = _bUsing; }
+    bool        Get_OnMap() { return m_bOnMap; }
+    bool        Get_Using() { return m_bUsing; }
+    int         Get_TileIdx() { return m_iTileIdx; }
+    ITEMLIST    Get_ItemType() { return m_eItemType; }
+    int         Get_ImgPosX() { return m_iImgPosX; }
 
-    void    Find_TileIdx_OnMap();
-    void    Find_Player_OnSameTile();
+    void        Find_TileIdx_OnMap();
+    void        Find_Player_OnSameTile();
 
 protected:
-    int     m_iAnimationOffsetY;
-    int     m_iImgPosX;
-    bool    m_bOnMap;
-    bool    m_bUsing;
-    bool    m_bIsPlayerOnTile;
-    int     m_iShowFrame;
-    int     m_iIdleFrame;
-    int     m_iFrameTicker;
+    int         m_iAnimationOffsetY;
+    int         m_iImgPosX;
+    bool        m_bOnMap;
+    bool        m_bUsing;
+    bool        m_bIsPlayerOnTile;
+    int         m_iShowFrame;
+    int         m_iIdleFrame;
+    int         m_iFrameTicker;
     ITEMLIST    m_eItemType;
 };
 

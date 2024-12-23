@@ -17,7 +17,7 @@
 #include "CPlayerShovelUI.h"
 #include "CPlayerWeaponUI.h"
 
-CStage::CStage() : m_bBeatOne(false)
+CStage::CStage() : m_bBeatOne(false), m_iFrameCount(0)
 {
 }
 
@@ -42,7 +42,6 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 
 
-
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
@@ -51,7 +50,7 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster>::Create(356,385));
 	CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 
-	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
+	//CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
 	//CObjMgr::Get_Instance()->
 
@@ -72,8 +71,10 @@ int CStage::Update()
 		if (m_bBeatOne == true)
 		{
 			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(true));
+			CBeatMgr::Get_Instance()->Set_Bar(CObjMgr::Get_Instance()->Get_LastBar());
 			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(false));
-			//CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CRightBar>::Create());
+			CBeatMgr::Get_Instance()->Set_Bar(CObjMgr::Get_Instance()->Get_LastBar());
+			// 바 플레이어 키 인풋 누르면 맨 앞에것들 삭제할 수 있도록 수정!!
 		}
 		m_bBeatOne = false;
 	}
@@ -81,7 +82,7 @@ int CStage::Update()
 	{
 		m_bBeatOne = true;
 	}
-
+	++m_iFrameCount;
 
 	return 0;
 }
@@ -90,6 +91,7 @@ void CStage::Late_Update()
 {
 	CObjMgr::Get_Instance()->Late_Update();
 	CTileMgr::Get_Instance()->Late_Update();
+	CBeatMgr::Get_Instance()->Late_Update();
 }
 
 

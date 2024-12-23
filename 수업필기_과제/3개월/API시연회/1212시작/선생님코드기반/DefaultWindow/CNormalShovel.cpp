@@ -16,7 +16,7 @@ void CNormalShovel::Initialize()
 
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
-    m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
+    //m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/Shovels.bmp", L"Shovels");
     m_eRender = RENDER_EFFECT;
@@ -35,11 +35,6 @@ int CNormalShovel::Update()
     }
     else if (m_bOnMap)
     {
-
-        m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
-        m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
-        m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
-
         Find_Player_OnSameTile();
 
         m_eRender = RENDER_MAPITEM;
@@ -54,7 +49,6 @@ int CNormalShovel::Update()
             m_iAnimationOffsetY += m_fSpeed;
             break;
         case 0:
-
         case 100:
             m_fSpeed *= -1.f;
             break;
@@ -80,11 +74,8 @@ void CNormalShovel::Late_Update()
     }
     if (m_bOnMap)
     {
-        m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
 
-        m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
-        m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
-        //Find_TileIdx_OnMap();
+        Find_TileIdx_OnMap();
     }
 }
 
@@ -105,7 +96,7 @@ void CNormalShovel::Render(HDC hDC)
                 (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
                 (int)m_tInfo.fCY,
                 hMemDC,						// 복사할 이미지 DC	
-                0,							// 비트맵 출력 시작 좌표(Left, top)
+                m_iImgPosX,							// 비트맵 출력 시작 좌표(Left, top)
                 0,
                 (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
                 (int)m_tInfo.fCY,
@@ -120,7 +111,7 @@ void CNormalShovel::Render(HDC hDC)
             (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
             (int)m_tInfo.fCY,
             hMemDC,						// 복사할 이미지 DC	
-            0,							// 비트맵 출력 시작 좌표(Left, top)
+            m_iImgPosX,							// 비트맵 출력 시작 좌표(Left, top)
             0,
             (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
             (int)m_tInfo.fCY,

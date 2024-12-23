@@ -1,6 +1,6 @@
 #pragma once
 
-
+class CObj;
 class CBeatMgr
 {
 private:
@@ -13,6 +13,9 @@ public:
 	void		Render(HDC hDC);
 	void		Release();
 
+
+
+
 public:
 	//bool		Check_PlayerMove();
 	bool		Get_PlayerActed() { return m_bIsPlayerActed; }
@@ -23,7 +26,11 @@ public:
 	void		Set_BeatStart() { m_tBeatStart = chrono::system_clock::now(); }
 	void		Set_TimeStart() { m_tTimerRightTime = chrono::system_clock::now(); }
 	void		Set_MusicStart() { m_tMusicStart = chrono::system_clock::now(); m_tBeatStart = m_tMusicStart; }
-	
+	void		Set_RBar(CObj* _RBar);
+	void		Set_LBar(CObj* _LBar);
+	void		Set_Bar(CObj* _Bar);
+	void		Delete_Bar(CObj* _Bar);
+	void		Delete_Bar_Act();
 
 public:
 	static CBeatMgr* Get_Instance()
@@ -52,9 +59,14 @@ private:
 	bool		m_bIsPlayerActed;
 	bool		m_bIsBeatMissed;
 	bool		m_bRightTimeBeat;
+	bool		m_bAbleBeatInterval;
 
 	chrono::system_clock::time_point m_tBeatStart;
 	chrono::system_clock::time_point m_tTimerRightTime;
 	chrono::system_clock::time_point m_tMusicStart;
 	chrono::microseconds m_llTimeChecker;
+
+	list<CObj*> m_LBeatBarlist;
+	list<CObj*> m_RBeatBarlist;
+	list<CObj*> m_BeatBarlist;
 };

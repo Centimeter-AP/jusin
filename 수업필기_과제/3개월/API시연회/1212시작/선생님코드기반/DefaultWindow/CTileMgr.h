@@ -23,7 +23,7 @@ public:
 	vector<CObj*>* Get_TileVec() { return &m_vecTile; }
 	vector<CObj*>& Get_WallVec() { return m_vecWall; }
 
-	CObj*		Check_TileObject(int _tileIdx);
+	bool		Check_TileObject(int _tileIdx);
 
 
 	void		Make_Object(POINT pt, int iDrawID, int iOption);

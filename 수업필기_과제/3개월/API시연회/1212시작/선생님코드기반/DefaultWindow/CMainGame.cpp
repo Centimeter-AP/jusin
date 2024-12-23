@@ -103,6 +103,7 @@ void CMainGame::Release()
 
 #endif // 
 
+	CBeatMgr::Destroy_Instance();
 	CTileMgr::Destroy_Instance();
 	CBmpMgr::Destroy_Instance();
 	CScrollMgr::Destroy_Instance();

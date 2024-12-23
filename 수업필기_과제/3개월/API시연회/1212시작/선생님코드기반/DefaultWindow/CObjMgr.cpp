@@ -3,6 +3,8 @@
 #include "CCollisionMgr.h"
 #include "CTileMgr.h"
 #include "CBeatMgr.h"
+#include "CItem.h"
+#include "CLeftBar.h"
 
 CObjMgr* CObjMgr::m_pInstance = nullptr;
 
@@ -103,6 +105,13 @@ CObj* CObjMgr::Is_Monster_Exist(int	_iTileIdx)
 }
 
 
+void CObjMgr::Get_Item(CItem* _pItem)
+{
+
+}
+
+
+
 void CObjMgr::Add_Object(OBJID eID, CObj* pObj)
 {
 	if (OBJ_END <= eID || nullptr == pObj)
@@ -123,7 +132,12 @@ int CObjMgr::Update()
 
 			if (OBJ_DEAD == iResult)
 			{
+				if (dynamic_cast<CLeftBar*>(*iter) != nullptr)
+				{
+					CBeatMgr::Get_Instance()->Delete_Bar((*iter));
+				}
 				Safe_Delete<CObj*>(*iter);
+				(*iter) = nullptr;
 				iter = m_ObjList[i].erase(iter);
 			}
 			else

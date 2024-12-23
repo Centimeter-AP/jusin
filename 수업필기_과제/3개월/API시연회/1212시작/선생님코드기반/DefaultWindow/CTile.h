@@ -18,11 +18,11 @@ public:
 	void		Set_Option(int _iOption) { m_iOption = _iOption; }
 
 public:
-	void Initialize() override;
-	int  Update() override;
-	void Late_Update() override;
-	void Render(HDC hDC) override;
-	void Release() override;
+	void		Initialize() override;
+	int			Update() override;
+	void		Late_Update() override;
+	void		Render(HDC hDC) override;
+	void		Release() override;
 
 private:
 	int		m_iDrawID;
