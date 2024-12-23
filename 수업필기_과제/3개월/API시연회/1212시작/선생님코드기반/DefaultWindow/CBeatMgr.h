@@ -13,24 +13,24 @@ public:
 	void		Render(HDC hDC);
 	void		Release();
 
-
-
-
 public:
 	//bool		Check_PlayerMove();
 	bool		Get_PlayerActed() { return m_bIsPlayerActed; }
 	bool		Get_BeatMissed() { return m_bIsBeatMissed; }
 	bool		Get_RightTimeBeat() { return m_bRightTimeBeat; }
+	bool		Get_AbleBeatInterval() { return m_bAbleBeatInterval; }
+
 	void		Set_PlayerActed(bool _bAct) { m_bIsPlayerActed = _bAct; }
 	void		Set_BeatMissed(bool _bMiss) { m_bIsBeatMissed = _bMiss; }
+	void		Set_AbleBeatInterrval(bool _Able) { m_bAbleBeatInterval = _Able; }
 	void		Set_BeatStart() { m_tBeatStart = chrono::system_clock::now(); }
 	void		Set_TimeStart() { m_tTimerRightTime = chrono::system_clock::now(); }
 	void		Set_MusicStart() { m_tMusicStart = chrono::system_clock::now(); m_tBeatStart = m_tMusicStart; }
-	void		Set_RBar(CObj* _RBar);
-	void		Set_LBar(CObj* _LBar);
+
 	void		Set_Bar(CObj* _Bar);
 	void		Delete_Bar(CObj* _Bar);
 	void		Delete_Bar_Act();
+
 
 public:
 	static CBeatMgr* Get_Instance()
@@ -69,4 +69,6 @@ private:
 	list<CObj*> m_LBeatBarlist;
 	list<CObj*> m_RBeatBarlist;
 	list<CObj*> m_BeatBarlist;
+
+
 };

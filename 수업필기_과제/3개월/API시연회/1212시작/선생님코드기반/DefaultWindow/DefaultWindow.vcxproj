@@ -161,6 +161,7 @@
     <ClInclude Include="CMyButton.h" />
     <ClInclude Include="CMyEdit.h" />
     <ClInclude Include="CMyMenu.h" />
+    <ClInclude Include="CNewBeatMgr.h" />
     <ClInclude Include="CNormalShovel.h" />
     <ClInclude Include="CObj.h" />
     <ClInclude Include="CObjMgr.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="CMyButton.cpp" />
     <ClCompile Include="CMyEdit.cpp" />
     <ClCompile Include="CMyMenu.cpp" />
+    <ClCompile Include="CNewBeatMgr.cpp" />
     <ClCompile Include="CNormalShovel.cpp" />
     <ClCompile Include="CObj.cpp" />
     <ClCompile Include="CObjMgr.cpp" />

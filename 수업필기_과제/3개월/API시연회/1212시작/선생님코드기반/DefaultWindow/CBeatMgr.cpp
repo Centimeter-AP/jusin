@@ -24,7 +24,7 @@ int CBeatMgr::Update()
 {
 	// 결국 박자는 시간체크 말고 노트충돌처리로..
 	// ... 시간체크로?
-	m_llTimeChecker = std::chrono::duration_cast<std::chrono::microseconds>(chrono::system_clock::now() - m_tBeatStart);
+	m_llTimeChecker = duration_cast<microseconds>(chrono::system_clock::now() - m_tBeatStart);
 	if (m_llTimeChecker.count() >= 521500)
 	{
 		if (m_bRightTimeBeat == false)
@@ -32,23 +32,35 @@ int CBeatMgr::Update()
 			m_tBeatStart = chrono::system_clock::now();
 			m_tTimerRightTime = chrono::system_clock::now();
 			m_bRightTimeBeat = true;
-			m_bAbleBeatInterval = true;
+			//m_bAbleBeatInterval = true;
 		}
 	}
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - m_tTimerRightTime).count() > 100)
+	if (duration_cast<milliseconds>(chrono::system_clock::now() - m_tTimerRightTime).count() > 30)
 	{
 		m_bRightTimeBeat = false;
 	}
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - m_tTimerRightTime).count() > 260000)
-	{
-		m_bAbleBeatInterval = false;
-	}
+	//if (duration_cast<milliseconds>(chrono::system_clock::now() - m_tTimerRightTime).count() > 260000)
+	//{
+	//	//m_bAbleBeatInterval = false;
+	//}
 	return 0;
 }
 
 void CBeatMgr::Late_Update()
 {
-	//double dTemp = (std::chrono::duration_cast<system_clock::duration>(m_tBeatStart - m_tMusicStart)).count() / (60.0 / (double)STAGE1BPM);
+	if(!m_BeatBarlist.empty())
+	{
+		if (m_BeatBarlist.front()->Get_Info().fX <= (float)WINCX * 0.5f + 80.f
+			&& m_BeatBarlist.front()->Get_Info().fX >= (float)WINCX * 0.5f - 80.f)
+		{
+			m_bAbleBeatInterval = true;
+		}
+		else
+		{
+			m_bAbleBeatInterval = false;
+		}
+	}
+	//double dTemp = (duration_cast<system_clock::duration>(m_tBeatStart - m_tMusicStart)).count() / (60.0 / (double)STAGE1BPM);
 	//duration<double> dRes = duration<double>(dTemp - (double)((int)dTemp));
 
 	//if (dTemp - (double)((int)dTemp) > 0.150)
@@ -70,14 +82,6 @@ void CBeatMgr::Release()
 void CBeatMgr::Set_Bar(CObj* _Bar)
 {
 	m_BeatBarlist.push_back(_Bar);
-}
-void CBeatMgr::Set_RBar(CObj* _RBar)
-{
-	m_RBeatBarlist.push_back(_RBar);
-}
-void CBeatMgr::Set_LBar(CObj* _LBar)
-{
-	m_LBeatBarlist.push_back(_LBar);
 }
 
 void CBeatMgr::Delete_Bar(CObj* _pBar)
@@ -104,8 +108,14 @@ void CBeatMgr::Delete_Bar(CObj* _pBar)
 void CBeatMgr::Delete_Bar_Act()
 {
 	// 입력 가능한 박자일 때만 삭제되게 조건 추가할 것 
-	m_BeatBarlist.front()->Set_Dead();
-	m_BeatBarlist.pop_front();
-	m_BeatBarlist.front()->Set_Dead();
-	m_BeatBarlist.pop_front();
+	if (m_bAbleBeatInterval == true)
+	{
+		if (!m_BeatBarlist.empty())
+		{
+			m_BeatBarlist.front()->Set_Dead();
+			m_BeatBarlist.pop_front();
+			m_BeatBarlist.front()->Set_Dead();
+			m_BeatBarlist.pop_front();
+		}
+	}
 }

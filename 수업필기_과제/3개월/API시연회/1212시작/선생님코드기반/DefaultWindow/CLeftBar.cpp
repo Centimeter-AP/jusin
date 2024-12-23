@@ -6,7 +6,7 @@
 
 void CLeftBar::Initialize()
 {
-    m_tInfo = {  50.f , (float)WINCY - 70.f, 10.f, 48.f };
+    m_tInfo = { 0.f , (float)WINCY - 70.f, 10.f, 48.f };
     m_pImgKey = L"Beatbar";
     m_fSpeed = 1.f;
 
@@ -19,7 +19,9 @@ int CLeftBar::Update()
     if (m_bDead)
         return OBJ_DEAD;
 
-    m_tInfo.fX += m_fSpeed * 3;
+    m_tInfo.fX += m_fSpeed * 4;
+
+
 
     __super::Update_Rect();
     return OBJ_NOEVENT;
@@ -29,13 +31,35 @@ void CLeftBar::Late_Update()
 {
     if (m_fSpeed < 0)
     {
-        if (m_tInfo.fX < (float)WINCX * 0.5f )
+        if (m_tInfo.fX < (float)WINCX * 0.5f - 80.f)
+        {
             m_bDead = true;
+        }
+        //if (m_tInfo.fX >= (float)WINCX * 0.5f - 80.f && m_tInfo.fX <= (float)WINCX * 0.5f + 80.f)
+        //{
+        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(true);
+
+        //}
+        //else
+        //{
+        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(false);
+        //}
     }
     else
     {
-        if (m_tInfo.fX > (float)WINCX * 0.5f )
+        if (m_tInfo.fX > (float)WINCX * 0.5f + 80.f)
+        {
             m_bDead = true;
+        }
+        //if (m_tInfo.fX <= (float)WINCX * 0.5f + 80.f && m_tInfo.fX >= (float)WINCX * 0.5f - 80.f)
+        //{
+        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(true);
+
+        //}
+        //else
+        //{
+        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(false);
+        //}
     }
 }
 

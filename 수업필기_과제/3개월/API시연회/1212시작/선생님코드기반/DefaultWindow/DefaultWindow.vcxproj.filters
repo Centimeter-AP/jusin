@@ -339,6 +339,9 @@
     <ClInclude Include="CLeftBar.h">
       <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
     </ClInclude>
+    <ClInclude Include="CNewBeatMgr.h">
+      <Filter>03. Design\BeatMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -496,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="CLeftBar.cpp">
       <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
+    </ClCompile>
+    <ClCompile Include="CNewBeatMgr.cpp">
+      <Filter>03. Design\BeatMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -67,7 +67,7 @@ public:
 		if (_isLeft == false)
 		{
 			pObj->Set_SpeedReverse();
-			pObj->Set_Pos((float)WINCX - 50.f, (float)WINCY - 70.f);
+			pObj->Set_Pos((float)WINCX, (float)WINCY - 70.f);
 		}
 		return pObj;
 	}
