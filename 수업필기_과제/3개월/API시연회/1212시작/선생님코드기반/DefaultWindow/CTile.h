@@ -11,9 +11,9 @@ public:
 public:
 	int			Get_DrawID() { return m_iDrawID; }
 	int			Get_Option() { return m_iOption; }
-	CObj**		Get_TileObj() { return m_pObject; }
+	array<CObj*, TOBJ_END>&	Get_TileObj() { return m_pObject; }
 
-
+	void		Set_TileObj(TILEOBJECT _OBJID, CObj* _Obj) { m_pObject[_OBJID] = _Obj; }
 	void		Set_DrawID(int _iDrawID) { m_iDrawID = _iDrawID;  }
 	void		Set_Option(int _iOption) { m_iOption = _iOption; }
 
@@ -27,6 +27,6 @@ public:
 private:
 	int		m_iDrawID;
 	int		m_iOption;
-	CObj*	m_pObject[TOBJ_END];
+	array<CObj*, TOBJ_END>	m_pObject;
 };
 

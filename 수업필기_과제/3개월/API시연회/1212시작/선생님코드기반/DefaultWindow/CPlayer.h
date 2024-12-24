@@ -36,7 +36,7 @@ private:
 
     bool        Can_Move();
 
-    void Get_Item(CObj* _pItem);
+    void        Get_Item(CObj* _pItem);
 
     //void        Get_Item(CItem* _pItem);
 
@@ -44,8 +44,6 @@ private:
     float       m_fJumpX;
     float       m_fJumpY;
     float       m_fJumpPower;
-    float       m_OrigfX;
-    float       m_OrigfY;
 
     float       m_fTime;
 
@@ -54,7 +52,7 @@ private:
 
     ULONGLONG   m_dwTempTick;
     
-    bool        m_bBeatCorrect;
+    //bool        m_bBeatCorrect;
     bool        m_bTemp;
 
     vector<CObj*>*	m_pvecTile;
@@ -70,7 +68,7 @@ private:
     bool        m_qltskrka;
 
 
-private:
+public:
     list<CObj*> m_Itemlist[ITEM_END];
 };
 

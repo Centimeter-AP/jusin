@@ -6,12 +6,11 @@
 
 void CLeftBar::Initialize()
 {
-    m_tInfo = { 0.f , (float)WINCY - 70.f, 10.f, 48.f };
+    m_tInfo = { 0.f , (float)WINCY - 70.f, 12.f, 60.f };
     m_pImgKey = L"Beatbar";
     m_fSpeed = 1.f;
 
-    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heartbeat.bmp", L"Beatbar");
-    m_eRender = RENDER_UI;
+    m_eRender = RENDER_BEAT;
 }
 
 int CLeftBar::Update()
@@ -36,9 +35,9 @@ void CLeftBar::Late_Update()
             {
                 CBeatMgr::Get_Instance()->Set_BeatMissed(true);
             }
-            else
-            {
-                //CBeatMgr::Get_Instance()->
+            else        // 박자 놓친 상태일 때
+            {           // 오브젝트 행동 가능 부여
+                CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
             }
         }
     }
@@ -47,14 +46,44 @@ void CLeftBar::Late_Update()
         if (m_tInfo.fX > (float)WINCX * 0.5f + CBeatMgr::Get_Instance()->Get_BeatJudgementPx())
         {
             m_bDead = true;
-            CBeatMgr::Get_Instance()->Set_BeatMissed(true);
+            if (CBeatMgr::Get_Instance()->Get_BeatMissed() == false)
+            {
+                CBeatMgr::Get_Instance()->Set_BeatMissed(true);
+            }
+        }
+        else        // 박자 놓친 상태일 때
+        {           // 오브젝트 행동 가능 부여
+            CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
         }
     }
 }
 
 void CLeftBar::Render(HDC hDC)
 {
-    Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+    Graphics graphics(hDC);
+
+    Image image(L"../content/texture/UI/BeatBar.png");
+
+    if (m_fSpeed < 0)
+    {
+        if (m_tInfo.fX > (float)WINCX * 0.5f)
+        {
+            graphics.DrawImage(&image, (int)m_tRect.left, (int)m_tRect.top, (int)m_tInfo.fCX, (int)m_tInfo.fCY);
+        }
+    }
+    else
+    {
+        if (m_tInfo.fX < (float)WINCX * 0.5f)
+        {
+            graphics.DrawImage(&image, (int)m_tRect.left, (int)m_tRect.top, (int)m_tInfo.fCX, (int)m_tInfo.fCY);
+        }
+    }
+
+
+
+    //graphics.DrawImage(&image, (int)m_tRect.left, (int)m_tRect.top, (int)m_tInfo.fCX, (int)m_tInfo.fCY);
+
+    //Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
 void CLeftBar::Release()

@@ -17,8 +17,10 @@
 
 
 CPlayer::CPlayer()
-	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f), m_OrigfY(0.f),
-	m_iCurTileIdx(0), m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f)
+	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f),
+	m_iCurTileIdx(0), m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
+	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
+	m_pvecTile(nullptr), m_qltskrka(false)
 {
 }
 
@@ -60,8 +62,6 @@ void CPlayer::Initialize()
 
 	m_eRender = RENDER_GAMEOBJECT;
 	m_fJumpPower = 9.5f;
-	m_OrigfX = m_tInfo.fX;
-	m_OrigfY = m_tInfo.fY;
 	m_iHeadTileIdx = m_iCurTileIdx;
 
 	m_iMaxHP = 6;
@@ -82,34 +82,12 @@ void CPlayer::Initialize()
 int CPlayer::Update()
 {
 	Key_Input();
-	//Change_Motion();
-	if (m_dwTempTick + 500 < GetTickCount64())
-	{
-		m_bBeatCorrect = true;
-		m_dwTempTick = GetTickCount64();
-	}
+	Jumping();
 	__super::Update_Rect();
-
-
-#ifdef  _DEBUG
-
-	//if (m_dwTime + 1000 < GetTickCount64())
-	//{
-	//	cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-	//	m_dwTime = GetTickCount64();
-	//}
-
-
-#endif //  _DEBUG
-
-
-
-
 	return OBJ_NOEVENT;
 }
 void CPlayer::Late_Update()
 {
-	Jumping();
 	Offset();
 	__super::Move_Frame();
 }
@@ -156,12 +134,12 @@ void CPlayer::Render(HDC hDC)
 			RGB(255, 0, 255));
 	}
 
-	GdiTransparentBlt(hDC,
+	GdiTransparentBlt(hDC,							//몸통
 		m_tRect.left + iScrollX,
 		m_tRect.top + iScrollY,
 		(int)m_tInfo.fCX,
 		(int)m_tInfo.fCY,
-		hMemDCarmor,
+		hMemDCarmor,													
 		(int)m_tInfo.fCX * m_tFrame.iFrameStart,
 		(int)m_tInfo.fCY * m_tFrame.iMotion,
 		PLAYERCX,
@@ -169,17 +147,17 @@ void CPlayer::Render(HDC hDC)
 		RGB(255, 0, 255));
 
 
-	GdiTransparentBlt(hDC,					// 복사 받을 DC
-		m_tRect.left + iScrollX,			// 복사 받을 위치 좌표 X, Y	
-		m_tRect.top + iScrollY,
-		PLAYERCX,							// 복사 받을 이미지의 가로, 세로
-		PLAYERCY,
-		hMemDChead,							// 복사할 이미지 DC	
-		PLAYERCX * m_tFrame.iFrameStart,	// 비트맵 출력 시작 좌표(Left, top)
-		PLAYERCY * m_tFrame.iMotion,
-		PLAYERCX,							// 복사할 이미지의 가로, 세로
-		PLAYERCY,
-		RGB(255, 0, 255));					// 제거할 색상
+	GdiTransparentBlt(hDC,							// 머리
+		m_tRect.left + iScrollX,			
+		m_tRect.top + iScrollY,				
+		PLAYERCX,							
+		PLAYERCY,							
+		hMemDChead,							
+		PLAYERCX * m_tFrame.iFrameStart,	
+		PLAYERCY * m_tFrame.iMotion,		
+		PLAYERCX,							
+		PLAYERCY,							
+		RGB(255, 0, 255));					
 
 	if (m_qltskrka == true)
 	{
@@ -191,36 +169,18 @@ void CPlayer::Render(HDC hDC)
 
 void CPlayer::Release()
 {
-
 }
 
 bool CPlayer::Can_Move()
 {
-	//return CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
-
-	//오브젝트 확인시키고
-	//플레이어랑 상호작용 시키고
-	//리턴값... 그쪽으로 갈 수 있는지 없는지 bool로?
-
-	//if (pTileObj == nullptr)
-	//{
-	//	return true;
-	//}
-	//else if (dynamic_cast<CItem*>(pTileObj) != nullptr)
-	//{
-	//	return true;
-	//}
-	//else if (dynamic_cast<CWall*>(pTileObj) != nullptr)
-	//{
-
-	//}
-
 	float	fHeadX(0.f), fHeadY(0.f);
 	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 
+	return CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
+
 	CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
-	CObj* pHeadItem = CObjMgr::Get_Instance()->Is_Item_Exist(m_iHeadTileIdx);
+ 	CObj* pHeadItem = CObjMgr::Get_Instance()->Is_Item_Exist(m_iHeadTileIdx);
 	CObj* pHeadMonster = CObjMgr::Get_Instance()->Is_Monster_Exist(m_iHeadTileIdx);
 	if (pHeadWall != nullptr)		// 벽 검사
 	{
@@ -266,7 +226,8 @@ void CPlayer::Get_Item(CObj* _pItem)
 			m_Itemlist[ITEM_SHOVEL].back()->Set_TileIdx(m_iHeadTileIdx);
 			m_Itemlist[ITEM_SHOVEL].back()->Initialize();
 			dynamic_cast<CItem*>(_pItem)->Set_OnMap(false);
-			_pItem->Set_Pos(0, 0);
+			_pItem->Set_TileIdx(0);
+			//_pItem->Set_Pos(0, 0);
 			swap(m_Itemlist[ITEM_SHOVEL].back(), _pItem);
 
 			/*m_Itemlist[ITEM_SHOVEL].pop_back();
@@ -296,7 +257,7 @@ void CPlayer::Get_Item(CObj* _pItem)
 }
 
 
-void CPlayer::Jumping()
+void CPlayer::Jumping()		// 그냥 점프하는 모션만 출력하는거
 {
 	if (m_bMove) // 실제로 타일을 이동했는가
 	{
@@ -309,8 +270,7 @@ void CPlayer::Jumping()
 		{
 		case DIR_LEFT:
 			m_fJumpPower = 9.5f;
-			// origfy가 이제 m_Curidx고
-			// 오른쪽은 m_headidx로 비교
+
 			if (fCurY < m_tInfo.fY)
 			{
 				m_tInfo.fY = fCurY;
@@ -360,8 +320,6 @@ void CPlayer::Jumping()
 				if ((m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.2f < 0)
 				{
 					m_tInfo.fY = fHeadY - 5.f;
-					//m_fShadowY = fHeadY - 20.f;
-					//m_bMove = false;
 					m_iCurTileIdx = m_iHeadTileIdx;
 					m_fTime = 0.f;
 				}
@@ -396,9 +354,6 @@ void CPlayer::Jumping()
 	else
 	{
 		m_fTime = 0.f;
-		m_OrigfX = m_tInfo.fX;
-		m_OrigfY = m_tInfo.fY;
-
 	}
 
 }
@@ -505,37 +460,41 @@ void CPlayer::Key_Input()
 
 	//if (m_bBeatCorrect)
 	{
-		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
+		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))			// 좌측
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true)
+			if (BEATMGR->Get_AbleBeatInterval() == true)		// 키 입력이 가능한 상태인지 (반박자 앞 ~ 반박자 뒤)
 			{
-				m_qltskrka = false;
-				CBeatMgr::Get_Instance()->Delete_Bar_Act();
-				m_eDir = DIR_LEFT;
-				m_ePrevDir = DIR_LEFT;
-				m_fShadowY = m_tRect.top + 4.f;
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);// 플레이어 행동 여부 true
+				CBeatMgr::Get_Instance()->Delete_Bar_Act();		// 가장 앞 노트들 삭제
 
-				//m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
-
-				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
-				if (m_bMove == true)
+				if (BEATMGR->Get_BeatMissed() == true)
 				{
-					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+					BEATMGR->Set_BeatMissed(false);
+				}
+
+				m_qltskrka = false;	// 안빗나감
+				m_eDir = DIR_LEFT;	// 좌측
+				m_ePrevDir = DIR_LEFT;	// 좌측보는중
+				m_fShadowY = m_tRect.top + 4.f; // 그림자 top 위치 조정
+
+				if (m_bMove == true) // lobby인지 확인하는 코드 필요? 지금은 작동x
+				{
+					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;			// 의도한 것 : 이미 움직이고 있던 상태에서 다시 입력시 가려던 타일로 즉시 이동
+					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;	// 근데 나온 것: 않되
 					m_iCurTileIdx = m_iHeadTileIdx;
 				}
-				--m_iHeadTileIdx;
-				if (Can_Move())
+				--m_iHeadTileIdx;	// 가고자 하는 타일(좌측)
+				if (Can_Move())		// 이동이 가능할 떄
 				{
-					m_bMove = true;
-					m_tFrame.iFrameStart = 0;
+					m_bMove = true;	// jumping 수행 (변수 이름을 바꾸기?)
+					m_tFrame.iFrameStart = 0; // 애니메이션 프레임 제어
 				}
 				else
-					m_iHeadTileIdx = m_iCurTileIdx;
+					m_iHeadTileIdx = m_iCurTileIdx;	// 이동이 안되면 가려는 타일을 취소하고 현재 타일로 설정
 			}
 			else
 			{
-				m_qltskrka = true;
+				m_qltskrka = true;		// !!감나빗
 			}
 
 			CTileMgr::Get_Instance()->Tile_Shine();
@@ -552,13 +511,14 @@ void CPlayer::Key_Input()
 		{
 			if (BEATMGR->Get_AbleBeatInterval() == true)
 			{
-				m_qltskrka = false;
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+
+				m_qltskrka = false;
 				m_eDir = DIR_RIGHT;
 				m_ePrevDir = DIR_RIGHT;
 				m_fShadowY = m_tRect.top + 4.f;
 
-				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 
 				if (m_bMove == true)
 				{
@@ -670,7 +630,7 @@ void CPlayer::Key_Input()
 
 #endif //  _DEBUG
 		}
-		m_bBeatCorrect = false;
+		//m_bBeatCorrect = false;
 
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))

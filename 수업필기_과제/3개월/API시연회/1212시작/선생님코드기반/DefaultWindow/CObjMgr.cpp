@@ -63,11 +63,10 @@ CObj* CObjMgr::Is_Item_Exist(float fx, float fy)
 }
 CObj* CObjMgr::Is_Item_Exist(int	_iTileIdx)
 {
-
 	if (!m_ObjList[OBJ_ITEM].empty())
 	{
 		auto iter = find_if(m_ObjList[OBJ_ITEM].begin(), m_ObjList[OBJ_ITEM].end(),
-			[_iTileIdx](CObj* pItem) {return (pItem->Get_TileIdx() == _iTileIdx); });		// 8.f
+			[_iTileIdx](CObj* pItem) {return (pItem->Get_TileIdx() == _iTileIdx); });		// TlqkftoRL
 		if (iter == m_ObjList[OBJ_ITEM].end())
 			return nullptr;
 		else
@@ -89,6 +88,8 @@ CObj* CObjMgr::Is_Monster_Exist(float fx, float fy)
 		else
 			return (*iter);
 	}
+	else
+		return nullptr;
 }
 
 CObj* CObjMgr::Is_Monster_Exist(int	_iTileIdx)
@@ -102,6 +103,8 @@ CObj* CObjMgr::Is_Monster_Exist(int	_iTileIdx)
 		else
 			return (*iter);
 	}
+	else
+		return nullptr;
 }
 
 

@@ -2,10 +2,10 @@
 #include "CTile.h"
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
+#include "CObjMgr.h"
 
-CTile::CTile() : m_iDrawID(0), m_iOption(0)
+CTile::CTile() : m_iDrawID(0), m_iOption(0), m_pObject{0,}
 {
-	ZeroMemory(m_pObject, sizeof(m_pObject));
 }
 
 CTile::~CTile()

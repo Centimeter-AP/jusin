@@ -42,11 +42,6 @@ int CBeatMgr::Update()
 		m_bRightTimeBeat = false;
 	}
 
-	if (m_bIsBeatMissed == true)
-	{
-		// true인 상태에서 beatbar삭제시 object 행동 true?
-	}
-
 	return 0;
 }
 

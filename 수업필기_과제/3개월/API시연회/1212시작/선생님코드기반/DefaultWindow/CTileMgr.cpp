@@ -226,7 +226,7 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 {
 	if (!m_vecTile.empty())
 	{
-		CObj** pTemp = static_cast<CTile*>(m_vecTile[_tileIdx])->Get_TileObj();
+		auto pTemp = static_cast<CTile*>(m_vecTile[_tileIdx])->Get_TileObj();
 
 		int i(0);
 		for (i = 0; i < TOBJ_END; ++i)
@@ -243,22 +243,17 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 			break;
 		case TOBJ_ITEM:
 		{
-
 			list<CObj*>& temp = static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(static_cast<CItem*>(pTemp[i])->Get_ItemType());
 			static_cast<CItem*>(temp.back())->Set_OnMap(true);
 			temp.back()->Set_TileIdx(_tileIdx);
 			temp.back()->Initialize();
 			swap(temp.back(), pTemp[i]);
-
-			//temp.pop_back();
-			//temp.push_back(pTemp[i]);
 			static_cast<CItem*>(temp.back())->Set_OnMap(false);
-			temp.back()->Set_Pos(0, 0);
+			temp.back()->Set_TileIdx(0);
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
 			return true;
 		}
-
 			break;
 		case TOBJ_WALL:
 			Break_Wall(pTemp[i], static_cast<CShovel*>(static_cast<CPlayer*>(GET_PLAYER)->Get_CurShovel()));
@@ -462,8 +457,6 @@ void CTileMgr::Load_Wall()
 	//MessageBox(g_hWnd, L"Load Wall", L"¼º°ø", MB_OK);
 
 }
-
-
 
 
 void CTileMgr::Load_Tile()

@@ -21,7 +21,9 @@ public:
 	bool		Get_AbleBeatInterval() { return m_bAbleBeatInterval; }
 	int			Get_BeatGapFrameCount() { return m_iBeatGapFrameCount; }
 	float		Get_BeatJudgementPx() { return m_fBeatJudgementPx; }
+	bool		Get_ObjectAbleToMove() { return m_bObjectAbleToMove; }
 
+	void		Set_ObjectAbleToMove(bool _Able) { m_bObjectAbleToMove = _Able; }
 	void		Set_PlayerActed(bool _bAct) { m_bIsPlayerActed = _bAct; }
 	void		Set_BeatMissed(bool _bMiss) { m_bIsBeatMissed = _bMiss; }
 	void		Set_AbleBeatInterrval(bool _Able) { m_bAbleBeatInterval = _Able; }
@@ -61,6 +63,8 @@ private:
 	bool		m_bIsBeatMissed;
 	bool		m_bRightTimeBeat;
 	bool		m_bAbleBeatInterval;
+
+	bool		m_bObjectAbleToMove;
 
 	chrono::system_clock::time_point m_tBeatStart;
 	chrono::system_clock::time_point m_tTimerRightTime;
