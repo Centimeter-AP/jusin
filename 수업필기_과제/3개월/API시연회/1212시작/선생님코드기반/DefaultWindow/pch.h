@@ -27,6 +27,11 @@
 // Release 일 때
 #pragma comment(lib, "fmod_vc.lib")
 
+#include "ole2.h"
+
+#include "gdiplus.h"
+#pragma comment(lib,"gdiplus")
+
 #ifdef _DEBUG
 
 #define _CRTDBG_MAP_ALLOC
@@ -42,5 +47,7 @@
 #endif
 
 using namespace std;
+using namespace Gdiplus;
 
 #endif //PCH_H
+

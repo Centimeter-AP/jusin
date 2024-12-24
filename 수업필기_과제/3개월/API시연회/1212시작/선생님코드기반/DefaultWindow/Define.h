@@ -37,8 +37,10 @@
 #define ADD_OBJ CObjMgr::Get_Instance()->Add_Object
 #define CREATE_OBJ(X) CAbstractFactory< X >::Create_Obj
 #define GET_PLAYER CObjMgr::Get_Instance()->Get_Player()
+#define BEATMGR CBeatMgr::Get_Instance()
 
-#define	STAGE1BPM		115;
+#define	STAGE1BPM		115
+#define STAGE1BPMSEC	(int)((60.f / (float)STAGE1BPM) * 1000000.f)
 
 extern HWND		g_hWnd;
 extern float	g_fVolume;

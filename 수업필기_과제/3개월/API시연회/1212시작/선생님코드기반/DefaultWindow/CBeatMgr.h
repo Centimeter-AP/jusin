@@ -19,6 +19,8 @@ public:
 	bool		Get_BeatMissed() { return m_bIsBeatMissed; }
 	bool		Get_RightTimeBeat() { return m_bRightTimeBeat; }
 	bool		Get_AbleBeatInterval() { return m_bAbleBeatInterval; }
+	int			Get_BeatGapFrameCount() { return m_iBeatGapFrameCount; }
+	float		Get_BeatJudgementPx() { return m_fBeatJudgementPx; }
 
 	void		Set_PlayerActed(bool _bAct) { m_bIsPlayerActed = _bAct; }
 	void		Set_BeatMissed(bool _bMiss) { m_bIsBeatMissed = _bMiss; }
@@ -30,7 +32,6 @@ public:
 	void		Set_Bar(CObj* _Bar);
 	void		Delete_Bar(CObj* _Bar);
 	void		Delete_Bar_Act();
-
 
 public:
 	static CBeatMgr* Get_Instance()
@@ -66,9 +67,9 @@ private:
 	chrono::system_clock::time_point m_tMusicStart;
 	chrono::microseconds m_llTimeChecker;
 
-	list<CObj*> m_LBeatBarlist;
-	list<CObj*> m_RBeatBarlist;
 	list<CObj*> m_BeatBarlist;
 
+	int			m_iBeatGapFrameCount;
+	float		m_fBeatJudgementPx;
 
 };

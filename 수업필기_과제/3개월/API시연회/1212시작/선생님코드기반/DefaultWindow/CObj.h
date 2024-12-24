@@ -43,6 +43,14 @@ public:
 	void		Set_Speed(float _speed) { m_fSpeed = _speed; }
 	void		Set_SpeedReverse() { m_fSpeed *= -1.f; }
 
+	int			Get_TileX() { m_iTileX = m_iTileIdx / TILEX; return m_iTileX; }
+	int			Get_TileY() { m_iTileY = m_iTileIdx % TILEX; return m_iTileY; }
+	void		Set_TileX(int _X) { m_iTileX = _X; m_iTileIdx = m_iTileX * TILEX + m_iTileY; }
+	void		Set_TileY(int _Y) { m_iTileX = _Y; m_iTileIdx = m_iTileX * TILEX + m_iTileY; }
+	void		Set_TileXY(int _X, int _Y) { m_iTileX = _X; m_iTileX = _Y;  m_iTileIdx = m_iTileX * TILEX + m_iTileY; }
+
+	int			Find_MyTileIdx() { return (((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX)); }
+
 public:
 	virtual void		Initialize()PURE;
 	virtual int			Update()PURE;
@@ -71,9 +79,12 @@ protected:
 
 	const TCHAR*		m_pImgKey;
 
+
 	int			m_iHP;
 	int			m_iMaxHP;
 	int			m_iArmor;
 	int			m_iTileIdx;
+	int			m_iTileX;
+	int			m_iTileY;
 };
 

@@ -21,8 +21,6 @@ int CLeftBar::Update()
 
     m_tInfo.fX += m_fSpeed * 4;
 
-
-
     __super::Update_Rect();
     return OBJ_NOEVENT;
 }
@@ -31,35 +29,26 @@ void CLeftBar::Late_Update()
 {
     if (m_fSpeed < 0)
     {
-        if (m_tInfo.fX < (float)WINCX * 0.5f - 80.f)
+        if (m_tInfo.fX < (float)WINCX * 0.5f - CBeatMgr::Get_Instance()->Get_BeatJudgementPx())
         {
             m_bDead = true;
+            if (CBeatMgr::Get_Instance()->Get_BeatMissed() == false)
+            {
+                CBeatMgr::Get_Instance()->Set_BeatMissed(true);
+            }
+            else
+            {
+                //CBeatMgr::Get_Instance()->
+            }
         }
-        //if (m_tInfo.fX >= (float)WINCX * 0.5f - 80.f && m_tInfo.fX <= (float)WINCX * 0.5f + 80.f)
-        //{
-        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(true);
-
-        //}
-        //else
-        //{
-        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(false);
-        //}
     }
     else
     {
-        if (m_tInfo.fX > (float)WINCX * 0.5f + 80.f)
+        if (m_tInfo.fX > (float)WINCX * 0.5f + CBeatMgr::Get_Instance()->Get_BeatJudgementPx())
         {
             m_bDead = true;
+            CBeatMgr::Get_Instance()->Set_BeatMissed(true);
         }
-        //if (m_tInfo.fX <= (float)WINCX * 0.5f + 80.f && m_tInfo.fX >= (float)WINCX * 0.5f - 80.f)
-        //{
-        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(true);
-
-        //}
-        //else
-        //{
-        //    CBeatMgr::Get_Instance()->Set_AbleBeatInterrval(false);
-        //}
     }
 }
 

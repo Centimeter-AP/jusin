@@ -52,7 +52,7 @@ private:
     STATE       m_eCurState;
     STATE       m_ePreState;
 
-    ULONGLONG       m_dwTempTick;
+    ULONGLONG   m_dwTempTick;
     
     bool        m_bBeatCorrect;
     bool        m_bTemp;
@@ -67,6 +67,7 @@ private:
 
     float       m_fShadowY;
 
+    bool        m_qltskrka;
 
 
 private:

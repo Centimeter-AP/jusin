@@ -33,7 +33,7 @@ void CPlayer::Initialize()
 	m_tInfo = { 404, 337, PLAYERCX, PLAYERCY };
 	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
 
-	m_iCurTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
+	m_iCurTileIdx = Find_MyTileIdx();
 	m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
 	m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
 	m_fShadowY = m_tInfo.fY - (m_tInfo.fCY * 0.5f) + 4.f;
@@ -88,8 +88,6 @@ int CPlayer::Update()
 		m_bBeatCorrect = true;
 		m_dwTempTick = GetTickCount64();
 	}
-
-
 	__super::Update_Rect();
 
 
@@ -182,6 +180,13 @@ void CPlayer::Render(HDC hDC)
 		PLAYERCX,							// 복사할 이미지의 가로, 세로
 		PLAYERCY,
 		RGB(255, 0, 255));					// 제거할 색상
+
+	if (m_qltskrka == true)
+	{
+		TCHAR szText[32];
+		wsprintf(szText, L"감나빗");
+		TextOut(hDC, WINCX / 2 - 20, WINCY - 150, szText, lstrlen(szText));
+	}
 }
 
 void CPlayer::Release()
@@ -400,7 +405,6 @@ void CPlayer::Jumping()
 
 void CPlayer::Offset()
 {
-
 	int		iOffSetminX = (WINCX >> 1) - 10;
 	int		iOffSetmaxX = (WINCX >> 1) + 10;
 
@@ -493,7 +497,6 @@ void CPlayer::Change_Motion()
 }
 
 
-
 void CPlayer::Key_Input()
 {
 	float	fY(0.f);
@@ -504,28 +507,36 @@ void CPlayer::Key_Input()
 	{
 		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
 		{
-			CBeatMgr::Get_Instance()->Delete_Bar_Act();
-			m_eDir = DIR_LEFT;
-			m_ePrevDir = DIR_LEFT;
-			m_fShadowY = m_tRect.top + 4.f;
-
-			//m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
-
-			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
-			if (m_bMove == true)
+			if (BEATMGR->Get_AbleBeatInterval() == true)
 			{
-				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
-			}
-			--m_iHeadTileIdx;
-			if (Can_Move())
-			{
-				m_bMove = true;
-				m_tFrame.iFrameStart = 0;
+				m_qltskrka = false;
+				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+				m_eDir = DIR_LEFT;
+				m_ePrevDir = DIR_LEFT;
+				m_fShadowY = m_tRect.top + 4.f;
+
+				//m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
+				if (m_bMove == true)
+				{
+					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+					m_iCurTileIdx = m_iHeadTileIdx;
+				}
+				--m_iHeadTileIdx;
+				if (Can_Move())
+				{
+					m_bMove = true;
+					m_tFrame.iFrameStart = 0;
+				}
+				else
+					m_iHeadTileIdx = m_iCurTileIdx;
 			}
 			else
-				m_iHeadTileIdx = m_iCurTileIdx;
+			{
+				m_qltskrka = true;
+			}
 
 			CTileMgr::Get_Instance()->Tile_Shine();
 
@@ -539,27 +550,35 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
 		{
-			CBeatMgr::Get_Instance()->Delete_Bar_Act();
-			m_eDir = DIR_RIGHT;
-			m_ePrevDir = DIR_RIGHT;
-			m_fShadowY = m_tRect.top + 4.f;
-
-			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
-
-			if (m_bMove == true)
+			if (BEATMGR->Get_AbleBeatInterval() == true)
 			{
-				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
-			}
-			++m_iHeadTileIdx;
-			if (Can_Move())
-			{
-				m_bMove = true;
-				m_tFrame.iFrameStart = 0;
+				m_qltskrka = false;
+				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+				m_eDir = DIR_RIGHT;
+				m_ePrevDir = DIR_RIGHT;
+				m_fShadowY = m_tRect.top + 4.f;
+
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
+
+				if (m_bMove == true)
+				{
+					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+					m_iCurTileIdx = m_iHeadTileIdx;
+				}
+				++m_iHeadTileIdx;
+				if (Can_Move())
+				{
+					m_bMove = true;
+					m_tFrame.iFrameStart = 0;
+				}
+				else
+					m_iHeadTileIdx = m_iCurTileIdx;
 			}
 			else
-				m_iHeadTileIdx = m_iCurTileIdx;
+			{
+				m_qltskrka = true;
+			}
 			CTileMgr::Get_Instance()->Tile_Shine();
 
 #ifdef  _DEBUG
@@ -572,27 +591,35 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_UP))
 		{
-			CBeatMgr::Get_Instance()->Delete_Bar_Act();
-			//m_tInfo.fY -= m_fSpeed;
-			m_eDir = DIR_UP;
-			m_fShadowY = m_tRect.top + 4.f;
-
-			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
-
-			if (m_bMove == true)
+			if (BEATMGR->Get_AbleBeatInterval() == true)
 			{
-				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
-			}
-			m_iHeadTileIdx -= TILEX;
-			if (Can_Move())
-			{
-				m_bMove = true;
-				m_tFrame.iFrameStart = 0;
+				m_qltskrka = false;
+				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+				//m_tInfo.fY -= m_fSpeed;
+				m_eDir = DIR_UP;
+				m_fShadowY = m_tRect.top + 4.f;
+
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
+
+				if (m_bMove == true)
+				{
+					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+					m_iCurTileIdx = m_iHeadTileIdx;
+				}
+				m_iHeadTileIdx -= TILEX;
+				if (Can_Move())
+				{
+					m_bMove = true;
+					m_tFrame.iFrameStart = 0;
+				}
+				else
+					m_iHeadTileIdx = m_iCurTileIdx;
 			}
 			else
-				m_iHeadTileIdx = m_iCurTileIdx;
+			{
+				m_qltskrka = true;
+			}
 
 			CTileMgr::Get_Instance()->Tile_Shine();
 
@@ -606,26 +633,34 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_DOWN))
 		{
-			CBeatMgr::Get_Instance()->Delete_Bar_Act();
-			//m_tInfo.fY += m_fSpeed;
-			m_eDir = DIR_DOWN;
-			m_fShadowY = m_tRect.top + 4.f;
-			CBeatMgr::Get_Instance()->Set_PlayerActed(true);
+			if (BEATMGR->Get_AbleBeatInterval() == true)
+			{
+				m_qltskrka = false;
+				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+				//m_tInfo.fY += m_fSpeed;
+				m_eDir = DIR_DOWN;
+				m_fShadowY = m_tRect.top + 4.f;
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 
-			if (m_bMove == true)
-			{
-				m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-				m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
-			}
-			m_iHeadTileIdx += TILEX;
-			if (Can_Move())
-			{
-				m_bMove = true;
-				m_tFrame.iFrameStart = 0;
+				if (m_bMove == true)
+				{
+					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
+					m_iCurTileIdx = m_iHeadTileIdx;
+				}
+				m_iHeadTileIdx += TILEX;
+				if (Can_Move())
+				{
+					m_bMove = true;
+					m_tFrame.iFrameStart = 0;
+				}
+				else
+					m_iHeadTileIdx = m_iCurTileIdx;
 			}
 			else
-				m_iHeadTileIdx = m_iCurTileIdx;
+			{
+				m_qltskrka = true;
+			}
 
 			CTileMgr::Get_Instance()->Tile_Shine();
 #ifdef  _DEBUG

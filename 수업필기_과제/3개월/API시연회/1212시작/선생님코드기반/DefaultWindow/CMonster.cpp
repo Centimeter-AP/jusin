@@ -3,6 +3,7 @@
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CTileMgr.h"
+#include "CObjMgr.h"
 
 CMonster::CMonster()
 {
@@ -24,6 +25,7 @@ void CMonster::Initialize()
     m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
+    m_pTarget = GET_PLAYER;
 
     m_pImgKey = L"Monster";
 
@@ -43,7 +45,7 @@ int CMonster::Update()
 
 void CMonster::Late_Update()
 {
- 
+
 }
 
 void CMonster::Render(HDC hDC)

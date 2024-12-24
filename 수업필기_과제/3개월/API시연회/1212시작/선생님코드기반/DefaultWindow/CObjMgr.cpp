@@ -128,7 +128,7 @@ int CObjMgr::Update()
 			iter != m_ObjList[i].end(); )
 		{
 			int iResult = (*iter)->Update();
-			CBeatMgr::Get_Instance()->Update();
+			//CBeatMgr::Get_Instance()->Update();
 
 			if (OBJ_DEAD == iResult)
 			{
