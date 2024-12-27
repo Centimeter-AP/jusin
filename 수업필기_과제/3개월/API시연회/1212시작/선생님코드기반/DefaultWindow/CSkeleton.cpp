@@ -10,10 +10,10 @@
 void CSkeleton::Initialize()
 {
     m_tInfo.fCX = 48.f;
-    m_tInfo.fCY = 48.f;
+    m_tInfo.fCY = 50.f;
     m_fSpeed = 6.f;
 
-    //CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Monster/Monster.bmp", L"Monster");
+    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Skeletons.bmp", L"Skeleton");
     m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
     m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();
 
@@ -22,7 +22,13 @@ void CSkeleton::Initialize()
     m_pTarget = GET_PLAYER;
     m_eDir = DIR_UP;
 
-    m_pImgKey = L"Monster";
+    m_tFrame.iFrameStart = 0;
+    m_tFrame.iFrameEnd = 3;
+    m_tFrame.iMotion = 0;
+    m_tFrame.dwSpeed = 100;
+    m_tFrame.dwTime = GetTickCount64();
+
+    m_pImgKey = L"Skeleton";
     m_fJumpPower = 9.5f;
     Get_TileX();
     Get_TileY();
@@ -39,9 +45,17 @@ int CSkeleton::Update()
     if (BEATMGR->Get_ObjectAbleToMove() == true)
     {
         if (m_eCurState == AFTER_ACT)
+        {
+            BEATMGR->Set_ObjectAbleToMove(false);
             m_eCurState = BEFORE_ACT;
+            m_iBeforeAct = 1;
+            return OBJ_NOEVENT;
+        }
         else
+        {
+            m_iBeforeAct = 0;
             m_eCurState = AFTER_ACT;
+        }
 
         m_iTileIdx = Find_MyTileIdx();
         if (m_pTarget != nullptr)
@@ -81,25 +95,25 @@ void CSkeleton::Late_Update()
 
 void CSkeleton::Render(HDC hDC)
 {
-    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
+    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Skeleton");
 
     int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
     int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
-    Rectangle(hDC, m_tRect.left + iScrollX, m_tRect.top + iScrollY, m_tRect.right + iScrollX, m_tRect.bottom + iScrollY);
+    //Rectangle(hDC, m_tRect.left + iScrollX, m_tRect.top + iScrollY, m_tRect.right + iScrollX, m_tRect.bottom + iScrollY);
 
+    GdiTransparentBlt(hDC,							
+        m_tRect.left + iScrollX,
+        m_tRect.top + iScrollY,
+        (int)m_tInfo.fCX,
+        (int)m_tInfo.fCY,
+        hMemDC,
+        (int)m_tInfo.fCX * m_tFrame.iFrameStart + m_iActMotionOffset * m_iBeforeAct,
+        (int)m_tInfo.fCY * m_tFrame.iMotion,
+        PLAYERCX,
+        PLAYERCY,
+        RGB(255, 0, 255));
 
-    //GdiTransparentBlt(hDC,			// 복사 받을 DC
-    //    m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
-    //    m_tRect.top + iScrollY,
-    //    (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
-    //    (int)m_tInfo.fCY,
-    //    hMemDC,						// 복사할 이미지 DC	
-    //    0,							// 비트맵 출력 시작 좌표(Left, top)
-    //    0,
-    //    (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
-    //    (int)m_tInfo.fCY,
-    //    RGB(255, 255, 255));		// 제거할 색상 
 }
 
 void CSkeleton::Release()

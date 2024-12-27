@@ -257,6 +257,10 @@ bool CMonster::Can_Move()
 	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 
+	int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
+
+	int iPlayerX = iPHTileIdx % TILEX;
+	int iPlayerY = iPHTileIdx / TILEX;
 	//return CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
 
 	CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
@@ -272,7 +276,12 @@ bool CMonster::Can_Move()
 			return true;
 		return false;
 	}
+	else if (iPHTileIdx == m_iHeadTileIdx)
+	{
+		return false;
+	}
 	else
 		return true;
 	return true;
+
 }

@@ -81,6 +81,8 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if (m_bDead)
+		return OBJ_DEAD;
 	Key_Input();
 	Jumping();
 	m_iTileIdx = m_iCurTileIdx;
