@@ -35,6 +35,7 @@ int CStoneWall::Update()
 	if (m_bDead)
 		return OBJ_DEAD;
 
+	m_iTileIdx = Find_MyTileIdx();
 	__super::Update_Rect();
 	return OBJ_NOEVENT;
 }

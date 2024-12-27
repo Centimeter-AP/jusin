@@ -5,16 +5,17 @@ class CMonster :   public CObj
 public:
     CMonster();
     virtual ~CMonster();
-    
 public:
     virtual void Initialize() override;
     virtual int Update() override;
     virtual void Late_Update() override;
-    void Find_Player();
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
+    void Find_Player();
 
     void        Jumping();
+    bool        Can_Move();
+
 protected:
     enum MONSTATE { MON_IDLE, MON_AGGRO, MON_ATTACK, MON_END };
 
@@ -26,4 +27,3 @@ protected:
     bool        m_bMove;
     float       m_fShadowY;
 };
-

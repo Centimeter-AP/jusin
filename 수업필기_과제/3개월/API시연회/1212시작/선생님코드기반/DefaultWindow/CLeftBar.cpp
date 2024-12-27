@@ -46,15 +46,15 @@ void CLeftBar::Late_Update()
         if (m_tInfo.fX > (float)WINCX * 0.5f + CBeatMgr::Get_Instance()->Get_BeatJudgementPx())
         {
             m_bDead = true;
-            if (CBeatMgr::Get_Instance()->Get_BeatMissed() == false)
-            {
-                CBeatMgr::Get_Instance()->Set_BeatMissed(true);
-            }
+        //    if (CBeatMgr::Get_Instance()->Get_BeatMissed() == false)
+        //    {
+        //        CBeatMgr::Get_Instance()->Set_BeatMissed(true);
+        //    }
         }
-        else        // 박자 놓친 상태일 때
-        {           // 오브젝트 행동 가능 부여
-            CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
-        }
+        //else        // 박자 놓친 상태일 때
+        //{           // 오브젝트 행동 가능 부여
+        //    CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
+        //}
     }
 }
 

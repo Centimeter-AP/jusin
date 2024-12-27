@@ -3,37 +3,60 @@
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CTileMgr.h"
+#include "CObjMgr.h"
 #include "CBeatMgr.h"
+#include "CSoundMgr.h"
 
 void CSkeleton::Initialize()
 {
     m_tInfo.fCX = 48.f;
-    m_tInfo.fCY = 50.f;
-    m_fSpeed = 3.f;
+    m_tInfo.fCY = 48.f;
+    m_fSpeed = 6.f;
 
     //CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Monster/Monster.bmp", L"Monster");
+    m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
+    m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();
 
-    m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
-    m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
-    m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
+    m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
+    m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+    m_pTarget = GET_PLAYER;
+    m_eDir = DIR_UP;
 
     m_pImgKey = L"Monster";
-
-    m_eDir = DIR_END;
+    m_fJumpPower = 9.5f;
+    Get_TileX();
+    Get_TileY();
     m_eRender = RENDER_GAMEOBJECT;
+    m_iMaxHP = 6;
+    m_iHP = 6;
 }
 
 int CSkeleton::Update()
 {
     if (m_bDead)
         return OBJ_DEAD;
-    if (CBeatMgr::Get_Instance()->Get_PlayerActed() || CBeatMgr::Get_Instance()->Get_BeatMissed())
+
+    if (BEATMGR->Get_ObjectAbleToMove() == true)
     {
-        if (m_eCurState == AFTER_JUMP)
-            m_eCurState = BEFORE_JUMP;
+        if (m_eCurState == AFTER_ACT)
+            m_eCurState = BEFORE_ACT;
         else
-            m_eCurState = AFTER_JUMP;
+            m_eCurState = AFTER_ACT;
+
+        m_iTileIdx = Find_MyTileIdx();
+        if (m_pTarget != nullptr)
+        {
+            Find_Player();
+        }
+        if (Can_Move())
+            m_bMove = true;
+        else
+            m_iHeadTileIdx = m_iCurTileIdx;
+        BEATMGR->Set_ObjectAbleToMove(false);
     }
+
+    Jumping();
+
     __super::Update_Rect();
 
     return OBJ_NOEVENT;
@@ -43,17 +66,17 @@ void CSkeleton::Late_Update()
 {
     switch (m_eCurState)
     {
-    case CSkeleton::BEFORE_JUMP:
+    case CSkeleton::BEFORE_ACT:
 
         break;
-    case CSkeleton::AFTER_JUMP:
+    case CSkeleton::AFTER_ACT:
 
         break;
     default:
         break;
     }
+    __super::Move_Frame();
 
-    
 }
 
 void CSkeleton::Render(HDC hDC)
@@ -76,7 +99,7 @@ void CSkeleton::Render(HDC hDC)
     //    0,
     //    (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
     //    (int)m_tInfo.fCY,
-    //    RGB(255, 255, 255));		// 제거할 색상
+    //    RGB(255, 255, 255));		// 제거할 색상 
 }
 
 void CSkeleton::Release()

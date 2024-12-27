@@ -25,7 +25,7 @@ void CTile::Initialize()
 
 int CTile::Update()
 {
-
+	m_iTileIdx = Find_MyTileIdx();
 	__super::Update_Rect();
 
 	return OBJ_NOEVENT;
@@ -33,7 +33,16 @@ int CTile::Update()
 
 void CTile::Late_Update()
 {
-	
+	for (int i = 0; i < TOBJ_END; ++i)
+	{
+		if (m_pObject[i] != nullptr)
+		{
+			if (m_pObject[i]->Get_TileIdx() != this->Get_TileIdx())
+			{
+				m_pObject[i] = nullptr;
+			}
+		}
+	}
 }
 
 void CTile::Render(HDC hDC)

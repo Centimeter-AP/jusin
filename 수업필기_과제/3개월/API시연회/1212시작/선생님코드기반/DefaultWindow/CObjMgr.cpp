@@ -107,7 +107,6 @@ CObj* CObjMgr::Is_Monster_Exist(int	_iTileIdx)
 		return nullptr;
 }
 
-
 void CObjMgr::Get_Item(CItem* _pItem)
 {
 
@@ -131,7 +130,26 @@ int CObjMgr::Update()
 			iter != m_ObjList[i].end(); )
 		{
 			int iResult = (*iter)->Update();
-			//CBeatMgr::Get_Instance()->Update();
+
+			switch (i)
+			{
+			case OBJ_PLAYER:
+				break;
+			case OBJ_MONSTER:
+				static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[(*iter)->Find_MyTileIdx()])->Set_TileObj(TOBJ_ENTITY, (*iter));
+				break;
+			case OBJ_WALL:
+				//static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[(*iter)->Find_MyTileIdx()])->Set_TileObj(TOBJ_WALL, (*iter));
+				break;
+			case OBJ_ITEM:
+			{
+				//if ((*iter)->Find_MyTileIdx() != (*CTileMgr::Get_Instance()->Get_TileVec())[(*iter)->Get_TileIdx()]->Get_TileIdx())
+					static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[(*iter)->Get_TileIdx()])->Set_TileObj(TOBJ_ITEM, (*iter));
+			}
+				break;
+			default:
+				break;
+			}
 
 			if (OBJ_DEAD == iResult)
 			{

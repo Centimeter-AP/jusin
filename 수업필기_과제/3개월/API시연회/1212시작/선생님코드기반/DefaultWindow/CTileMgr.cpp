@@ -49,9 +49,13 @@ int CTileMgr::Update()
 	for (auto& pTile : m_vecTile)
 		pTile->Update();
 	for (auto& pWall : m_vecWall)
+	{
 		pWall->Update();
+		static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[pWall->Find_MyTileIdx()])->Set_TileObj(TOBJ_WALL, pWall);
+	}
 	for (auto& pItem : m_vecItem)
 		pItem->Update();
+
 	return 0;
 }
 
@@ -188,7 +192,8 @@ CObj* CTileMgr::Is_Wall_Exist(float	fx, float fy)
 {
 	if (!m_vecWall.empty())
 	{
-		auto iter = find_if(m_vecWall.begin(), m_vecWall.end(), [fx, fy](CObj* pWall) {return ((pWall->Get_Info().fX == fx) && (pWall->Get_Info().fY == fy)); });
+		auto iter = find_if(m_vecWall.begin(), m_vecWall.end(),
+			[fx, fy](CObj* pWall) {return ((pWall->Get_Info().fX == fx) && (pWall->Get_Info().fY == fy)); });
 		if (iter == m_vecWall.end())
 			return nullptr;
 		else
@@ -226,7 +231,7 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 {
 	if (!m_vecTile.empty())
 	{
-		auto pTemp = static_cast<CTile*>(m_vecTile[_tileIdx])->Get_TileObj();
+		auto& pTemp = static_cast<CTile*>(m_vecTile[_tileIdx])->Get_TileObj();
 
 		int i(0);
 		for (i = 0; i < TOBJ_END; ++i)
@@ -243,16 +248,74 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 			break;
 		case TOBJ_ITEM:
 		{
-			list<CObj*>& temp = static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(static_cast<CItem*>(pTemp[i])->Get_ItemType());
-			static_cast<CItem*>(temp.back())->Set_OnMap(true);
-			temp.back()->Set_TileIdx(_tileIdx);
-			temp.back()->Initialize();
-			swap(temp.back(), pTemp[i]);
-			static_cast<CItem*>(temp.back())->Set_OnMap(false);
-			temp.back()->Set_TileIdx(0);
-			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
-			CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
-			return true;
+			//list<CObj*>& temp = static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(static_cast<CItem*>(pTemp[i])->Get_ItemType());
+			//static_cast<CItem*>(temp.back())->Set_OnMap(true);
+			//temp.back()->Set_TileIdx(_tileIdx);
+			//temp.back()->Initialize();
+			//static_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+			//pTemp[i]->Set_TileIdx(0);
+			//swap(temp.back(), pTemp[i]);
+			//CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			//CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+			//return true;
+
+
+			ITEMLIST	eItemType = static_cast<CItem*>(pTemp[i])->Get_ItemType();
+			list<CObj*>& playerItemslot = static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(static_cast<CItem*>(pTemp[i])->Get_ItemType());
+
+			switch (eItemType)
+			{
+			case ITEM_WEAPON:
+				if (!playerItemslot.empty())
+				{
+					static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+					playerItemslot.back()->Set_TileIdx(_tileIdx);
+					playerItemslot.back()->Initialize();
+					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+					pTemp[i]->Set_TileIdx(0);
+					//_pItem->Set_Pos(0, 0);
+					swap(playerItemslot.back(), pTemp[i]);
+
+					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+					CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+				}
+				else
+				{
+					playerItemslot.push_back(pTemp[i]);
+					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+				}
+				break;
+			case ITEM_SHOVEL:
+				if (!playerItemslot.empty())
+				{
+					static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+					playerItemslot.back()->Set_TileIdx(_tileIdx);
+					playerItemslot.back()->Initialize();
+					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+					pTemp[i]->Set_TileIdx(0);
+					//_pItem->Set_Pos(0, 0);
+					swap(playerItemslot.back(), pTemp[i]);
+
+					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+					CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+				}
+				else
+				{
+					playerItemslot.push_back(pTemp[i]);
+					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+				}
+				break;
+			case ITEM_ARMOR:
+				break;
+			case ITEM_HEAL:
+				break;
+			case ITEM_BOMB:
+				break;
+			case ITEM_END:
+				break;
+			default:
+				break;
+			}
 		}
 			break;
 		case TOBJ_WALL:

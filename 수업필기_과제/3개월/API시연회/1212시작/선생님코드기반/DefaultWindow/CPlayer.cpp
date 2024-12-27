@@ -83,6 +83,9 @@ int CPlayer::Update()
 {
 	Key_Input();
 	Jumping();
+	m_iTileIdx = m_iCurTileIdx;
+	Get_TileX();
+	Get_TileY();
 	__super::Update_Rect();
 	return OBJ_NOEVENT;
 }
@@ -98,7 +101,7 @@ void CPlayer::Render(HDC hDC)
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 	HDC		hMemDChead = CBmpMgr::Get_Instance()->Find_Image(L"Player_Head_R");
 	HDC		hMemDCarmor = CBmpMgr::Get_Instance()->Find_Image(L"Player_Armor_R");
-	HDC		hMemDCshadow = CBmpMgr::Get_Instance()->Find_Image(L"Player_Shadow");				// 그림자 용 xy 좌표 따로?
+	HDC		hMemDCshadow = CBmpMgr::Get_Instance()->Find_Image(L"Player_Shadow");	// 그림자 용 xy 좌표 따로?
 
 	if (m_ePrevDir == DIR_LEFT)
 	{
@@ -165,6 +168,13 @@ void CPlayer::Render(HDC hDC)
 		wsprintf(szText, L"감나빗");
 		TextOut(hDC, WINCX / 2 - 20, WINCY - 150, szText, lstrlen(szText));
 	}
+	if (CBeatMgr::Get_Instance()->Get_BeatMissed())
+	{
+		TCHAR szText[32];
+		wsprintf(szText, L"박자 놓침");
+		TextOut(hDC, GET_PLAYER->Get_Info().fX, GET_PLAYER->Get_Info().fY, szText, lstrlen(szText));
+	}
+
 }
 
 void CPlayer::Release()
@@ -182,6 +192,7 @@ bool CPlayer::Can_Move()
 	CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
  	CObj* pHeadItem = CObjMgr::Get_Instance()->Is_Item_Exist(m_iHeadTileIdx);
 	CObj* pHeadMonster = CObjMgr::Get_Instance()->Is_Monster_Exist(m_iHeadTileIdx);
+
 	if (pHeadWall != nullptr)		// 벽 검사
 	{
 		CTileMgr::Get_Instance()->Break_Wall(pHeadWall, static_cast<CShovel*>(m_Itemlist[ITEM_SHOVEL].front()));
@@ -195,7 +206,6 @@ bool CPlayer::Can_Move()
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"sfx_general_hit.wav", SOUND_EFFECT, g_fVolume);
 			CSoundMgr::Get_Instance()->PlaySound_AttackVoice();
-
 		}
 		return false;
 	}
@@ -219,9 +229,6 @@ void CPlayer::Get_Item(CObj* _pItem)
 	case ITEM_SHOVEL:
 		if (!m_Itemlist[ITEM_SHOVEL].empty())
 		{
-			//float	fHeadX(0.f), fHeadY(0.f);
-			//fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-			//fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 			static_cast<CItem*>(m_Itemlist[ITEM_SHOVEL].back())->Set_OnMap(true);
 			m_Itemlist[ITEM_SHOVEL].back()->Set_TileIdx(m_iHeadTileIdx);
 			m_Itemlist[ITEM_SHOVEL].back()->Initialize();
@@ -243,7 +250,6 @@ void CPlayer::Get_Item(CObj* _pItem)
 		}
 		break;
 	case ITEM_ARMOR:
-
 		break;
 	case ITEM_HEAL:
 		break;
@@ -466,11 +472,12 @@ void CPlayer::Key_Input()
 			{
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);// 플레이어 행동 여부 true
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();		// 가장 앞 노트들 삭제
+				CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
 
-				if (BEATMGR->Get_BeatMissed() == true)
-				{
-					BEATMGR->Set_BeatMissed(false);
-				}
+				//if (BEATMGR->Get_BeatMissed() == true)
+				//{
+				//	BEATMGR->Set_BeatMissed(false);
+				//}
 
 				m_qltskrka = false;	// 안빗나감
 				m_eDir = DIR_LEFT;	// 좌측
@@ -484,7 +491,7 @@ void CPlayer::Key_Input()
 					m_iCurTileIdx = m_iHeadTileIdx;
 				}
 				--m_iHeadTileIdx;	// 가고자 하는 타일(좌측)
-				if (Can_Move())		// 이동이 가능할 떄
+				if (Can_Move())		// 이동이 가능할 떄 
 				{
 					m_bMove = true;	// jumping 수행 (변수 이름을 바꾸기?)
 					m_tFrame.iFrameStart = 0; // 애니메이션 프레임 제어
@@ -513,6 +520,7 @@ void CPlayer::Key_Input()
 			{
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+				CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
 
 				m_qltskrka = false;
 				m_eDir = DIR_RIGHT;
@@ -554,12 +562,13 @@ void CPlayer::Key_Input()
 			if (BEATMGR->Get_AbleBeatInterval() == true)
 			{
 				m_qltskrka = false;
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+				CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
 				//m_tInfo.fY -= m_fSpeed;
 				m_eDir = DIR_UP;
 				m_fShadowY = m_tRect.top + 4.f;
 
-				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 
 				if (m_bMove == true)
 				{
@@ -601,6 +610,7 @@ void CPlayer::Key_Input()
 				m_eDir = DIR_DOWN;
 				m_fShadowY = m_tRect.top + 4.f;
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
+				CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
 
 				if (m_bMove == true)
 				{

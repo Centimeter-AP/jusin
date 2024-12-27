@@ -11,6 +11,7 @@ CBeatMgr::CBeatMgr()
 	: m_ullTimeChecker(GetTickCount64()), m_ullTimeTicker(GetTickCount64())
 	, m_bIsBeatMissed(true), m_bIsPlayerActed(false), m_bRightTimeBeat(false)
 	, m_bAbleBeatInterval(false), m_iBeatGapFrameCount(0), m_fBeatJudgementPx(80.f)
+	, m_bObjectAbleToMove(false)
 {
 	m_tTimerRightTime = m_tBeatStart = system_clock::now();
 	m_tMusicStart = m_tBeatStart = system_clock::now();
@@ -102,14 +103,16 @@ void CBeatMgr::Delete_Bar(CObj* _pBar)
 void CBeatMgr::Delete_Bar_Act()
 {
 	 //입력 가능한 박자일 때만 삭제되게 조건 추가할 것 
-	//if (m_bAbleBeatInterval == true)
+
+	if (!m_BeatBarlist.empty())
 	{
-		if (!m_BeatBarlist.empty())
-		{
-			m_BeatBarlist.front()->Set_Dead();
-			m_BeatBarlist.pop_front();
-			m_BeatBarlist.front()->Set_Dead();
-			m_BeatBarlist.pop_front();
-		}
+		m_BeatBarlist.front()->Set_Dead();
+		m_BeatBarlist.pop_front();
+		m_BeatBarlist.front()->Set_Dead();
+		m_BeatBarlist.pop_front();
+	}
+	if (CBeatMgr::Get_Instance()->Get_BeatMissed() == true)
+	{
+		CBeatMgr::Get_Instance()->Set_BeatMissed(false);
 	}
 }

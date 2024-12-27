@@ -1,10 +1,9 @@
 #pragma once
 #include "CMonster.h"
-class CSkeleton :
-    public CMonster
+class CSkeleton : public CMonster
 {
 public:
-    CSkeleton(): m_eCurState(BEFORE_JUMP) {}
+    CSkeleton(): m_eCurState(BEFORE_ACT), m_bAttacked(true) {}
     virtual ~CSkeleton() { Release(); }
 public:
     virtual void Initialize() override;
@@ -14,7 +13,8 @@ public:
     virtual void Release() override;
 
 private:
-    enum ACTSTATE{BEFORE_JUMP, AFTER_JUMP, END_ACT};
+    enum ACTSTATE{BEFORE_ACT, AFTER_ACT, END_ACT};
     ACTSTATE    m_eCurState;
+    bool        m_bAttacked;
 };
 

@@ -14,12 +14,13 @@ void CDagger::Initialize()
 
     m_iDamage = 1;
 
-    m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
+    //m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/Dagger.bmp", L"Dagger");
     m_eRender = RENDER_GAMEOBJECT;
+    m_eItemType = ITEM_WEAPON;
 
 }
 
@@ -27,6 +28,7 @@ int CDagger::Update()
 {
     if (m_bUsing)
     {
+        m_tInfo.fX = m_tInfo.fY = 0.f;
         m_eRender = RENDER_EFFECT;
     }
     else if (m_bOnMap)
@@ -41,7 +43,7 @@ int CDagger::Update()
         case 40:
         case 60:
         case 80:
-            m_tInfo.fY += m_fSpeed;
+            m_iAnimationOffsetY += m_fSpeed;
             break;
         case 0:
         case 100:
@@ -78,7 +80,7 @@ void CDagger::Render(HDC hDC)
             //Rectangle(hDC, m_tRect.left + iScrollX, m_tRect.top + iScrollY, m_tRect.right + iScrollX, m_tRect.bottom + iScrollY);
             GdiTransparentBlt(hDC,			// 복사 받을 DC
                 m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
-                m_tRect.top + iScrollY,
+                m_tRect.top + iScrollY + m_iAnimationOffsetY,
                 (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
                 (int)m_tInfo.fCY,
                 hMemDC,						// 복사할 이미지 DC	
