@@ -262,6 +262,7 @@ bool CMonster::Can_Move()
 	int iPlayerX = iPHTileIdx % TILEX;
 	int iPlayerY = iPHTileIdx / TILEX;
 	//return CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
+	// checktileobject 함수 사용하는 객체가 누구인지 매개변수로??
 
 	CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
 	CObj* pHeadMonster = CObjMgr::Get_Instance()->Is_Monster_Exist(m_iHeadTileIdx);
@@ -278,6 +279,8 @@ bool CMonster::Can_Move()
 	}
 	else if (iPHTileIdx == m_iHeadTileIdx)
 	{
+		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+		CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
 		return false;
 	}
 	else

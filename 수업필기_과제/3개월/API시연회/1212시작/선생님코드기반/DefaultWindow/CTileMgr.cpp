@@ -80,7 +80,6 @@ void CTileMgr::Render(HDC hDC)
 	int		iMaxX = iScrollX + WINCX / TILECX + 2;
 	int		iMaxY = iScrollY + WINCY / TILECY + 2;
 
-
 	/*** Tile Render ***/
 	for (int i = iScrollY; i < iMaxY; ++i)
 	{
@@ -99,7 +98,6 @@ void CTileMgr::Render(HDC hDC)
 		}
 	}
 
-	
 	if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_EDIT)
 	{
 		/*** Wall Render ***/
@@ -244,7 +242,12 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 		switch (i)
 		{
 		case TOBJ_ENTITY:
-			
+			//CObj* pHeadMonster = CObjMgr::Get_Instance()->Is_Monster_Exist(_tileIdx);
+
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"sfx_general_hit.wav", SOUND_EFFECT, g_fVolume);
+			CSoundMgr::Get_Instance()->PlaySound_AttackVoice();
+			return false;
 			break;
 		case TOBJ_ITEM:
 		{

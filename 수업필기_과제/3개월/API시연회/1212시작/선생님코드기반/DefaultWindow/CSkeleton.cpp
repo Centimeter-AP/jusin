@@ -48,6 +48,8 @@ int CSkeleton::Update()
         {
             BEATMGR->Set_ObjectAbleToMove(false);
             m_eCurState = BEFORE_ACT;
+            m_iHeadTileIdx = m_iCurTileIdx;
+            m_iTileIdx = Find_MyTileIdx();
             m_iBeforeAct = 1;
             return OBJ_NOEVENT;
         }

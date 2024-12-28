@@ -11,7 +11,7 @@ CBeatMgr::CBeatMgr()
 	: m_ullTimeChecker(GetTickCount64()), m_ullTimeTicker(GetTickCount64())
 	, m_bIsBeatMissed(true), m_bIsPlayerActed(false), m_bRightTimeBeat(false)
 	, m_bAbleBeatInterval(false), m_iBeatGapFrameCount(0), m_fBeatJudgementPx(80.f)
-	, m_bObjectAbleToMove(false)
+	, m_bObjectAbleToMove(false), m_iBeatCombo(0)
 {
 	m_tTimerRightTime = m_tBeatStart = system_clock::now();
 	m_tMusicStart = m_tBeatStart = system_clock::now();

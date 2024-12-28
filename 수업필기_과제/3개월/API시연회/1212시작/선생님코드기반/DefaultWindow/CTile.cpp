@@ -3,6 +3,7 @@
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CObjMgr.h"
+#include "CBeatMgr.h"
 
 CTile::CTile() : m_iDrawID(0), m_iOption(0), m_pObject{0,}
 {
@@ -51,6 +52,9 @@ void CTile::Render(HDC hDC)
 
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	
+	int		iBeatCorrect(0);
+	iBeatCorrect = (CBeatMgr::Get_Instance()->Get_BeatCombo() ? 1 : 0);
 
 	//GdiTransparentBlt(hDC,			// 복사 받을 DC
 	//	m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	
@@ -71,7 +75,7 @@ void CTile::Render(HDC hDC)
 		TILECY,
 		hMemDC,
 		52 * m_iDrawID + 2,
-		52 * 0 + 2,
+		52 * iBeatCorrect + 2 ,
 		SRCCOPY);
 
 }

@@ -22,7 +22,9 @@ public:
 	int			Get_BeatGapFrameCount() { return m_iBeatGapFrameCount; }
 	float		Get_BeatJudgementPx() { return m_fBeatJudgementPx; }
 	bool		Get_ObjectAbleToMove() { return m_bObjectAbleToMove; }
+	int			Get_BeatCombo() { return m_iBeatCombo; }
 
+	void		Set_BeatCombo(int _Combo) { m_iBeatCombo = _Combo; }
 	void		Set_ObjectAbleToMove(bool _Able) { m_bObjectAbleToMove = _Able; }
 	void		Set_PlayerActed(bool _bAct) { m_bIsPlayerActed = _bAct; }
 	void		Set_BeatMissed(bool _bMiss) { m_bIsBeatMissed = _bMiss; }
@@ -34,6 +36,7 @@ public:
 	void		Set_Bar(CObj* _Bar);
 	void		Delete_Bar(CObj* _Bar);
 	void		Delete_Bar_Act();
+	void		Plus_BeatCombo() { ++m_iBeatCombo; if (m_iBeatCombo > 3) m_iBeatCombo = 3; }
 
 public:
 	static CBeatMgr* Get_Instance()
@@ -76,4 +79,5 @@ private:
 	int			m_iBeatGapFrameCount;
 	float		m_fBeatJudgementPx;
 
+	int			m_iBeatCombo;
 };
