@@ -185,6 +185,15 @@ void CTileMgr::Tile_Shine()
 		}
 	}
 }
+void CTileMgr::Remove_TileObject(int _TileIdx, TILEOBJECT _OBJID)
+{
+	static_cast<CTile*>(m_vecTile[_TileIdx])->Remove_TileObj(_OBJID);
+}
+
+void CTileMgr::Set_TileObject(int _TileIdx, TILEOBJECT _OBJID, CObj* _Obj)
+{
+	static_cast<CTile*>(m_vecTile[_TileIdx])->Set_TileObj(_OBJID, _Obj);
+}
 
 CObj* CTileMgr::Is_Wall_Exist(float	fx, float fy)
 {
@@ -207,7 +216,15 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 		[_pTargetWall](CObj* pWall) { return pWall == _pTargetWall; });
 	if (iter != m_vecWall.end())
 	{
-		if (dynamic_cast<CWall*>(_pTargetWall)->Get_PowerNeed() <= _pShovel->Get_Power())
+		if (_pShovel == nullptr)
+		{
+			Safe_Delete<CObj*>((*iter));
+			iter = m_vecWall.erase(iter);
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"mov_dig_dirt.wav", SOUND_EFFECT, g_fVolume);
+			return;
+		}
+		else if (dynamic_cast<CWall*>(_pTargetWall)->Get_PowerNeed() <= _pShovel->Get_Power())
 		{
 			Safe_Delete<CObj*>((*iter));
 			iter = m_vecWall.erase(iter);

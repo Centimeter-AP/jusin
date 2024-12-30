@@ -94,12 +94,10 @@ void CMonster::Find_Player()
 		if (iPlayerX - m_iTileX > 0)	// 플레이어가 오른쪽에 있음
 		{
 			m_eDir = DIR_RIGHT;
-			m_iHeadTileIdx = m_iCurTileIdx + 1;
 		}
 		else							// 플레이어가 왼쪽에 있음
 		{
 			m_eDir = DIR_LEFT;
-			m_iHeadTileIdx = m_iCurTileIdx - 1;
 		}
 	}
 	else
@@ -107,14 +105,27 @@ void CMonster::Find_Player()
 		if (iPlayerY - m_iTileY > 0)	// 플레이어가 아래에 있음
 		{
 			m_eDir = DIR_DOWN;
-			m_iHeadTileIdx = m_iCurTileIdx + TILEX;
 		}
 		else							// 플레이어가 위에 있음
 		{
 			m_eDir = DIR_UP;
-			m_iHeadTileIdx = m_iCurTileIdx - TILEX;
 		}
 	}
+	//switch (m_eDir)
+	//{
+	//case DIR_LEFT:
+	//	m_iHeadTileIdx = m_iCurTileIdx - 1;
+	//	break;
+	//case DIR_RIGHT:
+	//	m_iHeadTileIdx = m_iCurTileIdx + 1;
+	//	break;
+	//case DIR_UP:
+	//	m_iHeadTileIdx = m_iCurTileIdx - TILEX;
+	//	break;
+	//case DIR_DOWN:
+	//	m_iHeadTileIdx = m_iCurTileIdx + TILEX;
+	//	break;
+	//}
 }
 
 
@@ -154,7 +165,8 @@ void CMonster::Jumping()
 		float fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
 		float fCurX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
 		float fCurY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
-
+		//CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+		//CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
 		switch (m_eDir)
 		{
 		case DIR_LEFT:
@@ -167,7 +179,10 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_bMove = false;
 				m_fTime = 0.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
+
 			}
 			else
 			{
@@ -185,7 +200,9 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_bMove = false;
 				m_fTime = 0.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
 			}
 			else
 			{
@@ -204,6 +221,8 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_fShadowY = fHeadY - 20.f;
 				m_bMove = false;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
 				m_iCurTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
@@ -215,7 +234,7 @@ void CMonster::Jumping()
 					m_tInfo.fY = fHeadY - 5.f;
 					//m_fShadowY = fHeadY - 20.f;
 					//m_bMove = false;
-					m_iCurTileIdx = m_iHeadTileIdx;
+					m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
 					m_fTime = 0.f;
 				}
 			}
@@ -232,7 +251,9 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_bMove = false;
 				m_fShadowY = fHeadY - 20.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			m_fShadowY -= -6.f * m_fTime - (9.8f * m_fTime * m_fTime);
@@ -253,6 +274,22 @@ void CMonster::Jumping()
 
 bool CMonster::Can_Move()
 {
+	switch (m_eDir)
+	{
+	case DIR_LEFT:
+		m_iHeadTileIdx = m_iCurTileIdx - 1;
+		break;
+	case DIR_RIGHT:
+		m_iHeadTileIdx = m_iCurTileIdx + 1;
+		break;
+	case DIR_UP:
+		m_iHeadTileIdx = m_iCurTileIdx - TILEX;
+		break;
+	case DIR_DOWN:
+		m_iHeadTileIdx = m_iCurTileIdx + TILEX;
+		break;
+	}
+
 	float	fHeadX(0.f), fHeadY(0.f);
 	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;

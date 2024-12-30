@@ -48,7 +48,6 @@ int CBeatMgr::Update()
 
 void CBeatMgr::Late_Update()
 {
-
 	if(!m_BeatBarlist.empty())
 	{
 		if (m_BeatBarlist.front()->Get_Info().fX <= (float)WINCX * 0.5f + m_fBeatJudgementPx

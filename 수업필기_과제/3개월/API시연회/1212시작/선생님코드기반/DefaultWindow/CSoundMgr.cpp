@@ -76,8 +76,33 @@ void CSoundMgr::PlayBGM(const TCHAR * pSoundKey, float fVolume)
 	
 	if (iter == m_mapSound.end())
 		return;
+	FMOD_System_PlaySound(m_pSystem, iter->second, NULL, 0, &m_pChannelArr[SOUND_BGM]);
 
-	FMOD_System_PlaySound(m_pSystem, iter->second, FALSE, FALSE, &m_pChannelArr[SOUND_BGM]);
+
+
+
+
+
+
+	// DSP 생성 (Pitch Shifter)
+	FMOD_DSP* dspPitchShift;
+	FMOD_System_CreateDSPByType(m_pSystem, FMOD_DSP_TYPE_PITCHSHIFT, &dspPitchShift);
+
+
+	// DSP 설정 - 피치를 유지하면서 배속 변경
+	FMOD_DSP_SetParameterFloat(dspPitchShift, FMOD_DSP_PITCHSHIFT_PITCH, 1.0f); // 피치 1.0 (기본값)
+	FMOD_Channel_AddDSP(m_pChannelArr[SOUND_BGM], 0, dspPitchShift);
+
+	float originalFrequency(0.f);
+	FMOD_Channel_GetFrequency(m_pChannelArr[SOUND_BGM], &originalFrequency);
+	FMOD_Channel_SetFrequency(m_pChannelArr[SOUND_BGM], originalFrequency * 1.5f);
+
+
+
+
+
+
+
 	FMOD_Channel_SetMode(m_pChannelArr[SOUND_BGM], FMOD_LOOP_NORMAL);
 	FMOD_Channel_SetVolume(m_pChannelArr[SOUND_BGM], fVolume);
 	FMOD_System_Update(m_pSystem);

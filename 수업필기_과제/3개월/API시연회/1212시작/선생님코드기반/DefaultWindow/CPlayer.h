@@ -68,8 +68,9 @@ private:
 
     bool        m_qltskrka;
 
-
 public:
     list<CObj*> m_Itemlist[ITEM_END];
+    int         m_iGold;
+
 };
 

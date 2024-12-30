@@ -26,4 +26,5 @@ protected:
     float       m_fTime;
     bool        m_bMove;
     float       m_fShadowY;
+    bool        m_bCanChangeDir;
 };

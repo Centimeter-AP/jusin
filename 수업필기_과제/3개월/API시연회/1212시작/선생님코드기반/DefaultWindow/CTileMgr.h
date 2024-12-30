@@ -18,6 +18,8 @@ public:
 
 	void		Picking_Tile(POINT pt, int iDrawID, int iOption);
 	void		Tile_Shine();
+	void		Remove_TileObject(int _TileIdx, TILEOBJECT _OBJID);
+	void		Set_TileObject(int _TileIdx, TILEOBJECT _OBJID, CObj* _Obj);
 	CObj*		Is_Wall_Exist(float fx, float fy);
 	void		Break_Wall(CObj* _pTargetWall, CShovel* _pShovel);
 	vector<CObj*>* Get_TileVec() { return &m_vecTile; }

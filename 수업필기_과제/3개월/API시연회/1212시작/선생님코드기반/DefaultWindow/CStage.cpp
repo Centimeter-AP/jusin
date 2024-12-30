@@ -17,6 +17,8 @@
 #include "CPlayerShovelUI.h"
 #include "CPlayerWeaponUI.h"
 #include "CSkeleton.h"
+#include "CTauren.h"
+#include "CBlueSlime.h"
 
 CStage::CStage() : m_bBeatOne(false), m_iFrameCount(0)
 {
@@ -47,14 +49,16 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
 
-	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create(356, 385));
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create(356, 385));
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
-	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create(256, 385));
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create(256, 385));
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
-	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create(304, 385));
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create(304, 385));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CBlueSlime>::Create(304, 289));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CTauren>::Create(304, 385));
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 
-	//CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
+	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
 	//CObjMgr::Get_Instance()->
 

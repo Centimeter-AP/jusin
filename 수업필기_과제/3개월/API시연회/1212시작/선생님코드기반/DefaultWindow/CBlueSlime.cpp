@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CSkeleton.h"
+#include "CBlueSlime.h"
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CTileMgr.h"
@@ -7,16 +7,24 @@
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
 
-void CSkeleton::Initialize()
+void CBlueSlime::Initialize()
 {
-    m_tInfo.fCX = 48.f;
+    m_tInfo.fCX = 52.f;
     m_tInfo.fCY = 50.f;
     m_fSpeed = 6.f;
 
-    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Skeletons.bmp", L"Skeleton");
+    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Blueslime_L.bmp", L"Blueslime_L");
     m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
     m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();
-
+    m_iSelectedIndex[0] = m_iTileIdx;
+    if (rand() % 2)
+    {
+        m_iSelectedIndex[1] = m_iTileIdx - TILEX;
+    }
+    else
+    {
+        m_iSelectedIndex[1] = m_iTileIdx + TILEX;
+    }
     m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
     m_pTarget = GET_PLAYER;
@@ -28,7 +36,7 @@ void CSkeleton::Initialize()
     m_tFrame.dwSpeed = 100;
     m_tFrame.dwTime = GetTickCount64();
 
-    m_pImgKey = L"Skeleton";
+    m_pImgKey = L"Blueslime_L";
     m_fJumpPower = 9.5f;
     Get_TileX();
     Get_TileY();
@@ -37,7 +45,7 @@ void CSkeleton::Initialize()
     m_iHP = 6;
 }
 
-int CSkeleton::Update()
+int CBlueSlime::Update()
 {
     if (m_bDead)
         return OBJ_DEAD;
@@ -46,27 +54,31 @@ int CSkeleton::Update()
     {
         if (m_eCurState == AFTER_ACT)
         {
-            //BEATMGR->Set_ObjectAbleToMove(false);
             m_eCurState = BEFORE_ACT;
             m_iHeadTileIdx = m_iCurTileIdx;
             m_iTileIdx = Find_MyTileIdx();
-            m_iBeforeAct = 1;
+            m_tFrame.iMotion = 0;
+
             return OBJ_NOEVENT;
         }
         else
         {
-            m_iBeforeAct = 0;
+            m_tFrame.iMotion = 1;
+            if (m_eDir == DIR_UP)
+                m_eDir = DIR_DOWN;
+            else
+                m_eDir = DIR_UP;
+
             m_eCurState = AFTER_ACT;
         }
 
         m_iTileIdx = Find_MyTileIdx();
-        if (m_pTarget != nullptr)
-        {
-            Find_Player();
-        }
+
         if (Can_Move())
         {
             m_bMove = true;
+            if (m_iHeadTileIdx != m_iCurTileIdx && m_iHeadTileIdx != m_iSelectedIndex[0] && m_iHeadTileIdx != m_iSelectedIndex[1])
+                m_bMove = false;
         }
         else
         {
@@ -75,6 +87,14 @@ int CSkeleton::Update()
         //BEATMGR->Set_ObjectAbleToMove(false);
     }
 
+    //if (m_iTileIdx == m_iSelectedIndex[0])
+    //{
+    //    m_iHeadTileIdx = m_iSelectedIndex[1];
+    //}
+    //else
+    //    m_iHeadTileIdx = m_iSelectedIndex[0];
+
+
     Jumping();
 
     __super::Update_Rect();
@@ -82,36 +102,34 @@ int CSkeleton::Update()
     return OBJ_NOEVENT;
 }
 
-void CSkeleton::Late_Update()
+void CBlueSlime::Late_Update()
 {
-
     __super::Move_Frame();
-
 }
 
-void CSkeleton::Render(HDC hDC)
+void CBlueSlime::Render(HDC hDC)
 {
-    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Skeleton");
+    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
 
     int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
     int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
     //Rectangle(hDC, m_tRect.left + iScrollX, m_tRect.top + iScrollY, m_tRect.right + iScrollX, m_tRect.bottom + iScrollY);
 
-    GdiTransparentBlt(hDC,							
+    GdiTransparentBlt(hDC,
         m_tRect.left + iScrollX,
         m_tRect.top + iScrollY,
         (int)m_tInfo.fCX,
         (int)m_tInfo.fCY,
         hMemDC,
-        (int)m_tInfo.fCX * m_tFrame.iFrameStart + m_iActMotionOffset * m_iBeforeAct,
+        (int)m_tInfo.fCX * m_tFrame.iFrameStart,
         (int)m_tInfo.fCY * m_tFrame.iMotion,
-        PLAYERCX,
-        PLAYERCY,
+        (int)m_tInfo.fCX,
+        (int)m_tInfo.fCY,
         RGB(255, 0, 255));
 
 }
 
-void CSkeleton::Release()
+void CBlueSlime::Release()
 {
 }

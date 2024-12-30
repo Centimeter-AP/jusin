@@ -166,6 +166,15 @@
     <Filter Include="01. Obj\UI\BeatUI\RightBar">
       <UniqueIdentifier>{9ed4d684-f7d9-4a64-9e57-3852516ca046}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\02. Monster\Skeleton">
+      <UniqueIdentifier>{e938601f-3e28-4008-9644-9ad7636403f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\BlueSlime">
+      <UniqueIdentifier>{a1a297f5-9dae-4847-9178-6065e7c7f155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\Tauren">
+      <UniqueIdentifier>{288d6be1-52da-49fa-b3d1-e7b3776340a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -306,9 +315,6 @@
     <ClInclude Include="CDagger.h">
       <Filter>01. Obj\08. Item\00. Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="CSkeleton.h">
-      <Filter>01. Obj\02. Monster</Filter>
-    </ClInclude>
     <ClInclude Include="CStageOne.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -336,14 +342,20 @@
     <ClInclude Include="CLeftBar.h">
       <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
     </ClInclude>
-    <ClInclude Include="CNewBeatMgr.h">
-      <Filter>03. Design\BeatMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="CTauren.h">
-      <Filter>01. Obj\02. Monster</Filter>
-    </ClInclude>
     <ClInclude Include="CLobby.h">
       <Filter>02. Scene\03. Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="CBlueSlime.h">
+      <Filter>01. Obj\02. Monster\BlueSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkeleton.h">
+      <Filter>01. Obj\02. Monster\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="CTauren.h">
+      <Filter>01. Obj\02. Monster\Tauren</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerMoney.h">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -470,9 +482,6 @@
     <ClCompile Include="CDagger.cpp">
       <Filter>01. Obj\08. Item\00. Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="CSkeleton.cpp">
-      <Filter>01. Obj\02. Monster</Filter>
-    </ClCompile>
     <ClCompile Include="CStageOne.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -500,14 +509,20 @@
     <ClCompile Include="CLeftBar.cpp">
       <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
     </ClCompile>
-    <ClCompile Include="CNewBeatMgr.cpp">
-      <Filter>03. Design\BeatMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="CTauren.cpp">
-      <Filter>01. Obj\02. Monster</Filter>
-    </ClCompile>
     <ClCompile Include="CLobby.cpp">
       <Filter>02. Scene\03. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="CBlueSlime.cpp">
+      <Filter>01. Obj\02. Monster\BlueSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkeleton.cpp">
+      <Filter>01. Obj\02. Monster\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="CTauren.cpp">
+      <Filter>01. Obj\02. Monster\Tauren</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerMoney.cpp">
+      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
