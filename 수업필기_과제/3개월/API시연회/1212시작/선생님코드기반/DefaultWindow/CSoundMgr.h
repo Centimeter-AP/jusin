@@ -36,6 +36,8 @@ public:
 	void StopAll();
 	void SetChannelVolume(CHANNELID eID, float fVolume);
 
+	void PlaySoundFaster(CHANNELID eID, float fFrequency);
+
 private:
 	void LoadSoundFile(); 
 
