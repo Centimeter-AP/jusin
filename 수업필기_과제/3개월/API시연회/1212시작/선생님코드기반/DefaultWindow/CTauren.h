@@ -1,10 +1,14 @@
 #pragma once
 #include "CMonster.h"
-class CSkeleton : public CMonster
+class CTauren : public CMonster
 {
 public:
-    CSkeleton(): m_eCurState(AFTER_ACT), m_bAttacked(true), m_iActMotionOffset(192), m_iBeforeAct(0){}
-    virtual ~CSkeleton() { Release(); }
+    CTauren()
+    : m_eCurState(IDLE_ACT), m_bPlayerFound(false)
+    , m_bBumped(false)
+    {}
+	virtual ~CTauren();
+
 public:
     virtual void Initialize() override;
     virtual int Update() override;
@@ -13,10 +17,12 @@ public:
     virtual void Release() override;
 
 private:
-    enum ACTSTATE{BEFORE_ACT, AFTER_ACT, END_ACT};
+    enum ACTSTATE { IDLE_ACT, DASH_ACT, FAINT_ACT, END_ACT };
     ACTSTATE    m_eCurState;
-    bool        m_bAttacked;
+    bool        m_bPlayerFound;
+    bool        m_bBumped;
     int         m_iActMotionOffset;
     int         m_iBeforeAct;
+    DIRECTION   m_ePrevDir;
 };
 

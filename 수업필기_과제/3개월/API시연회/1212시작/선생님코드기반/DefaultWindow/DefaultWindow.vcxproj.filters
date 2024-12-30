@@ -309,9 +309,6 @@
     <ClInclude Include="CSkeleton.h">
       <Filter>01. Obj\02. Monster</Filter>
     </ClInclude>
-    <ClInclude Include="CLobby.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CStageOne.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -341,6 +338,12 @@
     </ClInclude>
     <ClInclude Include="CNewBeatMgr.h">
       <Filter>03. Design\BeatMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CTauren.h">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CLobby.h">
+      <Filter>02. Scene\03. Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -470,9 +473,6 @@
     <ClCompile Include="CSkeleton.cpp">
       <Filter>01. Obj\02. Monster</Filter>
     </ClCompile>
-    <ClCompile Include="CLobby.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CStageOne.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -502,6 +502,12 @@
     </ClCompile>
     <ClCompile Include="CNewBeatMgr.cpp">
       <Filter>03. Design\BeatMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTauren.cpp">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CLobby.cpp">
+      <Filter>02. Scene\03. Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

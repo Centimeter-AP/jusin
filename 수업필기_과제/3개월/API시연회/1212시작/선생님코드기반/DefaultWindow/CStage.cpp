@@ -67,6 +67,7 @@ void CStage::Initialize()
 int CStage::Update()
 {
 	//CBeatMgr::Get_Instance()->Update();
+	CTileMgr::Get_Instance()->Update();
 
 	if (CBeatMgr::Get_Instance()->Get_RightTimeBeat())
 	{
@@ -83,7 +84,6 @@ int CStage::Update()
 	{
 		m_bBeatOne = true;
 	}
-	CTileMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 
 	++m_iFrameCount;

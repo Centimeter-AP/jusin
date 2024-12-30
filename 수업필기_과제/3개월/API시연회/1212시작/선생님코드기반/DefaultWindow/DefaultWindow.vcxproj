@@ -182,6 +182,7 @@
     <ClInclude Include="CStage.h" />
     <ClInclude Include="CStageOne.h" />
     <ClInclude Include="CStoneWall.h" />
+    <ClInclude Include="CTauren.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTileMgr.h" />
     <ClInclude Include="CTitaniumShovel.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="CStage.cpp" />
     <ClCompile Include="CStageOne.cpp" />
     <ClCompile Include="CStoneWall.cpp" />
+    <ClCompile Include="CTauren.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTileMgr.cpp" />
     <ClCompile Include="CTitaniumShovel.cpp" />

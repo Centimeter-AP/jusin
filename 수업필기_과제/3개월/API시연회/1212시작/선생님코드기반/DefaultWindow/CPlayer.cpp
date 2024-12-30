@@ -647,7 +647,7 @@ void CPlayer::Key_Input()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		CBeatMgr::Get_Instance()->Delete_Bar_Act();
+		CBeatMgr::Get_Instance()->Plus_BeatCombo();
 	}
 
 }

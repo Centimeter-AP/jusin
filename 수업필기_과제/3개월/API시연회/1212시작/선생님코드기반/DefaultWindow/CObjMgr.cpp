@@ -126,6 +126,8 @@ int CObjMgr::Update()
 {
 	for (size_t i = 0; i < OBJ_END; ++i)
 	{
+		if (i == OBJ_WALL)
+			BEATMGR->Set_ObjectAbleToMove(false);
 		for (auto iter = m_ObjList[i].begin();
 			iter != m_ObjList[i].end(); )
 		{
@@ -146,6 +148,7 @@ int CObjMgr::Update()
 				//if ((*iter)->Find_MyTileIdx() != (*CTileMgr::Get_Instance()->Get_TileVec())[(*iter)->Get_TileIdx()]->Get_TileIdx())
 					static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[(*iter)->Get_TileIdx()])->Set_TileObj(TOBJ_ITEM, (*iter));
 			}
+			
 				break;
 			default:
 				break;
