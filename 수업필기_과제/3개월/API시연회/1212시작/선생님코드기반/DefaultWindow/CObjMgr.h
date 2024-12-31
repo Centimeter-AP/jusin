@@ -36,6 +36,7 @@ public:
 	void		Release();
 
 	void		Delete_ID(OBJID eID);
+	void		Delete_Object(OBJID eID, CObj* pObj);
 
 public:
 	static CObjMgr* Get_Instance()

@@ -1,5 +1,6 @@
 #pragma once
 #include "CObj.h"
+#include "CMonsterHP.h"
 class CMonster :   public CObj
 {
 public:
@@ -18,6 +19,8 @@ public:
 
 protected:
     enum MONSTATE { MON_IDLE, MON_AGGRO, MON_ATTACK, MON_END };
+
+    CMonsterHP  m_HP_UI;
 
     vector<CObj*>* m_pvecTile;
     int         m_iCurTileIdx;

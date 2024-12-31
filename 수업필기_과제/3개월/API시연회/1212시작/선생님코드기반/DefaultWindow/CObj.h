@@ -79,7 +79,6 @@ protected:
 
 	const TCHAR*		m_pImgKey;
 
-
 	int			m_iHP;
 	int			m_iMaxHP;
 	int			m_iArmor;

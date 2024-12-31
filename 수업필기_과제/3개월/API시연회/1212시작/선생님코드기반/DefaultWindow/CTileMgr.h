@@ -35,6 +35,8 @@ public:
 	void		Save_Wall();
 	void		Load_Wall();
 	void		Load_Tile();
+	void		Load_Wall(STAGEID stage);
+	void		Load_Tile(STAGEID stage);
 
 public:
 	static CTileMgr* Get_Instance()

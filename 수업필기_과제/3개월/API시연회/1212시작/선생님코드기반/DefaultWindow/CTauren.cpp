@@ -39,14 +39,20 @@ void CTauren::Initialize()
     Get_TileX();
     Get_TileY();
     m_eRender = RENDER_GAMEOBJECT;
-    m_iMaxHP = 10;
-    m_iHP = 10;
+    m_iMaxHP = 5;
+    m_iHP = 5;
+
+    m_HP_UI.Set_Target(this);
+    m_HP_UI.Initialize();
+    CObjMgr::Get_Instance()->Add_Object(OBJ_UI, &m_HP_UI);
 }
 
 int CTauren::Update()
 {
-    if (m_bDead)
+    if (m_bDead || m_iHP == 0)
+    {
         return OBJ_DEAD;
+    }
 
     if (m_eDir == DIR_LEFT)
         m_ePrevDir = DIR_LEFT;
@@ -203,4 +209,5 @@ void CTauren::Render(HDC hDC)
 
 void CTauren::Release()
 {
+    CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
 }

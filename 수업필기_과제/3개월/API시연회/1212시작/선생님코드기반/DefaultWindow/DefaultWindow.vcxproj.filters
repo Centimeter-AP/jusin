@@ -175,6 +175,9 @@
     <Filter Include="01. Obj\02. Monster\Tauren">
       <UniqueIdentifier>{288d6be1-52da-49fa-b3d1-e7b3776340a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\UI\MonsterHP">
+      <UniqueIdentifier>{d48904cd-732f-4ebd-b514-30b3c182f34b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -315,9 +318,6 @@
     <ClInclude Include="CDagger.h">
       <Filter>01. Obj\08. Item\00. Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="CStageOne.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CNormalShovel.h">
       <Filter>01. Obj\08. Item\01. Shovel\Normal</Filter>
     </ClInclude>
@@ -356,6 +356,12 @@
     </ClInclude>
     <ClInclude Include="CPlayerMoney.h">
       <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterHP.h">
+      <Filter>01. Obj\UI\MonsterHP</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageOne.h">
+      <Filter>02. Scene\03. Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -482,9 +488,6 @@
     <ClCompile Include="CDagger.cpp">
       <Filter>01. Obj\08. Item\00. Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="CStageOne.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CNormalShovel.cpp">
       <Filter>01. Obj\08. Item\01. Shovel\Normal</Filter>
     </ClCompile>
@@ -523,6 +526,12 @@
     </ClCompile>
     <ClCompile Include="CPlayerMoney.cpp">
       <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterHP.cpp">
+      <Filter>01. Obj\UI\MonsterHP</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageOne.cpp">
+      <Filter>02. Scene\03. Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

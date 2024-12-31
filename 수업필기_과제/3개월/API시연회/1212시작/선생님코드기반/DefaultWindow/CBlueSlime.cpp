@@ -6,6 +6,7 @@
 #include "CObjMgr.h"
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
+#include "CMonsterHP.h"
 
 void CBlueSlime::Initialize()
 {
@@ -41,14 +42,23 @@ void CBlueSlime::Initialize()
     Get_TileX();
     Get_TileY();
     m_eRender = RENDER_GAMEOBJECT;
-    m_iMaxHP = 6;
-    m_iHP = 6;
+    m_iMaxHP = 2;
+    m_iHP = 2;
+
+    m_HP_UI.Set_Target(this);
+    m_HP_UI.Initialize();
+    CObjMgr::Get_Instance()->Add_Object(OBJ_UI, &m_HP_UI);
 }
 
 int CBlueSlime::Update()
 {
-    if (m_bDead)
+    if (m_bDead || m_iHP == 0)
+    {
+        
+
         return OBJ_DEAD;
+
+    }
 
     if (BEATMGR->Get_ObjectAbleToMove() == true)
     {
@@ -128,8 +138,10 @@ void CBlueSlime::Render(HDC hDC)
         (int)m_tInfo.fCY,
         RGB(255, 0, 255));
 
+    //m_HP_UI.Render(hDC);
 }
 
 void CBlueSlime::Release()
 {
+    CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
 }

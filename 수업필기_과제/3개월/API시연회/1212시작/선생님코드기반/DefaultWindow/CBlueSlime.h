@@ -6,7 +6,7 @@ public:
     CBlueSlime()
     : m_iSelectedIndex{0,0}
     {}
-    virtual ~CBlueSlime() {}
+    virtual ~CBlueSlime() { Release(); }
 public:
     virtual void Initialize() override;
     virtual int  Update() override;

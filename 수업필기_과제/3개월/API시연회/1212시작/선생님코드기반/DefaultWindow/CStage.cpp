@@ -31,7 +31,7 @@ CStage::~CStage()
 
 void CStage::Initialize()
 {
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Ground.bmp", L"Ground");
+	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Ground.bmp", L"Ground");
 	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile.bmp", L"Tile");
 
 	//CLineMgr::Get_Instance()->Initialize();
@@ -58,14 +58,14 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CTauren>::Create(304, 385));
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 
-	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
+	//CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
 	//CObjMgr::Get_Instance()->
 
-	//for (int i = 0; i < 3; ++i)
-	//{
-	//	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster>::Create(float(rand() % WINCX), float(rand() % WINCY), 0.f));		
-	//}
+	for (int i = 0; i < 3; ++i)
+	{
+		CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create(float(rand() % WINCX), float(rand() % WINCY), 0.f));
+	}
 }
 
 int CStage::Update()

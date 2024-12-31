@@ -7,7 +7,7 @@ public:
     : m_eCurState(IDLE_ACT), m_bPlayerFound(false)
     , m_iBumped(0)
     {}
-    virtual ~CTauren() {}
+    virtual ~CTauren() { Release(); }
 
 public:
     virtual void Initialize() override;

@@ -21,6 +21,7 @@ void CPlayerHP::Initialize()
 
 int CPlayerHP::Update()
 {
+  
     __super::Update_Rect();
     return OBJ_NOEVENT;
 }

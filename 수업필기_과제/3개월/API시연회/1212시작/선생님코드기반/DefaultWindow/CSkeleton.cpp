@@ -33,14 +33,21 @@ void CSkeleton::Initialize()
     Get_TileX();
     Get_TileY();
     m_eRender = RENDER_GAMEOBJECT;
-    m_iMaxHP = 6;
-    m_iHP = 6;
+    m_iMaxHP = 1;
+    m_iHP = 1;
+
+    m_HP_UI.Set_Target(this);
+    m_HP_UI.Initialize();
+    CObjMgr::Get_Instance()->Add_Object(OBJ_UI, &m_HP_UI);
 }
 
 int CSkeleton::Update()
 {
-    if (m_bDead)
+    if (m_bDead || m_iHP == 0)
+    {
+
         return OBJ_DEAD;
+    }
 
     if (BEATMGR->Get_ObjectAbleToMove() == true)
     {
@@ -110,8 +117,10 @@ void CSkeleton::Render(HDC hDC)
         PLAYERCY,
         RGB(255, 0, 255));
 
+    m_HP_UI.Render(hDC);
 }
 
 void CSkeleton::Release()
 {
+    CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
 }

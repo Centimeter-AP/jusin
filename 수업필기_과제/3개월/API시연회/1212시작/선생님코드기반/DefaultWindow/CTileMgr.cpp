@@ -261,6 +261,7 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 		case TOBJ_ENTITY:
 			//CObj* pHeadMonster = CObjMgr::Get_Instance()->Is_Monster_Exist(_tileIdx);
 
+			pTemp[i]->Set_HP(static_cast<CWeapon*>(static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_WEAPON).front())->Get_Damage());
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"sfx_general_hit.wav", SOUND_EFFECT, g_fVolume);
 			CSoundMgr::Get_Instance()->PlaySound_AttackVoice();
@@ -545,6 +546,93 @@ void CTileMgr::Load_Wall()
 void CTileMgr::Load_Tile()
 {
 	HANDLE hFile = CreateFile(L"../Data/Tile.dat", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	int		iDrawID(0), iOption(0);
+	DWORD	dwByte(0);
+	INFO	tTile{};
+
+	Release();
+
+	while (true)
+	{
+		int iRes = ReadFile(hFile, &tTile, sizeof(INFO), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iDrawID, sizeof(int), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iOption, sizeof(int), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pTile = CAbstractFactory<CTile>::Create(tTile.fX, tTile.fY);
+		dynamic_cast<CTile*>(pTile)->Set_DrawID(iDrawID);
+		dynamic_cast<CTile*>(pTile)->Set_Option(iOption);
+
+		m_vecTile.push_back(pTile);
+	}
+
+
+
+	CloseHandle(hFile);
+	//MessageBox(g_hWnd, L"Load Save", L"성공", MB_OK);
+
+}
+
+void CTileMgr::Load_Wall(STAGEID stage)
+{
+	TCHAR szText[32];
+	wsprintf(szText, L"../Data/Tile%d.dat", stage);
+	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD	dwByte(0);
+	CWall	Wall;
+
+
+	while (true)
+	{
+		int iRes = ReadFile(hFile, &Wall, sizeof(CWall), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pWall(nullptr);
+
+		switch (Wall.Get_WallType())
+		{
+		case WALLTYPE::DIRT_WALL:
+			pWall = CAbstractFactory<CDirtWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::SHOP_WALL:
+			pWall = CAbstractFactory<CShopWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::STONE_WALL:
+			pWall = CAbstractFactory<CStoneWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::BEDROCK:
+			pWall = CAbstractFactory<CBedrock>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		default:
+			break;
+		}
+	}
+	CloseHandle(hFile);
+	//MessageBox(g_hWnd, L"Load Wall", L"성공", MB_OK);
+
+}
+
+void CTileMgr::Load_Tile(STAGEID stage)
+{
+	TCHAR szText[32];
+	wsprintf(szText, L"../Data/Tile%d.dat", stage);
+	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (INVALID_HANDLE_VALUE == hFile)
 		return;

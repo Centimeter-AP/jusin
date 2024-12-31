@@ -25,6 +25,7 @@ void CMonster::Initialize()
     m_tInfo.fCY = 48.f;
     m_fSpeed = 6.f;
 
+
     //CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Monster/Monster.bmp", L"Monster");
 	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
 	m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();

@@ -225,3 +225,15 @@ void CObjMgr::Delete_ID(OBJID eID)
 
 	m_ObjList[eID].clear();
 }
+
+void CObjMgr::Delete_Object(OBJID eID, CObj* pObj)
+{
+	for (auto iter = m_ObjList[eID].begin(); iter != m_ObjList[eID].end(); ++iter )
+	{
+		if (pObj == (*iter))
+		{
+			iter = m_ObjList[eID].erase(iter);
+			return;
+		}
+	}
+}
