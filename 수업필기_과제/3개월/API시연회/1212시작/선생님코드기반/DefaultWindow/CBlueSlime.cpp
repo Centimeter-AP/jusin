@@ -16,7 +16,7 @@ void CBlueSlime::Initialize()
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Blueslime_L.bmp", L"Blueslime_L");
     m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
-    m_iHeadTileIdx = m_iTileIdx = m_iTileIdx = Find_MyTileIdx();
+    m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx();
     m_iSelectedIndex[0] = m_iTileIdx;
     if (rand() % 2)
     {
@@ -56,6 +56,7 @@ int CBlueSlime::Update()
     if (m_bDead || m_iHP == 0)
     {
         
+        CBeatMgr::Get_Instance()->Plus_BeatCombo();
 
         return OBJ_DEAD;
 

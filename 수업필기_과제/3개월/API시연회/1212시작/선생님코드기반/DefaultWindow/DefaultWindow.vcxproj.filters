@@ -387,6 +387,12 @@
     <ClInclude Include="CLetterbox.h">
       <Filter>01. Obj\UI\Letterbox</Filter>
     </ClInclude>
+    <ClInclude Include="CStair.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralRiffBoss.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -568,6 +574,12 @@
     </ClCompile>
     <ClCompile Include="CLetterbox.cpp">
       <Filter>01. Obj\UI\Letterbox</Filter>
+    </ClCompile>
+    <ClCompile Include="CStair.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralRiffBoss.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

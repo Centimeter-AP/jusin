@@ -10,7 +10,7 @@ void CLetterbox::Initialize()
 
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Letterbox.bmp", L"Letterbox");
-	m_eRender = RENDER_UI;
+	m_eRender = RENDER_LETTERBOX;
 }
 
 int CLetterbox::Update()

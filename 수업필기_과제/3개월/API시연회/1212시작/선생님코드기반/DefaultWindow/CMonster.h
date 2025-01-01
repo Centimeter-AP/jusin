@@ -13,6 +13,7 @@ public:
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
     void Find_Player();
+    void         Set_FirstTileIdx() { m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx(); }
 
     void        Jumping();
     bool        Can_Move();

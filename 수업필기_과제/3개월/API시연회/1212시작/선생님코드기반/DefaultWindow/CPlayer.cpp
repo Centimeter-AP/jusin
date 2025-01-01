@@ -503,6 +503,7 @@ void CPlayer::Key_Input()
 			}
 			else
 			{
+				CBeatMgr::Get_Instance()->Lose_BeatCombo();
 				m_qltskrka = true;		// !!°¨³ªºø
 			}
 
@@ -547,6 +548,7 @@ void CPlayer::Key_Input()
 			}
 			else
 			{
+				CBeatMgr::Get_Instance()->Lose_BeatCombo();
 				m_qltskrka = true;
 			}
 			CTileMgr::Get_Instance()->Tile_Shine();
@@ -589,6 +591,7 @@ void CPlayer::Key_Input()
 			}
 			else
 			{
+				CBeatMgr::Get_Instance()->Lose_BeatCombo();
 				m_qltskrka = true;
 			}
 
@@ -631,6 +634,7 @@ void CPlayer::Key_Input()
 			}
 			else
 			{
+				CBeatMgr::Get_Instance()->Lose_BeatCombo();
 				m_qltskrka = true;
 			}
 

@@ -12,6 +12,7 @@
 #include "CNormalShovel.h"
 #include "CDagger.h"
 #include "CSoundMgr.h"
+#include "CBeatMgr.h"
 #include "CDoor.h"
 #include "CVerticalDoor.h"
 
@@ -254,6 +255,8 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 		}
 		else
 		{
+			CBeatMgr::Get_Instance()->Lose_BeatCombo();
+
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"mov_dig_fail.wav", SOUND_EFFECT, g_fVolume);
 		}

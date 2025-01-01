@@ -16,8 +16,6 @@ void CPlayerWeaponUI::Initialize()
     m_pCurWeapon = static_cast<CPlayer*>(m_pTarget)->Get_CurWeapon();
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/UI_Weapon.bmp", L"UI_Weapon");
-    //CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Half.bmp", L"Heart_Half");
-    //CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Empty.bmp", L"Heart_Empty");
     m_eRender = RENDER_UI;
 }
 

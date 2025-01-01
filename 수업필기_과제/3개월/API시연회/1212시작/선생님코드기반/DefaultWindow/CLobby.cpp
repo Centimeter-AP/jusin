@@ -11,6 +11,7 @@
 #include "CPlayerHP.h"
 #include "CPlayerShovelUI.h"
 #include "CPlayerWeaponUI.h"
+#include "CStair.h"
 
 
 CLobby::CLobby()
@@ -36,10 +37,13 @@ void CLobby::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(792, 432));
+	static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_STAGEONE);
 
 	CScrollMgr::Get_Instance()->Set_ScrollX(-430);
 	CScrollMgr::Get_Instance()->Set_ScrollY(330);
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
+	CSoundMgr::Get_Instance()->PlayBGM(L"lobby.ogg", 0.2f);
 
 	//CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
 

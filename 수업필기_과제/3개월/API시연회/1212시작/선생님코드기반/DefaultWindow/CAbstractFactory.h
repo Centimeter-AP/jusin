@@ -4,6 +4,7 @@
 #include "CItem.h"
 #include "CObjMgr.h"
 #include "CTileMgr.h"
+#include "CMonster.h"
 
 template<typename T>
 class CAbstractFactory
@@ -25,9 +26,18 @@ public:
 		CObj* pObj = new T;
 		pObj->Initialize();
 		pObj->Set_Pos(_fX, _fY);
-
+		pObj->Set_TileIdx(pObj->Find_MyTileIdx());
 		if(0.f != _fAngle)
 			pObj->Set_Angle(_fAngle);
+
+		return pObj;
+	}
+	static CObj* Create_Monster(float _fX, float _fY)
+	{
+		CObj* pObj = new T;
+		pObj->Set_Pos(_fX, _fY);
+		pObj->Initialize();
+		static_cast<CMonster*>(pObj)->Set_FirstTileIdx();
 
 		return pObj;
 	}
@@ -67,7 +77,7 @@ public:
 		if (_isLeft == false)
 		{
 			pObj->Set_SpeedReverse();
-			pObj->Set_Pos((float)WINCX, (float)WINCY - 70.f);
+			pObj->Set_Pos((float)WINCX, (float)WINCY - 145.f);
 		}
 		return pObj;
 	}

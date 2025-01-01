@@ -6,7 +6,7 @@
 
 void CLeftBar::Initialize()
 {
-    m_tInfo = { 0.f , (float)WINCY - 70.f, 12.f, 60.f };
+    m_tInfo = { 0.f , (float)WINCY - 145.f, 12.f, 60.f };
     m_pImgKey = L"Beatbar";
     m_fSpeed = 1.f;
 
@@ -33,6 +33,7 @@ void CLeftBar::Late_Update()
             m_bDead = true;
             if (CBeatMgr::Get_Instance()->Get_BeatMissed() == false)
             {
+                CBeatMgr::Get_Instance()->Lose_BeatCombo();
                 CBeatMgr::Get_Instance()->Set_BeatMissed(true);
             }
             else        // 박자 놓친 상태일 때

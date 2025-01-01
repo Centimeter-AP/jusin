@@ -3,6 +3,7 @@
 #include "CShield.h"
 #include "CScrewBullet.h"
 #include "CGuideBullet.h"
+#include "CTileMgr.h"
 
 class CItem;
 class CPlayer :    public CObj
@@ -27,7 +28,13 @@ public:
     CObj*        Get_CurWeapon() { return m_Itemlist[ITEM_WEAPON].front(); }
     list<CObj*>& Get_ItemSlot(int _iItemlist) { return m_Itemlist[_iItemlist]; }
 
-    void         Set_FirstTileIdx() { m_iTileIdx = Find_MyTileIdx();  m_iHeadTileIdx = m_iTileIdx; }
+    void         Set_FirstTileIdx() { m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx(); }
+    void         Set_PositionCorrect() {
+        m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
+        m_iTileIdx = Find_MyTileIdx();
+        m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+        m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
+    }
 
 private:
     void        Key_Input();

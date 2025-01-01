@@ -13,7 +13,7 @@
 #include "CBeatMgr.h"
 #include "CLetterbox.h"
 
-float	g_fVolume(0.3f);
+float	g_fVolume(0.5f);
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount64()), m_iFPS(0)
@@ -33,7 +33,7 @@ void CMainGame::Initialize()
 	//srand(time(NULL));
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Title/Buffer_Back.bmp", L"Back");
-	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLetterbox>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_LETTERBOX, CAbstractFactory<CLetterbox>::Create());
 	CSceneMgr::Get_Instance()->Set_Scene(SC_LOGO);
 	CSoundMgr::Get_Instance()->Initialize();
 

@@ -145,6 +145,7 @@
     <ClInclude Include="CBossStage.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCollisionMgr.h" />
+    <ClInclude Include="CCoralRiffBoss.h" />
     <ClInclude Include="CDagger.h" />
     <ClInclude Include="CDirtWall.h" />
     <ClInclude Include="CDoor.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="CSoundMgr.h" />
     <ClInclude Include="CStage.h" />
     <ClInclude Include="CStageOne.h" />
+    <ClInclude Include="CStair.h" />
     <ClInclude Include="CStoneWall.h" />
     <ClInclude Include="CTauren.h" />
     <ClInclude Include="CTile.h" />
@@ -211,6 +213,7 @@
     <ClCompile Include="CBossStage.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
+    <ClCompile Include="CCoralRiffBoss.cpp" />
     <ClCompile Include="CDagger.cpp" />
     <ClCompile Include="CDirtWall.cpp" />
     <ClCompile Include="CDoor.cpp" />
@@ -252,6 +255,7 @@
     <ClCompile Include="CSoundMgr.cpp" />
     <ClCompile Include="CStage.cpp" />
     <ClCompile Include="CStageOne.cpp" />
+    <ClCompile Include="CStair.cpp" />
     <ClCompile Include="CStoneWall.cpp" />
     <ClCompile Include="CTauren.cpp" />
     <ClCompile Include="CTile.cpp" />

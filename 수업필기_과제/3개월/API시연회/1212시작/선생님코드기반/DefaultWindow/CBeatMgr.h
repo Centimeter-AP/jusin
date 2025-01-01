@@ -37,6 +37,7 @@ public:
 	void		Delete_Bar(CObj* _Bar);
 	void		Delete_Bar_Act();
 	void		Plus_BeatCombo() { ++m_iBeatCombo; if (m_iBeatCombo > 3) m_iBeatCombo = 3; }
+	void		Lose_BeatCombo() { m_iBeatCombo = 0; }
 
 public:
 	static CBeatMgr* Get_Instance()

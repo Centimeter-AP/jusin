@@ -6,7 +6,7 @@
 
 void CHeartbeat::Initialize()
 {
-	m_tInfo = { (float)WINCX * 0.5f, (float)WINCY - 70.f, 80.f, 100.f };
+	m_tInfo = { (float)WINCX * 0.5f, (float)WINCY - 145.f, 80.f, 100.f };
     m_pImgKey = L"Heartbeat";
 
 	

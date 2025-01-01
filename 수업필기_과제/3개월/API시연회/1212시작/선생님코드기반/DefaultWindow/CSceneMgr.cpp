@@ -15,6 +15,7 @@ CSceneMgr::~CSceneMgr()
 
 void CSceneMgr::Set_Scene(SCENEID eID)
 {
+	// 여기서 페이드인 페이드아웃 적용
 	m_eCurScene = eID;
 
 	if (m_ePreScene != m_eCurScene)

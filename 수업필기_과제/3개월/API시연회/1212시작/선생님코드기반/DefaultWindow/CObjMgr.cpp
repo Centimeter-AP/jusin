@@ -153,6 +153,10 @@ int CObjMgr::Update()
 			//default:
 			//	break;
 			//}
+			if (OBJ_NEXTSCENE == iResult)
+			{
+				return 0;
+			}
 
 			if (OBJ_DEAD == iResult)
 			{

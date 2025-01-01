@@ -121,5 +121,5 @@ void CStage::Render(HDC hDC)
 
 void CStage::Release()
 {
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
+	//CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
 }	

@@ -51,6 +51,7 @@ int CTauren::Update()
 {
     if (m_bDead || m_iHP == 0)
     {
+        CBeatMgr::Get_Instance()->Plus_BeatCombo();
         return OBJ_DEAD;
     }
 
@@ -113,12 +114,17 @@ int CTauren::Update()
             if (m_eCurState != DASH_ACT)
             {
                 Find_Player();
+                if (m_eDir == DIR_LEFT)
+                    m_ePrevDir = DIR_LEFT;
+                else if (m_eDir == DIR_RIGHT)
+                    m_ePrevDir = DIR_RIGHT;
                 int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
                 int iPlayerX = iPHTileIdx % TILEX;
                 int iPlayerY = iPHTileIdx / TILEX;
                 if (m_iTileX == iPlayerX || m_iTileY == iPlayerY)
                 {
                     m_eCurState = DASH_ACT;
+                    return OBJ_NOEVENT;
                 }
             }
         }
@@ -137,6 +143,15 @@ int CTauren::Update()
             fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
             CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
 
+            int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
+            if (iPHTileIdx == m_iHeadTileIdx)
+            {
+                m_eCurState = FAINT_ACT;
+                if (m_ePrevDir == DIR_LEFT)
+                    m_pImgKey = L"MinotaursFaint_L";
+                else
+                    m_pImgKey = L"MinotaursFaint_R";
+            }
             if (pHeadWall != nullptr)		// º® °Ë»ç
             {
                 if (m_eCurState == DASH_ACT)

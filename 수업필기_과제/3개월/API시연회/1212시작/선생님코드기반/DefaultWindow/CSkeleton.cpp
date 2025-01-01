@@ -46,6 +46,7 @@ int CSkeleton::Update()
 {
     if (m_bDead || m_iHP == 0)
     {
+        CBeatMgr::Get_Instance()->Plus_BeatCombo();
 
         return OBJ_DEAD;
     }
