@@ -12,6 +12,8 @@
 #include "CNormalShovel.h"
 #include "CDagger.h"
 #include "CSoundMgr.h"
+#include "CDoor.h"
+#include "CVerticalDoor.h"
 
 CTileMgr* CTileMgr::m_pInstance = nullptr;
 
@@ -31,14 +33,19 @@ void CTileMgr::Initialize()
 	{
 		for (int j = 0; j < TILEX; ++j)
 		{
-			if (j == 0)
-				float fX = (float)(j * TILECX) + (TILECX >> 1);
+			
+			/*if (j == 0)
+				float fX = (float)(j * TILECX) + (TILECX >> 1);*/
 			float fX = (float)(j * TILECX) + (TILECX >> 1);
-			if (i == 0)
-				float fY = (float)(i * TILECY) + (TILECY >> 1);
+			/*if (i == 0)
+				float fY = (float)(i * TILECY) + (TILECY >> 1);*/
 			float fY = (float)(i * TILECY) + (TILECY >> 1);
 
 			CObj* pTile = CAbstractFactory<CTile>::Create(fX, fY);
+			if ((i * TILEX + j) % 2)
+			{
+				dynamic_cast<CTile*>(pTile)->Set_DrawID(1);
+			}
 			m_vecTile.push_back(pTile);
 		}
 	}
@@ -91,8 +98,8 @@ void CTileMgr::Render(HDC hDC)
 				continue;
 			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_EDIT)	
 			{
-				if (iIndex % 2)
-					dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(1);
+				//if (iIndex % 2)
+				//	dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(1);
 			}
 			m_vecTile[iIndex]->Render(hDC);
 		}
@@ -169,6 +176,8 @@ void CTileMgr::Tile_Shine()
 {
 	for (int i = 0; i < TILEX * TILEY; ++i)
 	{
+		if (static_cast<CTile*>(m_vecTile[i])->Get_DrawID() == 3)
+			continue;
 		if(i % 2)
 		{
 			if (static_cast<CTile*>(m_vecTile[i])->Get_DrawID() == 0)
@@ -218,13 +227,24 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 	{
 		if (_pShovel == nullptr)
 		{
+			if (static_cast<CWall*>(_pTargetWall)->Get_WallType() == BEDROCK)
+				return;
 			Safe_Delete<CObj*>((*iter));
 			iter = m_vecWall.erase(iter);
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"mov_dig_dirt.wav", SOUND_EFFECT, g_fVolume);
 			return;
 		}
-		else if (dynamic_cast<CWall*>(_pTargetWall)->Get_PowerNeed() <= _pShovel->Get_Power())
+		else if (static_cast<CWall*>(_pTargetWall)->Get_WallType() == DOOR_WALL
+			  || static_cast<CWall*>(_pTargetWall)->Get_WallType() == VDOOR_WALL)
+		{
+			Safe_Delete<CObj*>((*iter));
+			iter = m_vecWall.erase(iter);
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"obj_door_open.wav", SOUND_EFFECT, g_fVolume);
+			return;
+		}
+		else if (static_cast<CWall*>(_pTargetWall)->Get_PowerNeed() <= _pShovel->Get_Power())
 		{
 			Safe_Delete<CObj*>((*iter));
 			iter = m_vecWall.erase(iter);
@@ -355,8 +375,6 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 	return true;
 }
 
-
-
 void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 {
 	int		x = pt.x / TILECX;
@@ -369,7 +387,17 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 	switch (iOption)
 	{
 	case OPT_TILE:
-		//dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(iDrawID);
+		if (iDrawID == 1)
+			dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(3);
+		else if (iDrawID == 0)
+		{
+			if (iIndex % 2)
+			{
+				dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(1);
+			}
+			else
+				dynamic_cast<CTile*>(m_vecTile[iIndex])->Set_DrawID(0);
+		}
 		break;
 	case OPT_WALL:
 	{
@@ -401,6 +429,14 @@ void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
 				break;
 			case WALLTYPE::BEDROCK:
 				pWall = CAbstractFactory<CBedrock>::Create(fx, fy);
+				m_vecWall.push_back(pWall);
+				break;
+			case WALLTYPE::DOOR_WALL:
+				pWall = CAbstractFactory<CDoor>::Create(fx, fy);
+				m_vecWall.push_back(pWall);
+				break;
+			case WALLTYPE::VDOOR_WALL:
+				pWall = CAbstractFactory<CVerticalDoor>::Create(fx, fy);
 				m_vecWall.push_back(pWall);
 				break;
 			default:
@@ -581,9 +617,26 @@ void CTileMgr::Load_Tile()
 
 void CTileMgr::Load_Wall(STAGEID stage)
 {
+	//HANDLE hFile;
+	//switch (stage)
+	//{
+	//case STAGE_LOBBY:
+	//	hFile = CreateFile(L"../Data/Tile0.dat", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	//	break;
+	//case STAGE_ONE:
+	//	hFile = CreateFile(L"../Data/Tile1.dat", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	//	break;
+	//case STAGE_BOSS:
+	//	hFile = CreateFile(L"../Data/Tile2.dat", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	//	break;
+	//default:
+	//	hFile = CreateFile(L"../Data/Tile.dat", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	//	break;
+	//}
 	TCHAR szText[32];
-	wsprintf(szText, L"../Data/Tile%d.dat", stage);
+	wsprintf(szText, L"../Data/Wall%d.dat", (int)stage);
 	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
 
 	if (INVALID_HANDLE_VALUE == hFile)
 		return;
@@ -619,6 +672,14 @@ void CTileMgr::Load_Wall(STAGEID stage)
 			pWall = CAbstractFactory<CBedrock>::Create(Wall.Get_Info());
 			m_vecWall.push_back(pWall);
 			break;
+		case WALLTYPE::DOOR_WALL:
+			pWall = CAbstractFactory<CDoor>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::VDOOR_WALL:
+			pWall = CAbstractFactory<CVerticalDoor>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
 		default:
 			break;
 		}
@@ -631,7 +692,7 @@ void CTileMgr::Load_Wall(STAGEID stage)
 void CTileMgr::Load_Tile(STAGEID stage)
 {
 	TCHAR szText[32];
-	wsprintf(szText, L"../Data/Tile%d.dat", stage);
+	wsprintf(szText, L"../Data/Tile%d.dat", (int)stage);
 	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (INVALID_HANDLE_VALUE == hFile)

@@ -47,7 +47,7 @@ void CMyEdit::Render_InfoText(HDC hDC)
 		wsprintf(szText, L"타입: 타일");
 		if (m_iNum == 0)
 			wsprintf(szNum, L"번호: 0");
-		else
+		else if (m_iNum == 1)
 			wsprintf(szNum, L"번호: X");
 		break;
 	case OPT_WALL:
@@ -60,6 +60,10 @@ void CMyEdit::Render_InfoText(HDC hDC)
 			wsprintf(szNum, L"번호: 상점벽");
 		else if (m_iNum == 3)
 			wsprintf(szNum, L"번호: 베드락");
+		else if (m_iNum == 4)
+			wsprintf(szNum, L"번호: 가로문");
+		else if (m_iNum == 5)
+			wsprintf(szNum, L"번호: 세로문");
 		else
 			wsprintf(szNum, L"번호: X");
 		break;
@@ -175,7 +179,7 @@ void CMyEdit::Key_Input()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_OEM_PLUS))
 	{
-		if (m_iNum == 5)
+		if (m_iNum == 6)
 			return;
 		++m_iNum;
 	}

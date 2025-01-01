@@ -178,6 +178,18 @@
     <Filter Include="01. Obj\UI\MonsterHP">
       <UniqueIdentifier>{d48904cd-732f-4ebd-b514-30b3c182f34b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene\03. Stage\BossStage">
+      <UniqueIdentifier>{74e29197-331d-43ab-8e1e-134fe458201e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\03. Stage\Lobby">
+      <UniqueIdentifier>{c3a507f6-069c-419d-b015-e82f2eb15def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\03. Stage\StageOne">
+      <UniqueIdentifier>{2e803be2-d154-4b72-b1fe-190326403bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\UI\Letterbox">
+      <UniqueIdentifier>{0f969303-e16c-4cbe-a48b-204ce872dcb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -342,9 +354,6 @@
     <ClInclude Include="CLeftBar.h">
       <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
     </ClInclude>
-    <ClInclude Include="CLobby.h">
-      <Filter>02. Scene\03. Stage</Filter>
-    </ClInclude>
     <ClInclude Include="CBlueSlime.h">
       <Filter>01. Obj\02. Monster\BlueSlime</Filter>
     </ClInclude>
@@ -360,8 +369,23 @@
     <ClInclude Include="CMonsterHP.h">
       <Filter>01. Obj\UI\MonsterHP</Filter>
     </ClInclude>
+    <ClInclude Include="CDoor.h">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="CVerticalDoor.h">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClInclude>
     <ClInclude Include="CStageOne.h">
-      <Filter>02. Scene\03. Stage</Filter>
+      <Filter>02. Scene\03. Stage\StageOne</Filter>
+    </ClInclude>
+    <ClInclude Include="CLobby.h">
+      <Filter>02. Scene\03. Stage\Lobby</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossStage.h">
+      <Filter>02. Scene\03. Stage\BossStage</Filter>
+    </ClInclude>
+    <ClInclude Include="CLetterbox.h">
+      <Filter>01. Obj\UI\Letterbox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -512,9 +536,6 @@
     <ClCompile Include="CLeftBar.cpp">
       <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
     </ClCompile>
-    <ClCompile Include="CLobby.cpp">
-      <Filter>02. Scene\03. Stage</Filter>
-    </ClCompile>
     <ClCompile Include="CBlueSlime.cpp">
       <Filter>01. Obj\02. Monster\BlueSlime</Filter>
     </ClCompile>
@@ -530,8 +551,23 @@
     <ClCompile Include="CMonsterHP.cpp">
       <Filter>01. Obj\UI\MonsterHP</Filter>
     </ClCompile>
+    <ClCompile Include="CDoor.cpp">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="CVerticalDoor.cpp">
+      <Filter>03. Design\WallMgr\06. Wall</Filter>
+    </ClCompile>
     <ClCompile Include="CStageOne.cpp">
-      <Filter>02. Scene\03. Stage</Filter>
+      <Filter>02. Scene\03. Stage\StageOne</Filter>
+    </ClCompile>
+    <ClCompile Include="CLobby.cpp">
+      <Filter>02. Scene\03. Stage\Lobby</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossStage.cpp">
+      <Filter>02. Scene\03. Stage\BossStage</Filter>
+    </ClCompile>
+    <ClCompile Include="CLetterbox.cpp">
+      <Filter>01. Obj\UI\Letterbox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

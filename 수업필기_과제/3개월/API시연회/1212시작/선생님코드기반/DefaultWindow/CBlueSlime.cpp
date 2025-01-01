@@ -16,7 +16,7 @@ void CBlueSlime::Initialize()
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Blueslime_L.bmp", L"Blueslime_L");
     m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
-    m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();
+    m_iHeadTileIdx = m_iTileIdx = m_iTileIdx = Find_MyTileIdx();
     m_iSelectedIndex[0] = m_iTileIdx;
     if (rand() % 2)
     {
@@ -26,8 +26,8 @@ void CBlueSlime::Initialize()
     {
         m_iSelectedIndex[1] = m_iTileIdx + TILEX;
     }
-    m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-    m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+    m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
     m_pTarget = GET_PLAYER;
     m_eDir = DIR_UP;
 
@@ -44,6 +44,7 @@ void CBlueSlime::Initialize()
     m_eRender = RENDER_GAMEOBJECT;
     m_iMaxHP = 2;
     m_iHP = 2;
+    m_iDamage = 2;
 
     m_HP_UI.Set_Target(this);
     m_HP_UI.Initialize();
@@ -65,7 +66,7 @@ int CBlueSlime::Update()
         if (m_eCurState == AFTER_ACT)
         {
             m_eCurState = BEFORE_ACT;
-            m_iHeadTileIdx = m_iCurTileIdx;
+            m_iHeadTileIdx = m_iTileIdx;
             m_iTileIdx = Find_MyTileIdx();
             m_tFrame.iMotion = 0;
 
@@ -87,12 +88,12 @@ int CBlueSlime::Update()
         if (Can_Move())
         {
             m_bMove = true;
-            if (m_iHeadTileIdx != m_iCurTileIdx && m_iHeadTileIdx != m_iSelectedIndex[0] && m_iHeadTileIdx != m_iSelectedIndex[1])
+            if (m_iHeadTileIdx != m_iTileIdx && m_iHeadTileIdx != m_iSelectedIndex[0] && m_iHeadTileIdx != m_iSelectedIndex[1])
                 m_bMove = false;
         }
         else
         {
-            m_iHeadTileIdx = m_iCurTileIdx;
+            m_iHeadTileIdx = m_iTileIdx;
         }
         //BEATMGR->Set_ObjectAbleToMove(false);
     }

@@ -21,11 +21,13 @@ public:
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
 
-    int          Get_CurTileIdx() { return m_iCurTileIdx; }
+    //int          Get_CurTileIdx() { return m_iCurTileIdx; }
     int          Get_HeadTileIdx() { return m_iHeadTileIdx; }
     CObj*        Get_CurShovel() { return m_Itemlist[ITEM_SHOVEL].front(); }
     CObj*        Get_CurWeapon() { return m_Itemlist[ITEM_WEAPON].front(); }
     list<CObj*>& Get_ItemSlot(int _iItemlist) { return m_Itemlist[_iItemlist]; }
+
+    void         Set_FirstTileIdx() { m_iTileIdx = Find_MyTileIdx();  m_iHeadTileIdx = m_iTileIdx; }
 
 private:
     void        Key_Input();

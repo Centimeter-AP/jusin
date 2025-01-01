@@ -23,9 +23,9 @@ public:
 	static CObj* Create(float _fX, float _fY, float _fAngle = 0.f)
 	{
 		CObj* pObj = new T;
-		pObj->Set_Pos(_fX, _fY);
 		pObj->Initialize();
-		
+		pObj->Set_Pos(_fX, _fY);
+
 		if(0.f != _fAngle)
 			pObj->Set_Angle(_fAngle);
 

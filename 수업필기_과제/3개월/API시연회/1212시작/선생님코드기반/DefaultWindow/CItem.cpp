@@ -11,7 +11,7 @@ void CItem::Find_Player_OnSameTile()
 {
 	if (m_pTarget != nullptr)
 	{
-		if (static_cast<CPlayer*>(m_pTarget)->Get_CurTileIdx() == m_iTileIdx)
+		if ((m_pTarget)->Get_TileIdx() == m_iTileIdx)
 			m_bIsPlayerOnTile = true;
 		else
 			m_bIsPlayerOnTile = false;

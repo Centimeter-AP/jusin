@@ -9,13 +9,11 @@ void CPlayerMoney::Initialize()
 {
 
     m_tInfo = { (float)WINCX - 50.f, 50.f, 48.f, 44.f };
-    m_pImgKey = L"Heart_Full";
+    m_pImgKey = L"Gold";
     m_iHP = CObjMgr::Get_Instance()->Get_Player()->Get_HP();
     m_iMaxHP = CObjMgr::Get_Instance()->Get_Player()->Get_MaxHP();
 
-    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Full.bmp", L"Heart_Full");
-    //CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Half.bmp", L"Heart_Half");
-    //CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Heart_Empty.bmp", L"Heart_Empty");
+    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/Gold.bmp", L"Gold");
     m_eRender = RENDER_UI;
 }
 

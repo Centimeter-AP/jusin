@@ -10,7 +10,7 @@
 
 void CPlayerWeaponUI::Initialize()
 {
-    m_tInfo = { 120.f, 50.f, 60.f, 66.f };
+    m_tInfo = { 120.f, 125.f, 60.f, 66.f };
     m_pImgKey = L"Dagger";
     m_pTarget = CObjMgr::Get_Instance()->Get_Player();
     m_pCurWeapon = static_cast<CPlayer*>(m_pTarget)->Get_CurWeapon();

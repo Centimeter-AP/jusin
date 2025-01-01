@@ -24,6 +24,7 @@ void CDirtWall::Initialize()
 	m_enWallType = DIRT_WALL;
 	// 벽 별로 imgpos 설정
 	m_iImgPosX = 0;
+	// 1632 보스
 	m_iImgPosY = 0;
 
 	m_iHP = 1;

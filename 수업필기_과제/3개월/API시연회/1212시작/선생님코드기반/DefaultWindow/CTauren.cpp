@@ -20,10 +20,10 @@ void CTauren::Initialize()
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/MinotaursFaint_R.bmp", L"MinotaursFaint_R");
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/MinotaursCharge2.bmp", L"MinotaursCharge");
     m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
-    m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();
+    m_iHeadTileIdx = m_iTileIdx = m_iTileIdx = Find_MyTileIdx();
 
-    m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-    m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+    m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
     m_pTarget = GET_PLAYER;
     m_eDir = DIR_LEFT;
     m_ePrevDir = DIR_LEFT;
@@ -41,7 +41,7 @@ void CTauren::Initialize()
     m_eRender = RENDER_GAMEOBJECT;
     m_iMaxHP = 5;
     m_iHP = 5;
-
+    m_iDamage = 6;
     m_HP_UI.Set_Target(this);
     m_HP_UI.Initialize();
     CObjMgr::Get_Instance()->Add_Object(OBJ_UI, &m_HP_UI);
@@ -68,9 +68,9 @@ int CTauren::Update()
             {
                 m_eCurState = IDLE_ACT;
             }
-            CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+            CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
             CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-            m_iHeadTileIdx = m_iCurTileIdx = Find_MyTileIdx();
+            m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx();
             if (m_ePrevDir == DIR_LEFT)
                 m_pImgKey = L"MinotaursFaint_L";
             else
@@ -155,7 +155,7 @@ int CTauren::Update()
                     CTileMgr::Get_Instance()->Break_Wall(pHeadWall, nullptr);
                 }
             }
-            m_iHeadTileIdx = m_iCurTileIdx;
+            m_iHeadTileIdx = m_iTileIdx;
         }
 
         //BEATMGR->Set_ObjectAbleToMove(false);

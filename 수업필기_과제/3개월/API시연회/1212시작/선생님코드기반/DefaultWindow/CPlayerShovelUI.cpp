@@ -10,7 +10,7 @@
 
 void CPlayerShovelUI::Initialize()
 {
-    m_tInfo = { 50.f, 50.f, 60.f, 66.f };
+    m_tInfo = { 50.f, 125.f, 60.f, 66.f };
     m_pImgKey = L"Shovels";
     m_pTarget = CObjMgr::Get_Instance()->Get_Player();
     m_pCurShov = static_cast<CPlayer*>(m_pTarget)->Get_CurShovel();

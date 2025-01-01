@@ -6,6 +6,7 @@
 #include "CLineMgr.h"
 #include "CKeyMgr.h"
 #include "CScrollMgr.h"
+#include "CSceneMgr.h"
 #include "CBmpMgr.h"
 #include "CSoundMgr.h"
 #include "CTileMgr.h"
@@ -18,7 +19,7 @@
 
 CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f),
-	m_iCurTileIdx(0), m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
+	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
 	m_pvecTile(nullptr), m_qltskrka(false)
 {
@@ -32,12 +33,12 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	//m_tInfo = { WINCX * 0.5f + 24.f, WINCY * 0.5f + 24.f, PLAYERCX, PLAYERCY };
-	m_tInfo = { 404, 337, PLAYERCX, PLAYERCY };
+	m_tInfo = { 840, 337, PLAYERCX, PLAYERCY };
 	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
 
-	m_iCurTileIdx = Find_MyTileIdx();
-	m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-	m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+	m_iTileIdx = Find_MyTileIdx();
+	m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+	m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
 	m_fShadowY = m_tInfo.fY - (m_tInfo.fCY * 0.5f) + 4.f;
 	
 	m_fSpeed = 6.f;
@@ -62,7 +63,7 @@ void CPlayer::Initialize()
 
 	m_eRender = RENDER_GAMEOBJECT;
 	m_fJumpPower = 9.5f;
-	m_iHeadTileIdx = m_iCurTileIdx;
+	m_iHeadTileIdx = m_iTileIdx;
 
 	m_iMaxHP = 6;
 	m_iHP = 6;
@@ -70,7 +71,7 @@ void CPlayer::Initialize()
 	// 최초 플레이어 init할 때 필수로 들고있어야 하는 아이템들 여기서 생성 후 아이템리스트에 별도로 보관?
 	// 좀 비효율적인 것 같긴 한데 고민하느니 일단 만들기..
 	// 플레이어말고 오브젝트매니저에서 관리하므로 release에서 관리 필요xxxx
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(false));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CNormalShovel>::Create_Item(false));
 	m_Itemlist[ITEM_SHOVEL].push_back(CObjMgr::Get_Instance()->Get_LastItem());
 	m_Itemlist[ITEM_SHOVEL].back()->Set_Target(this);
 
@@ -85,7 +86,6 @@ int CPlayer::Update()
 		return OBJ_DEAD;
 	Key_Input();
 	Jumping();
-	m_iTileIdx = m_iCurTileIdx;
 	Get_TileX();
 	Get_TileY();
 	__super::Update_Rect();
@@ -271,8 +271,8 @@ void CPlayer::Jumping()		// 그냥 점프하는 모션만 출력하는거
 	{
 		float fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 		float fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-		float fCurX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-		float fCurY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+		float fCurX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+		float fCurY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
 
 		switch (m_eDir)
 		{
@@ -284,7 +284,7 @@ void CPlayer::Jumping()		// 그냥 점프하는 모션만 출력하는거
 				m_tInfo.fY = fCurY;
 				m_bMove = false;
 				m_fTime = 0.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iHeadTileIdx;
 			}
 			else
 			{
@@ -301,7 +301,7 @@ void CPlayer::Jumping()		// 그냥 점프하는 모션만 출력하는거
 				m_tInfo.fY = fCurY;
 				m_bMove = false;
 				m_fTime = 0.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iHeadTileIdx;
 			}
 			else
 			{
@@ -319,7 +319,7 @@ void CPlayer::Jumping()		// 그냥 점프하는 모션만 출력하는거
 				m_tInfo.fY = fHeadY;
 				m_fShadowY = fHeadY - 20.f;
 				m_bMove = false;
-				m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			else
@@ -328,7 +328,7 @@ void CPlayer::Jumping()		// 그냥 점프하는 모션만 출력하는거
 				if ((m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.2f < 0)
 				{
 					m_tInfo.fY = fHeadY - 5.f;
-					m_iCurTileIdx = m_iHeadTileIdx;
+					m_iTileIdx = m_iHeadTileIdx;
 					m_fTime = 0.f;
 				}
 			}
@@ -345,7 +345,7 @@ void CPlayer::Jumping()		// 그냥 점프하는 모션만 출력하는거
 				m_tInfo.fY = fHeadY;
 				m_bMove = false;
 				m_fShadowY = fHeadY - 20.f;
-				m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			m_fShadowY -= -6.f * m_fTime - (9.8f * m_fTime * m_fTime);
@@ -470,7 +470,7 @@ void CPlayer::Key_Input()
 	{
 		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))			// 좌측
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true)		// 키 입력이 가능한 상태인지 (반박자 앞 ~ 반박자 뒤)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)		// 키 입력이 가능한 상태인지 (반박자 앞 ~ 반박자 뒤)
 			{
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);// 플레이어 행동 여부 true
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();		// 가장 앞 노트들 삭제
@@ -490,7 +490,7 @@ void CPlayer::Key_Input()
 				{
 					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;			// 의도한 것 : 이미 움직이고 있던 상태에서 다시 입력시 가려던 타일로 즉시 이동
 					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;	// 근데 나온 것: 않되
-					m_iCurTileIdx = m_iHeadTileIdx;
+					m_iTileIdx = m_iHeadTileIdx;
 				}
 				--m_iHeadTileIdx;	// 가고자 하는 타일(좌측)
 				if (Can_Move())		// 이동이 가능할 떄 
@@ -499,7 +499,7 @@ void CPlayer::Key_Input()
 					m_tFrame.iFrameStart = 0; // 애니메이션 프레임 제어
 				}
 				else
-					m_iHeadTileIdx = m_iCurTileIdx;	// 이동이 안되면 가려는 타일을 취소하고 현재 타일로 설정
+					m_iHeadTileIdx = m_iTileIdx;	// 이동이 안되면 가려는 타일을 취소하고 현재 타일로 설정
 			}
 			else
 			{
@@ -511,14 +511,14 @@ void CPlayer::Key_Input()
 #ifdef  _DEBUG
 
 			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+			cout << "플레이어 위치 타일 : " << m_iTileIdx << endl;
 
 #endif //  _DEBUG
 		}
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
 			{
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();
@@ -534,7 +534,7 @@ void CPlayer::Key_Input()
 				{
 					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-					m_iCurTileIdx = m_iHeadTileIdx;
+					m_iTileIdx = m_iHeadTileIdx;
 				}
 				++m_iHeadTileIdx;
 				if (Can_Move())
@@ -543,7 +543,7 @@ void CPlayer::Key_Input()
 					m_tFrame.iFrameStart = 0;
 				}
 				else
-					m_iHeadTileIdx = m_iCurTileIdx;
+					m_iHeadTileIdx = m_iTileIdx;
 			}
 			else
 			{
@@ -554,14 +554,14 @@ void CPlayer::Key_Input()
 #ifdef  _DEBUG
 
 			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+			cout << "플레이어 위치 타일 : " << m_iTileIdx << endl;
 
 #endif //  _DEBUG
 		}
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_UP))
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
 			{
 				m_qltskrka = false;
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
@@ -576,7 +576,7 @@ void CPlayer::Key_Input()
 				{
 					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-					m_iCurTileIdx = m_iHeadTileIdx;
+					m_iTileIdx = m_iHeadTileIdx;
 				}
 				m_iHeadTileIdx -= TILEX;
 				if (Can_Move())
@@ -585,7 +585,7 @@ void CPlayer::Key_Input()
 					m_tFrame.iFrameStart = 0;
 				}
 				else
-					m_iHeadTileIdx = m_iCurTileIdx;
+					m_iHeadTileIdx = m_iTileIdx;
 			}
 			else
 			{
@@ -597,14 +597,14 @@ void CPlayer::Key_Input()
 #ifdef  _DEBUG
 
 			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+			cout << "플레이어 위치 타일 : " << m_iTileIdx << endl;
 
 #endif //  _DEBUG
 		}
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_DOWN))
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
 			{
 				m_qltskrka = false;
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();
@@ -618,7 +618,7 @@ void CPlayer::Key_Input()
 				{
 					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 					m_tInfo.fY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-					m_iCurTileIdx = m_iHeadTileIdx;
+					m_iTileIdx = m_iHeadTileIdx;
 				}
 				m_iHeadTileIdx += TILEX;
 				if (Can_Move())
@@ -627,7 +627,7 @@ void CPlayer::Key_Input()
 					m_tFrame.iFrameStart = 0;
 				}
 				else
-					m_iHeadTileIdx = m_iCurTileIdx;
+					m_iHeadTileIdx = m_iTileIdx;
 			}
 			else
 			{
@@ -638,7 +638,7 @@ void CPlayer::Key_Input()
 #ifdef  _DEBUG
 
 			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;
-			cout << "플레이어 위치 타일 : " << m_iCurTileIdx << endl;
+			cout << "플레이어 위치 타일 : " << m_iTileIdx << endl;
 
 #endif //  _DEBUG
 		}

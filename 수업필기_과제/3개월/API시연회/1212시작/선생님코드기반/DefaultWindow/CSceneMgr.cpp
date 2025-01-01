@@ -35,8 +35,16 @@ void CSceneMgr::Set_Scene(SCENEID eID)
 			m_pScene = new CMyEdit;
 			break;
 
-		case SC_STAGE:
-			m_pScene = new CStage;
+		case SC_LOBBY:
+			m_pScene = new CLobby;
+			break;
+
+		case SC_STAGEONE:
+			m_pScene = new CStageOne;
+			break;
+
+		case SC_BOSS:
+			m_pScene = new CBossStage;
 			break;
 		}
 

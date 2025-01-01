@@ -24,6 +24,7 @@ void CStoneWall::Initialize()
 	m_enWallType = STONE_WALL;
 	// 벽 별로 imgpos 설정
 	m_iImgPosX = 1392;
+	// 1776 보스
 	m_iImgPosY = 0;
 
 	m_iHP = 2;

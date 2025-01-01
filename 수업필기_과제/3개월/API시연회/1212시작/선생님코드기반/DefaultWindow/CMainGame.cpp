@@ -11,6 +11,7 @@
 #include "CTileMgr.h"
 #include "CSoundMgr.h"
 #include "CBeatMgr.h"
+#include "CLetterbox.h"
 
 float	g_fVolume(0.3f);
 
@@ -29,8 +30,10 @@ void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 	
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Title/Buffer_Back.bmp", L"Back");
+	//srand(time(NULL));
 
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Title/Buffer_Back.bmp", L"Back");
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLetterbox>::Create());
 	CSceneMgr::Get_Instance()->Set_Scene(SC_LOGO);
 	CSoundMgr::Get_Instance()->Initialize();
 

@@ -23,11 +23,12 @@ protected:
     CMonsterHP  m_HP_UI;
 
     vector<CObj*>* m_pvecTile;
-    int         m_iCurTileIdx;
+    //int         m_iCurTileIdx;
     int         m_iHeadTileIdx;
     float       m_fJumpPower;
     float       m_fTime;
     bool        m_bMove;
     float       m_fShadowY;
     bool        m_bCanChangeDir;
+    int         m_iDamage;
 };

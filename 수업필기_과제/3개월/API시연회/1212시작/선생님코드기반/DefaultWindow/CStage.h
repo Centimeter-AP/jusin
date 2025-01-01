@@ -11,14 +11,14 @@ public:
 	virtual ~CStage();
 
 public:
-	void Initialize() override;
-	int Update() override;
-	void Late_Update() override;
-	void Render(HDC hDC) override;
-	void Release() override;
+	virtual void Initialize() override;
+	virtual int Update() override;
+	virtual void Late_Update() override;
+	virtual void Render(HDC hDC) override;
+	virtual void Release() override;
 
-private:
-	bool m_bBeatOne;
+protected:
+	bool	m_bBeatOne;
 	int		m_iFrameCount;
 
 };

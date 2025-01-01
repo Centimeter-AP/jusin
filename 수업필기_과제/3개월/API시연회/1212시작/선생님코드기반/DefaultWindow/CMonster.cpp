@@ -9,8 +9,9 @@
 #include "CPlayer.h"
 
 CMonster::CMonster()
-	:m_fTime(0.f), m_fJumpPower(0.f), m_iCurTileIdx(0)
+	:m_fTime(0.f), m_fJumpPower(0.f)
 	, m_iHeadTileIdx(0), m_bMove(false), m_fShadowY(0.f)
+	, m_iDamage(0)
 {
 }
 
@@ -28,10 +29,10 @@ void CMonster::Initialize()
 
     //CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Monster/Monster.bmp", L"Monster");
 	m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
-	m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();
+	m_iHeadTileIdx = m_iTileIdx = m_iTileIdx = Find_MyTileIdx();
 
-	m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-	m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f; 
+	m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+	m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f; 
 	m_pTarget = GET_PLAYER;
 	m_eDir = DIR_UP;
 
@@ -59,8 +60,8 @@ int CMonster::Update()
 		if (Can_Move())
 			m_bMove = true;
 		else
-			m_iHeadTileIdx = m_iCurTileIdx;
-		BEATMGR->Set_ObjectAbleToMove(false);
+			m_iHeadTileIdx = m_iTileIdx;
+		//BEATMGR->Set_ObjectAbleToMove(false);
 
 	}
 	Jumping();
@@ -164,8 +165,8 @@ void CMonster::Jumping()
 	{
 		float fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 		float fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY - 24.f;
-		float fCurX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-		float fCurY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+		float fCurX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+		float fCurY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
 		//CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
 		//CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
 		switch (m_eDir)
@@ -180,9 +181,9 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_bMove = false;
 				m_fTime = 0.f;
-				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-				m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iTileIdx = m_iHeadTileIdx;
 
 			}
 			else
@@ -201,9 +202,9 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_bMove = false;
 				m_fTime = 0.f;
-				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-				m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iTileIdx = m_iHeadTileIdx;
 			}
 			else
 			{
@@ -222,9 +223,9 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_fShadowY = fHeadY - 20.f;
 				m_bMove = false;
-				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-				m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			else
@@ -235,7 +236,7 @@ void CMonster::Jumping()
 					m_tInfo.fY = fHeadY - 5.f;
 					//m_fShadowY = fHeadY - 20.f;
 					//m_bMove = false;
-					m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
+					m_iTileIdx = m_iTileIdx = m_iHeadTileIdx;
 					m_fTime = 0.f;
 				}
 			}
@@ -252,9 +253,9 @@ void CMonster::Jumping()
 				m_tInfo.fX = fHeadX;
 				m_bMove = false;
 				m_fShadowY = fHeadY - 20.f;
-				CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-				m_iTileIdx = m_iCurTileIdx = m_iHeadTileIdx;
+				m_iTileIdx = m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			m_fShadowY -= -6.f * m_fTime - (9.8f * m_fTime * m_fTime);
@@ -278,16 +279,16 @@ bool CMonster::Can_Move()
 	switch (m_eDir)
 	{
 	case DIR_LEFT:
-		m_iHeadTileIdx = m_iCurTileIdx - 1;
+		m_iHeadTileIdx = m_iTileIdx - 1;
 		break;
 	case DIR_RIGHT:
-		m_iHeadTileIdx = m_iCurTileIdx + 1;
+		m_iHeadTileIdx = m_iTileIdx + 1;
 		break;
 	case DIR_UP:
-		m_iHeadTileIdx = m_iCurTileIdx - TILEX;
+		m_iHeadTileIdx = m_iTileIdx - TILEX;
 		break;
 	case DIR_DOWN:
-		m_iHeadTileIdx = m_iCurTileIdx + TILEX;
+		m_iHeadTileIdx = m_iTileIdx + TILEX;
 		break;
 	}
 
@@ -310,8 +311,6 @@ bool CMonster::Can_Move()
 
 	//if (HeadTileArr[])
 
-
-
 	if (pHeadWall != nullptr)		// º® °Ë»ç
 	{
 		return false;
@@ -324,6 +323,7 @@ bool CMonster::Can_Move()
 	}
 	else if (iPHTileIdx == m_iHeadTileIdx)
 	{
+		GET_PLAYER->Set_HP(m_iDamage);
 		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 		CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
 		return false;

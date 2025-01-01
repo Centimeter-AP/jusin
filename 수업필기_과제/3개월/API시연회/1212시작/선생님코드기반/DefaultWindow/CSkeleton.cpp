@@ -15,10 +15,10 @@ void CSkeleton::Initialize()
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Skeletons.bmp", L"Skeleton");
     m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
-    m_iHeadTileIdx = m_iTileIdx = m_iCurTileIdx = Find_MyTileIdx();
+    m_iHeadTileIdx = m_iTileIdx = m_iTileIdx = Find_MyTileIdx();
 
-    m_tInfo.fX = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fX;
-    m_tInfo.fY = (*m_pvecTile)[m_iCurTileIdx]->Get_Info().fY - 24.f;
+    m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
     m_pTarget = GET_PLAYER;
     m_eDir = DIR_UP;
 
@@ -35,6 +35,7 @@ void CSkeleton::Initialize()
     m_eRender = RENDER_GAMEOBJECT;
     m_iMaxHP = 1;
     m_iHP = 1;
+    m_iDamage = 1;
 
     m_HP_UI.Set_Target(this);
     m_HP_UI.Initialize();
@@ -55,7 +56,7 @@ int CSkeleton::Update()
         {
             //BEATMGR->Set_ObjectAbleToMove(false);
             m_eCurState = BEFORE_ACT;
-            m_iHeadTileIdx = m_iCurTileIdx;
+            m_iHeadTileIdx = m_iTileIdx;
             m_iTileIdx = Find_MyTileIdx();
             m_iBeforeAct = 1;
             return OBJ_NOEVENT;
@@ -77,7 +78,7 @@ int CSkeleton::Update()
         }
         else
         {
-            m_iHeadTileIdx = m_iCurTileIdx;
+            m_iHeadTileIdx = m_iTileIdx;
         }
         //BEATMGR->Set_ObjectAbleToMove(false);
     }
