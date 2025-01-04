@@ -34,6 +34,7 @@ public:
         m_iTileIdx = Find_MyTileIdx();
         m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
         m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
+        m_fShadowY = m_tInfo.fY - (m_tInfo.fCY * 0.5f) + 4.f;
     }
 
 private:

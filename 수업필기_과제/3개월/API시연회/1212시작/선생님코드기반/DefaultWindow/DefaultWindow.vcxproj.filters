@@ -190,6 +190,9 @@
     <Filter Include="01. Obj\UI\Letterbox">
       <UniqueIdentifier>{0f969303-e16c-4cbe-a48b-204ce872dcb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\02. Monster\CoralRiff">
+      <UniqueIdentifier>{b3600d28-4ad0-4d99-9ec2-78df2b015491}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -390,8 +393,20 @@
     <ClInclude Include="CStair.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CCoralBrass.h">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralDrum.h">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralPiano.h">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClInclude>
     <ClInclude Include="CCoralRiffBoss.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralViolin.h">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -578,8 +593,20 @@
     <ClCompile Include="CStair.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CCoralBrass.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralDrum.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralPiano.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClCompile>
     <ClCompile Include="CCoralRiffBoss.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralViolin.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

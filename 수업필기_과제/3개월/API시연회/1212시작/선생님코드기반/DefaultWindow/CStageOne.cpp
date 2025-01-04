@@ -42,7 +42,7 @@ void CStageOne::Initialize()
 	CTileMgr::Get_Instance()->Load_Tile(STAGE_ONE);
 	CTileMgr::Get_Instance()->Load_Wall(STAGE_ONE);
 	//CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
-	GET_PLAYER->Set_Pos(300, 400);
+	GET_PLAYER->Set_Pos(300, 300);
 	static_cast<CPlayer*>(GET_PLAYER)->Set_PositionCorrect();
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CNormalShovel>::Create_Item(true, 404, 385));
@@ -65,6 +65,8 @@ void CStageOne::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CBlueSlime>::Create_Monster(1320, 768));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CTauren>::Create_Monster(1272, 912));
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
+	CScrollMgr::Get_Instance()->Set_Scroll(0, 0);
+
 	CSoundMgr::Get_Instance()->StopSound(SOUND_BGM);
 	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.ogg", 0.2f);
 	CBeatMgr::Get_Instance()->Set_MusicStart();

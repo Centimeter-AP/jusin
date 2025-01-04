@@ -1,18 +1,18 @@
 #pragma once
 #include "CObj.h"
 #include "CMonsterHP.h"
-class CMonster :   public CObj
+class CMonster : public CObj
 {
 public:
     CMonster();
     virtual ~CMonster();
 public:
     virtual void Initialize() override;
-    virtual int Update() override;
+    virtual int  Update() override;
     virtual void Late_Update() override;
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
-    void Find_Player();
+    void         Find_Player();
     void         Set_FirstTileIdx() { m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx(); }
 
     void        Jumping();
