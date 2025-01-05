@@ -6,6 +6,8 @@
 #include "CObjMgr.h"
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
+#include "CCoralInst.h"
+#include "CKeyMgr.h"
 
 
 void CCoralRiffBoss::Initialize()
@@ -14,8 +16,10 @@ void CCoralRiffBoss::Initialize()
 //본체 86 120
 //호른 72 116
 //키보드 52 110 
+    m_iImgCX = 86.f;
+    m_iImgCY = 120.f;
     m_tInfo.fCX = 86.f;
-    m_tInfo.fCY = 120.f;
+    m_tInfo.fCY = 48.f;
     m_fSpeed = 6.f;
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Boss/coralriff_head.bmp", L"Boss");
@@ -24,9 +28,9 @@ void CCoralRiffBoss::Initialize()
     CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
 
     m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
-    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
+    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY;
     m_pTarget = GET_PLAYER;
-    m_eDir = DIR_UP;
+    m_eDir = DIR_DOWN;
 
     m_tFrame.iFrameStart = 0;
     m_tFrame.iFrameEnd = 3;
@@ -42,6 +46,7 @@ void CCoralRiffBoss::Initialize()
     m_iMaxHP = 5;
     m_iHP = 5;
     m_iDamage = 6;
+    m_iBeatPassed = 0;
 
     m_HP_UI.Set_Target(this);
     m_HP_UI.Initialize();
@@ -56,6 +61,28 @@ int CCoralRiffBoss::Update()
 
         return OBJ_DEAD;
     }
+    if (CKeyMgr::Get_Instance()->Key_Down('Z'))
+    {
+        m_iPhasePassed = 1;
+        m_iBeatPassed = 0;
+    }
+
+    if (m_iPhasePassed > 0)
+    {
+        if (BEATMGR->Get_ObjectAbleToMove() == true)
+        {
+            if (m_iPhasePassed < 8)
+            {
+                Inst_Phase();
+            }
+            else
+            {
+                Move_Phase();
+            }
+            ++m_iBeatPassed;
+        }
+    }
+
 
     m_iTileIdx = Find_MyTileIdx();
 
@@ -78,16 +105,28 @@ void CCoralRiffBoss::Render(HDC hDC)
 
     //Rectangle(hDC, m_tRect.left + iScrollX, m_tRect.top + iScrollY, m_tRect.right + iScrollX, m_tRect.bottom + iScrollY);
 
+    //GdiTransparentBlt(hDC,
+    //    m_tRect.left + iScrollX,
+    //    m_tRect.top + iScrollY,
+    //    (int)m_tInfo.fCX,
+    //    (int)m_tInfo.fCY,
+    //    hMemDC,
+    //    (int)m_tInfo.fCX * m_tFrame.iFrameStart,
+    //    (int)m_tInfo.fCY * m_tFrame.iMotion,
+    //    (int)m_tInfo.fCX,
+    //    (int)m_tInfo.fCY,
+    //    RGB(255, 0, 255));
+
     GdiTransparentBlt(hDC,
         m_tRect.left + iScrollX,
-        m_tRect.top + iScrollY,
-        (int)m_tInfo.fCX,
-        (int)m_tInfo.fCY,
+        m_tRect.bottom - m_iImgCY + iScrollY,
+        m_iImgCX,
+        m_iImgCY,
         hMemDC,
-        (int)m_tInfo.fCX * m_tFrame.iFrameStart,
-        (int)m_tInfo.fCY * m_tFrame.iMotion,
-        (int)m_tInfo.fCX,
-        (int)m_tInfo.fCY,
+        m_iImgCX * m_tFrame.iFrameStart,
+        m_iImgCY * m_tFrame.iMotion,
+        m_iImgCX,
+        m_iImgCY,
         RGB(255, 0, 255));
 
     m_HP_UI.Render(hDC);
@@ -96,4 +135,105 @@ void CCoralRiffBoss::Render(HDC hDC)
 void CCoralRiffBoss::Release()
 {
     CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
+}
+
+void CCoralRiffBoss::Inst_Phase()
+{
+    if (m_iPhasePassed == 1)
+    {
+        if (m_iBeatPassed == 4)
+        {
+            m_iPhasePassed = 2;
+            m_iBeatPassed = 0;
+        }
+    }
+    else if (m_iPhasePassed > 1 && m_iPhasePassed < 6)
+    {
+        if (m_iBeatPassed == 1)
+        {
+            int i = rand() % 4 + 1;
+            static_cast<CCoralInst*>(m_vecInstrument[(m_iPhasePassed - 2) * 2])->Goto_Player(i);
+            static_cast<CCoralInst*>(m_vecInstrument[(m_iPhasePassed - 2) * 2 + 1])->Goto_Player(10 - i);
+            // 1일때 부르르
+            // 2일때 잠수
+            // 4일때 옆에등장
+            // 8일때 
+        }
+        else if (m_iBeatPassed == 7)
+        {
+            ++m_iPhasePassed;
+            m_iBeatPassed = 0;
+        }
+    }
+    else if (m_iPhasePassed == 6)
+    {
+        if (m_iBeatPassed == 1)
+        {
+            static_cast<CCoralInst*>(m_vecInstrument[0])->Goto_Player(2);
+            static_cast<CCoralInst*>(m_vecInstrument[2])->Goto_Player(8);
+            static_cast<CCoralInst*>(m_vecInstrument[4])->Goto_Player(4);
+            static_cast<CCoralInst*>(m_vecInstrument[6])->Goto_Player(6);
+        }
+        else if (m_iBeatPassed == 7)
+        {
+            ++m_iPhasePassed;
+            m_iBeatPassed = 0;
+        }
+    }
+    else if (m_iPhasePassed == 7)
+    {
+        if (m_iBeatPassed == 1)
+        {
+            static_cast<CCoralInst*>(m_vecInstrument[1])->Goto_Player(1);
+            static_cast<CCoralInst*>(m_vecInstrument[3])->Goto_Player(9);
+            static_cast<CCoralInst*>(m_vecInstrument[5])->Goto_Player(3);
+            static_cast<CCoralInst*>(m_vecInstrument[7])->Goto_Player(7);
+        }
+        else if (m_iBeatPassed == 7)
+        {
+            ++m_iPhasePassed;
+            m_iBeatPassed = 0;
+        }
+    }
+    else if (m_iPhasePassed >= 8)
+    {
+        return; 
+    }
+
+}
+
+void CCoralRiffBoss::Move_Phase()
+{
+    if (m_iPhasePassed >= 8)
+    {
+
+        if (m_eCurState == AFTER_ACT)
+        {
+            m_eCurState = BEFORE_ACT;
+            m_iHeadTileIdx = m_iTileIdx;
+            m_iTileIdx = Find_MyTileIdx();
+            m_iBeforeAct = 1;
+            return ;
+        }
+        else
+        {
+            m_iBeforeAct = 0;
+            m_eCurState = AFTER_ACT;
+        }
+
+        m_iTileIdx = Find_MyTileIdx();
+        if (m_pTarget != nullptr)
+        {
+            Find_Player();
+        }
+        if (Can_Move())
+        {
+            m_bMove = true;
+        }
+        else
+        {
+            m_iHeadTileIdx = m_iTileIdx;
+        }
+        Jumping();
+    }
 }

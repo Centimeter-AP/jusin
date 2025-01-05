@@ -147,6 +147,7 @@
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CCoralBrass.h" />
     <ClInclude Include="CCoralDrum.h" />
+    <ClInclude Include="CCoralInst.h" />
     <ClInclude Include="CCoralPiano.h" />
     <ClInclude Include="CCoralRiffBoss.h" />
     <ClInclude Include="CCoralViolin.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="CTitaniumShovel.h" />
     <ClInclude Include="CVerticalDoor.h" />
     <ClInclude Include="CWall.h" />
+    <ClInclude Include="CWaterTile.h" />
     <ClInclude Include="CWeapon.h" />
     <ClInclude Include="DefaultWindow.h" />
     <ClInclude Include="Define.h" />
@@ -219,6 +221,7 @@
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CCoralBrass.cpp" />
     <ClCompile Include="CCoralDrum.cpp" />
+    <ClCompile Include="CCoralInst.cpp" />
     <ClCompile Include="CCoralPiano.cpp" />
     <ClCompile Include="CCoralRiffBoss.cpp" />
     <ClCompile Include="CCoralViolin.cpp" />
@@ -271,6 +274,7 @@
     <ClCompile Include="CTitaniumShovel.cpp" />
     <ClCompile Include="CVerticalDoor.cpp" />
     <ClCompile Include="CWall.cpp" />
+    <ClCompile Include="CWaterTile.cpp" />
     <ClCompile Include="CWeapon.cpp" />
     <ClCompile Include="DefaultWindow.cpp" />
     <ClCompile Include="pch.cpp">

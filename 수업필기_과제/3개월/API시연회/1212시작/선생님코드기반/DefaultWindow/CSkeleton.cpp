@@ -15,7 +15,7 @@ void CSkeleton::Initialize()
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Skeletons.bmp", L"Skeleton");
     m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
-    m_iHeadTileIdx = m_iTileIdx = m_iTileIdx = Find_MyTileIdx();
+    m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx();
 
     m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;

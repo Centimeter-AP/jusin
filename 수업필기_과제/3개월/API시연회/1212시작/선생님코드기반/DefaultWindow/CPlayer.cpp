@@ -65,8 +65,8 @@ void CPlayer::Initialize()
 	m_fJumpPower = 9.5f;
 	m_iHeadTileIdx = m_iTileIdx;
 
-	m_iMaxHP = 6;
-	m_iHP = 6;
+	m_iMaxHP = 10;
+	m_iHP = 10;
 
 	// 최초 플레이어 init할 때 필수로 들고있어야 하는 아이템들 여기서 생성 후 아이템리스트에 별도로 보관?
 	// 좀 비효율적인 것 같긴 한데 고민하느니 일단 만들기..
@@ -506,8 +506,8 @@ void CPlayer::Key_Input()
 				CBeatMgr::Get_Instance()->Lose_BeatCombo();
 				m_qltskrka = true;		// !!감나빗
 			}
-
-			CTileMgr::Get_Instance()->Tile_Shine();
+			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
+				CTileMgr::Get_Instance()->Tile_Shine();
 
 #ifdef  _DEBUG
 
@@ -530,7 +530,6 @@ void CPlayer::Key_Input()
 				m_ePrevDir = DIR_RIGHT;
 				m_fShadowY = m_tRect.top + 4.f;
 
-
 				if (m_bMove == true)
 				{
 					m_tInfo.fX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
@@ -551,7 +550,8 @@ void CPlayer::Key_Input()
 				CBeatMgr::Get_Instance()->Lose_BeatCombo();
 				m_qltskrka = true;
 			}
-			CTileMgr::Get_Instance()->Tile_Shine();
+			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
+				CTileMgr::Get_Instance()->Tile_Shine();
 
 #ifdef  _DEBUG
 
@@ -595,7 +595,8 @@ void CPlayer::Key_Input()
 				m_qltskrka = true;
 			}
 
-			CTileMgr::Get_Instance()->Tile_Shine();
+			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
+				CTileMgr::Get_Instance()->Tile_Shine();
 
 #ifdef  _DEBUG
 
@@ -638,7 +639,8 @@ void CPlayer::Key_Input()
 				m_qltskrka = true;
 			}
 
-			CTileMgr::Get_Instance()->Tile_Shine();
+			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
+				CTileMgr::Get_Instance()->Tile_Shine();
 #ifdef  _DEBUG
 
 			cout << "플레이어 위치 : " << m_tInfo.fX << '\t' << m_tInfo.fY << endl;

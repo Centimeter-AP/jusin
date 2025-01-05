@@ -1,10 +1,10 @@
 #pragma once
-#include "CWeapon.h"
-class CDagger : public CWeapon
+#include "CTile.h"
+class CWaterTile : public CTile
 {
 public:
-	CDagger() {}
-	virtual ~CDagger() { Release(); }
+	CWaterTile();
+	virtual ~CWaterTile();
 public:
 	void Initialize() override;
 	int Update() override;

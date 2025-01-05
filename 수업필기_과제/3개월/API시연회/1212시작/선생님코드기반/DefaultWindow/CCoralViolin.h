@@ -1,6 +1,6 @@
 #pragma once
-#include "CMonster.h"
-class CCoralViolin : public CMonster
+#include "CCoralInst.h"
+class CCoralViolin : public CCoralInst
 {
 public:
     CCoralViolin() {}
@@ -13,10 +13,7 @@ public:
     virtual void Release() override;
 
 private:
-    enum ACTSTATE { BEFORE_ACT, AFTER_ACT, END_ACT };
-    ACTSTATE    m_eCurState;
-    bool        m_bAttacked;
-    int         m_iBeforeAct;
+
 };
 
 

@@ -241,3 +241,16 @@ void CObjMgr::Delete_Object(OBJID eID, CObj* pObj)
 		}
 	}
 }
+
+void CObjMgr::Delete_Map_Item()
+{
+	for (auto iter = m_ObjList[OBJ_ITEM].begin(); iter != m_ObjList[OBJ_ITEM].end(); ++iter)
+	{
+		if (static_cast<CItem*>(*iter)->Get_OnMap() == true)
+		{
+			Safe_Delete<CObj*>((*iter));
+			iter = m_ObjList[OBJ_ITEM].erase(iter);
+			return;
+		}
+	}
+}

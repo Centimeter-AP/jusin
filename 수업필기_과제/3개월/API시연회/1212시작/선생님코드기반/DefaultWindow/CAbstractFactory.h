@@ -32,6 +32,18 @@ public:
 
 		return pObj;
 	}
+	static CObj* Create(int _iTileIdx)
+	{
+		CObj* pObj = new T;
+		float fX = (_iTileIdx % TILEX) * 48 + 24;
+		float fY = (_iTileIdx / TILEX) * 48 + 24;
+		pObj->Set_Pos(fX, fY);
+		pObj->Initialize();
+		pObj->Set_TileIdx(_iTileIdx);
+
+		return pObj;
+	}
+
 	static CObj* Create_Monster(float _fX, float _fY)
 	{
 		CObj* pObj = new T;
@@ -54,7 +66,7 @@ public:
 		CObj* pObj = new T;
 		pObj->Initialize();
 		if (_isOnMap)
-			dynamic_cast<CItem*>(pObj)->Set_OnMap(_isOnMap);
+			static_cast<CItem*>(pObj)->Set_OnMap(_isOnMap);
 		int iTileIdx = ((int)_fY / TILECY) * TILEX + ((int)_fX / TILECX);
 		pObj->Set_Pos(
 			(*(CTileMgr::Get_Instance()->Get_TileVec()))[iTileIdx]->Get_Info().fX,

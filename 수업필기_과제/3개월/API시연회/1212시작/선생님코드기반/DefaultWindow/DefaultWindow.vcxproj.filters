@@ -130,42 +130,6 @@
     <Filter Include="01. Obj\08. Item\01. Shovel\Titanium">
       <UniqueIdentifier>{1456c33d-aa33-466e-bb74-f7ff71b520ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\UI">
-      <UniqueIdentifier>{6ca8b8d2-30a1-4b87-9f7c-66d0b7443407}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\PlayerUI">
-      <UniqueIdentifier>{9b2de9f5-0917-4eeb-ba54-a42c0087094d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\PlayerUI\PlayerHP">
-      <UniqueIdentifier>{d39d1a93-e318-4262-850e-33255a75ad53}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem">
-      <UniqueIdentifier>{16a7b0a3-22a9-4143-bd95-8414c2c22947}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerShovel">
-      <UniqueIdentifier>{0979c26c-6378-4368-904c-6719b6e0cca3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerWeapon">
-      <UniqueIdentifier>{e72396c7-cd87-43ad-a5c7-f7ba14a9310e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerBomb">
-      <UniqueIdentifier>{d03d84ca-9d08-4559-8511-2ddd11dfd46a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney">
-      <UniqueIdentifier>{9bfdabc9-e28f-46f2-b0f5-3b727fcd6323}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\BeatUI">
-      <UniqueIdentifier>{8dba1075-e4d3-4d31-86cb-adb5c0ec3e50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\BeatUI\Heartbeat">
-      <UniqueIdentifier>{60c51846-8d6e-4593-87a1-5458849e7ca0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\BeatUI\LeftBar">
-      <UniqueIdentifier>{6d3d5dfd-c871-426c-86d3-0e5ae3eb405f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\BeatUI\RightBar">
-      <UniqueIdentifier>{9ed4d684-f7d9-4a64-9e57-3852516ca046}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Obj\02. Monster\Skeleton">
       <UniqueIdentifier>{e938601f-3e28-4008-9644-9ad7636403f4}</UniqueIdentifier>
     </Filter>
@@ -174,9 +138,6 @@
     </Filter>
     <Filter Include="01. Obj\02. Monster\Tauren">
       <UniqueIdentifier>{288d6be1-52da-49fa-b3d1-e7b3776340a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Obj\UI\MonsterHP">
-      <UniqueIdentifier>{d48904cd-732f-4ebd-b514-30b3c182f34b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Scene\03. Stage\BossStage">
       <UniqueIdentifier>{74e29197-331d-43ab-8e1e-134fe458201e}</UniqueIdentifier>
@@ -187,11 +148,80 @@
     <Filter Include="02. Scene\03. Stage\StageOne">
       <UniqueIdentifier>{2e803be2-d154-4b72-b1fe-190326403bcb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\UI\Letterbox">
-      <UniqueIdentifier>{0f969303-e16c-4cbe-a48b-204ce872dcb7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Obj\02. Monster\CoralRiff">
       <UniqueIdentifier>{b3600d28-4ad0-4d99-9ec2-78df2b015491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\CoralRiff\Boss">
+      <UniqueIdentifier>{d6de1dfa-4a0f-4e7f-96a8-9f14ec5bb75e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\CoralRiff\Inst">
+      <UniqueIdentifier>{4288f7eb-958a-4cf3-afd0-5e6ba7e389d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\CoralRiff\Inst\Brass">
+      <UniqueIdentifier>{43bf7cf5-3b47-4166-a1ba-09b3fee4240a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\CoralRiff\Inst\Piano">
+      <UniqueIdentifier>{4c9b51b6-86ea-49b0-ba65-887242f9e8b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\CoralRiff\Inst\Violin">
+      <UniqueIdentifier>{156a5232-8b0c-4f3a-8125-c813a0031ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\CoralRiff\Inst\Drum">
+      <UniqueIdentifier>{df4d4b2f-0a1e-419a-a578-c3993b3c2d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI">
+      <UniqueIdentifier>{6ca8b8d2-30a1-4b87-9f7c-66d0b7443407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI">
+      <UniqueIdentifier>{9b2de9f5-0917-4eeb-ba54-a42c0087094d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerHP">
+      <UniqueIdentifier>{d39d1a93-e318-4262-850e-33255a75ad53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem">
+      <UniqueIdentifier>{16a7b0a3-22a9-4143-bd95-8414c2c22947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerShovel">
+      <UniqueIdentifier>{0979c26c-6378-4368-904c-6719b6e0cca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerWeapon">
+      <UniqueIdentifier>{e72396c7-cd87-43ad-a5c7-f7ba14a9310e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerBomb">
+      <UniqueIdentifier>{d03d84ca-9d08-4559-8511-2ddd11dfd46a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerMoney">
+      <UniqueIdentifier>{9bfdabc9-e28f-46f2-b0f5-3b727fcd6323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\BeatUI">
+      <UniqueIdentifier>{8dba1075-e4d3-4d31-86cb-adb5c0ec3e50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\BeatUI\Heartbeat">
+      <UniqueIdentifier>{60c51846-8d6e-4593-87a1-5458849e7ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\BeatUI\LeftBar">
+      <UniqueIdentifier>{6d3d5dfd-c871-426c-86d3-0e5ae3eb405f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\BeatUI\RightBar">
+      <UniqueIdentifier>{9ed4d684-f7d9-4a64-9e57-3852516ca046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\MonsterHP">
+      <UniqueIdentifier>{d48904cd-732f-4ebd-b514-30b3c182f34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\Letterbox">
+      <UniqueIdentifier>{0f969303-e16c-4cbe-a48b-204ce872dcb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\06. Misc">
+      <UniqueIdentifier>{2afdb4d6-87db-4678-98f9-0f04c1d6124b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\06. Misc\WaterTile">
+      <UniqueIdentifier>{74cb516b-805e-4621-a917-0ac3a1c00357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\06. Misc\Stair">
+      <UniqueIdentifier>{5ffac10d-db75-49a5-a034-ad9d0e0722c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\06. Misc\Trap">
+      <UniqueIdentifier>{ba9bf133-1128-41b1-9217-6f50ccaa4239}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -340,22 +370,22 @@
       <Filter>01. Obj\08. Item\01. Shovel\Titanium</Filter>
     </ClInclude>
     <ClInclude Include="CHeartbeat.h">
-      <Filter>01. Obj\UI\BeatUI\Heartbeat</Filter>
+      <Filter>01. Obj\09. UI\BeatUI\Heartbeat</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerHP.h">
-      <Filter>01. Obj\UI\PlayerUI\PlayerHP</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerHP</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerShovelUI.h">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerShovel</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerShovel</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerItemUI.h">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerWeaponUI.h">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerWeapon</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerWeapon</Filter>
     </ClInclude>
     <ClInclude Include="CLeftBar.h">
-      <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
+      <Filter>01. Obj\09. UI\BeatUI\LeftBar</Filter>
     </ClInclude>
     <ClInclude Include="CBlueSlime.h">
       <Filter>01. Obj\02. Monster\BlueSlime</Filter>
@@ -367,10 +397,10 @@
       <Filter>01. Obj\02. Monster\Tauren</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerMoney.h">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
     </ClInclude>
     <ClInclude Include="CMonsterHP.h">
-      <Filter>01. Obj\UI\MonsterHP</Filter>
+      <Filter>01. Obj\09. UI\MonsterHP</Filter>
     </ClInclude>
     <ClInclude Include="CDoor.h">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
@@ -388,25 +418,31 @@
       <Filter>02. Scene\03. Stage\BossStage</Filter>
     </ClInclude>
     <ClInclude Include="CLetterbox.h">
-      <Filter>01. Obj\UI\Letterbox</Filter>
-    </ClInclude>
-    <ClInclude Include="CCoralBrass.h">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
-    </ClInclude>
-    <ClInclude Include="CCoralDrum.h">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
-    </ClInclude>
-    <ClInclude Include="CCoralPiano.h">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+      <Filter>01. Obj\09. UI\Letterbox</Filter>
     </ClInclude>
     <ClInclude Include="CCoralRiffBoss.h">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+      <Filter>01. Obj\02. Monster\CoralRiff\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralInst.h">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralBrass.h">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Brass</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralDrum.h">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Drum</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoralPiano.h">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Piano</Filter>
     </ClInclude>
     <ClInclude Include="CCoralViolin.h">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Violin</Filter>
+    </ClInclude>
+    <ClInclude Include="CWaterTile.h">
+      <Filter>01. Obj\06. Misc\WaterTile</Filter>
     </ClInclude>
     <ClInclude Include="CStair.h">
-      <Filter>01. Obj</Filter>
+      <Filter>01. Obj\06. Misc\Stair</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -540,22 +576,22 @@
       <Filter>01. Obj\08. Item\01. Shovel\Titanium</Filter>
     </ClCompile>
     <ClCompile Include="CHeartbeat.cpp">
-      <Filter>01. Obj\UI\BeatUI\Heartbeat</Filter>
+      <Filter>01. Obj\09. UI\BeatUI\Heartbeat</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerHP.cpp">
-      <Filter>01. Obj\UI\PlayerUI\PlayerHP</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerHP</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerShovelUI.cpp">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerShovel</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerShovel</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerItemUI.cpp">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerWeaponUI.cpp">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerWeapon</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerWeapon</Filter>
     </ClCompile>
     <ClCompile Include="CLeftBar.cpp">
-      <Filter>01. Obj\UI\BeatUI\LeftBar</Filter>
+      <Filter>01. Obj\09. UI\BeatUI\LeftBar</Filter>
     </ClCompile>
     <ClCompile Include="CBlueSlime.cpp">
       <Filter>01. Obj\02. Monster\BlueSlime</Filter>
@@ -567,10 +603,10 @@
       <Filter>01. Obj\02. Monster\Tauren</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerMoney.cpp">
-      <Filter>01. Obj\UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerMoney</Filter>
     </ClCompile>
     <ClCompile Include="CMonsterHP.cpp">
-      <Filter>01. Obj\UI\MonsterHP</Filter>
+      <Filter>01. Obj\09. UI\MonsterHP</Filter>
     </ClCompile>
     <ClCompile Include="CDoor.cpp">
       <Filter>03. Design\WallMgr\06. Wall</Filter>
@@ -588,25 +624,31 @@
       <Filter>02. Scene\03. Stage\BossStage</Filter>
     </ClCompile>
     <ClCompile Include="CLetterbox.cpp">
-      <Filter>01. Obj\UI\Letterbox</Filter>
-    </ClCompile>
-    <ClCompile Include="CCoralBrass.cpp">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
-    </ClCompile>
-    <ClCompile Include="CCoralDrum.cpp">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
-    </ClCompile>
-    <ClCompile Include="CCoralPiano.cpp">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+      <Filter>01. Obj\09. UI\Letterbox</Filter>
     </ClCompile>
     <ClCompile Include="CCoralRiffBoss.cpp">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+      <Filter>01. Obj\02. Monster\CoralRiff\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralInst.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralBrass.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Brass</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralDrum.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Drum</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoralPiano.cpp">
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Piano</Filter>
     </ClCompile>
     <ClCompile Include="CCoralViolin.cpp">
-      <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+      <Filter>01. Obj\02. Monster\CoralRiff\Inst\Violin</Filter>
+    </ClCompile>
+    <ClCompile Include="CWaterTile.cpp">
+      <Filter>01. Obj\06. Misc\WaterTile</Filter>
     </ClCompile>
     <ClCompile Include="CStair.cpp">
-      <Filter>01. Obj</Filter>
+      <Filter>01. Obj\06. Misc\Stair</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,7 @@
 #include "CBeatMgr.h"
 #include "CDoor.h"
 #include "CVerticalDoor.h"
+#include "CCoralInst.h"
 
 CTileMgr* CTileMgr::m_pInstance = nullptr;
 
@@ -306,6 +307,8 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 			CSoundMgr::Get_Instance()->PlaySound(L"sfx_general_hit.wav", SOUND_EFFECT, g_fVolume);
 			CSoundMgr::Get_Instance()->PlaySound_AttackVoice();
+			if (dynamic_cast<CCoralInst*>(pTemp[i]) != nullptr)
+				dynamic_cast<CCoralInst*>(pTemp[i])->Set_ActState(CCoralInst::IDLE_ACT);
 			return false;
 			break;
 		case TOBJ_ITEM:

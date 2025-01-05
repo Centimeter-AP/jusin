@@ -1,7 +1,7 @@
 #pragma once
-#include "CMonster.h"
+#include "CCoralInst.h"
 class CCoralBrass :
-    public CMonster
+    public CCoralInst
 {
 public:
     CCoralBrass() {}
@@ -14,9 +14,6 @@ public:
     virtual void Release() override;
 
 private:
-    enum ACTSTATE { BEFORE_ACT, AFTER_ACT, END_ACT };
-    ACTSTATE    m_eCurState;
-    bool        m_bAttacked;
-    int         m_iBeforeAct;
+
 };
 

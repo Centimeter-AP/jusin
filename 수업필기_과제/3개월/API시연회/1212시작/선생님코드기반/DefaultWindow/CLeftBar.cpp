@@ -3,6 +3,7 @@
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CBeatMgr.h"
+#include "CSceneMgr.h"
 
 void CLeftBar::Initialize()
 {
@@ -17,8 +18,10 @@ int CLeftBar::Update()
 {
     if (m_bDead)
         return OBJ_DEAD;
-
-    m_tInfo.fX += m_fSpeed * 4;
+    if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_BOSS)
+        m_tInfo.fX += m_fSpeed * 4.f * (126.f / 115.f);
+    else if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_STAGEONE)
+        m_tInfo.fX += m_fSpeed * 4.f;
 
     __super::Update_Rect();
     return OBJ_NOEVENT;

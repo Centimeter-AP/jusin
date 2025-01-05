@@ -26,6 +26,7 @@
 #include "CCoralDrum.h"
 #include "CCoralBrass.h"
 #include "CKeyMgr.h"
+#include "CWaterTile.h"
 
 CBossStage::CBossStage()
 {
@@ -43,6 +44,7 @@ void CBossStage::Initialize()
 	{
 		CObjMgr::Get_Instance()->Delete_ID((OBJID)i);
 	}
+	CObjMgr::Get_Instance()->Delete_Map_Item();
 	
 	CTileMgr::Get_Instance()->Load_Tile(STAGE_BOSS);
 	CTileMgr::Get_Instance()->Load_Wall(STAGE_BOSS);
@@ -85,8 +87,17 @@ void CBossStage::Initialize()
 	Boss->Set_Inst(CObjMgr::Get_Instance()->Get_LastMonster());
 
 
-
-
+	//auto pTile = CTileMgr::Get_Instance()->Get_TileVec();
+	//pTile->push_back(CAbstractFactory<CWaterTile>::Create(569));
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 411 + i * 51; j < (411 + i * 51) + 11; ++j)
+		{
+			CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(j));
+		}
+	}
+	
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(569));
 
 	//CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CCoralBrass>::Create_Monster(408, 500));
 	//CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create_Monster(216, 384));
@@ -113,6 +124,8 @@ int CBossStage::Update()
 	{
 		if (m_bBeatOne == true)
 		{
+			CTileMgr::Get_Instance()->Tile_Shine();
+
 			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(true));
 			CBeatMgr::Get_Instance()->Set_Bar(CObjMgr::Get_Instance()->Get_LastBar());
 			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(false));
@@ -138,6 +151,7 @@ int CBossStage::Update()
 		CTileMgr::Get_Instance()->Load_Tile2();
 		CTileMgr::Get_Instance()->Load_Wall2();
 	}
+
 
 
 	return 0;

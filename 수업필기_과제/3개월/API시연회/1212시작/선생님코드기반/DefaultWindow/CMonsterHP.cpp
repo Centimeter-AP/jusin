@@ -13,7 +13,7 @@ void CMonsterHP::Initialize()
     m_tFrame.iFrameStart = 0;
     m_tFrame.iFrameEnd = 1;
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/UI/MonsterHeart.bmp", L"MonsterHeart");
-    m_eRender = RENDER_UI;
+    m_eRender = RENDER_OBJUI;
 }
 
 int CMonsterHP::Update()

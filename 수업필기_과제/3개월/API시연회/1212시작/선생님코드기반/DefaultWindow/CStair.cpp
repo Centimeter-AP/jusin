@@ -21,8 +21,15 @@ int CStair::Update()
 {
 	if (GET_PLAYER->Get_TileIdx() == m_iTileIdx)
 	{
-		Interact_Stair();
-		return OBJ_NEXTSCENE;
+		if (m_iIsClosed == 0)
+		{
+			Interact_Stair();
+			return OBJ_NEXTSCENE;
+		}
+		else
+		{
+			// 사운드출력, 사운드한번만출력할 bool변수 추가
+		}
 	}
 
 	__super::Update_Rect();

@@ -25,7 +25,7 @@ public:
 	void		Render(HDC hDC) override;
 	void		Release() override;
 
-private:
+protected:
 	int		m_iDrawID; 
 	int		m_iOption;
 	array<CObj*, TOBJ_END>	m_pObject;

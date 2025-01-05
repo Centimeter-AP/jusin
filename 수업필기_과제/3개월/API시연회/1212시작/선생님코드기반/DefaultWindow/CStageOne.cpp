@@ -91,6 +91,8 @@ int CStageOne::Update()
 	{
 		if (m_bBeatOne == true)
 		{
+			CTileMgr::Get_Instance()->Tile_Shine();
+
 			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(true));
 			CBeatMgr::Get_Instance()->Set_Bar(CObjMgr::Get_Instance()->Get_LastBar());
 			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CLeftBar>::Create_Bar(false));
@@ -135,5 +137,5 @@ void CStageOne::Render(HDC hDC)
 
 void CStageOne::Release()
 {
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
+	//CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
 }

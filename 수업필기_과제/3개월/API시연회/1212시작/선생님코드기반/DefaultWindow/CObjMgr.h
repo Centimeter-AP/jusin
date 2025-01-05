@@ -37,6 +37,7 @@ public:
 
 	void		Delete_ID(OBJID eID);
 	void		Delete_Object(OBJID eID, CObj* pObj);
+	void		Delete_Map_Item();
 
 public:
 	static CObjMgr* Get_Instance()

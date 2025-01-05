@@ -2,6 +2,7 @@
 #include "CBeatMgr.h"
 #include "Define.h"
 #include "CObj.h"
+#include "CSceneMgr.h"
 
 CBeatMgr* CBeatMgr::m_pInstance = nullptr;
 
@@ -34,7 +35,11 @@ int CBeatMgr::Update()
 			m_tBeatStart += microseconds(m_iBPMSec);
 			m_tTimerRightTime = system_clock::now();
 			m_bRightTimeBeat = true;
-			m_fBeatJudgementPx = (float)m_iBeatGapFrameCount * 0.5f * 3.f;
+			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_BOSS)
+				m_fBeatJudgementPx = (float)m_iBeatGapFrameCount * 0.5f * 4.f * (126.f / 115.f);
+			else
+				m_fBeatJudgementPx = (float)m_iBeatGapFrameCount * 0.5f * 4.f;
+
 			m_iBeatGapFrameCount = 0;
 		}
 	}

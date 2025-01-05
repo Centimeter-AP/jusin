@@ -6,6 +6,7 @@
 #include "CObjMgr.h"
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
+#include "CPlayer.h"
 
 
 void CCoralPiano::Initialize()
@@ -14,8 +15,10 @@ void CCoralPiano::Initialize()
 //본체 86 120
 //호른 72 116
 //키보드 52 110 34
-    m_tInfo.fCX = 52.f;
-    m_tInfo.fCY = 110.f;
+    m_iImgCX = 52.f;
+    m_iImgCY = 110.f;
+    m_tInfo.fCX = 48.f;
+    m_tInfo.fCY = 48.f;
     m_fSpeed = 6.f;
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Monster/Boss/coralriff_keytar.bmp", L"Piano");
@@ -24,7 +27,7 @@ void CCoralPiano::Initialize()
     CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
 
     m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
-    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
+    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY;
     m_pTarget = GET_PLAYER;
     m_eDir = DIR_UP;
 
@@ -42,6 +45,7 @@ void CCoralPiano::Initialize()
     m_iMaxHP = 1;
     m_iHP = 1;
     m_iDamage = 2;
+    m_iOrigTileIdx = m_iTileIdx;
 
     m_HP_UI.Set_Target(this);
     m_HP_UI.Initialize();
@@ -60,6 +64,84 @@ int CCoralPiano::Update()
 
     m_iTileIdx = Find_MyTileIdx();
 
+    if (BEATMGR->Get_ObjectAbleToMove() == true)
+    {
+        if (m_bMoveStart == true)
+        {
+            if (m_eCurState == SHAKE_ACT && m_iBeatPassed == 1)
+            {
+                m_eCurState = DIVEDOWN_ACT; m_iBeatPassed = 0;
+            }
+            else if (m_eCurState == DIVEDOWN_ACT && m_iBeatPassed == 2)
+            {
+                m_eCurState = DIVEUP_ACT; m_iBeatPassed = 0;
+            }
+            else if (m_eCurState == DIVEUP_ACT && m_iBeatPassed == 1)
+            {
+                m_eCurState = ATTACKREADY_ACT; m_iBeatPassed = 0;
+            }
+            else if (m_eCurState == ATTACKREADY_ACT && m_iBeatPassed == 3)
+            {
+                m_eCurState = IDLE_ACT; m_iBeatPassed = 0; m_bMoveStart = false;
+            }
+
+            switch (m_eCurState)
+            {
+            case CCoralInst::SHAKE_ACT:
+                //쉐낏하기 애니메이션
+                break;
+            case CCoralInst::DIVEDOWN_ACT:
+                // 사운드, 이펙트 
+                if (m_bWaterIn == false)
+                {
+                    CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+                    CSoundMgr::Get_Instance()->PlaySound(L"mov_water_in.ogg", SOUND_EFFECT, g_fVolume);
+                    m_bWaterIn = true;
+                }
+                break;
+            case CCoralInst::DIVEUP_ACT:
+                // 사운드, 이펙트...
+                m_bWaterIn = false;
+                CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+                CSoundMgr::Get_Instance()->PlaySound(L"mov_water_out.ogg", SOUND_EFFECT, g_fVolume);
+                Set_HeadPositionIdx();
+                CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
+                CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+                m_iTileIdx = m_iHeadTileIdx;
+                m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+                m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY;
+                break;
+            case CCoralInst::ATTACKREADY_ACT:
+                if (m_iBeatPassed > 0)
+                {
+                    int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
+                    if (m_iTileIdx + 1 == iPHTileIdx || m_iTileIdx + TILEX == iPHTileIdx
+                        || m_iTileIdx - 1 == iPHTileIdx || m_iTileIdx - TILEX == iPHTileIdx)
+                    {
+                        GET_PLAYER->Set_HP(m_iDamage);
+                        CSoundMgr::Get_Instance()->StopSound(SOUND_VOCAL);
+                        CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_VOCAL, g_fVolume);
+                    }
+                }
+                break;
+            case CCoralInst::IDLE_ACT:
+                CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
+                CTileMgr::Get_Instance()->Set_TileObject(m_iOrigTileIdx, TOBJ_ENTITY, this);
+                m_iTileIdx = m_iOrigTileIdx;
+                m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+                m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY;
+                m_iBeatPassed = 0; m_bMoveStart = false;
+                break;
+            default:
+                break;
+            }
+            ++m_iBeatPassed;
+
+        }
+    }
+
+
+    m_iShakeAnimation *= -1;
     __super::Update_Rect();
 
     return OBJ_NOEVENT;
@@ -72,26 +154,32 @@ void CCoralPiano::Late_Update()
 
 void CCoralPiano::Render(HDC hDC)
 {
-    HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
+    if (m_eCurState != DIVEDOWN_ACT)
+    {
+        HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
 
-    int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-    int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+        int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+        int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
-    //Rectangle(hDC, m_tRect.left + iScrollX, m_tRect.top + iScrollY, m_tRect.right + iScrollX, m_tRect.bottom + iScrollY);
+        //Rectangle(hDC, m_tRect.left + iScrollX, m_tRect.top + iScrollY, m_tRect.right + iScrollX, m_tRect.bottom + iScrollY);
 
-    GdiTransparentBlt(hDC,
-        m_tRect.left -8+ iScrollX,
-        m_tRect.top + iScrollY,
-        (int)m_tInfo.fCX,
-        (int)m_tInfo.fCY,
-        hMemDC,
-        (int)m_tInfo.fCX * m_tFrame.iFrameStart,
-        (int)m_tInfo.fCY * m_tFrame.iMotion,
-        (int)m_tInfo.fCX,
-        (int)m_tInfo.fCY,
-        RGB(255, 0, 255));
+        if (m_eCurState == SHAKE_ACT || m_eCurState == ATTACKREADY_ACT)
+            m_tRect.left += m_iShakeAnimation;
 
-    m_HP_UI.Render(hDC);
+        GdiTransparentBlt(hDC,
+            m_tRect.left - 8 + iScrollX,
+            m_tRect.bottom - m_iImgCY + iScrollY,
+            m_iImgCX,
+            m_iImgCY,
+            hMemDC,
+            m_iImgCX * m_tFrame.iFrameStart,
+            m_iImgCY * m_tFrame.iMotion,
+            m_iImgCX,
+            m_iImgCY,
+            RGB(255, 0, 255));
+
+        m_HP_UI.Render(hDC);
+    }
 }
 
 void CCoralPiano::Release()

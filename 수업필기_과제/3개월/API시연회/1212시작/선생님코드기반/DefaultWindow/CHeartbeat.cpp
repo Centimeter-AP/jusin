@@ -3,6 +3,7 @@
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CBeatMgr.h"
+#include "CTileMgr.h"
 
 void CHeartbeat::Initialize()
 {
@@ -25,6 +26,7 @@ int CHeartbeat::Update()
 		{
 			m_iBeat = 1;
 		}
+
 	}
 	else
 	{
