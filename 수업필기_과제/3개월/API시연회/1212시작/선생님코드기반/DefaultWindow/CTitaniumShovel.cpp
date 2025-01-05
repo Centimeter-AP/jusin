@@ -74,7 +74,10 @@ void CTitaniumShovel::Late_Update()
     }
     if (m_bOnMap)
     {
-        //Find_TileIdx_OnMap();   // 없애도 상관 없는지?
+        Find_TileIdx_OnMap();   // 없애도 상관 없는지?
+
+        CTileMgr::Get_Instance()->Set_TileObject(m_iTileIdx, TOBJ_ITEM, this);
+
     }
 }
 

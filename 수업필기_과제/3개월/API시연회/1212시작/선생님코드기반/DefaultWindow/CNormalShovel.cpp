@@ -76,6 +76,8 @@ void CNormalShovel::Late_Update()
     {
 
         Find_TileIdx_OnMap();
+        CTileMgr::Get_Instance()->Set_TileObject(m_iTileIdx, TOBJ_ITEM, this);
+
     }
 }
 

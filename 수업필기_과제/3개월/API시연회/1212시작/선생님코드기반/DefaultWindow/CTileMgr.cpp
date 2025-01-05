@@ -56,11 +56,25 @@ int CTileMgr::Update()
 {
 	for (auto& pTile : m_vecTile)
 		pTile->Update();
-	for (auto& pWall : m_vecWall)
+	for (auto iter = m_vecWall.begin(); iter != m_vecWall.end();)
 	{
-		pWall->Update();
-		static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[pWall->Find_MyTileIdx()])->Set_TileObj(TOBJ_WALL, pWall);
+		if ((*iter)->Update() == OBJ_DEAD)
+		{
+			Safe_Delete<CObj*>(*iter);
+			(*iter) = nullptr;
+			iter = m_vecWall.erase(iter);
+		}
+		else
+		{
+			static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[(*iter)->Find_MyTileIdx()])->Set_TileObj(TOBJ_WALL, (*iter));
+			++iter;
+		}
 	}
+	//for (auto& pWall : m_vecWall)
+	//{
+	//	pWall->Update();
+	//	static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[pWall->Find_MyTileIdx()])->Set_TileObj(TOBJ_WALL, pWall);
+	//}
 	for (auto& pItem : m_vecItem)
 		pItem->Update();
 
@@ -228,7 +242,7 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 	{
 		if (_pShovel == nullptr)
 		{
-			if (static_cast<CWall*>(_pTargetWall)->Get_WallType() == BEDROCK)
+			if (static_cast<CWall*>(_pTargetWall)->Get_WallType() == BEDROCK||static_cast<CWall*>(_pTargetWall)->Get_WallType() == SHOP_WALL)
 				return;
 			Safe_Delete<CObj*>((*iter));
 			iter = m_vecWall.erase(iter);
@@ -237,8 +251,11 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 			return;
 		}
 		else if (static_cast<CWall*>(_pTargetWall)->Get_WallType() == DOOR_WALL
-			  || static_cast<CWall*>(_pTargetWall)->Get_WallType() == VDOOR_WALL)
+			|| static_cast<CWall*>(_pTargetWall)->Get_WallType() == VDOOR_WALL)
 		{
+			_pTargetWall->Set_Dead();
+			Open_Door(_pTargetWall);
+
 			Safe_Delete<CObj*>((*iter));
 			iter = m_vecWall.erase(iter);
 			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
@@ -263,6 +280,7 @@ void CTileMgr::Break_Wall(CObj* _pTargetWall, CShovel* _pShovel)
 		
 	}
 	_pShovel->Set_Using(true);
+	_pShovel->Set_FrameTickerZero();
 }
 
 bool CTileMgr::Check_TileObject(int _tileIdx)
@@ -376,6 +394,47 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 		}
 	}
 	return true;
+}
+
+void CTileMgr::Open_Door(CObj* CurDoor)
+{
+	CObj* nearDoor = Is_Wall_Exist(CurDoor->Get_Info().fX + 48, CurDoor->Get_Info().fY);
+	if (dynamic_cast<CDoor*>(nearDoor) || dynamic_cast<CVerticalDoor*>(nearDoor))
+	{
+		if (!(nearDoor->Get_Dead()))
+		{
+			nearDoor->Set_Dead();
+			Open_Door(nearDoor);
+		}
+	}
+	nearDoor = Is_Wall_Exist(CurDoor->Get_Info().fX - 48, CurDoor->Get_Info().fY);
+	if (dynamic_cast<CDoor*>(nearDoor) || dynamic_cast<CVerticalDoor*>(nearDoor))
+	{
+		if (!(nearDoor->Get_Dead()))
+		{
+			nearDoor->Set_Dead();
+			Open_Door(nearDoor);
+		}
+	}
+	nearDoor = Is_Wall_Exist(CurDoor->Get_Info().fX, CurDoor->Get_Info().fY+48);
+	if (dynamic_cast<CDoor*>(nearDoor) || dynamic_cast<CVerticalDoor*>(nearDoor))
+	{
+		if (!(nearDoor->Get_Dead()))
+		{
+			nearDoor->Set_Dead();
+			Open_Door(nearDoor);
+		}
+	}
+	nearDoor = Is_Wall_Exist(CurDoor->Get_Info().fX, CurDoor->Get_Info().fY-48);
+	if (dynamic_cast<CDoor*>(nearDoor) || dynamic_cast<CVerticalDoor*>(nearDoor))
+	{
+		if (!(nearDoor->Get_Dead()))
+		{
+			nearDoor->Set_Dead();
+			Open_Door(nearDoor);
+		}
+	}
+	return;
 }
 
 void CTileMgr::Make_Object(POINT pt, int iDrawID, int iOption)
@@ -728,4 +787,188 @@ void CTileMgr::Load_Tile(STAGEID stage)
 	CloseHandle(hFile);
 	//MessageBox(g_hWnd, L"Load Save", L"¼º°ø", MB_OK);
 
+}
+
+void CTileMgr::Load_Wall1()
+{
+	TCHAR szText[32];
+	wsprintf(szText, L"../Data/Wall2_1.dat");
+	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD	dwByte(0);
+	CWall	Wall;
+
+
+	while (true)
+	{
+		int iRes = ReadFile(hFile, &Wall, sizeof(CWall), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pWall(nullptr);
+
+		switch (Wall.Get_WallType())
+		{
+		case WALLTYPE::DIRT_WALL:
+			pWall = CAbstractFactory<CDirtWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::SHOP_WALL:
+			pWall = CAbstractFactory<CShopWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::STONE_WALL:
+			pWall = CAbstractFactory<CStoneWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::BEDROCK:
+			pWall = CAbstractFactory<CBedrock>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::DOOR_WALL:
+			pWall = CAbstractFactory<CDoor>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::VDOOR_WALL:
+			pWall = CAbstractFactory<CVerticalDoor>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		default:
+			break;
+		}
+	}
+	CloseHandle(hFile);
+}
+
+void CTileMgr::Load_Wall2()
+{
+	TCHAR szText[32];
+	wsprintf(szText, L"../Data/Wall2_2.dat");
+	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD	dwByte(0);
+	CWall	Wall;
+
+
+	while (true)
+	{
+		int iRes = ReadFile(hFile, &Wall, sizeof(CWall), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pWall(nullptr);
+
+		switch (Wall.Get_WallType())
+		{
+		case WALLTYPE::DIRT_WALL:
+			pWall = CAbstractFactory<CDirtWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::SHOP_WALL:
+			pWall = CAbstractFactory<CShopWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::STONE_WALL:
+			pWall = CAbstractFactory<CStoneWall>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::BEDROCK:
+			pWall = CAbstractFactory<CBedrock>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::DOOR_WALL:
+			pWall = CAbstractFactory<CDoor>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		case WALLTYPE::VDOOR_WALL:
+			pWall = CAbstractFactory<CVerticalDoor>::Create(Wall.Get_Info());
+			m_vecWall.push_back(pWall);
+			break;
+		default:
+			break;
+		}
+	}
+	CloseHandle(hFile);
+}
+
+void CTileMgr::Load_Tile1()
+{
+	TCHAR szText[32];
+	wsprintf(szText, L"../Data/Tile2_1.dat");
+	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	int		iDrawID(0), iOption(0);
+	DWORD	dwByte(0);
+	INFO	tTile{};
+
+	Release();
+
+	while (true)
+	{
+		int iRes = ReadFile(hFile, &tTile, sizeof(INFO), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iDrawID, sizeof(int), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iOption, sizeof(int), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pTile = CAbstractFactory<CTile>::Create(tTile.fX, tTile.fY);
+		dynamic_cast<CTile*>(pTile)->Set_DrawID(iDrawID);
+		dynamic_cast<CTile*>(pTile)->Set_Option(iOption);
+
+		m_vecTile.push_back(pTile);
+	}
+
+
+
+	CloseHandle(hFile);
+}
+
+void CTileMgr::Load_Tile2()
+{
+	TCHAR szText[32];
+	wsprintf(szText, L"../Data/Tile2_2.dat");
+	HANDLE hFile = CreateFile(szText, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	int		iDrawID(0), iOption(0);
+	DWORD	dwByte(0);
+	INFO	tTile{};
+
+	Release();
+
+	while (true)
+	{
+		int iRes = ReadFile(hFile, &tTile, sizeof(INFO), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iDrawID, sizeof(int), &dwByte, NULL);
+		iRes = ReadFile(hFile, &iOption, sizeof(int), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pTile = CAbstractFactory<CTile>::Create(tTile.fX, tTile.fY);
+		dynamic_cast<CTile*>(pTile)->Set_DrawID(iDrawID);
+		dynamic_cast<CTile*>(pTile)->Set_Option(iOption);
+
+		m_vecTile.push_back(pTile);
+	}
+
+
+
+	CloseHandle(hFile);
 }

@@ -32,4 +32,7 @@ protected:
     float       m_fShadowY;
     bool        m_bCanChangeDir;
     int         m_iDamage;
+
+    int         m_iImgCX;
+    int         m_iImgCY;
 };

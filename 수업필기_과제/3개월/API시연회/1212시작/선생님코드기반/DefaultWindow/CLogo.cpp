@@ -17,6 +17,7 @@ void CLogo::Initialize()
 {
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Title/Title_Screen_Button.bmp", L"Logo");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile.bmp", L"Tile");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile_Boss.bmp", L"Tile_Boss");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Walls.bmp", L"Wall");
 
 

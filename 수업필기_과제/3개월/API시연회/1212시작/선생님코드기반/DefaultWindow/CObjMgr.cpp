@@ -126,7 +126,7 @@ int CObjMgr::Update()
 {
 	for (size_t i = 0; i < OBJ_END; ++i)
 	{
-		if (i == OBJ_WALL)
+		if (i == OBJ_BUTTON)
 			BEATMGR->Set_ObjectAbleToMove(false);
 		for (auto iter = m_ObjList[i].begin();
 			iter != m_ObjList[i].end(); )
@@ -232,7 +232,7 @@ void CObjMgr::Delete_ID(OBJID eID)
 
 void CObjMgr::Delete_Object(OBJID eID, CObj* pObj)
 {
-	for (auto iter = m_ObjList[eID].begin(); iter != m_ObjList[eID].end(); ++iter )
+	for (auto iter = m_ObjList[eID].begin(); iter != m_ObjList[eID].end(); ++iter)
 	{
 		if (pObj == (*iter))
 		{

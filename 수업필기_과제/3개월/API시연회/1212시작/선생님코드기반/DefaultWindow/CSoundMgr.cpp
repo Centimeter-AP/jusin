@@ -64,7 +64,7 @@ void CSoundMgr::PlaySound(const TCHAR * pSoundKey, CHANNELID eID, float fVolume)
 	FMOD_System_Update(m_pSystem);
 }
 
-void CSoundMgr::PlayBGM(const TCHAR * pSoundKey, float fVolume)
+void CSoundMgr::PlayBGM(const TCHAR * pSoundKey, float fVolume, CHANNELID eID)
 {
 	map<TCHAR*, FMOD_SOUND*>::iterator iter;
 
@@ -76,9 +76,9 @@ void CSoundMgr::PlayBGM(const TCHAR * pSoundKey, float fVolume)
 	
 	if (iter == m_mapSound.end())
 		return;
-	FMOD_System_PlaySound(m_pSystem, iter->second, NULL, 0, &m_pChannelArr[SOUND_BGM]);
-	FMOD_Channel_SetMode(m_pChannelArr[SOUND_BGM], FMOD_LOOP_NORMAL);
-	FMOD_Channel_SetVolume(m_pChannelArr[SOUND_BGM], fVolume);
+	FMOD_System_PlaySound(m_pSystem, iter->second, NULL, 0, &m_pChannelArr[eID]);
+	FMOD_Channel_SetMode(m_pChannelArr[eID], FMOD_LOOP_NORMAL);
+	FMOD_Channel_SetVolume(m_pChannelArr[eID], fVolume);
 	FMOD_System_Update(m_pSystem);
 }
 
@@ -91,6 +91,19 @@ void CSoundMgr::StopAll()
 {
 	for (int i = 0 ; i < SOUND_END; ++i)
 		FMOD_Channel_Stop(m_pChannelArr[i]);
+}
+
+void CSoundMgr::ChangeChannelVolume(CHANNELID eID, float fVolume)
+{
+	float fCurVol(0.f);
+
+
+	FMOD_Channel_GetVolume(m_pChannelArr[eID], &fCurVol);
+
+	fCurVol += fVolume;
+	FMOD_Channel_SetVolume(m_pChannelArr[eID], fCurVol);
+
+	FMOD_System_Update(m_pSystem);
 }
 
 void CSoundMgr::SetChannelVolume(CHANNELID eID, float fVolume)
@@ -114,6 +127,8 @@ void CSoundMgr::PlaySoundFaster(CHANNELID eID, float fFrequency)
 	float originalFrequency(0.f);
 	FMOD_Channel_GetFrequency(m_pChannelArr[eID], &originalFrequency);
 	FMOD_Channel_SetFrequency(m_pChannelArr[eID], originalFrequency * fFrequency);
+
+
 }
 
 void CSoundMgr::LoadSoundFile()

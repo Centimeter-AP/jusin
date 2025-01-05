@@ -1,4 +1,5 @@
 #pragma once
+#include "Define.h"
 
 class CObj;
 class CBeatMgr
@@ -33,9 +34,14 @@ public:
 	void		Set_TimeStart() { m_tTimerRightTime = chrono::system_clock::now(); }
 	void		Set_MusicStart() { m_tMusicStart = chrono::system_clock::now(); m_tBeatStart = m_tMusicStart; }
 
+	void		Set_BPMSTAGE1() { m_iBPM = STAGE1BPM; m_iBPMSec = STAGE1BPMSEC; }
+	void		Set_BPMBOSS() { m_iBPM = BOSSBPM; m_iBPMSec = BOSSBPMSEC; }
+
 	void		Set_Bar(CObj* _Bar);
 	void		Delete_Bar(CObj* _Bar);
 	void		Delete_Bar_Act();
+	void		Empty_Bar();
+
 	void		Plus_BeatCombo() { ++m_iBeatCombo; if (m_iBeatCombo > 3) m_iBeatCombo = 3; }
 	void		Lose_BeatCombo() { m_iBeatCombo = 0; }
 
@@ -74,6 +80,8 @@ private:
 	chrono::system_clock::time_point m_tTimerRightTime;
 	chrono::system_clock::time_point m_tMusicStart;
 	chrono::microseconds m_llTimeChecker;
+	int			m_iBPM;
+	int			m_iBPMSec;
 
 	list<CObj*> m_BeatBarlist;
 

@@ -10,7 +10,7 @@ void CStair::Initialize()
     m_tInfo.fCX = TILECX;
     m_tInfo.fCY = TILECY;
 	m_pImgKey = L"Stair";
-	m_eRender = RENDER_GAMEOBJECT;
+	m_eRender = RENDER_BACKGROUND;
     m_iTileIdx = Find_MyTileIdx();
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile_Stair.bmp", L"Stair");

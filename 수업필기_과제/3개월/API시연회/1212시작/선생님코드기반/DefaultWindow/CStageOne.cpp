@@ -19,6 +19,7 @@
 #include "CSkeleton.h"
 #include "CTauren.h"
 #include "CBlueSlime.h"
+#include "CStair.h"
 
 CStageOne::CStageOne() 
 {
@@ -45,7 +46,7 @@ void CStageOne::Initialize()
 	GET_PLAYER->Set_Pos(300, 300);
 	static_cast<CPlayer*>(GET_PLAYER)->Set_PositionCorrect();
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CNormalShovel>::Create_Item(true, 404, 385));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 404, 385));
 	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 452, 385));
 	CObjMgr::Get_Instance()->Get_LastItem()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
@@ -54,6 +55,8 @@ void CStageOne::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(1320, 934));
+	static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_BOSS);
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create_Monster(312, 816));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create_Monster(696, 816));
@@ -67,6 +70,7 @@ void CStageOne::Initialize()
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 	CScrollMgr::Get_Instance()->Set_Scroll(0, 0);
 
+	BEATMGR->Set_BPMSTAGE1();
 	CSoundMgr::Get_Instance()->StopSound(SOUND_BGM);
 	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.ogg", 0.2f);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
@@ -131,5 +135,5 @@ void CStageOne::Render(HDC hDC)
 
 void CStageOne::Release()
 {
-	//CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
 }

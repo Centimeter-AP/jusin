@@ -11,7 +11,7 @@ CBeatMgr::CBeatMgr()
 	: m_ullTimeChecker(GetTickCount64()), m_ullTimeTicker(GetTickCount64())
 	, m_bIsBeatMissed(false), m_bIsPlayerActed(false), m_bRightTimeBeat(false)
 	, m_bAbleBeatInterval(false), m_iBeatGapFrameCount(0), m_fBeatJudgementPx(80.f)
-	, m_bObjectAbleToMove(false), m_iBeatCombo(0)
+	, m_bObjectAbleToMove(false), m_iBeatCombo(0), m_iBPM(0), m_iBPMSec(0)
 {
 	m_tTimerRightTime = m_tBeatStart = system_clock::now();
 	m_tMusicStart = m_tBeatStart = system_clock::now();
@@ -27,11 +27,11 @@ int CBeatMgr::Update()
 	// ... 시간체크로?
 	++m_iBeatGapFrameCount;
 	m_llTimeChecker = duration_cast<microseconds>(system_clock::now() - m_tBeatStart);
-	if (m_llTimeChecker.count() >= STAGE1BPMSEC)
+	if (m_llTimeChecker.count() >= m_iBPMSec)
 	{
 		if (m_bRightTimeBeat == false)
 		{
-			m_tBeatStart += microseconds(STAGE1BPMSEC);
+			m_tBeatStart += microseconds(m_iBPMSec);
 			m_tTimerRightTime = system_clock::now();
 			m_bRightTimeBeat = true;
 			m_fBeatJudgementPx = (float)m_iBeatGapFrameCount * 0.5f * 3.f;
@@ -113,5 +113,15 @@ void CBeatMgr::Delete_Bar_Act()
 	if (CBeatMgr::Get_Instance()->Get_BeatMissed() == true)
 	{
 		CBeatMgr::Get_Instance()->Set_BeatMissed(false);
+	}
+}
+
+void CBeatMgr::Empty_Bar()
+{
+
+	for (auto iter = m_BeatBarlist.begin(); iter != m_BeatBarlist.end();)
+	{
+		(*iter)->Set_Dead();
+		iter = m_BeatBarlist.erase(iter);
 	}
 }

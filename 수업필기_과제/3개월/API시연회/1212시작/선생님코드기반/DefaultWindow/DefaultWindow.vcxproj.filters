@@ -390,9 +390,6 @@
     <ClInclude Include="CLetterbox.h">
       <Filter>01. Obj\UI\Letterbox</Filter>
     </ClInclude>
-    <ClInclude Include="CStair.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CCoralBrass.h">
       <Filter>01. Obj\02. Monster\CoralRiff</Filter>
     </ClInclude>
@@ -407,6 +404,9 @@
     </ClInclude>
     <ClInclude Include="CCoralViolin.h">
       <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClInclude>
+    <ClInclude Include="CStair.h">
+      <Filter>01. Obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -590,9 +590,6 @@
     <ClCompile Include="CLetterbox.cpp">
       <Filter>01. Obj\UI\Letterbox</Filter>
     </ClCompile>
-    <ClCompile Include="CStair.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CCoralBrass.cpp">
       <Filter>01. Obj\02. Monster\CoralRiff</Filter>
     </ClCompile>
@@ -607,6 +604,9 @@
     </ClCompile>
     <ClCompile Include="CCoralViolin.cpp">
       <Filter>01. Obj\02. Monster\CoralRiff</Filter>
+    </ClCompile>
+    <ClCompile Include="CStair.cpp">
+      <Filter>01. Obj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

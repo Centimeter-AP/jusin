@@ -68,6 +68,13 @@ int CTauren::Update()
             if (m_iBumped == 2)
             {
                 m_eCurState = IDLE_ACT;
+                m_iBumped = 0;
+                m_tFrame.iFrameStart = 0;
+                if (m_ePrevDir == DIR_LEFT)
+                    m_pImgKey = L"MinotaursIdle_L";
+                else
+                    m_pImgKey = L"MinotaursIdle_R";
+                return OBJ_NOEVENT;
             }
             CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
             CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
@@ -118,12 +125,13 @@ int CTauren::Update()
                     m_ePrevDir = DIR_LEFT;
                 else if (m_eDir == DIR_RIGHT)
                     m_ePrevDir = DIR_RIGHT;
-                int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
+                int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_TileIdx();
                 int iPlayerX = iPHTileIdx % TILEX;
                 int iPlayerY = iPHTileIdx / TILEX;
                 if (m_iTileX == iPlayerX || m_iTileY == iPlayerY)
                 {
                     m_eCurState = DASH_ACT;
+                    CTauren::Update();
                     return OBJ_NOEVENT;
                 }
             }

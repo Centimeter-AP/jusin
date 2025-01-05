@@ -187,25 +187,42 @@ void CMonsterHP::Render(HDC hDC)
     {
         int emptyheart = m_iMaxHP - m_iHP;
         m_tRect.left -= (int)m_tInfo.fCX * 2;
-        for (int i = 0; i < m_iMaxHP - emptyheart; ++i)
+        if (emptyheart == 0)
         {
-            GdiTransparentBlt(hDC,
-                m_tRect.left + iScrollX + (int)m_tInfo.fCX * i,
-                m_tRect.top + iScrollY,
-                (int)m_tInfo.fCX,
-                (int)m_tInfo.fCY,
-                hMemDC,
-                (int)m_tInfo.fCX * 0,
-                0,
-                (int)m_tInfo.fCX,
-                (int)m_tInfo.fCY,
-                RGB(255, 0, 255));
-            if (i + 1 == m_iMaxHP - emptyheart)
-                m_tRect.left += (int)m_tInfo.fCX * (i + 1);
+            for (int i = 0; i < m_iMaxHP - emptyheart; ++i)
+            {
+                GdiTransparentBlt(hDC,
+                    m_tRect.left + iScrollX + (int)m_tInfo.fCX * i,
+                    m_tRect.top + iScrollY,
+                    (int)m_tInfo.fCX,
+                    (int)m_tInfo.fCY,
+                    hMemDC,
+                    (int)m_tInfo.fCX * 0,
+                    0,
+                    (int)m_tInfo.fCX,
+                    (int)m_tInfo.fCY,
+                    RGB(255, 0, 255));
+            }
         }
-        if (emptyheart != 0)
+        else if (emptyheart != 0)
         {
-            for (int i = 0; i < m_iMaxHP - m_iHP; ++i)
+            for (int i = 0; i < m_iMaxHP - emptyheart; ++i)
+            {
+                GdiTransparentBlt(hDC,
+                    m_tRect.left + iScrollX + (int)m_tInfo.fCX * i,
+                    m_tRect.top + iScrollY,
+                    (int)m_tInfo.fCX,
+                    (int)m_tInfo.fCY,
+                    hMemDC,
+                    (int)m_tInfo.fCX * 0,
+                    0,
+                    (int)m_tInfo.fCX,
+                    (int)m_tInfo.fCY,
+                    RGB(255, 0, 255));
+                if (i + 1 == m_iMaxHP - emptyheart)
+                    m_tRect.left += (int)m_tInfo.fCX * (i + 1);
+            }
+            for (int i = 0; i < emptyheart; ++i)
             {
                 GdiTransparentBlt(hDC,
                     m_tRect.left + iScrollX + (int)m_tInfo.fCX * i,

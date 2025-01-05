@@ -3,6 +3,9 @@
 class CCoralViolin : public CMonster
 {
 public:
+    CCoralViolin() {}
+    virtual ~CCoralViolin() { Release(); }
+public:
     virtual void Initialize() override;
     virtual int Update() override;
     virtual void Late_Update() override;

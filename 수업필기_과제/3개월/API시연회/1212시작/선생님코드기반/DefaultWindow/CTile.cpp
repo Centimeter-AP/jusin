@@ -2,6 +2,7 @@
 #include "CTile.h"
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
+#include "CSceneMgr.h"
 #include "CObjMgr.h"
 #include "CBeatMgr.h"
 
@@ -27,6 +28,11 @@ void CTile::Initialize()
 int CTile::Update()
 {
 	m_iTileIdx = Find_MyTileIdx();
+	if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_BOSS)
+	{
+		m_pImgKey = L"Tile_Boss";
+	}
+
 	__super::Update_Rect();
 
 	return OBJ_NOEVENT;

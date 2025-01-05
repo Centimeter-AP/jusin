@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CBedrock.h"
 #include "CScrollMgr.h"
+#include "CSceneMgr.h"
 #include "CBmpMgr.h"
 
 CBedrock::CBedrock()
@@ -35,7 +36,11 @@ int CBedrock::Update()
 {
 	if (m_bDead)
 		return OBJ_DEAD;
-
+	if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_BOSS)
+	{
+		m_iImgPosX = 1824;
+		m_iImgPosY = 0;
+	}
 	m_iTileIdx = Find_MyTileIdx();
 	__super::Update_Rect();
 	return OBJ_NOEVENT;

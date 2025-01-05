@@ -15,6 +15,7 @@ public:
 public:
     void        Set_OnMap(bool _bOnMap) { m_bOnMap = _bOnMap; }
     void        Set_Using(bool _bUsing) { m_bUsing = _bUsing; }
+    void        Set_FrameTickerZero() { m_iFrameTicker = 0; }
     bool        Get_OnMap() { return m_bOnMap; }
     bool        Get_Using() { return m_bUsing; }
     int         Get_TileIdx() { return m_iTileIdx; }
