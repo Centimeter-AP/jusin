@@ -30,7 +30,7 @@ void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 	
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Title/Buffer_Back.bmp", L"Back");
 	CObjMgr::Get_Instance()->Add_Object(OBJ_LETTERBOX, CAbstractFactory<CLetterbox>::Create());

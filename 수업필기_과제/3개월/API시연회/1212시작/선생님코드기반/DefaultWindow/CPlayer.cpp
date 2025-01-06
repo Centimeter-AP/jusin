@@ -114,7 +114,7 @@ void CPlayer::Render(HDC hDC)
 	{
 		GdiTransparentBlt(hDC,
 			m_tRect.left + iScrollX,
-			m_fShadowY + iScrollY, // 그림자 좀만 밑으로 지게
+			(int)m_fShadowY + iScrollY, // 그림자 좀만 밑으로 지게
 			(int)m_tInfo.fCX,
 			(int)m_tInfo.fCY,
 			hMemDCshadow,
@@ -128,7 +128,7 @@ void CPlayer::Render(HDC hDC)
 	{// 좌우 이동 때 그림자 y축 이동 제거 
 		GdiTransparentBlt(hDC,
 			m_tRect.left + iScrollX,
-			m_fShadowY + iScrollY, // 그림자 좀만 밑으로 지게
+			(int)m_fShadowY + iScrollY, // 그림자 좀만 밑으로 지게
 			(int)m_tInfo.fCX,
 			(int)m_tInfo.fCY,
 			hMemDCshadow,

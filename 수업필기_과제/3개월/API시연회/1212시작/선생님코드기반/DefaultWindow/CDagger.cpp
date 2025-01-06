@@ -35,7 +35,7 @@ int CDagger::Update()
     {
         Find_Player_OnSameTile();
         m_eRender = RENDER_MAPITEM;
-        m_iFrameTicker += m_fSpeed;
+        m_iFrameTicker += (int)m_fSpeed;
 
         switch (m_iFrameTicker)
         {
@@ -43,7 +43,7 @@ int CDagger::Update()
         case 40:
         case 60:
         case 80:
-            m_iAnimationOffsetY += m_fSpeed;
+            m_iAnimationOffsetY += (int)m_fSpeed;
             break;
         case 0:
         case 100:

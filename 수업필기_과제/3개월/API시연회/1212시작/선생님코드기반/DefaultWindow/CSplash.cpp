@@ -53,13 +53,13 @@ void CSplash::Render(HDC hDC)
     GdiTransparentBlt(hDC,
         m_tRect.left + iScrollX,
         m_tRect.bottom + iScrollY,
-        m_tInfo.fCX,
-        m_tInfo.fCY,
+        (int)m_tInfo.fCX,
+        (int)m_tInfo.fCY,
         hMemDC,
-        m_tInfo.fCX * m_tFrame.iFrameStart,
+        (int)m_tInfo.fCX * m_tFrame.iFrameStart,
         0,
-        m_tInfo.fCX,
-        m_tInfo.fCY,
+        (int)m_tInfo.fCX,
+        (int)m_tInfo.fCY,
         RGB(255, 0, 255));
 }
 

@@ -3,7 +3,7 @@
 class CHeartbeat : public CObj
 {
 public:
-	CHeartbeat(): m_iBeat(0) {}
+	CHeartbeat(): m_iBeat(0), m_llTimeChecker(0), m_ullBPM(0), m_ullTimeTick(0) {}
 	~CHeartbeat() {}
 
 public:

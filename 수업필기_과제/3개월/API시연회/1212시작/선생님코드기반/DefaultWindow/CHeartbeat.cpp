@@ -52,13 +52,13 @@ void CHeartbeat::Render(HDC hDC)
 	GdiTransparentBlt(hDC,					// 복사 받을 DC
 		m_tRect.left,			// 복사 받을 위치 좌표 X, Y	
 		m_tRect.top,
-		m_tInfo.fCX,							// 복사 받을 이미지의 가로, 세로
-		m_tInfo.fCY,
+		(int)m_tInfo.fCX,							// 복사 받을 이미지의 가로, 세로
+		(int)m_tInfo.fCY,
 		hMemDC,								// 복사할 이미지 DC	
-		m_tInfo.fCX * m_iBeat,	// 비트맵 출력 시작 좌표(Left, top)
+		(int)m_tInfo.fCX * m_iBeat,	// 비트맵 출력 시작 좌표(Left, top)
 		0,
-		m_tInfo.fCX,							// 복사할 이미지의 가로, 세로
-		m_tInfo.fCY,
+		(int)m_tInfo.fCX,							// 복사할 이미지의 가로, 세로
+		(int)m_tInfo.fCY,
 		RGB(255, 0, 255));					// 제거할 색상
 }
 

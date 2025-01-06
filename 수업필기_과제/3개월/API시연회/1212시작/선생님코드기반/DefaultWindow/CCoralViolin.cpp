@@ -21,8 +21,8 @@ void CCoralViolin::Initialize()
     //본체 86 120
     //호른 72 116
     //키보드 52 110
-    m_iImgCX = 90.f;
-    m_iImgCY = 112.f;
+    m_iImgCX = 90;
+    m_iImgCY = 112;
     m_tInfo.fCX = 90.f;
     m_tInfo.fCY = 48.f;
     m_fSpeed = 6.f;
