@@ -15,6 +15,7 @@ public:
     virtual void Late_Update() override;
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
+    virtual void     Play_HitSound();
 
 private:
     enum ACTSTATE { IDLE_ACT, DASH_ACT, FAINT_ACT, END_ACT };

@@ -14,7 +14,7 @@
 CMonster::CMonster()
 	:m_fTime(0.f), m_fJumpPower(0.f)
 	, m_iHeadTileIdx(0), m_bMove(false), m_fShadowY(0.f)
-	, m_iDamage(0), m_iImgCX(0), m_iImgCY(0)
+	, m_iDamage(0), m_iImgCX(0), m_iImgCY(0), m_bCanChangeDir(false), m_pvecTile(nullptr)
 {
 }
 
@@ -310,6 +310,8 @@ void CMonster::BossMove()
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
+				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
+				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_01.ogg", SOUND_BOSSEFFECT3, 0.25f);
 				m_iTileIdx = m_iHeadTileIdx;
 			}
 			else
@@ -338,6 +340,8 @@ void CMonster::BossMove()
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
+				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
+				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_02.ogg", SOUND_BOSSEFFECT3, 0.25f);
 				m_iTileIdx = m_iHeadTileIdx;
 			}
 			else
@@ -367,6 +371,8 @@ void CMonster::BossMove()
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
+				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
+				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_03.ogg", SOUND_BOSSEFFECT3, 0.25f);
 				m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
@@ -406,6 +412,119 @@ void CMonster::BossMove()
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
+				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
+				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_04.ogg", SOUND_BOSSEFFECT3, 0.25f);
+				m_iTileIdx = m_iHeadTileIdx;
+				m_fTime = 0.f;
+			}
+			m_fShadowY -= -6.f * m_fTime - (9.8f * m_fTime * m_fTime);
+			if (m_fShadowY > fHeadY - 20.f)
+				m_fShadowY = fHeadY - 20.f;
+			break;
+		default:
+			break;
+		}
+		m_fTime += 0.15f;
+	}
+	else
+	{
+		m_fTime = 0.f;
+	}
+}
+
+void CMonster::BossInstMove()
+{
+	if (m_bMove) // 실제로 타일을 이동했는가
+	{
+		float fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+		float fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+		float fCurX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+		float fCurY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY;
+		//CTileMgr::Get_Instance()->Remove_TileObject(m_iCurTileIdx, TOBJ_ENTITY);
+		//CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+		switch (m_eDir)
+		{
+		case DIR_LEFT:
+			m_fJumpPower = 9.5f;
+			// origfy가 이제 m_Curidx고
+			// 오른쪽은 m_headidx로 비교
+			if (fHeadX >= m_tInfo.fX)
+			{
+				m_tInfo.fY = fHeadY;
+				m_tInfo.fX = fHeadX;
+				m_bMove = false;
+				m_fTime = 0.f;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				m_iTileIdx = m_iHeadTileIdx;
+			}
+			else
+			{
+				m_tInfo.fX -= (m_fSpeed * cosf(45.f * PI / 180) * m_fTime);
+				if (fHeadX > m_tInfo.fX)
+					m_tInfo.fX = fHeadX;
+			}
+			break;
+		case DIR_RIGHT:
+			m_fJumpPower = 9.5f;
+			if (fHeadX <= m_tInfo.fX)
+			{
+				m_tInfo.fY = fHeadY;
+				m_tInfo.fX = fHeadX;
+				m_bMove = false;
+				m_fTime = 0.f;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				m_iTileIdx = m_iHeadTileIdx;
+			}
+			else
+			{
+				m_tInfo.fX += m_fSpeed;
+				if (fHeadX < m_tInfo.fX)
+					m_tInfo.fX = fHeadX;
+			}
+			break;
+		case DIR_UP:
+			m_fJumpPower = 20.f;
+
+			if (fHeadY > m_tInfo.fY)
+			{
+				m_tInfo.fY = fHeadY;
+				m_tInfo.fX = fHeadX;
+				m_fShadowY = fHeadY - 20.f;
+				m_bMove = false;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				m_iTileIdx = m_iHeadTileIdx;
+				m_fTime = 0.f;
+			}
+			else
+			{
+				m_tInfo.fY -= (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.1f;
+				if ((m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) * 0.2f < 0)
+				{
+					m_tInfo.fY = fHeadY - 5.f;
+					//m_fShadowY = fHeadY - 20.f;
+					//m_bMove = false;
+					m_iTileIdx = m_iTileIdx = m_iHeadTileIdx;
+					m_fTime = 0.f;
+				}
+			}
+
+			m_fShadowY += -2.f * m_fTime - (9.8f * m_fTime * m_fTime) * 0.45f;
+			break;
+		case DIR_DOWN:
+			m_fJumpPower = 20.f;
+
+			m_tInfo.fY += (m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime);
+			if ((m_fJumpPower * sinf(45.f * PI / 180) * m_fTime) - (9.8f * m_fTime * m_fTime) < 0)
+			{
+				m_tInfo.fY = fHeadY;
+				m_tInfo.fX = fHeadX;
+				m_bMove = false;
+				m_fShadowY = fHeadY - 20.f;
+				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
+				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
 				m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
@@ -484,8 +603,3 @@ bool CMonster::Can_Move()
 
 }
 
-void CMonster::Play_HitSound()
-{
-	CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT4);
-	CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT4, g_fVolume);
-}

@@ -12,10 +12,14 @@ public:
 	void Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
+
 private:
 	bool m_bPlayerEntered;
 	bool m_bPlayerEnteredCheck;
+
 	bool m_bPlayerCleared;
 	bool m_bPlayerClearedCheck;
 
+	bool m_bCutscene;
+	bool m_bCutsceneCheck;
 };

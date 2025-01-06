@@ -35,8 +35,8 @@ public:
 	static CObj* Create(int _iTileIdx)
 	{
 		CObj* pObj = new T;
-		float fX = (_iTileIdx % TILEX) * 48 + 24;
-		float fY = (_iTileIdx / TILEX) * 48 + 24;
+		float fX = float((_iTileIdx % TILEX) * 48 + 24);
+		float fY = float((_iTileIdx / TILEX) * 48 + 24);
 		pObj->Set_Pos(fX, fY);
 		pObj->Initialize();
 		pObj->Set_TileIdx(_iTileIdx);

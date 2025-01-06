@@ -17,8 +17,8 @@ void CCoralBrass::Initialize()
 //본체 86 120
 //호른 72 116 46
 //키보드 52 110 
-    m_iImgCX = 72.f;
-    m_iImgCY = 116.f;
+    m_iImgCX = 72;
+    m_iImgCY = 116;
     m_tInfo.fCX = 72.f;
     m_tInfo.fCY = 48.f;
     m_fSpeed = 6.f;

@@ -9,6 +9,12 @@
 #include "Define.h"
 #include "CPlayer.h"
 
+void CCoralInst::Play_HitSound()
+{
+	CSoundMgr::Get_Instance()->StopSound(SOUND_MONHIT1);
+	CSoundMgr::Get_Instance()->PlaySound(L"en_tentacle_hit.ogg", SOUND_MONHIT1, 0.2f);
+}
+
 void CCoralInst::Goto_Player(int _Pos)
 {
 	m_iMovingPos = _Pos;
@@ -53,4 +59,12 @@ void CCoralInst::Set_TilePos()
 {
 	CTileMgr::Get_Instance()->Set_TileObject(m_iTileIdx, TOBJ_ENTITY, this);
 
+}
+
+void CCoralInst::Move_Attack()
+{
+	if (m_eCurState == MOVE_ACT)
+	{
+		BossInstMove();
+	}
 }

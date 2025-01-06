@@ -57,7 +57,8 @@ int CBlueSlime::Update()
     {
         
         CBeatMgr::Get_Instance()->Plus_BeatCombo();
-
+        CSoundMgr::Get_Instance()->StopSound(SOUND_MONDEATH1);
+        CSoundMgr::Get_Instance()->PlaySound(L"en_slime_death_01.wav", SOUND_MONDEATH1, 0.2f);
         return OBJ_DEAD;
 
     }
@@ -146,4 +147,10 @@ void CBlueSlime::Render(HDC hDC)
 void CBlueSlime::Release()
 {
     CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
+}
+
+void CBlueSlime::Play_HitSound()
+{
+    CSoundMgr::Get_Instance()->StopSound(SOUND_MONHIT1);
+    CSoundMgr::Get_Instance()->PlaySound(L"en_slime_hit_01.wav", SOUND_MONHIT1, 0.2f);
 }

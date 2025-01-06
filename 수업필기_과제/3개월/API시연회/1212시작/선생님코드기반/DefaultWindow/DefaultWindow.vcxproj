@@ -142,6 +142,7 @@
     <ClInclude Include="CBedrock.h" />
     <ClInclude Include="CBlueSlime.h" />
     <ClInclude Include="CBmpMgr.h" />
+    <ClInclude Include="CBossCutscene.h" />
     <ClInclude Include="CBossStage.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCollisionMgr.h" />
@@ -210,7 +211,6 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="test.h" />
     <ClInclude Include="UIMgr.h" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +219,7 @@
     <ClCompile Include="CBedrock.cpp" />
     <ClCompile Include="CBlueSlime.cpp" />
     <ClCompile Include="CBmpMgr.cpp" />
+    <ClCompile Include="CBossCutscene.cpp" />
     <ClCompile Include="CBossStage.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
@@ -288,7 +289,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="UIMgr.cpp" />
   </ItemGroup>
   <ItemGroup>

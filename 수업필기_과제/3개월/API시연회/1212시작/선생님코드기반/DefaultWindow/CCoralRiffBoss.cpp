@@ -19,8 +19,8 @@ void CCoralRiffBoss::Initialize()
 //본체 86 120
 //호른 72 116
 //키보드 52 110 
-    m_iImgCX = 86.f;
-    m_iImgCY = 120.f;
+    m_iImgCX = 86;
+    m_iImgCY = 120;
     m_tInfo.fCX = 86.f;
     m_tInfo.fCY = 48.f;
     m_fSpeed = 6.f;
@@ -152,6 +152,22 @@ void CCoralRiffBoss::Release()
     CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
 }
 
+void CCoralRiffBoss::Play_HitSound()
+{
+    CSoundMgr::Get_Instance()->StopSound(SOUND_MONHIT2);
+    CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_hit_01.ogg", SOUND_MONHIT2, 0.2f);
+}
+
+void CCoralRiffBoss::Teleport_Hit()
+{
+    int i = rand() % 4;
+    m_iTileIdx = m_iTeleportPos[i];
+    m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
+    m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY;
+}
+
+
+
 void CCoralRiffBoss::Inst_Phase()
 {
     if (m_iPhasePassed == 1)
@@ -166,7 +182,7 @@ void CCoralRiffBoss::Inst_Phase()
     {
         if (m_iBeatPassed == 1)
         {
-            srand(time(NULL));
+            //srand(time(NULL));
             int i = rand() % 4 + 1;
             static_cast<CCoralInst*>(m_vecInstrument[(m_iPhasePassed - 2) * 2])->Goto_Player(i);
             static_cast<CCoralInst*>(m_vecInstrument[(m_iPhasePassed - 2) * 2 + 1])->Goto_Player(10 - i);
@@ -204,6 +220,7 @@ void CCoralRiffBoss::Inst_Phase()
         }
         else if (m_iBeatPassed == 6)
         {
+            CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT1);
             CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_cry.ogg", SOUND_BOSSEFFECT1, 0.25f);
             CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS1, 0.25f);
             CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS2, 0.25f);

@@ -3,6 +3,7 @@
 #include "Define.h"
 #include "CObj.h"
 #include "CSceneMgr.h"
+#include "CSoundMgr.h"
 
 CBeatMgr* CBeatMgr::m_pInstance = nullptr;
 
@@ -13,6 +14,7 @@ CBeatMgr::CBeatMgr()
 	, m_bIsBeatMissed(false), m_bIsPlayerActed(false), m_bRightTimeBeat(false)
 	, m_bAbleBeatInterval(false), m_iBeatGapFrameCount(0), m_fBeatJudgementPx(80.f)
 	, m_bObjectAbleToMove(false), m_iBeatCombo(0), m_iBPM(0), m_iBPMSec(0)
+	, m_llTimeChecker(0)
 {
 	m_tTimerRightTime = m_tBeatStart = system_clock::now();
 	m_tMusicStart = m_tBeatStart = system_clock::now();
@@ -129,4 +131,29 @@ void CBeatMgr::Empty_Bar()
 		(*iter)->Set_Dead();
 		iter = m_BeatBarlist.erase(iter);
 	}
+}
+
+void CBeatMgr::Plus_BeatCombo()
+{
+	if (m_iBeatCombo == 0)
+	{
+		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT4);
+		CSoundMgr::Get_Instance()->PlaySound(L"sfx_chain_groove_ST.ogg", SOUND_EFFECT4, 0.5f);
+	}
+
+	++m_iBeatCombo; 
+	if (m_iBeatCombo > 3)
+	{
+		m_iBeatCombo = 3;
+	}
+}
+
+void CBeatMgr::Lose_BeatCombo()
+{
+	if (m_iBeatCombo != 0)
+	{
+		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT4);
+		CSoundMgr::Get_Instance()->PlaySound(L"sfx_chain_break_ST.ogg", SOUND_EFFECT4, 0.5f);
+	}
+	m_iBeatCombo = 0;
 }

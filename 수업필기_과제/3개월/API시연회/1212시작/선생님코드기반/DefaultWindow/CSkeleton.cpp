@@ -47,7 +47,8 @@ int CSkeleton::Update()
     if (m_bDead || m_iHP == 0)
     {
         CBeatMgr::Get_Instance()->Plus_BeatCombo();
-
+        CSoundMgr::Get_Instance()->StopSound(SOUND_MONDEATH2);
+        CSoundMgr::Get_Instance()->PlaySound(L"en_skel_death.ogg", SOUND_MONDEATH2, 0.2f);
         return OBJ_DEAD;
     }
 
@@ -126,3 +127,10 @@ void CSkeleton::Release()
 {
     CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
 }
+
+void CSkeleton::Play_HitSound()
+{
+    CSoundMgr::Get_Instance()->StopSound(SOUND_MONHIT2);
+    CSoundMgr::Get_Instance()->PlaySound(L"en_skel_hit_01.wav", SOUND_MONHIT2, 0.2f);
+}
+

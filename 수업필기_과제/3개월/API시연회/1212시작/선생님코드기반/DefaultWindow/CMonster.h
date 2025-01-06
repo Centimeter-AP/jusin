@@ -6,6 +6,7 @@ class CMonster : public CObj
 public:
     CMonster();
     virtual ~CMonster();
+
 public:
     virtual void Initialize() override;
     virtual int  Update() override;
@@ -17,7 +18,10 @@ public:
 
     void        Jumping();
     void        BossMove();
+    void        BossInstMove();
     bool        Can_Move();
+
+    virtual void     Play_HitSound() PURE;
 
 protected:
     enum MONSTATE { MON_IDLE, MON_AGGRO, MON_ATTACK, MON_END };

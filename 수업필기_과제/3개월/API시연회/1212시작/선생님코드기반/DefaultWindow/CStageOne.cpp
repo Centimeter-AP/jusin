@@ -21,7 +21,7 @@
 #include "CBlueSlime.h"
 #include "CStair.h"
 
-CStageOne::CStageOne() 
+CStageOne::CStageOne() :m_pBoss(nullptr)
 {
 }
 
@@ -57,7 +57,10 @@ void CStageOne::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(1320, 934));
 	static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_BOSS);
+	static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_IsClosed(true);
 
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CTauren>::Create_Monster(1272, 912));
+	m_pBoss = CObjMgr::Get_Instance()->Get_FirstMonster();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create_Monster(312, 816));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create_Monster(696, 816));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create_Monster(936, 480));
@@ -66,7 +69,6 @@ void CStageOne::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CBlueSlime>::Create_Monster(792, 480));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CBlueSlime>::Create_Monster(744, 192));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CBlueSlime>::Create_Monster(1320, 768));
-	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CTauren>::Create_Monster(1272, 912));
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 	CScrollMgr::Get_Instance()->Set_Scroll(0, 0);
 
@@ -104,6 +106,7 @@ int CStageOne::Update()
 	{
 		m_bBeatOne = true;
 	}
+
 	CObjMgr::Get_Instance()->Update();
 
 	++m_iFrameCount;

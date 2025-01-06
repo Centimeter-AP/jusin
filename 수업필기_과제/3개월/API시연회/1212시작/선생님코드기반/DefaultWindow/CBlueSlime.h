@@ -4,7 +4,7 @@ class CBlueSlime : public CMonster
 {
 public:
     CBlueSlime()
-    : m_iSelectedIndex{0,0}
+    : m_iSelectedIndex{0,0}, m_eCurState(BEFORE_ACT)
     {}
     virtual ~CBlueSlime() { Release(); }
 public:
@@ -13,6 +13,7 @@ public:
     virtual void Late_Update() override;
     virtual void Render(HDC hDC) override;
     virtual void Release() override;
+    virtual void     Play_HitSound();
 
 private:
     enum ACTSTATE { BEFORE_ACT, AFTER_ACT, END_ACT };

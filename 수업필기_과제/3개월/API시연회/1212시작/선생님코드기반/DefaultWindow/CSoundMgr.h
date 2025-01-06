@@ -59,6 +59,6 @@ private:
 public:
 	void	PlaySound_DigVoice();
 	void	PlaySound_AttackVoice();
-	void	PlaySound_HitVoice();
+	//void	PlaySound_HitVoice();
 };
 

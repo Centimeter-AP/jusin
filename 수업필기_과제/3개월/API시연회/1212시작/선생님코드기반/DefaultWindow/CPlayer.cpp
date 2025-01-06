@@ -21,7 +21,7 @@ CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f),
 	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
-	m_pvecTile(nullptr), m_qltskrka(false)
+	m_pvecTile(nullptr), m_qltskrka(false), m_iGold(0)
 {
 }
 
@@ -174,7 +174,7 @@ void CPlayer::Render(HDC hDC)
 	{
 		TCHAR szText[32];
 		wsprintf(szText, L"박자 놓침");
-		TextOut(hDC, GET_PLAYER->Get_Info().fX, GET_PLAYER->Get_Info().fY, szText, lstrlen(szText));
+		TextOut(hDC, int(GET_PLAYER->Get_Info().fX + iScrollX), int(GET_PLAYER->Get_Info().fY + iScrollY), szText, lstrlen(szText));
 	}
 
 }

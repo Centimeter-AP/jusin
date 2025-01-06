@@ -30,6 +30,7 @@
 
 CBossStage::CBossStage() : m_bPlayerEntered(false), m_bPlayerCleared(false)
 , m_bPlayerEnteredCheck(false), m_bPlayerClearedCheck(false)
+, m_bCutscene(false), m_bCutsceneCheck(false)
 {
 }
 

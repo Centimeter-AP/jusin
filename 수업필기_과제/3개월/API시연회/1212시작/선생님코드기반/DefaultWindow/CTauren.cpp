@@ -7,6 +7,7 @@
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
 #include "CPlayer.h"
+#include "CStair.h"
 
 void CTauren::Initialize()
 {
@@ -52,6 +53,9 @@ int CTauren::Update()
     if (m_bDead || m_iHP == 0)
     {
         CBeatMgr::Get_Instance()->Plus_BeatCombo();
+        CSoundMgr::Get_Instance()->StopSound(SOUND_MONDEATH1);
+        CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_hit_01.wav", SOUND_MONDEATH1, 0.2f);
+        static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_IsClosed(false);
         return OBJ_DEAD;
     }
 
@@ -233,4 +237,10 @@ void CTauren::Render(HDC hDC)
 void CTauren::Release()
 {
     CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
+}
+
+void CTauren::Play_HitSound()
+{
+    CSoundMgr::Get_Instance()->StopSound(SOUND_MONHIT1);
+    CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_hit_01.wav", SOUND_MONHIT1, 0.2f);
 }

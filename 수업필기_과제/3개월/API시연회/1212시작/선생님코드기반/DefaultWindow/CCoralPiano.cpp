@@ -17,8 +17,8 @@ void CCoralPiano::Initialize()
 //본체 86 120
 //호른 72 116
 //키보드 52 110 34
-    m_iImgCX = 52.f;
-    m_iImgCY = 110.f;
+    m_iImgCX = 52;
+    m_iImgCY = 110;
     m_tInfo.fCX = 48.f;
     m_tInfo.fCY = 48.f;
     m_fSpeed = 6.f;
