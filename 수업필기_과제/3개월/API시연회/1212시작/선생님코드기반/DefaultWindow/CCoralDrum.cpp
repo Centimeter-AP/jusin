@@ -7,6 +7,8 @@
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
 #include "CPlayer.h"
+#include "CAbstractFactory.h"
+#include "CWaterTile.h"
 
 
 void CCoralDrum::Initialize()
@@ -108,6 +110,8 @@ int CCoralDrum::Update()
                 m_iTileIdx = m_iHeadTileIdx;
                 m_tInfo.fX = (*m_pvecTile)[m_iTileIdx]->Get_Info().fX;
                 m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY;
+                CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iTileIdx));
+
                 break;
             case CCoralInst::ATTACKREADY_ACT:
                 if (m_iBeatPassed > 0)

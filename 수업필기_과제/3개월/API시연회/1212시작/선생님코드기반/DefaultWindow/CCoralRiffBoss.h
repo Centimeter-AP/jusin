@@ -3,7 +3,7 @@
 class CCoralRiffBoss : public CMonster
 {
 public:
-    CCoralRiffBoss() : m_iBeatPassed(0), m_eCurState(AFTER_ACT), m_iPhasePassed(0), m_bAttacked(true), m_iBeforeAct(0){}
+    CCoralRiffBoss() : m_iBeatPassed(0), m_eCurState(AFTER_ACT), m_iPhasePassed(0), m_bAttacked(true), m_iBeforeAct(0), m_ibMovePhase(false){}
     virtual ~CCoralRiffBoss() { Release(); }
 public:
     virtual void Initialize() override;
@@ -24,7 +24,7 @@ private:
     ACTSTATE    m_eCurState;
     bool        m_bAttacked;
     int         m_iBeforeAct;
-
+    bool        m_ibMovePhase;
 
     int         m_iBeatPassed;
     int         m_iPhasePassed;

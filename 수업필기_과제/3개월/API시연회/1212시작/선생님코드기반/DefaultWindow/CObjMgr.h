@@ -27,6 +27,7 @@ public:
 	CObj* Is_Monster_Exist(int _iTileIdx);
 
 	void Get_Item(CItem* _pItem);
+	bool	Find_ifExist(OBJID eID, CObj* pObj);
 
 public:
 	void		Add_Object(OBJID eID, CObj* pObj);

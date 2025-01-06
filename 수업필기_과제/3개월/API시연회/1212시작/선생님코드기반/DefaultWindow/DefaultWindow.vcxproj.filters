@@ -223,6 +223,21 @@
     <Filter Include="01. Obj\06. Misc\Trap">
       <UniqueIdentifier>{ba9bf133-1128-41b1-9217-6f50ccaa4239}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\10. Effect">
+      <UniqueIdentifier>{03f74ea7-ef21-420a-b4dc-878b2da95556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\10. Effect\Attack">
+      <UniqueIdentifier>{73a28fbe-9fe3-4c4a-b691-3263b1429d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\10. Effect\Attack\Dagger">
+      <UniqueIdentifier>{5bbc2a85-40ff-4543-851a-9c28dd5b0476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\10. Effect\Attack\Monster">
+      <UniqueIdentifier>{64773109-2f45-4c56-8185-9b3fac0a452a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\10. Effect\Particles">
+      <UniqueIdentifier>{931a21cd-7c73-481c-9742-a499aafd168a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -444,6 +459,12 @@
     <ClInclude Include="CStair.h">
       <Filter>01. Obj\06. Misc\Stair</Filter>
     </ClInclude>
+    <ClInclude Include="CEffect.h">
+      <Filter>01. Obj\10. Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -649,6 +670,12 @@
     </ClCompile>
     <ClCompile Include="CStair.cpp">
       <Filter>01. Obj\06. Misc\Stair</Filter>
+    </ClCompile>
+    <ClCompile Include="CEffect.cpp">
+      <Filter>01. Obj\10. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>01. Obj\02. Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

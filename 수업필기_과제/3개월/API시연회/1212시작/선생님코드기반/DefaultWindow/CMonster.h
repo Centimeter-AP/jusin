@@ -16,6 +16,7 @@ public:
     void         Set_FirstTileIdx() { m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx(); }
 
     void        Jumping();
+    void        BossMove();
     bool        Can_Move();
 
 protected:

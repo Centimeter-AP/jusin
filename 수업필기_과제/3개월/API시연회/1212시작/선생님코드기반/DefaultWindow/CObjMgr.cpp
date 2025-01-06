@@ -112,6 +112,18 @@ void CObjMgr::Get_Item(CItem* _pItem)
 
 }
 
+bool CObjMgr::Find_ifExist(OBJID eID, CObj* pObj)
+{
+	for (auto iter = m_ObjList[eID].begin(); iter != m_ObjList[eID].end(); ++iter)
+	{
+		if ((*iter) == pObj)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 
 
 void CObjMgr::Add_Object(OBJID eID, CObj* pObj)
@@ -250,7 +262,6 @@ void CObjMgr::Delete_Map_Item()
 		{
 			Safe_Delete<CObj*>((*iter));
 			iter = m_ObjList[OBJ_ITEM].erase(iter);
-			return;
 		}
 	}
 }

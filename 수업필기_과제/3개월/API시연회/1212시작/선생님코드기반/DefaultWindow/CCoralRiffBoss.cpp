@@ -81,10 +81,14 @@ int CCoralRiffBoss::Update()
             }
             ++m_iBeatPassed;
         }
+        if (m_ibMovePhase == true)
+        {
+            BossMove();
+        }
     }
 
 
-    m_iTileIdx = Find_MyTileIdx();
+    //m_iTileIdx = Find_MyTileIdx();
 
     __super::Update_Rect();
 
@@ -139,9 +143,11 @@ void CCoralRiffBoss::Release()
 
 void CCoralRiffBoss::Inst_Phase()
 {
+
+
     if (m_iPhasePassed == 1)
     {
-        if (m_iBeatPassed == 4)
+        if (m_iBeatPassed == 3)
         {
             m_iPhasePassed = 2;
             m_iBeatPassed = 0;
@@ -151,13 +157,11 @@ void CCoralRiffBoss::Inst_Phase()
     {
         if (m_iBeatPassed == 1)
         {
+            srand(time(NULL));
             int i = rand() % 4 + 1;
             static_cast<CCoralInst*>(m_vecInstrument[(m_iPhasePassed - 2) * 2])->Goto_Player(i);
             static_cast<CCoralInst*>(m_vecInstrument[(m_iPhasePassed - 2) * 2 + 1])->Goto_Player(10 - i);
-            // 1일때 부르르
-            // 2일때 잠수
-            // 4일때 옆에등장
-            // 8일때 
+
         }
         else if (m_iBeatPassed == 7)
         {
@@ -206,7 +210,15 @@ void CCoralRiffBoss::Move_Phase()
 {
     if (m_iPhasePassed >= 8)
     {
+        if (m_ibMovePhase == false)
+        {
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS1, 0.2f);
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS2, 0.2f);
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS3, 0.2f);
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS4, 0.2f);
 
+            m_ibMovePhase = true;
+        }
         if (m_eCurState == AFTER_ACT)
         {
             m_eCurState = BEFORE_ACT;
@@ -217,6 +229,7 @@ void CCoralRiffBoss::Move_Phase()
         }
         else
         {
+
             m_iBeforeAct = 0;
             m_eCurState = AFTER_ACT;
         }
@@ -234,6 +247,5 @@ void CCoralRiffBoss::Move_Phase()
         {
             m_iHeadTileIdx = m_iTileIdx;
         }
-        Jumping();
     }
 }
