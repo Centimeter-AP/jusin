@@ -10,7 +10,7 @@ void CSplash::Initialize()
 	m_tInfo.fCX = TILECX;
 	m_tInfo.fCY = TILECY;
 	m_pImgKey = L"Splash";
-	m_iTileIdx = Find_MyTileIdx();
+	//m_iTileIdx = Find_MyTileIdx();
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Effect/Splash_2.bmp", L"Splash");
 

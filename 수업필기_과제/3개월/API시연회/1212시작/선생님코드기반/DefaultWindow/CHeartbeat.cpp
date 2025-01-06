@@ -4,6 +4,8 @@
 #include "CScrollMgr.h"
 #include "CBeatMgr.h"
 #include "CTileMgr.h"
+#include "CObjMgr.h"
+#include "Define.h"
 
 void CHeartbeat::Initialize()
 {
@@ -60,6 +62,13 @@ void CHeartbeat::Render(HDC hDC)
 		(int)m_tInfo.fCX,							// 복사할 이미지의 가로, 세로
 		(int)m_tInfo.fCY,
 		RGB(255, 0, 255));					// 제거할 색상
+
+	TCHAR szText[32];
+	wsprintf(szText, L"콤보 배수 : %d배", CBeatMgr::Get_Instance()->Get_BeatCombo() + 1);
+	TextOut(hDC, 
+			WINCX / 2 - 55, 
+			WINCY - 100,
+			szText, lstrlen(szText));
 }
 
 void CHeartbeat::Release()

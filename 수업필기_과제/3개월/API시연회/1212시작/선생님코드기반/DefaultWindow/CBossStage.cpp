@@ -146,17 +146,17 @@ int CBossStage::Update()
 
 	++m_iFrameCount;
 
-	if (CKeyMgr::Get_Instance()->Key_Down('1'))
-	{
+	//if (CKeyMgr::Get_Instance()->Key_Down('1'))
+	//{
 
-		CTileMgr::Get_Instance()->Load_Tile1();
-		CTileMgr::Get_Instance()->Load_Wall1();
-	}
-	if (CKeyMgr::Get_Instance()->Key_Down('2'))
-	{
-		CTileMgr::Get_Instance()->Load_Tile2();
-		CTileMgr::Get_Instance()->Load_Wall2();
-	}
+	//	CTileMgr::Get_Instance()->Load_Tile1();
+	//	CTileMgr::Get_Instance()->Load_Wall1();
+	//}
+	//if (CKeyMgr::Get_Instance()->Key_Down('2'))
+	//{
+	//	CTileMgr::Get_Instance()->Load_Tile2();
+	//	CTileMgr::Get_Instance()->Load_Wall2();
+	//}
 	if (m_bPlayerEntered == false)
 	{
 		if (GET_PLAYER->Get_TileIdx() >= 772 && GET_PLAYER->Get_TileIdx() <= 774)

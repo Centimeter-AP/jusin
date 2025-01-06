@@ -11,6 +11,7 @@
 #include "CAbstractFactory.h"
 #include "CSplash.h"
 #include "CWaterTile.h"
+#include "CPlayer.h"
 
 
 void CCoralRiffBoss::Initialize()
@@ -283,6 +284,16 @@ void CCoralRiffBoss::Move_Phase()
             CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
             CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
             CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+            int playerheadtile = static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx();
+            if (m_iHeadTileIdx == playerheadtile || m_iHeadTileIdx + 1 == playerheadtile
+               || m_iHeadTileIdx - 1 == playerheadtile || m_iHeadTileIdx - TILEX + 1 == playerheadtile
+               || m_iHeadTileIdx - TILEX - 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 == playerheadtile
+               || m_iHeadTileIdx - TILEX * 2 + 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 - 1 == playerheadtile)
+            {
+                GET_PLAYER->Set_HP(m_iDamage);
+                CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+                CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
+            }
         }
     }
 }

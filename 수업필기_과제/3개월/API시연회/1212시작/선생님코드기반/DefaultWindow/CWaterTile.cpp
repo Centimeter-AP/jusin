@@ -4,6 +4,8 @@
 #include "CScrollMgr.h"
 #include "CSceneMgr.h"
 #include "CObjMgr.h"
+#include "CBeatMgr.h"
+#include "CSoundMgr.h"
 
 CWaterTile::CWaterTile()
 {
@@ -31,14 +33,15 @@ int CWaterTile::Update()
         return OBJ_DEAD;
     }
 
-	auto pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
-	for (auto& pTile : (*pvecTile))
+	for (auto& pTile : (*CTileMgr::Get_Instance()->Get_TileVec()))
 	{
 		if (pTile->Get_TileIdx() == m_iTileIdx)
 		{
 			m_iDrawID = static_cast<CTile*>(pTile)->Get_DrawID();
 		}
 	}
+	if (BEATMGR->Get_ObjectAbleToMove() == true)
+		Check_PlayerInWater();
 
 	__super::Update_Rect();
 
@@ -69,4 +72,25 @@ void CWaterTile::Render(HDC hDC)
 
 void CWaterTile::Release()
 {
+}
+
+void CWaterTile::Check_PlayerInWater()
+{
+	if (static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx() == m_iTileIdx)
+	{
+		if (static_cast<CPlayer*>(GET_PLAYER)->Get_InWater() == false)
+		{
+			static_cast<CPlayer*>(GET_PLAYER)->Set_InWater(true);
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"mov_water_in.ogg", SOUND_EFFECT, 0.4f);
+		}
+	}
+	if (static_cast<CPlayer*>(GET_PLAYER)->Get_InWater() == true && GET_PLAYER->Get_TileIdx() == m_iTileIdx)
+	{
+		m_bDead = true;
+		static_cast<CPlayer*>(GET_PLAYER)->Set_InWater(false);
+		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+		CSoundMgr::Get_Instance()->PlaySound(L"mov_water_out.ogg", SOUND_EFFECT, 0.4f);
+	}
+
 }

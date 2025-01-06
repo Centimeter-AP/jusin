@@ -153,6 +153,7 @@
     <ClInclude Include="CCoralRiffBoss.h" />
     <ClInclude Include="CCoralViolin.h" />
     <ClInclude Include="CDagger.h" />
+    <ClInclude Include="CDaggerEffect.h" />
     <ClInclude Include="CDirtWall.h" />
     <ClInclude Include="CDoor.h" />
     <ClInclude Include="CEffect.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="CCoralRiffBoss.cpp" />
     <ClCompile Include="CCoralViolin.cpp" />
     <ClCompile Include="CDagger.cpp" />
+    <ClCompile Include="CDaggerEffect.cpp" />
     <ClCompile Include="CDirtWall.cpp" />
     <ClCompile Include="CDoor.cpp" />
     <ClCompile Include="CEffect.cpp" />

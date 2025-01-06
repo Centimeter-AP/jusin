@@ -468,6 +468,9 @@
     <ClInclude Include="CBossCutscene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CDaggerEffect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -681,6 +684,9 @@
       <Filter>01. Obj\10. Effect\Particles</Filter>
     </ClCompile>
     <ClCompile Include="CBossCutscene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CDaggerEffect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

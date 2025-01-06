@@ -310,6 +310,16 @@ void CMonster::BossMove()
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
+				int playerheadtile = static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx();
+				if (m_iHeadTileIdx == playerheadtile || m_iHeadTileIdx + 1 == playerheadtile
+					|| m_iHeadTileIdx - 1 == playerheadtile || m_iHeadTileIdx - TILEX + 1 == playerheadtile
+					|| m_iHeadTileIdx - TILEX - 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 == playerheadtile
+					|| m_iHeadTileIdx - TILEX * 2 + 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 - 1 == playerheadtile)
+				{
+					GET_PLAYER->Set_HP(m_iDamage);
+					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
+				}
 				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
 				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_01.ogg", SOUND_BOSSEFFECT3, 0.25f);
 				m_iTileIdx = m_iHeadTileIdx;
@@ -339,6 +349,16 @@ void CMonster::BossMove()
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+				int playerheadtile = static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx();
+				if (m_iHeadTileIdx == playerheadtile || m_iHeadTileIdx + 1 == playerheadtile
+					|| m_iHeadTileIdx - 1 == playerheadtile || m_iHeadTileIdx - TILEX + 1 == playerheadtile
+					|| m_iHeadTileIdx - TILEX - 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 == playerheadtile
+					|| m_iHeadTileIdx - TILEX * 2 + 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 - 1 == playerheadtile)
+				{
+					GET_PLAYER->Set_HP(m_iDamage);
+					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
+				}
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
 				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
 				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_02.ogg", SOUND_BOSSEFFECT3, 0.25f);
@@ -370,6 +390,16 @@ void CMonster::BossMove()
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
 				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+				int playerheadtile = static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx();
+				if (m_iHeadTileIdx == playerheadtile || m_iHeadTileIdx + 1 == playerheadtile
+					|| m_iHeadTileIdx - 1 == playerheadtile || m_iHeadTileIdx - TILEX + 1 == playerheadtile
+					|| m_iHeadTileIdx - TILEX - 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 == playerheadtile
+					|| m_iHeadTileIdx - TILEX * 2 + 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 - 1 == playerheadtile)
+				{
+					GET_PLAYER->Set_HP(m_iDamage);
+					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
+				}
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
 				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
 				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_03.ogg", SOUND_BOSSEFFECT3, 0.25f);
@@ -403,14 +433,25 @@ void CMonster::BossMove()
 				m_fShadowY = fHeadY - 20.f;
 				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx));
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx + 1));
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - 1));
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX + 1));
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX - 1));
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
-				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+				int isplashidx = m_iHeadTileIdx + TILEX;
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx - TILEX + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx - TILEX - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx - TILEX * 2));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx - TILEX * 2 + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(isplashidx - TILEX * 2 - 1));
+				int playerheadtile = static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx();
+				if (isplashidx == playerheadtile || isplashidx + 1 == playerheadtile
+				 || isplashidx - 1 == playerheadtile || isplashidx - TILEX + 1 == playerheadtile
+				 || isplashidx - TILEX - 1 == playerheadtile || isplashidx - TILEX * 2 == playerheadtile
+				 || isplashidx - TILEX * 2 + 1 == playerheadtile || isplashidx - TILEX * 2 - 1 == playerheadtile)
+				{
+					GET_PLAYER->Set_HP(m_iDamage);
+					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
+				}
 				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
 				CSoundMgr::Get_Instance()->StopSound(SOUND_BOSSEFFECT3);
 				CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_attack_splash_04.ogg", SOUND_BOSSEFFECT3, 0.25f);
@@ -566,7 +607,6 @@ bool CMonster::Can_Move()
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
 
 	auto& HeadTileArr = static_cast<CTile*>((*CTileMgr::Get_Instance()->Get_TileVec())[m_iHeadTileIdx])->Get_TileObj();
-
 
 	int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
 

@@ -15,13 +15,14 @@
 #include "CBedrock.h"
 #include "CDagger.h"
 #include "CBeatMgr.h"
+#include "CSplash.h"
 
 
 CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f),
 	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
-	m_pvecTile(nullptr), m_qltskrka(false), m_iGold(0)
+	m_pvecTile(nullptr), m_qltskrka(false), m_iGold(0), m_iWaterTileOffset(0), m_bInWater(false)
 {
 }
 
@@ -88,6 +89,11 @@ int CPlayer::Update()
 	Jumping();
 	Get_TileX();
 	Get_TileY();
+
+	if (CKeyMgr::Get_Instance()->Key_Down('Q'))
+	{
+		CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iTileIdx));
+	}
 	__super::Update_Rect();
 	return OBJ_NOEVENT;
 }
@@ -138,30 +144,42 @@ void CPlayer::Render(HDC hDC)
 			PLAYERCY,
 			RGB(255, 0, 255));
 	}
+	if (m_bInWater == true && m_iHeadTileIdx == m_iTileIdx)
+	{
+		m_iWaterTileOffset = 10;
+	}
+	else if (m_bInWater == false)
+	{
+		m_iWaterTileOffset -= 4;
+		if (m_iWaterTileOffset < 0)
+		{
+			m_iWaterTileOffset = 0;
+		}
+	}
 
 	GdiTransparentBlt(hDC,							//몸통
 		m_tRect.left + iScrollX,
-		m_tRect.top + iScrollY,
+		m_tRect.top + iScrollY + m_iWaterTileOffset,
 		(int)m_tInfo.fCX,
-		(int)m_tInfo.fCY,
+		(int)m_tInfo.fCY - m_iWaterTileOffset,	// 여기 줄임
 		hMemDCarmor,													
 		(int)m_tInfo.fCX * m_tFrame.iFrameStart,
 		(int)m_tInfo.fCY * m_tFrame.iMotion,
 		PLAYERCX,
-		PLAYERCY,
+		PLAYERCY - m_iWaterTileOffset,			// 여기도 줄임
 		RGB(255, 0, 255));
 
 
 	GdiTransparentBlt(hDC,							// 머리
 		m_tRect.left + iScrollX,			
-		m_tRect.top + iScrollY,				
+		m_tRect.top + iScrollY + m_iWaterTileOffset,
 		PLAYERCX,							
-		PLAYERCY,							
+		PLAYERCY - m_iWaterTileOffset,
 		hMemDChead,							
 		PLAYERCX * m_tFrame.iFrameStart,	
 		PLAYERCY * m_tFrame.iMotion,		
 		PLAYERCX,							
-		PLAYERCY,							
+		PLAYERCY - m_iWaterTileOffset,
 		RGB(255, 0, 255));					
 
 	if (m_qltskrka == true)
@@ -176,7 +194,6 @@ void CPlayer::Render(HDC hDC)
 		wsprintf(szText, L"박자 놓침");
 		TextOut(hDC, int(GET_PLAYER->Get_Info().fX + iScrollX), int(GET_PLAYER->Get_Info().fY + iScrollY), szText, lstrlen(szText));
 	}
-
 }
 
 void CPlayer::Release()
@@ -188,6 +205,9 @@ bool CPlayer::Can_Move()
 	float	fHeadX(0.f), fHeadY(0.f);
 	fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
 	fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+
+	if (m_bInWater == true)
+		return false;
 
 	return CTileMgr::Get_Instance()->Check_TileObject(m_iHeadTileIdx);
 

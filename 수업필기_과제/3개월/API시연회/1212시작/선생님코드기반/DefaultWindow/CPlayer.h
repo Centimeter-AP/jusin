@@ -36,6 +36,8 @@ public:
         m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
         m_fShadowY = m_tInfo.fY - (m_tInfo.fCY * 0.5f) + 4.f;
     }
+    void        Set_InWater(bool _isIn) { m_bInWater = _isIn; }
+    bool        Get_InWater() { return m_bInWater; }
 
 private:
     void        Key_Input();
@@ -75,6 +77,8 @@ private:
     bool        m_bMove;
 
     float       m_fShadowY;
+    int         m_iWaterTileOffset;
+    bool        m_bInWater;
 
     bool        m_qltskrka;
 
