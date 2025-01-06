@@ -191,6 +191,7 @@
     <ClInclude Include="CShovel.h" />
     <ClInclude Include="CSkeleton.h" />
     <ClInclude Include="CSoundMgr.h" />
+    <ClInclude Include="CSplash.h" />
     <ClInclude Include="CStage.h" />
     <ClInclude Include="CStageOne.h" />
     <ClInclude Include="CStair.h" />
@@ -267,6 +268,7 @@
     <ClCompile Include="CShovel.cpp" />
     <ClCompile Include="CSkeleton.cpp" />
     <ClCompile Include="CSoundMgr.cpp" />
+    <ClCompile Include="CSplash.cpp" />
     <ClCompile Include="CStage.cpp" />
     <ClCompile Include="CStageOne.cpp" />
     <ClCompile Include="CStair.cpp" />

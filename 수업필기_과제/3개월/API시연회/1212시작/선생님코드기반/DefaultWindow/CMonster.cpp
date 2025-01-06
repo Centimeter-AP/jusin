@@ -7,6 +7,9 @@
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
 #include "CPlayer.h"
+#include "CAbstractFactory.h"
+#include "CSplash.h"
+#include "CWaterTile.h"
 
 CMonster::CMonster()
 	:m_fTime(0.f), m_fJumpPower(0.f)
@@ -298,8 +301,16 @@ void CMonster::BossMove()
 				m_fTime = 0.f;
 				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-				m_iTileIdx = m_iTileIdx = m_iHeadTileIdx;
-
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
+				m_iTileIdx = m_iHeadTileIdx;
 			}
 			else
 			{
@@ -318,6 +329,15 @@ void CMonster::BossMove()
 				m_fTime = 0.f;
 				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
 				m_iTileIdx = m_iHeadTileIdx;
 			}
 			else
@@ -338,6 +358,15 @@ void CMonster::BossMove()
 				m_bMove = false;
 				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
 				m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
@@ -368,7 +397,16 @@ void CMonster::BossMove()
 				m_fShadowY = fHeadY - 20.f;
 				CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
 				CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-				m_iTileIdx = m_iTileIdx = m_iHeadTileIdx;
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
+				CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iHeadTileIdx));
+				m_iTileIdx = m_iHeadTileIdx;
 				m_fTime = 0.f;
 			}
 			m_fShadowY -= -6.f * m_fTime - (9.8f * m_fTime * m_fTime);
@@ -444,4 +482,10 @@ bool CMonster::Can_Move()
 		return true;
 	return true;
 
+}
+
+void CMonster::Play_HitSound()
+{
+	CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT4);
+	CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT4, g_fVolume);
 }

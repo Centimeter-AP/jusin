@@ -8,6 +8,9 @@
 #include "CSoundMgr.h"
 #include "CCoralInst.h"
 #include "CKeyMgr.h"
+#include "CAbstractFactory.h"
+#include "CSplash.h"
+#include "CWaterTile.h"
 
 
 void CCoralRiffBoss::Initialize()
@@ -58,14 +61,20 @@ int CCoralRiffBoss::Update()
     if (m_bDead || m_iHP == 0)
     {
         CBeatMgr::Get_Instance()->Plus_BeatCombo();
-
+        CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_death.ogg", SOUND_EFFECT2, 0.2f);
+        CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_yeah_02.wav", SOUND_EFFECT3, 0.2f);
+        for (auto& pInst : m_vecInstrument)
+        {
+            pInst->Set_Dead();
+        }
         return OBJ_DEAD;
     }
     if (CKeyMgr::Get_Instance()->Key_Down('Z'))
     {
-        m_iPhasePassed = 1;
+        m_iPhasePassed += 1;
         m_iBeatPassed = 0;
     }
+    m_iShakeAnimation *= -1;
 
     if (m_iPhasePassed > 0)
     {
@@ -84,6 +93,7 @@ int CCoralRiffBoss::Update()
         if (m_ibMovePhase == true)
         {
             BossMove();
+            
         }
     }
 
@@ -120,7 +130,8 @@ void CCoralRiffBoss::Render(HDC hDC)
     //    (int)m_tInfo.fCX,
     //    (int)m_tInfo.fCY,
     //    RGB(255, 0, 255));
-
+    if (m_eCurState == BEFORE_ACT)
+        m_tRect.left += m_iShakeAnimation;
     GdiTransparentBlt(hDC,
         m_tRect.left + iScrollX,
         m_tRect.bottom - m_iImgCY + iScrollY,
@@ -133,7 +144,7 @@ void CCoralRiffBoss::Render(HDC hDC)
         m_iImgCY,
         RGB(255, 0, 255));
 
-    m_HP_UI.Render(hDC);
+    //m_HP_UI.Render(hDC);
 }
 
 void CCoralRiffBoss::Release()
@@ -143,8 +154,6 @@ void CCoralRiffBoss::Release()
 
 void CCoralRiffBoss::Inst_Phase()
 {
-
-
     if (m_iPhasePassed == 1)
     {
         if (m_iBeatPassed == 3)
@@ -193,8 +202,14 @@ void CCoralRiffBoss::Inst_Phase()
             static_cast<CCoralInst*>(m_vecInstrument[5])->Goto_Player(3);
             static_cast<CCoralInst*>(m_vecInstrument[7])->Goto_Player(7);
         }
-        else if (m_iBeatPassed == 7)
+        else if (m_iBeatPassed == 6)
         {
+            CSoundMgr::Get_Instance()->PlaySound(L"en_coralriff_cry.ogg", SOUND_BOSSEFFECT1, 0.25f);
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS1, 0.25f);
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS2, 0.25f);
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS3, 0.25f);
+            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS4, 0.25f);
+
             ++m_iPhasePassed;
             m_iBeatPassed = 0;
         }
@@ -212,11 +227,6 @@ void CCoralRiffBoss::Move_Phase()
     {
         if (m_ibMovePhase == false)
         {
-            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS1, 0.2f);
-            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS2, 0.2f);
-            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS3, 0.2f);
-            CSoundMgr::Get_Instance()->ChangeChannelVolume(SOUND_BOSS4, 0.2f);
-
             m_ibMovePhase = true;
         }
         if (m_eCurState == AFTER_ACT)
@@ -229,23 +239,43 @@ void CCoralRiffBoss::Move_Phase()
         }
         else
         {
-
             m_iBeforeAct = 0;
             m_eCurState = AFTER_ACT;
+            m_iTileIdx = Find_MyTileIdx();
+
         }
 
-        m_iTileIdx = Find_MyTileIdx();
         if (m_pTarget != nullptr)
         {
             Find_Player();
         }
+
         if (Can_Move())
         {
             m_bMove = true;
+            
         }
         else
         {
             m_iHeadTileIdx = m_iTileIdx;
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx));
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx + 1));
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - 1));
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX + 1));
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX - 1));
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2));
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 + 1));
+            CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iHeadTileIdx - TILEX * 2 - 1));
         }
     }
+}
+
+void CCoralRiffBoss::Set_InstTilePos()
+{
+    CTileMgr::Get_Instance()->Set_TileObject(m_iTileIdx, TOBJ_ENTITY, this);
+    for (auto& pInst : m_vecInstrument)
+    {
+        static_cast<CCoralInst*>(pInst)->Set_TilePos();
+    }
+
 }

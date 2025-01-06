@@ -20,6 +20,7 @@ public:
     void        Goto_Player(int _Pos);
     void        Set_HeadPositionIdx();
     void        Set_ActState(ACTSTATE _state) { m_eCurState = _state; }
+    void        Set_TilePos();
 
 protected:
     ACTSTATE    m_eCurState;

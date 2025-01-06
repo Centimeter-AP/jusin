@@ -177,7 +177,7 @@ void CCoralDrum::Render(HDC hDC)
             m_iImgCY,
             RGB(255, 0, 255));
 
-        m_HP_UI.Render(hDC);
+        //m_HP_UI.Render(hDC);
     }
 }
 

@@ -465,6 +465,9 @@
     <ClInclude Include="test.h">
       <Filter>01. Obj\02. Monster</Filter>
     </ClInclude>
+    <ClInclude Include="CSplash.h">
+      <Filter>01. Obj\10. Effect\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -676,6 +679,9 @@
     </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CSplash.cpp">
+      <Filter>01. Obj\10. Effect\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

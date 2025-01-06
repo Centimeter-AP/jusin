@@ -28,7 +28,8 @@
 #include "CKeyMgr.h"
 #include "CWaterTile.h"
 
-CBossStage::CBossStage()
+CBossStage::CBossStage() : m_bPlayerEntered(false), m_bPlayerCleared(false)
+, m_bPlayerEnteredCheck(false), m_bPlayerClearedCheck(false)
 {
 }
 
@@ -110,7 +111,6 @@ void CBossStage::Initialize()
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst3Violin.ogg", 0.2f, SOUND_BOSS3);
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst4Piano.ogg", 0.2f, SOUND_BOSS4);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
-
 }
 
 int CBossStage::Update()
@@ -137,12 +137,17 @@ int CBossStage::Update()
 	{
 		m_bBeatOne = true;
 	}
+	if (CObjMgr::Get_Instance()->Get_MonsterList().empty() == true)
+	{
+		m_bPlayerCleared = true;
+	}
 	CObjMgr::Get_Instance()->Update();
 
 	++m_iFrameCount;
 
 	if (CKeyMgr::Get_Instance()->Key_Down('1'))
 	{
+
 		CTileMgr::Get_Instance()->Load_Tile1();
 		CTileMgr::Get_Instance()->Load_Wall1();
 	}
@@ -151,7 +156,30 @@ int CBossStage::Update()
 		CTileMgr::Get_Instance()->Load_Tile2();
 		CTileMgr::Get_Instance()->Load_Wall2();
 	}
+	if (m_bPlayerEntered == false)
+	{
+		if (GET_PLAYER->Get_TileIdx() >= 772 && GET_PLAYER->Get_TileIdx() <= 774)
+			m_bPlayerEntered = true;
+	}
 
+	if (m_bPlayerEnteredCheck == false && m_bPlayerEntered == true)
+	{
+		// Äç ¼Ò¸®
+		CSoundMgr::Get_Instance()->PlaySound(L"boss_zone1_walls.ogg", SOUND_EFFECT2, 0.13f);
+		// ¸÷ Å¸ÀÏ ÀÎµ¦½º ´Ù½Ã È®ÀÎ
+		
+		CTileMgr::Get_Instance()->Load_Tile1();
+		CTileMgr::Get_Instance()->Load_Wall1();
+		static_cast<CCoralRiffBoss*>(CObjMgr::Get_Instance()->Get_FirstMonster())->Set_InstTilePos();
+		static_cast<CCoralRiffBoss*>(CObjMgr::Get_Instance()->Get_FirstMonster())->Set_Phase(1);
+		m_bPlayerEnteredCheck = true;
+	}
+	if (m_bPlayerClearedCheck == false && m_bPlayerCleared == true)
+	{
+		CTileMgr::Get_Instance()->Load_Tile2();
+		CTileMgr::Get_Instance()->Load_Wall2();
+		m_bPlayerClearedCheck = true;
+	}
 
 
 	return 0;

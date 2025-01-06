@@ -11,9 +11,10 @@ private:
 	CObjMgr(const CObjMgr& rhs) = delete;
 	CObj operator =(CObj& rObj) = delete;
 	~CObjMgr();
-
 public:
 	CObj* Get_Player()		{ return m_ObjList[OBJ_PLAYER].front(); }
+	auto& Get_MonsterList()	{ return m_ObjList[OBJ_MONSTER];	}
+	CObj* Get_FirstMonster() { return m_ObjList[OBJ_MONSTER].front(); }
 	CObj* Get_LastMonster() { return m_ObjList[OBJ_MONSTER].back(); }
 	CObj* Get_LastItem()	{ return m_ObjList[OBJ_ITEM].back(); }
 	CObj* Get_LastBar()		{ return m_ObjList[OBJ_UI].back(); }

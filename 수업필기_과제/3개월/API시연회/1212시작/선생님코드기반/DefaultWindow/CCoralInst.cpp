@@ -48,3 +48,9 @@ void CCoralInst::Set_HeadPositionIdx()
 		break;
 	}
 }
+
+void CCoralInst::Set_TilePos()
+{
+	CTileMgr::Get_Instance()->Set_TileObject(m_iTileIdx, TOBJ_ENTITY, this);
+
+}
