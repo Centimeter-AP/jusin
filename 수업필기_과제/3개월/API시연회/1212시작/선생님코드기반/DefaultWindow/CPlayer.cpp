@@ -18,13 +18,15 @@
 #include "CSplash.h"
 #include "CWaterTile.h"
 #include "CDaggerEffect.h"
+#include "CHitRed.h"
 
 
 CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f),
 	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
-	m_pvecTile(nullptr), m_qltskrka(false), m_iGold(0), m_iWaterTileOffset(0), m_bInWater(false)
+	m_pvecTile(nullptr), m_qltskrka(false), m_iGold(0), m_iWaterTileOffset(0), m_bInWater(false),
+	m_bDebugMovable(true), m_bHit(false)
 {
 }
 
@@ -91,6 +93,11 @@ int CPlayer::Update()
 	Jumping();
 	Get_TileX();
 	Get_TileY();
+	if (m_bHit)
+	{
+		CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHitRed>::Create(0));
+		m_bHit = false;
+	}
 
 	if (CKeyMgr::Get_Instance()->Key_Down('Q'))
 	{
@@ -197,6 +204,7 @@ void CPlayer::Render(HDC hDC)
 		wsprintf(szText, L"박자 놓침");
 		TextOut(hDC, int(GET_PLAYER->Get_Info().fX + iScrollX), int(GET_PLAYER->Get_Info().fY + iScrollY), szText, lstrlen(szText));
 	}
+
 }
 
 void CPlayer::Release()
@@ -502,7 +510,7 @@ void CPlayer::Key_Input()
 	{
 		if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))			// 좌측
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)		// 키 입력이 가능한 상태인지 (반박자 앞 ~ 반박자 뒤)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY || m_bDebugMovable)		// 키 입력이 가능한 상태인지 (반박자 앞 ~ 반박자 뒤)
 			{
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);// 플레이어 행동 여부 true
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();		// 가장 앞 노트들 삭제
@@ -551,7 +559,7 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY || m_bDebugMovable)
 			{
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();
@@ -595,7 +603,7 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_UP))
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY || m_bDebugMovable)
 			{
 				m_qltskrka = false;
 				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
@@ -640,7 +648,7 @@ void CPlayer::Key_Input()
 
 		else if (CKeyMgr::Get_Instance()->Key_Down(VK_DOWN))
 		{
-			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY || m_bDebugMovable)
 			{
 				m_qltskrka = false;
 				CBeatMgr::Get_Instance()->Delete_Bar_Act();
@@ -686,6 +694,7 @@ void CPlayer::Key_Input()
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
 		CBeatMgr::Get_Instance()->Plus_BeatCombo();
+		m_bHit = true;
 	}
 
 }

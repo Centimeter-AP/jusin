@@ -238,6 +238,9 @@
     <Filter Include="01. Obj\10. Effect\Particles">
       <UniqueIdentifier>{931a21cd-7c73-481c-9742-a499aafd168a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\09. UI\Cutscene">
+      <UniqueIdentifier>{8f98a3b3-d2a6-49f7-8867-ead8a53f411c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -465,9 +468,6 @@
     <ClInclude Include="CSplash.h">
       <Filter>01. Obj\10. Effect\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="CBossCutscene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CDaggerEffect.h">
       <Filter>01. Obj\10. Effect\Attack\Dagger</Filter>
     </ClInclude>
@@ -476,6 +476,15 @@
     </ClInclude>
     <ClInclude Include="CDummy.h">
       <Filter>01. Obj\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossCutscene.h">
+      <Filter>01. Obj\09. UI\Cutscene</Filter>
+    </ClInclude>
+    <ClInclude Include="CDraw.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CHitRed.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -689,9 +698,6 @@
     <ClCompile Include="CSplash.cpp">
       <Filter>01. Obj\10. Effect\Particles</Filter>
     </ClCompile>
-    <ClCompile Include="CBossCutscene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CDaggerEffect.cpp">
       <Filter>01. Obj\10. Effect\Attack\Dagger</Filter>
     </ClCompile>
@@ -700,6 +706,12 @@
     </ClCompile>
     <ClCompile Include="CDummy.cpp">
       <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossCutscene.cpp">
+      <Filter>01. Obj\09. UI\Cutscene</Filter>
+    </ClCompile>
+    <ClCompile Include="CHitRed.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

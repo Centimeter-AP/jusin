@@ -22,6 +22,7 @@ public:
     bool        Can_Move();
 
     virtual void     Play_HitSound() PURE;
+    void        Attack_Effect();
 
 protected:
     enum MONSTATE { MON_IDLE, MON_AGGRO, MON_ATTACK, MON_END };

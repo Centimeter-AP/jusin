@@ -63,6 +63,7 @@ void CLobby::Initialize()
 	CScrollMgr::Get_Instance()->Set_ScrollX(-430);
 	CScrollMgr::Get_Instance()->Set_ScrollY(330);
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
+	CSoundMgr::Get_Instance()->StopAll();
 	CSoundMgr::Get_Instance()->PlayBGM(L"lobby.ogg", 0.2f);
 
 	// 피타격 테스트용 더미

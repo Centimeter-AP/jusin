@@ -27,4 +27,3 @@ private:
 	bool m_bIsDisappear;
 	int  m_iDisappearTimer;
 };
-

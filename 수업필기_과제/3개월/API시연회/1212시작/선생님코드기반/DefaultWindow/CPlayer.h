@@ -40,6 +40,7 @@ public:
     bool        Get_InWater() { return m_bInWater; }
     void        Set_FullHP() { m_iHP = m_iMaxHP; }
     void        Attack_Effect();
+	void        Set_Hit() { m_bHit = true; }
 
 private:
     void        Key_Input();
@@ -83,8 +84,10 @@ private:
     bool        m_bInWater;
 
     bool        m_qltskrka;
+    bool        m_bDebugMovable;
+	bool    m_bHit;
 
-public:
+
     list<CObj*> m_Itemlist[ITEM_END];
     int         m_iGold;
 

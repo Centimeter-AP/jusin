@@ -156,10 +156,12 @@
     <ClInclude Include="CDaggerEffect.h" />
     <ClInclude Include="CDirtWall.h" />
     <ClInclude Include="CDoor.h" />
+    <ClInclude Include="CDraw.h" />
     <ClInclude Include="CDummy.h" />
     <ClInclude Include="CEffect.h" />
     <ClInclude Include="CGuideBullet.h" />
     <ClInclude Include="CHeartbeat.h" />
+    <ClInclude Include="CHitRed.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CLeftBar.h" />
@@ -240,6 +242,7 @@
     <ClCompile Include="CEffect.cpp" />
     <ClCompile Include="CGuideBullet.cpp" />
     <ClCompile Include="CHeartbeat.cpp" />
+    <ClCompile Include="CHitRed.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CLeftBar.cpp" />

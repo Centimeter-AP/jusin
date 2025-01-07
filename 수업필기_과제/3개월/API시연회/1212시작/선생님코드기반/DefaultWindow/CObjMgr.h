@@ -19,6 +19,7 @@ public:
 	CObj* Get_LastItem()	{ return m_ObjList[OBJ_ITEM].back(); }
 	CObj* Get_LastBar()		{ return m_ObjList[OBJ_UI].back(); }
 	CObj* Get_LastStair()   { return m_ObjList[OBJ_STAIR].back(); }
+	CObj* Get_LastEffect() { return m_ObjList[OBJ_EFFECT].back(); }
 	CObj* Get_Target(OBJID eID, CObj* pDst);
 
 	CObj* Is_Item_Exist(float fx, float fy);

@@ -63,7 +63,6 @@ void CDaggerEffect::Late_Update()
 void CDaggerEffect::Render(HDC hDC)
 {
 	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
-	HDC		hMemDChit = CBmpMgr::Get_Instance()->Find_Image(L"HitParticle");
 
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
@@ -80,6 +79,8 @@ void CDaggerEffect::Render(HDC hDC)
 		(int)m_tInfo.fCX,
 		(int)m_tInfo.fCY,
 		RGB(255, 0, 255));
+
+	HDC		hMemDChit = CBmpMgr::Get_Instance()->Find_Image(L"HitParticle");
 	GdiTransparentBlt(hDC,
 		m_tRect.left + iScrollX,
 		m_tRect.top - 12 + iScrollY,

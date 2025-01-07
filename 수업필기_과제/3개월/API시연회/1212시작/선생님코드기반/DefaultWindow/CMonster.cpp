@@ -10,6 +10,7 @@
 #include "CAbstractFactory.h"
 #include "CSplash.h"
 #include "CWaterTile.h"
+#include "CMonsterEffect.h"
 
 CMonster::CMonster()
 	:m_fTime(0.f), m_fJumpPower(0.f)
@@ -642,11 +643,19 @@ bool CMonster::Can_Move()
 		GET_PLAYER->Set_HP(m_iDamage);
 		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 		CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
+		Attack_Effect();
+		static_cast<CPlayer*>(GET_PLAYER)->Set_Hit();
 		return false;
 	}
 	else
 		return true;
 	return true;
 
+}
+
+void CMonster::Attack_Effect()
+{
+	CObjMgr::Get_Instance()->Add_Object(OBJ_EFFECT, CAbstractFactory<CMonsterEffect>::Create(m_iHeadTileIdx));
+	CObjMgr::Get_Instance()->Get_LastEffect()->Set_Target(this);
 }
 
