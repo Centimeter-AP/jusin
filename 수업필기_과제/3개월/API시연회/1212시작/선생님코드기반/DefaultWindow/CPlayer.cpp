@@ -16,6 +16,8 @@
 #include "CDagger.h"
 #include "CBeatMgr.h"
 #include "CSplash.h"
+#include "CWaterTile.h"
+#include "CDaggerEffect.h"
 
 
 CPlayer::CPlayer()
@@ -93,6 +95,7 @@ int CPlayer::Update()
 	if (CKeyMgr::Get_Instance()->Key_Down('Q'))
 	{
 		CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iTileIdx));
+		CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iTileIdx));
 	}
 	__super::Update_Rect();
 	return OBJ_NOEVENT;
@@ -186,7 +189,7 @@ void CPlayer::Render(HDC hDC)
 	{
 		TCHAR szText[32];
 		wsprintf(szText, L"°¨³ªºø");
-		TextOut(hDC, WINCX / 2 - 20, WINCY - 150, szText, lstrlen(szText));
+		TextOut(hDC, WINCX / 2 - 20, WINCY - 150 - 75, szText, lstrlen(szText));
 	}
 	if (CBeatMgr::Get_Instance()->Get_BeatMissed())
 	{
@@ -479,6 +482,15 @@ void CPlayer::Change_Motion()
 
 }
 
+
+void CPlayer::Attack_Effect()
+{
+	if (static_cast<CWeapon*>(m_Itemlist[ITEM_WEAPON].front())->Get_WeaponType() == CWeapon::DAGGER_TYPE)
+	{
+		//CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CNormalShovel>::Create_Item(false));
+		CObjMgr::Get_Instance()->Add_Object(OBJ_EFFECT, CAbstractFactory<CDaggerEffect>::Create(m_iHeadTileIdx));
+	}
+}
 
 void CPlayer::Key_Input()
 {

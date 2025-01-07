@@ -17,7 +17,7 @@ void CTitaniumShovel::Initialize()
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
     //m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
-
+    m_pTarget = GET_PLAYER;
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/Shovels.bmp", L"Shovels");
     m_eRender = RENDER_EFFECT;
     m_iPower = POWER_TWO;

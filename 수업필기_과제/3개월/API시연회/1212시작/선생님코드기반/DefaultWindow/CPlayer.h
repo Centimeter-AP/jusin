@@ -38,6 +38,8 @@ public:
     }
     void        Set_InWater(bool _isIn) { m_bInWater = _isIn; }
     bool        Get_InWater() { return m_bInWater; }
+    void        Set_FullHP() { m_iHP = m_iMaxHP; }
+    void        Attack_Effect();
 
 private:
     void        Key_Input();

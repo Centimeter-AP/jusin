@@ -313,6 +313,7 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 				dynamic_cast<CCoralInst*>(pTemp[i])->Set_ActState(CCoralInst::IDLE_ACT);
 			if (dynamic_cast<CCoralRiffBoss*>(pTemp[i]) != nullptr)
 				dynamic_cast<CCoralRiffBoss*>(pTemp[i])->Teleport_Hit();
+			static_cast<CPlayer*>(GET_PLAYER)->Attack_Effect();
 			return false;
 			break;
 		case TOBJ_ITEM:

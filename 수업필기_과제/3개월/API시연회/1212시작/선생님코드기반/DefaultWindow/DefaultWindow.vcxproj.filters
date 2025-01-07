@@ -469,7 +469,13 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CDaggerEffect.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>01. Obj\10. Effect\Attack\Dagger</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterEffect.h">
+      <Filter>01. Obj\10. Effect\Attack\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CDummy.h">
+      <Filter>01. Obj\02. Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -687,7 +693,13 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CDaggerEffect.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>01. Obj\10. Effect\Attack\Dagger</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterEffect.cpp">
+      <Filter>01. Obj\10. Effect\Attack\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CDummy.cpp">
+      <Filter>01. Obj\02. Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

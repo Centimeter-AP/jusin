@@ -12,6 +12,7 @@
 #include "CPlayerShovelUI.h"
 #include "CPlayerWeaponUI.h"
 #include "CStair.h"
+#include "CDummy.h"
 
 
 CLobby::CLobby()
@@ -30,9 +31,26 @@ void CLobby::Initialize()
 
 	//CLineMgr::Get_Instance()->Initialize();
 
+	BEATMGR->Empty_Bar();
+	for (int i = OBJ_BEAT; i < OBJ_END; ++i)
+	{
+		CObjMgr::Get_Instance()->Delete_ID((OBJID)i);
+	}
+	CObjMgr::Get_Instance()->Delete_Map_Item();
+	BEATMGR->Lose_BeatCombo();
+
+
 	CTileMgr::Get_Instance()->Load_Tile(STAGE_LOBBY);
 	CTileMgr::Get_Instance()->Load_Wall(STAGE_LOBBY);
-	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(840,337));
+	if (CObjMgr::Get_Instance()->Check_IsPlayerEmpty() == false)
+	{
+		GET_PLAYER->Set_Pos(840, 337);
+		static_cast<CPlayer*>(GET_PLAYER)->Set_PositionCorrect();
+		static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
+		static_cast<CPlayer*>(GET_PLAYER)->Set_FullHP();
+	}
+	else
+		CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create(840,337));
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
@@ -47,7 +65,8 @@ void CLobby::Initialize()
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
 	CSoundMgr::Get_Instance()->PlayBGM(L"lobby.ogg", 0.2f);
 
-	//CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.wav", g_fVolume);
+	// 피타격 테스트용 더미
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CDummy>::Create_Monster(840 - 48, 337 - 48));
 
 }
 

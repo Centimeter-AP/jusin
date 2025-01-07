@@ -3,6 +3,7 @@
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CTileMgr.h"
+#include "CObjMgr.h"
 
 //26
 void CDagger::Initialize()
@@ -21,7 +22,8 @@ void CDagger::Initialize()
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/Dagger.bmp", L"Dagger");
     m_eRender = RENDER_GAMEOBJECT;
     m_eItemType = ITEM_WEAPON;
-
+    m_eWeaponType = DAGGER_TYPE;
+    //m_pTarget = GET_PLAYER;
 }
 
 int CDagger::Update()

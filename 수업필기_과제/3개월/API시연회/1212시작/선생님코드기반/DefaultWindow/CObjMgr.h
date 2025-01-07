@@ -29,6 +29,7 @@ public:
 
 	void Get_Item(CItem* _pItem);
 	bool	Find_ifExist(OBJID eID, CObj* pObj);
+	bool	Check_IsPlayerEmpty() { return m_ObjList[OBJ_PLAYER].empty(); }
 
 public:
 	void		Add_Object(OBJID eID, CObj* pObj);

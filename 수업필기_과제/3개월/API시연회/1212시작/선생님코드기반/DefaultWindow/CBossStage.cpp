@@ -27,6 +27,7 @@
 #include "CCoralBrass.h"
 #include "CKeyMgr.h"
 #include "CWaterTile.h"
+#include "CBossCutscene.h"
 
 CBossStage::CBossStage() : m_bPlayerEntered(false), m_bPlayerCleared(false)
 , m_bPlayerEnteredCheck(false), m_bPlayerClearedCheck(false)
@@ -54,7 +55,6 @@ void CBossStage::Initialize()
 	GET_PLAYER->Set_Pos(408, 1056);
 	static_cast<CPlayer*>(GET_PLAYER)->Set_PositionCorrect();
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
-
 	BEATMGR->Set_BPMBOSS();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
@@ -111,7 +111,10 @@ void CBossStage::Initialize()
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst2Brass.ogg", 0.2f, SOUND_BOSS2);
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst3Violin.ogg", 0.2f, SOUND_BOSS3);
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst4Piano.ogg", 0.2f, SOUND_BOSS4);
+	CSoundMgr::Get_Instance()->StopSound(SOUND_VOCAL);
+	CSoundMgr::Get_Instance()->PlaySound(L"vo_announcer_coralriff.ogg", SOUND_VOCAL, 0.2f);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
+	ADD_OBJ(OBJ_UI, CREATE_IDX(CBossCutscene)(0));
 }
 
 int CBossStage::Update()
@@ -179,9 +182,12 @@ int CBossStage::Update()
 	{
 		CTileMgr::Get_Instance()->Load_Tile2();
 		CTileMgr::Get_Instance()->Load_Wall2();
+		// 408 240 / 263
+
+		CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(408, 264));
+		static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_LOBBY);
 		m_bPlayerClearedCheck = true;
 	}
-
 
 	return 0;
 }
@@ -192,7 +198,6 @@ void CBossStage::Late_Update()
 	CTileMgr::Get_Instance()->Late_Update();
 	CBeatMgr::Get_Instance()->Late_Update();
 }
-
 
 void CBossStage::Render(HDC hDC)
 {

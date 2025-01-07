@@ -3,7 +3,7 @@
 class CWeapon : public CItem
 {
 public:
-	CWeapon() : m_iDamage(0){}
+	CWeapon() : m_iDamage(0), m_eWeaponType(WEAPONTYPE_END){}
 	virtual ~CWeapon(){}
 
 public:
@@ -14,8 +14,14 @@ public:
 	virtual void Release()			PURE;
 
 	int		Get_Damage() { return m_iDamage; }
+
+public:
+	enum WEAPONTYPE { DAGGER_TYPE, LONGSWORD_TYPE, BROADSWORD_TYPE, WEAPONTYPE_END };
+	WEAPONTYPE	Get_WeaponType() { return m_eWeaponType; }
+
 protected:
 	int		m_iDamage;
+	WEAPONTYPE m_eWeaponType;
 	
 };
 

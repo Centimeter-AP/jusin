@@ -28,6 +28,13 @@ int CSplash::Update()
 	if (m_bDead)
 		return OBJ_DEAD;
 
+#ifdef  _DEBUG
+
+    cout << "¹° Å¸ÀÏ : " << m_iTileIdx << endl;
+
+#endif //  _DEBUG
+
+
 	__super::Update_Rect();
 
 	return OBJ_NOEVENT;
@@ -52,7 +59,7 @@ void CSplash::Render(HDC hDC)
 
     GdiTransparentBlt(hDC,
         m_tRect.left + iScrollX,
-        m_tRect.bottom + iScrollY,
+        m_tRect.top + iScrollY,
         (int)m_tInfo.fCX,
         (int)m_tInfo.fCY,
         hMemDC,
