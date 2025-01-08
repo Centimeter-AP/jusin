@@ -12,7 +12,7 @@ void CNormalShovel::Initialize()
     m_pImgKey = L"Shovels";
     m_fSpeed = 2.f;
     m_iImgPosX = 0;
-
+	m_iPrice = 100;
 
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;

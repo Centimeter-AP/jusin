@@ -44,8 +44,8 @@ void CCoralDrum::Initialize()
     Get_TileX();
     Get_TileY();
     m_eRender = RENDER_GAMEOBJECT;
-    m_iMaxHP = 2;
-    m_iHP = 2;
+    m_iMaxHP = 1;
+    m_iHP = 1;
     m_iDamage = 3;
     m_iOrigTileIdx = m_iTileIdx;
 

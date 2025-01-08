@@ -241,6 +241,15 @@
     <Filter Include="01. Obj\09. UI\Cutscene">
       <UniqueIdentifier>{8f98a3b3-d2a6-49f7-8867-ead8a53f411c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\08. Item\02. Healing">
+      <UniqueIdentifier>{fc4e16a0-4b83-4f10-95bd-956640a7483c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item\02. Healing\Apple">
+      <UniqueIdentifier>{7a433b3a-cb44-467b-adfe-0045514f4473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item\02. Healing\Cheese">
+      <UniqueIdentifier>{1a13228b-9dd0-4231-89f6-62129a6d86d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -486,6 +495,15 @@
     <ClInclude Include="CHitRed.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CHealing.h">
+      <Filter>01. Obj\08. Item\02. Healing</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissInputText.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CMerchant.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -711,6 +729,15 @@
       <Filter>01. Obj\09. UI\Cutscene</Filter>
     </ClCompile>
     <ClCompile Include="CHitRed.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CHealing.cpp">
+      <Filter>01. Obj\08. Item\02. Healing</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissInputText.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CMerchant.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

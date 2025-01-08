@@ -332,60 +332,185 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 
 			ITEMLIST	eItemType = static_cast<CItem*>(pTemp[i])->Get_ItemType();
 			list<CObj*>& playerItemslot = static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(static_cast<CItem*>(pTemp[i])->Get_ItemType());
-
-			switch (eItemType)
+			if (static_cast<CItem*>(pTemp[i])->Get_IsSelling() == true)
 			{
-			case ITEM_WEAPON:
-				if (!playerItemslot.empty())
+				if (static_cast<CPlayer*>(GET_PLAYER)->Get_Money() >= static_cast<CItem*>(pTemp[i])->Get_Price())
 				{
-					static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
-					playerItemslot.back()->Set_TileIdx(_tileIdx);
-					playerItemslot.back()->Initialize();
-					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
-					pTemp[i]->Set_TileIdx(0);
-					//_pItem->Set_Pos(0, 0);
-					swap(playerItemslot.back(), pTemp[i]);
+					static_cast<CPlayer*>(GET_PLAYER)->Set_Money(-static_cast<CItem*>(pTemp[i])->Get_Price());
+					static_cast<CItem*>(pTemp[i])->Set_IsSelling(false);
 
-					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
-					CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+					switch (eItemType)
+					{
+					case ITEM_WEAPON:
+						if (!playerItemslot.empty())
+						{
+							static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+							playerItemslot.back()->Set_TileIdx(_tileIdx);
+							playerItemslot.back()->Initialize();
+							dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+							pTemp[i]->Set_TileIdx(0);
+							//_pItem->Set_Pos(0, 0);
+							swap(playerItemslot.back(), pTemp[i]);
+
+							CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+							CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+						}
+						else
+						{
+							playerItemslot.push_back(pTemp[i]);
+							dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+						}
+						break;
+					case ITEM_SHOVEL:
+						if (!playerItemslot.empty())
+						{
+							static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+							playerItemslot.back()->Set_TileIdx(_tileIdx);
+							playerItemslot.back()->Initialize();
+							dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+							pTemp[i]->Set_TileIdx(0);
+							//_pItem->Set_Pos(0, 0);
+							swap(playerItemslot.back(), pTemp[i]);
+
+							CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+							CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+						}
+						else
+						{
+							playerItemslot.push_back(pTemp[i]);
+							dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+						}
+						break;
+					case ITEM_ARMOR:
+						break;
+					case ITEM_HEAL:
+						break;
+					case ITEM_BOMB:
+						break;
+					case ITEM_END:
+						break;
+					default:
+						break;
+					}
 				}
 				else
 				{
-					playerItemslot.push_back(pTemp[i]);
-					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
-				}
-				break;
-			case ITEM_SHOVEL:
-				if (!playerItemslot.empty())
-				{
-					static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
-					playerItemslot.back()->Set_TileIdx(_tileIdx);
-					playerItemslot.back()->Initialize();
-					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
-					pTemp[i]->Set_TileIdx(0);
-					//_pItem->Set_Pos(0, 0);
-					swap(playerItemslot.back(), pTemp[i]);
-
 					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
-					CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+					CSoundMgr::Get_Instance()->PlaySound(L"sfx_error.wav", SOUND_EFFECT, 0.8f);
+					return false;
+					// µ·¾ø¾î
 				}
-				else
-				{
-					playerItemslot.push_back(pTemp[i]);
-					dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
-				}
-				break;
-			case ITEM_ARMOR:
-				break;
-			case ITEM_HEAL:
-				break;
-			case ITEM_BOMB:
-				break;
-			case ITEM_END:
-				break;
-			default:
-				break;
 			}
+			else
+			{
+				switch (eItemType)
+				{
+				case ITEM_WEAPON:
+					if (!playerItemslot.empty())
+					{
+						static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+						playerItemslot.back()->Set_TileIdx(_tileIdx);
+						playerItemslot.back()->Initialize();
+						dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+						pTemp[i]->Set_TileIdx(0);
+						//_pItem->Set_Pos(0, 0);
+						swap(playerItemslot.back(), pTemp[i]);
+
+						CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+						CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+					}
+					else
+					{
+						playerItemslot.push_back(pTemp[i]);
+						dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+					}
+					break;
+				case ITEM_SHOVEL:
+					if (!playerItemslot.empty())
+					{
+						static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+						playerItemslot.back()->Set_TileIdx(_tileIdx);
+						playerItemslot.back()->Initialize();
+						dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+						pTemp[i]->Set_TileIdx(0);
+						//_pItem->Set_Pos(0, 0);
+						swap(playerItemslot.back(), pTemp[i]);
+
+						CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+						CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+					}
+					else
+					{
+						playerItemslot.push_back(pTemp[i]);
+						dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+					}
+					break;
+				case ITEM_ARMOR:
+					break;
+				case ITEM_HEAL:
+					break;
+				case ITEM_BOMB:
+					break;
+				case ITEM_END:
+					break;
+				default:
+					break;
+				}
+			}
+			
+			//switch (eItemType)
+			//{
+			//case ITEM_WEAPON:
+			//	if (!playerItemslot.empty())
+			//	{
+			//		static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+			//		playerItemslot.back()->Set_TileIdx(_tileIdx);
+			//		playerItemslot.back()->Initialize();
+			//		dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+			//		pTemp[i]->Set_TileIdx(0);
+			//		//_pItem->Set_Pos(0, 0);
+			//		swap(playerItemslot.back(), pTemp[i]);
+
+			//		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			//		CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+			//	}
+			//	else
+			//	{
+			//		playerItemslot.push_back(pTemp[i]);
+			//		dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+			//	}
+			//	break;
+			//case ITEM_SHOVEL:
+			//	if (!playerItemslot.empty())
+			//	{
+			//		static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+			//		playerItemslot.back()->Set_TileIdx(_tileIdx);
+			//		playerItemslot.back()->Initialize();
+			//		dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+			//		pTemp[i]->Set_TileIdx(0);
+			//		//_pItem->Set_Pos(0, 0);
+			//		swap(playerItemslot.back(), pTemp[i]);
+
+			//		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			//		CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+			//	}
+			//	else
+			//	{
+			//		playerItemslot.push_back(pTemp[i]);
+			//		dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+			//	}
+			//	break;
+			//case ITEM_ARMOR:
+			//	break;
+			//case ITEM_HEAL:
+			//	break;
+			//case ITEM_BOMB:
+			//	break;
+			//case ITEM_END:
+			//	break;
+			//default:
+			//	break;
+			//}
 		}
 			break;
 		case TOBJ_WALL:

@@ -25,8 +25,8 @@ CPlayer::CPlayer()
 	: m_fTime(0.f), m_dwTempTick(0), m_fJumpX(0.f), m_fJumpY(0.f), m_fJumpPower(0.f),
 	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
-	m_pvecTile(nullptr), m_qltskrka(false), m_iGold(0), m_iWaterTileOffset(0), m_bInWater(false),
-	m_bDebugMovable(true), m_bHit(false)
+	m_pvecTile(nullptr), m_qltskrka(false), m_iMoney(0), m_iWaterTileOffset(0), m_bInWater(false),
+	m_bDebugMovable(true), m_bHit(false), m_ifoo(0)
 {
 }
 
@@ -54,6 +54,8 @@ void CPlayer::Initialize()
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_armor_left_.bmp", L"Player_Armor_L");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_armor_right.bmp", L"Player_Armor_R");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Character/Player_Shadow.bmp", L"Player_Shadow");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Text/game_beatskipped_1.bmp", L"beatskipped1");
+	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Text/game_beatskipped.bmp", L"beatskipped");
 
 	m_pImgKey = L"Player_Head_L";
 	m_eCurState = IDLE;
@@ -120,6 +122,7 @@ void CPlayer::Render(HDC hDC)
 	HDC		hMemDChead = CBmpMgr::Get_Instance()->Find_Image(L"Player_Head_R");
 	HDC		hMemDCarmor = CBmpMgr::Get_Instance()->Find_Image(L"Player_Armor_R");
 	HDC		hMemDCshadow = CBmpMgr::Get_Instance()->Find_Image(L"Player_Shadow");	// 그림자 용 xy 좌표 따로?
+	HDC		hMemDCskiptext = CBmpMgr::Get_Instance()->Find_Image(L"beatskipped1");	// 그림자 용 xy 좌표 따로?
 
 	if (m_ePrevDir == DIR_LEFT)
 	{
@@ -179,7 +182,6 @@ void CPlayer::Render(HDC hDC)
 		PLAYERCY - m_iWaterTileOffset,			// 여기도 줄임
 		RGB(255, 0, 255));
 
-
 	GdiTransparentBlt(hDC,							// 머리
 		m_tRect.left + iScrollX,			
 		m_tRect.top + iScrollY + m_iWaterTileOffset,
@@ -192,17 +194,28 @@ void CPlayer::Render(HDC hDC)
 		PLAYERCY - m_iWaterTileOffset,
 		RGB(255, 0, 255));					
 
-	if (m_qltskrka == true)
-	{
-		TCHAR szText[32];
-		wsprintf(szText, L"감나빗");
-		TextOut(hDC, WINCX / 2 - 20, WINCY - 150 - 75, szText, lstrlen(szText));
-	}
+	//if (m_qltskrka == true)
+	//{
+	//	TCHAR szText[32];
+	//	wsprintf(szText, L"감나빗");
+	//	TextOut(hDC, WINCX / 2 - 20, WINCY - 150 - 75, szText, lstrlen(szText));
+	//}
+
+
+
 	if (CBeatMgr::Get_Instance()->Get_BeatMissed())
 	{
-		TCHAR szText[32];
-		wsprintf(szText, L"박자 놓침");
-		TextOut(hDC, int(GET_PLAYER->Get_Info().fX + iScrollX), int(GET_PLAYER->Get_Info().fY + iScrollY), szText, lstrlen(szText));
+		GdiTransparentBlt(hDC,
+			m_tRect.left + iScrollX - 14,
+			m_tRect.top + iScrollY - 20,
+			77,
+			15,
+			hMemDCskiptext,
+			0,
+			0,
+			77,
+			15,
+			RGB(255, 0, 255));
 	}
 
 }
@@ -544,6 +557,7 @@ void CPlayer::Key_Input()
 			else
 			{
 				CBeatMgr::Get_Instance()->Lose_BeatCombo();
+				BEATMGR->Set_InputBeatMissed(true);
 				m_qltskrka = true;		// !!감나빗
 			}
 			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
@@ -588,6 +602,7 @@ void CPlayer::Key_Input()
 			else
 			{
 				CBeatMgr::Get_Instance()->Lose_BeatCombo();
+				BEATMGR->Set_InputBeatMissed(true);
 				m_qltskrka = true;
 			}
 			if (CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY)
@@ -632,6 +647,7 @@ void CPlayer::Key_Input()
 			else
 			{
 				CBeatMgr::Get_Instance()->Lose_BeatCombo();
+				BEATMGR->Set_InputBeatMissed(true);
 				m_qltskrka = true;
 			}
 
@@ -676,6 +692,7 @@ void CPlayer::Key_Input()
 			else
 			{
 				CBeatMgr::Get_Instance()->Lose_BeatCombo();
+				BEATMGR->Set_InputBeatMissed(true);
 				m_qltskrka = true;
 			}
 
@@ -693,8 +710,9 @@ void CPlayer::Key_Input()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		CBeatMgr::Get_Instance()->Plus_BeatCombo();
-		m_bHit = true;
+		//CBeatMgr::Get_Instance()->Plus_BeatCombo();
+		m_iMoney += 100; 
+		//m_bHit = true;
 	}
 
 }

@@ -22,5 +22,6 @@ private:
 	chrono::system_clock::time_point m_tTimerRightTime;
 	chrono::duration<double> m_llTimeChecker;
 
+
 };
 

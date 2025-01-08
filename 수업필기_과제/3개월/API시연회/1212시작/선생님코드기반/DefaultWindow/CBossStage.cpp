@@ -105,7 +105,7 @@ void CBossStage::Initialize()
 	//CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSkeleton>::Create_Monster(216, 384));
 	CScrollMgr::Get_Instance()->Set_Scroll(0, -523);
 
-	CSoundMgr::Get_Instance()->StopSound(SOUND_BGM);
+	CSoundMgr::Get_Instance()->StopAll();
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst0Bass.ogg", 0.2f, SOUND_BOSS0);
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst1Drum.ogg", 0.2f, SOUND_BOSS1);
 	CSoundMgr::Get_Instance()->PlayBGM(L"boss_4_inst2Brass.ogg", 0.2f, SOUND_BOSS2);

@@ -131,6 +131,62 @@ void CSoundMgr::PlaySoundFaster(CHANNELID eID, float fFrequency)
 
 }
 
+bool CSoundMgr::IsChannelPeakLevelAboveThreshold(CHANNELID eID)
+{
+    if (eID < 0 || eID >= SOUND_END)
+        return false;
+
+    FMOD_DSP* pDSP = NULL;
+    FMOD_RESULT result = FMOD_Channel_GetDSP(m_pChannelArr[eID], FMOD_CHANNELCONTROL_DSP_HEAD, &pDSP);
+    if (result != FMOD_OK || !pDSP)
+        return false;
+
+    // DSP 메터링 활성화
+    result = FMOD_DSP_SetMeteringEnabled(pDSP, true, true);
+    if (result != FMOD_OK)
+        return false;
+
+    // FMOD 시스템 업데이트
+    FMOD_System_Update(m_pSystem);
+
+	FMOD_DSP_METERING_INFO meteringInfo{ 0 };
+	FMOD_DSP_METERING_INFO inputMeteringInfo{ 0 };
+    result = FMOD_DSP_GetMeteringInfo(pDSP, &inputMeteringInfo, &meteringInfo);
+    if (result != FMOD_OK)
+        return false;
+	FMOD_DEBUG_FLAGS flags = FMOD_DEBUG_LEVEL_ERROR | FMOD_DEBUG_LEVEL_WARNING | FMOD_DEBUG_LEVEL_LOG;
+	result = FMOD_Debug_Initialize(flags, FMOD_DEBUG_MODE_TTY, NULL, nullptr);
+    // 메터링 정보 확인
+    for (int i = 0; i < meteringInfo.numchannels; ++i)
+    {	
+		int temp = 20 * log(meteringInfo.peaklevel[i]);
+        if (20 * log(meteringInfo.peaklevel[i]) > -50)
+            return true;
+    }
+
+    return false;
+}
+
+//{
+//	if (eID < 0 || eID >= SOUND_END)
+//		return false;
+//
+//	FMOD_DSP* pDSP = NULL;
+//	FMOD_RESULT result = FMOD_Channel_GetDSP(m_pChannelArr[eID], FMOD_CHANNELCONTROL_DSP_HEAD, &pDSP);
+//	if (!pDSP)
+//		return false;
+//
+//	FMOD_DSP_METERING_INFO meteringInfo;
+//	FMOD_DSP_METERING_INFO inputmeteringInfo;
+//	FMOD_DSP_SetMeteringEnabled(pDSP, true, true);
+//	FMOD_DSP_GetMeteringInfo(pDSP, &inputmeteringInfo, &meteringInfo);
+//
+//	if (meteringInfo.peaklevel[0] > -20)
+//		return true;
+//
+//	return false;
+//}
+
 void CSoundMgr::LoadSoundFile()
 {
 	// _finddata_t : <io.h>에서 제공하며 파일 정보를 저장하는 구조체

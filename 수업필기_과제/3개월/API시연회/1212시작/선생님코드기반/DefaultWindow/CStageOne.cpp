@@ -20,6 +20,7 @@
 #include "CTauren.h"
 #include "CBlueSlime.h"
 #include "CStair.h"
+#include "CMerchant.h"
 
 CStageOne::CStageOne() :m_pBoss(nullptr)
 {
@@ -46,8 +47,13 @@ void CStageOne::Initialize()
 	GET_PLAYER->Set_Pos(300, 300);
 	static_cast<CPlayer*>(GET_PLAYER)->Set_PositionCorrect();
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 404, 385));
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 452, 385));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 1176, 288));
+	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 1224, 288));
+	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 1272, 288));
+	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 452, 385));
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
@@ -69,10 +75,14 @@ void CStageOne::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CBlueSlime>::Create_Monster(1320, 768));
 	//CObjMgr::Get_Instance()->Get_LastMonster()->Set_Target(CObjMgr::Get_Instance()->Get_Player());
 	CScrollMgr::Get_Instance()->Set_Scroll(0, 0);
-
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMerchant>::Create(1224, 144));
 	BEATMGR->Set_BPMSTAGE1();
 	CSoundMgr::Get_Instance()->StopSound(SOUND_BGM);
-	CSoundMgr::Get_Instance()->PlayBGM(L"BGM_1-1.ogg", 0.2f);
+	CSoundMgr::Get_Instance()->PlayBGM(L"zone1_1_shopkeeper.ogg", 0.2f ,SOUND_MERCHANT);
+	
+	TCHAR szText[32];
+	wsprintf(szText, L"zone1_1_%d.ogg", rand()%9);
+	CSoundMgr::Get_Instance()->PlayBGM(szText, 0.2f);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
 	//CObjMgr::Get_Instance()->
 	

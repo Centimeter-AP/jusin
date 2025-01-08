@@ -24,7 +24,9 @@ public:
 	float		Get_BeatJudgementPx() { return m_fBeatJudgementPx; }
 	bool		Get_ObjectAbleToMove() { return m_bObjectAbleToMove; }
 	int			Get_BeatCombo() { return m_iBeatCombo; }
+	bool		Get_InputBeatMissed() { return m_bInputBeatMissed; }
 
+	void		Set_InputBeatMissed(bool _bMiss) { m_bInputBeatMissed = _bMiss; }
 	void		Set_BeatCombo(int _Combo) { m_iBeatCombo = _Combo; }
 	void		Set_ObjectAbleToMove(bool _Able) { m_bObjectAbleToMove = _Able; }
 	void		Set_PlayerActed(bool _bAct) { m_bIsPlayerActed = _bAct; }
@@ -89,4 +91,5 @@ private:
 	float		m_fBeatJudgementPx;
 
 	int			m_iBeatCombo;
+	bool		m_bInputBeatMissed;
 };

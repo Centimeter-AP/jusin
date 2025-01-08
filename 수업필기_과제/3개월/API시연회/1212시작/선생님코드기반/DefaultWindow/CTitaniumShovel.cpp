@@ -13,7 +13,7 @@ void CTitaniumShovel::Initialize()
     m_fSpeed = 2.f;
     m_iImgPosX = 48;
 
-
+    m_iPrice = 200;
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
     //m_iTileIdx = ((int)m_tInfo.fY / TILECY) * TILEX + ((int)m_tInfo.fX / TILECX);
@@ -87,7 +87,10 @@ void CTitaniumShovel::Render(HDC hDC)
 
     int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
     int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
-
+    if (m_bIsSelling)
+    {
+        Draw_Price(hDC);
+    }
     if (m_bOnMap)
     {
         if (m_bIsPlayerOnTile == false)

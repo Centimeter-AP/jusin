@@ -27,7 +27,9 @@ public:
     CObj*        Get_CurShovel() { return m_Itemlist[ITEM_SHOVEL].front(); }
     CObj*        Get_CurWeapon() { return m_Itemlist[ITEM_WEAPON].front(); }
     list<CObj*>& Get_ItemSlot(int _iItemlist) { return m_Itemlist[_iItemlist]; }
+	int          Get_Money() { return m_iMoney; }
 
+	void         Set_Money(int _iMoney) { m_iMoney += _iMoney; }
     void         Set_FirstTileIdx() { m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx(); }
     void         Set_PositionCorrect() {
         m_pvecTile = CTileMgr::Get_Instance()->Get_TileVec();
@@ -36,6 +38,10 @@ public:
         m_tInfo.fY = (*m_pvecTile)[m_iTileIdx]->Get_Info().fY - 24.f;
         m_fShadowY = m_tInfo.fY - (m_tInfo.fCY * 0.5f) + 4.f;
     }
+	void        Set_Armor(int _iArmor) { m_iArmor = _iArmor; }
+	int     Get_Armor() { return m_iArmor; }
+	void        Set_foo(int _foo) { m_ifoo = _foo; }    
+	int     Get_foo() { return m_ifoo; }
     void        Set_InWater(bool _isIn) { m_bInWater = _isIn; }
     bool        Get_InWater() { return m_bInWater; }
     void        Set_FullHP() { m_iHP = m_iMaxHP; }
@@ -89,7 +95,9 @@ private:
 
 
     list<CObj*> m_Itemlist[ITEM_END];
-    int         m_iGold;
+    int         m_iMoney;
+    int         m_ifoo;
+    int         m_iArmor;
 
 };
 
