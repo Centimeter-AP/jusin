@@ -4,7 +4,7 @@ class CPlayerMoney :
     public CObj
 {
 public:
-    CPlayerMoney() {}
+    CPlayerMoney():m_iMoney(0) {}
     virtual ~CPlayerMoney() {}
 
 public:
@@ -13,6 +13,7 @@ public:
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
-
+private:
+	int m_iMoney;
 };
 

@@ -10,5 +10,6 @@ public:
     virtual void Render(HDC hDC)    PURE;
     virtual void Release()          PURE;
 public:
+	virtual void Use_Item()         PURE;
 };
 

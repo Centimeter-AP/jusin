@@ -2,6 +2,7 @@
 #include "CMissInputText.h"
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
+#include "CSoundMgr.h"
 
 void CMissInputText::Initialize()
 {
@@ -14,7 +15,8 @@ void CMissInputText::Initialize()
     m_fSpeed = 1.f;
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Text/TEMP_missed.bmp", L"InputMiss");
-
+	CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT2);
+	CSoundMgr::Get_Instance()->PlaySound(L"sfx_missedbeat.ogg", SOUND_EFFECT2, 0.9f);
     m_eRender = RENDER_LETTERBOX;
 }
 

@@ -34,6 +34,7 @@ public:
     void        Find_TileIdx_OnMap();
     void        Find_Player_OnSameTile();
     void        Draw_Price(HDC hDC);
+	void        Play_PurchaseSound();
 
 protected:
     int         m_iAnimationOffsetY;

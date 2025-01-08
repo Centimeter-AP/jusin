@@ -4,6 +4,7 @@
 #include "CScrollMgr.h"
 #include "CSceneMgr.h"
 #include "CObjMgr.h"
+#include "CSoundMgr.h"
 
 void CStair::Initialize()
 {
@@ -26,12 +27,20 @@ int CStair::Update()
 			Interact_Stair();
 			return OBJ_NEXTSCENE;
 		}
-		else
+	}
+	if (static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx() == m_iTileIdx)
+	{
+		if (m_bIsPlayerOnTile == false)
 		{
-			// 사운드출력, 사운드한번만출력할 bool변수 추가
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+			CSoundMgr::Get_Instance()->PlaySound(L"sfx_error.wav", SOUND_EFFECT, 0.8f);
+			m_bIsPlayerOnTile = true;
 		}
 	}
-
+	else
+	{
+		m_bIsPlayerOnTile = false;
+	}
 	__super::Update_Rect();
 	//m_iIsClosed = 1;
     return OBJ_NOEVENT;
@@ -39,6 +48,7 @@ int CStair::Update()
 
 void CStair::Late_Update()
 {
+
 }
 
 void CStair::Render(HDC hDC)

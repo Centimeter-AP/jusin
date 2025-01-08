@@ -7,7 +7,7 @@
 
 void CPlayerHP::Initialize()
 {
-    m_tInfo = { (float)WINCX - 50.f, 125.f, 48.f, 44.f };
+    m_tInfo = { (float)WINCX - 150.f, 125.f, 48.f, 44.f };
     //m_pImgKey = L"Heart_Full";
     m_iHP = CObjMgr::Get_Instance()->Get_Player()->Get_HP();
     m_iMaxHP = CObjMgr::Get_Instance()->Get_Player()->Get_MaxHP();

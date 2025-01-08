@@ -27,7 +27,7 @@ public:
 
 	void		Set_Direction(DIRECTION eDir) { m_eDir = eDir; }
 	void		Set_Dead() { m_bDead = true; }
-	void		Set_HP(int	_iDmg) { m_iHP -= _iDmg; }
+	void		Set_HP(int	_iDmg) { m_iHP -= _iDmg; if (m_iHP < 0) m_iHP = 0; if (m_iHP > m_iMaxHP) m_iHP = m_iMaxHP; }
 	void		Set_Angle(float _fAngle) { m_fAngle = _fAngle; }
 
 	void		Set_Target(CObj* pTarget) { m_pTarget = pTarget; }

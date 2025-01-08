@@ -247,8 +247,14 @@
     <Filter Include="01. Obj\08. Item\02. Healing\Apple">
       <UniqueIdentifier>{7a433b3a-cb44-467b-adfe-0045514f4473}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\08. Item\02. Healing\Cheese">
+    <Filter Include="01. Obj\08. Item\02. Healing\MagicCheese">
       <UniqueIdentifier>{1a13228b-9dd0-4231-89f6-62129a6d86d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item\03. Armor">
+      <UniqueIdentifier>{475d18fa-fcb0-43b2-8ae4-9addc9c59517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\08. Item\04. Money">
+      <UniqueIdentifier>{fbf62ec6-5b7c-41fa-8fd3-a7df6741f91d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +356,6 @@
     </ClInclude>
     <ClInclude Include="CTileMgr.h">
       <Filter>03. Design\TileMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="CAnimation.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CBeatMgr.h">
       <Filter>03. Design\BeatMgr</Filter>
@@ -498,11 +501,26 @@
     <ClInclude Include="CHealing.h">
       <Filter>01. Obj\08. Item\02. Healing</Filter>
     </ClInclude>
-    <ClInclude Include="CMissInputText.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CMerchant.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CApple.h">
+      <Filter>01. Obj\08. Item\02. Healing\Apple</Filter>
+    </ClInclude>
+    <ClInclude Include="CArmor.h">
+      <Filter>01. Obj\08. Item\03. Armor</Filter>
+    </ClInclude>
+    <ClInclude Include="CDiamond.h">
+      <Filter>01. Obj\08. Item\04. Money</Filter>
+    </ClInclude>
+    <ClInclude Include="CGold.h">
+      <Filter>01. Obj\08. Item\04. Money</Filter>
+    </ClInclude>
+    <ClInclude Include="CMagicCheese.h">
+      <Filter>01. Obj\08. Item\02. Healing\MagicCheese</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissInputText.h">
+      <Filter>01. Obj\09. UI\BeatUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -589,9 +607,6 @@
     </ClCompile>
     <ClCompile Include="CTileMgr.cpp">
       <Filter>03. Design\TileMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="CAnimation.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CBeatMgr.cpp">
       <Filter>03. Design\BeatMgr</Filter>
@@ -734,11 +749,26 @@
     <ClCompile Include="CHealing.cpp">
       <Filter>01. Obj\08. Item\02. Healing</Filter>
     </ClCompile>
-    <ClCompile Include="CMissInputText.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CMerchant.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CMagicCheese.cpp">
+      <Filter>01. Obj\08. Item\02. Healing\MagicCheese</Filter>
+    </ClCompile>
+    <ClCompile Include="CApple.cpp">
+      <Filter>01. Obj\08. Item\02. Healing\Apple</Filter>
+    </ClCompile>
+    <ClCompile Include="CArmor.cpp">
+      <Filter>01. Obj\08. Item\03. Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="CDiamond.cpp">
+      <Filter>01. Obj\08. Item\04. Money</Filter>
+    </ClCompile>
+    <ClCompile Include="CGold.cpp">
+      <Filter>01. Obj\08. Item\04. Money</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissInputText.cpp">
+      <Filter>01. Obj\09. UI\BeatUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

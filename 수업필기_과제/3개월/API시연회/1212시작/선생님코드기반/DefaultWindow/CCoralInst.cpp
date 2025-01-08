@@ -12,7 +12,7 @@
 void CCoralInst::Play_HitSound()
 {
 	CSoundMgr::Get_Instance()->StopSound(SOUND_MONHIT1);
-	CSoundMgr::Get_Instance()->PlaySound(L"en_tentacle_hit.ogg", SOUND_MONHIT1, 0.2f);
+	CSoundMgr::Get_Instance()->PlaySound(L"en_tentacle_hit.ogg", SOUND_MONHIT1, 0.4f);
 }
 
 void CCoralInst::Goto_Player(int _Pos)

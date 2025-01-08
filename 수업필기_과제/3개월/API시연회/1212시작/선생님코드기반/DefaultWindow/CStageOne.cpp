@@ -21,6 +21,8 @@
 #include "CBlueSlime.h"
 #include "CStair.h"
 #include "CMerchant.h"
+#include "CApple.h"
+#include "CPlayerMoney.h"
 
 CStageOne::CStageOne() :m_pBoss(nullptr)
 {
@@ -49,7 +51,7 @@ void CStageOne::Initialize()
 	static_cast<CPlayer*>(GET_PLAYER)->Set_FirstTileIdx();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 1176, 288));
 	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 1224, 288));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CApple>::Create_Item(true, 1224, 288));
 	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 1272, 288));
 	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
@@ -57,6 +59,7 @@ void CStageOne::Initialize()
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerMoney>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(1320, 934));
@@ -81,8 +84,8 @@ void CStageOne::Initialize()
 	CSoundMgr::Get_Instance()->PlayBGM(L"zone1_1_shopkeeper.ogg", 0.2f ,SOUND_MERCHANT);
 	
 	TCHAR szText[32];
-	wsprintf(szText, L"zone1_1_%d.ogg", rand()%9);
-	CSoundMgr::Get_Instance()->PlayBGM(szText, 0.2f);
+	wsprintf(szText, L"zone1_1_%d.ogg", rand()%2);
+	CSoundMgr::Get_Instance()->PlayBGM(szText, 0.17f);
 	CBeatMgr::Get_Instance()->Set_MusicStart();
 	//CObjMgr::Get_Instance()->
 	

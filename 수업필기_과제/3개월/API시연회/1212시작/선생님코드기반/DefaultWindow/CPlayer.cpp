@@ -19,6 +19,7 @@
 #include "CWaterTile.h"
 #include "CDaggerEffect.h"
 #include "CHitRed.h"
+#include "CHealing.h"
 
 
 CPlayer::CPlayer()
@@ -26,7 +27,7 @@ CPlayer::CPlayer()
 	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
 	m_pvecTile(nullptr), m_qltskrka(false), m_iMoney(0), m_iWaterTileOffset(0), m_bInWater(false),
-	m_bDebugMovable(true), m_bHit(false), m_ifoo(0)
+	m_bDebugMovable(true), m_bHit(false)
 {
 }
 
@@ -101,11 +102,15 @@ int CPlayer::Update()
 		m_bHit = false;
 	}
 
-	if (CKeyMgr::Get_Instance()->Key_Down('Q'))
-	{
-		CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iTileIdx));
-		CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iTileIdx));
-	}
+	//if (CKeyMgr::Get_Instance()->Key_Down('Q'))
+	//{
+	//	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CSplash>::Create(m_iTileIdx));
+	//	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iTileIdx));
+	//}
+
+	//m_tFrame.iMotion = m_Itemlist[ITEM_ARMOR].front()->Get_ArmorType();
+
+
 	__super::Update_Rect();
 	return OBJ_NOEVENT;
 }
@@ -708,11 +713,33 @@ void CPlayer::Key_Input()
 		//m_bBeatCorrect = false;
 
 	}
+	if (CKeyMgr::Get_Instance()->Key_Down('E'))
+	{
+		if (m_Itemlist[ITEM_HEAL].empty() == false)
+		{
+			if (BEATMGR->Get_AbleBeatInterval() == true || CSceneMgr::Get_Instance()->Get_CurSceneID() == SC_LOBBY || m_bDebugMovable)
+			{
+				static_cast<CHealing*>(m_Itemlist[ITEM_HEAL].front())->Use_Item();
+				m_Itemlist[ITEM_HEAL].pop_front();
+				m_qltskrka = false;
+				CBeatMgr::Get_Instance()->Delete_Bar_Act();
+				CBeatMgr::Get_Instance()->Set_PlayerActed(true);
+				CBeatMgr::Get_Instance()->Set_ObjectAbleToMove(true);
+			}
+		}
+		else
+		{
+			CBeatMgr::Get_Instance()->Lose_BeatCombo();
+			BEATMGR->Set_InputBeatMissed(true);
+			m_qltskrka = true;
+		}
+	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
 		//CBeatMgr::Get_Instance()->Plus_BeatCombo();
-		m_iMoney += 100; 
+ 		m_iMoney += 100; 
 		//m_bHit = true;
+		m_bDebugMovable = !m_bDebugMovable;
 	}
 
 }

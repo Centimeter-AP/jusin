@@ -53,8 +53,9 @@ int CTauren::Update()
     if (m_bDead || m_iHP == 0)
     {
         CBeatMgr::Get_Instance()->Plus_BeatCombo();
+        CSoundMgr::Get_Instance()->StopSound(SOUND_MONHIT1);
         CSoundMgr::Get_Instance()->StopSound(SOUND_MONDEATH1);
-        CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_hit_01.wav", SOUND_MONDEATH1, 0.2f);
+        CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_death.wav", SOUND_MONDEATH1, 0.3f);
         static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_IsClosed(false);
         return OBJ_DEAD;
     }
@@ -63,139 +64,143 @@ int CTauren::Update()
         m_ePrevDir = DIR_LEFT;
     else if (m_eDir == DIR_RIGHT)
         m_ePrevDir = DIR_RIGHT;
-
-    if (BEATMGR->Get_ObjectAbleToMove() == true)
+    if (m_bPlayerFound)
     {
-        if (m_eCurState == FAINT_ACT && m_iBumped < 2) // 3턴 이동 x 2턴 faint모션 1턴 일어나기
+        if (BEATMGR->Get_ObjectAbleToMove() == true)
         {
-            ++m_iBumped;
-            if (m_iBumped == 2)
+            if (m_eCurState == FAINT_ACT && m_iBumped < 2) // 3턴 이동 x 2턴 faint모션 1턴 일어나기
             {
-                m_eCurState = IDLE_ACT;
+                ++m_iBumped;
+                if (m_iBumped == 2)
+                {
+                    m_eCurState = IDLE_ACT;
+                    m_iBumped = 0;
+                    m_tFrame.iFrameStart = 0;
+                    if (m_ePrevDir == DIR_LEFT)
+                        m_pImgKey = L"MinotaursIdle_L";
+                    else
+                        m_pImgKey = L"MinotaursIdle_R";
+                    return OBJ_NOEVENT;
+                }
+                CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
+                CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
+                m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx();
+                if (m_ePrevDir == DIR_LEFT)
+                    m_pImgKey = L"MinotaursFaint_L";
+                else
+                    m_pImgKey = L"MinotaursFaint_R";
+
+                m_tFrame.iFrameStart = 0;
+                //m_iTileIdx = 
+                return OBJ_NOEVENT;
+            }
+            else if (m_eCurState == DASH_ACT)
+            {
+                m_tFrame.iFrameStart = 0;
+                if (m_ePrevDir == DIR_RIGHT)
+                    m_tFrame.iFrameStart = 1;
+                m_pImgKey = L"MinotaursCharge";
+            }
+            else if (m_eCurState == IDLE_ACT)
+            {
                 m_iBumped = 0;
                 m_tFrame.iFrameStart = 0;
                 if (m_ePrevDir == DIR_LEFT)
                     m_pImgKey = L"MinotaursIdle_L";
                 else
                     m_pImgKey = L"MinotaursIdle_R";
-                return OBJ_NOEVENT;
+                m_eCurState = IDLE_ACT;
             }
-            CTileMgr::Get_Instance()->Remove_TileObject(m_iTileIdx, TOBJ_ENTITY);
-            CTileMgr::Get_Instance()->Set_TileObject(m_iHeadTileIdx, TOBJ_ENTITY, this);
-            m_iHeadTileIdx = m_iTileIdx = Find_MyTileIdx();
-            if (m_ePrevDir == DIR_LEFT)
-                m_pImgKey = L"MinotaursFaint_L";
             else
-                m_pImgKey = L"MinotaursFaint_R";
-
-            m_tFrame.iFrameStart = 0;
-            //m_iTileIdx = 
-            return OBJ_NOEVENT;
-        }
-        else if (m_eCurState == DASH_ACT)
-        {
-            m_tFrame.iFrameStart = 0;
-            if (m_ePrevDir == DIR_RIGHT)
-                m_tFrame.iFrameStart = 1;
-            m_pImgKey = L"MinotaursCharge";
-        }
-        else if (m_eCurState == IDLE_ACT)
-        {
-            m_iBumped = 0;
-            m_tFrame.iFrameStart = 0;
-            if (m_ePrevDir == DIR_LEFT)
-                m_pImgKey = L"MinotaursIdle_L";
-            else
-                m_pImgKey = L"MinotaursIdle_R";
-            m_eCurState = IDLE_ACT;
-        }
-        else
-        {
-            m_iBumped = 0;
-            m_tFrame.iFrameStart = 0;
-            if (m_ePrevDir == DIR_LEFT)
-                m_pImgKey = L"MinotaursIdle_L";
-            else
-                m_pImgKey = L"MinotaursIdle_R";
-            m_eCurState = IDLE_ACT;
-        }
-        m_iTileIdx = Find_MyTileIdx();
-        if (m_pTarget != nullptr)
-        {
-            if (m_eCurState != DASH_ACT)
             {
-                Find_Player();
-                if (m_eDir == DIR_LEFT)
-                    m_ePrevDir = DIR_LEFT;
-                else if (m_eDir == DIR_RIGHT)
-                    m_ePrevDir = DIR_RIGHT;
-                int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_TileIdx();
-                int iPlayerX = iPHTileIdx % TILEX;
-                int iPlayerY = iPHTileIdx / TILEX;
-                if (m_iTileX == iPlayerX || m_iTileY == iPlayerY)
+                m_iBumped = 0;
+                m_tFrame.iFrameStart = 0;
+                if (m_ePrevDir == DIR_LEFT)
+                    m_pImgKey = L"MinotaursIdle_L";
+                else
+                    m_pImgKey = L"MinotaursIdle_R";
+                m_eCurState = IDLE_ACT;
+            }
+            m_iTileIdx = Find_MyTileIdx();
+            if (m_pTarget != nullptr)
+            {
+                if (m_eCurState != DASH_ACT)
                 {
-                    m_eCurState = DASH_ACT;
-                    CTauren::Update();
-                    return OBJ_NOEVENT;
+                    Find_Player();
+                    if (m_eDir == DIR_LEFT)
+                        m_ePrevDir = DIR_LEFT;
+                    else if (m_eDir == DIR_RIGHT)
+                        m_ePrevDir = DIR_RIGHT;
+                    int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_TileIdx();
+                    int iPlayerX = iPHTileIdx % TILEX;
+                    int iPlayerY = iPHTileIdx / TILEX;
+                    if (m_iTileX == iPlayerX || m_iTileY == iPlayerY)
+                    {
+                        m_eCurState = DASH_ACT;
+                        CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT4);
+                        CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_charge.wav", SOUND_EFFECT4, 0.3f);
+
+                        CTauren::Update();
+                        return OBJ_NOEVENT;
+                    }
                 }
             }
-        }
-        if (m_eDir == DIR_LEFT)
-            m_ePrevDir = DIR_LEFT;
-        else if (m_eDir == DIR_RIGHT)
-            m_ePrevDir = DIR_RIGHT;
-        if (Can_Move())
-        {
-            m_bMove = true;
-        }
-        else
-        {
-            float	fHeadX(0.f), fHeadY(0.f);
-            fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
-            fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
-            CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
-
-            int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
-            if (iPHTileIdx == m_iHeadTileIdx)
+            if (m_eDir == DIR_LEFT)
+                m_ePrevDir = DIR_LEFT;
+            else if (m_eDir == DIR_RIGHT)
+                m_ePrevDir = DIR_RIGHT;
+            if (Can_Move())
             {
-                m_eCurState = FAINT_ACT;
-                if (m_ePrevDir == DIR_LEFT)
-                    m_pImgKey = L"MinotaursFaint_L";
-                else
-                    m_pImgKey = L"MinotaursFaint_R";
+                m_bMove = true;
             }
-            if (pHeadWall != nullptr)		// 벽 검사
+            else
             {
-                if (m_eCurState == DASH_ACT)
-                {
-                    CTileMgr::Get_Instance()->Break_Wall(pHeadWall, nullptr);
+                float	fHeadX(0.f), fHeadY(0.f);
+                fHeadX = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fX;
+                fHeadY = (*m_pvecTile)[m_iHeadTileIdx]->Get_Info().fY;
+                CObj* pHeadWall = CTileMgr::Get_Instance()->Is_Wall_Exist(fHeadX, fHeadY);
 
+                int iPHTileIdx = static_cast<CPlayer*>(m_pTarget)->Get_HeadTileIdx();
+                if (iPHTileIdx == m_iHeadTileIdx)
+                {
                     m_eCurState = FAINT_ACT;
                     if (m_ePrevDir == DIR_LEFT)
                         m_pImgKey = L"MinotaursFaint_L";
                     else
                         m_pImgKey = L"MinotaursFaint_R";
-
                 }
-                else if (m_eCurState == IDLE_ACT)
+                if (pHeadWall != nullptr)		// 벽 검사
                 {
-                    CTileMgr::Get_Instance()->Break_Wall(pHeadWall, nullptr);
+                    if (m_eCurState == DASH_ACT)
+                    {
+                        CTileMgr::Get_Instance()->Break_Wall(pHeadWall, nullptr);
+                        CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT4);
+                        CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_wallimpact.wav", SOUND_EFFECT4, 0.3f);
+
+                        m_eCurState = FAINT_ACT;
+                        if (m_ePrevDir == DIR_LEFT)
+                            m_pImgKey = L"MinotaursFaint_L";
+                        else
+                            m_pImgKey = L"MinotaursFaint_R";
+
+                    }
+                    else if (m_eCurState == IDLE_ACT)
+                    {
+                        CTileMgr::Get_Instance()->Break_Wall(pHeadWall, nullptr);
+                    }
                 }
+                m_iHeadTileIdx = m_iTileIdx;
             }
-            m_iHeadTileIdx = m_iTileIdx;
+
+            //BEATMGR->Set_ObjectAbleToMove(false);
         }
 
-        //BEATMGR->Set_ObjectAbleToMove(false);
+        if (m_eCurState == FAINT_ACT)
+        {
+            m_bMove = false;
+        }
+        Jumping();
     }
-
-    if (m_eCurState == FAINT_ACT)
-    {
-        m_bMove = false;
-    }
-
-
-    Jumping();
-
     __super::Update_Rect();
 
     return OBJ_NOEVENT;
@@ -206,8 +211,15 @@ void CTauren::Late_Update()
     if (m_eCurState == DASH_ACT)
         return;
     
-
-
+    int iDistance = abs(m_pTarget->Get_TileX() - Get_TileX()) + abs(m_pTarget->Get_TileY() - Get_TileY());
+	if (m_bPlayerFound == false)
+    {
+        if (iDistance <= 20)
+        {
+            m_bPlayerFound = true;
+			CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_cry.wav", SOUND_EFFECT3, 0.2f);
+        }
+    }
     __super::Move_Frame();
 }
 

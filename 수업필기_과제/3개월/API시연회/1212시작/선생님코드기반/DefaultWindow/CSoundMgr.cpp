@@ -242,7 +242,7 @@ void CSoundMgr::PlaySound_DigVoice()
 	TCHAR szKey[32];
 	wsprintf(szKey, L"vo_cad_dig_0%d.wav", rand() % 4 + 1);
 	CSoundMgr::Get_Instance()->StopSound(SOUND_VOCAL);
-	CSoundMgr::Get_Instance()->PlaySound(szKey, SOUND_VOCAL, 0.32f);
+	CSoundMgr::Get_Instance()->PlaySound(szKey, SOUND_VOCAL, 0.35f);
 }
 
 void CSoundMgr::PlaySound_AttackVoice()
@@ -250,5 +250,5 @@ void CSoundMgr::PlaySound_AttackVoice()
 	TCHAR szKey[32];
 	wsprintf(szKey, L"vo_cad_melee_1_0%d.wav", rand() % 4 + 1);
 	CSoundMgr::Get_Instance()->StopSound(SOUND_VOCAL);
-	CSoundMgr::Get_Instance()->PlaySound(szKey, SOUND_VOCAL, 0.32f);
+	CSoundMgr::Get_Instance()->PlaySound(szKey, SOUND_VOCAL, 0.35f);
 }

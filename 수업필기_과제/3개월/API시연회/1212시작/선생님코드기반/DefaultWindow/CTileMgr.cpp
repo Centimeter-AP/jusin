@@ -338,7 +338,7 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 				{
 					static_cast<CPlayer*>(GET_PLAYER)->Set_Money(-static_cast<CItem*>(pTemp[i])->Get_Price());
 					static_cast<CItem*>(pTemp[i])->Set_IsSelling(false);
-
+					static_cast<CItem*>(pTemp[i])->Play_PurchaseSound();
 					switch (eItemType)
 					{
 					case ITEM_WEAPON:
@@ -382,8 +382,42 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 						}
 						break;
 					case ITEM_ARMOR:
+						if (!playerItemslot.empty())
+						{
+							static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+							playerItemslot.back()->Set_TileIdx(_tileIdx);
+							playerItemslot.back()->Initialize();
+							dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+							pTemp[i]->Set_TileIdx(0);
+							swap(playerItemslot.back(), pTemp[i]);
+
+							CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+							CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+						}
+						else
+						{
+							playerItemslot.push_back(pTemp[i]);
+							static_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+						}
 						break;
 					case ITEM_HEAL:
+						if (!playerItemslot.empty())
+						{
+							static_cast<CItem*>(playerItemslot.back())->Set_OnMap(true);
+							playerItemslot.back()->Set_TileIdx(_tileIdx);
+							playerItemslot.back()->Initialize();
+							dynamic_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+							pTemp[i]->Set_TileIdx(0);
+							swap(playerItemslot.back(), pTemp[i]);
+
+							CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+							CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+						}
+						else
+						{
+							playerItemslot.push_back(pTemp[i]);
+							static_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+						}
 						break;
 					case ITEM_BOMB:
 						break;

@@ -58,15 +58,17 @@ void CMerchant::Late_Update()
         if (m_tFrame.iFrameStart % 2)
             m_tFrame.dwSpeed = 50;
         else
-            m_tFrame.dwSpeed = 400;
+            m_tFrame.dwSpeed = 450;
         if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
             m_tFrame.iFrameStart = 0;
 
         m_tFrame.dwTime = GetTickCount64();
     }
     int iDistance = abs(m_pTarget->Get_TileX() - Get_TileX()) + abs(m_pTarget->Get_TileY() - Get_TileY());
-    int iVolume = 0.6f - (float)iDistance / 8.f;
-	CSoundMgr::Get_Instance()->SetChannelVolume(SOUND_MERCHANT, 0.6f - (float)iDistance / 8.f);
+    float iVolume = 0.6f - (float)iDistance / 15.f;
+    if (iVolume < 0.f)
+		iVolume = 0.f;
+	CSoundMgr::Get_Instance()->SetChannelVolume(SOUND_MERCHANT, iVolume);
 }
 
 void CMerchant::Render(HDC hDC)
