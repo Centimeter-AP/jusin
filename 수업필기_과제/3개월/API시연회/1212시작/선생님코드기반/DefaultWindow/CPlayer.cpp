@@ -109,6 +109,7 @@ int CPlayer::Update()
 	//}
 
 	//m_tFrame.iMotion = m_Itemlist[ITEM_ARMOR].front()->Get_ArmorType();
+	// 0이 기본(옷없음), 1이 가죽, 2가 체인, 3이 플레이트
 
 
 	__super::Update_Rect();
