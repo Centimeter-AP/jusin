@@ -4,7 +4,7 @@ class CTauren : public CMonster
 {
 public:
     CTauren()
-    : m_eCurState(IDLE_ACT), m_bPlayerFound(false)
+    : m_eCurState(IDLE_ACT)
 		, m_iBumped(0), m_ePrevDir(DIR_LEFT)
     {}
     virtual ~CTauren() { Release(); }
@@ -20,7 +20,6 @@ public:
 private:
     enum ACTSTATE { IDLE_ACT, DASH_ACT, FAINT_ACT, END_ACT };
     ACTSTATE    m_eCurState;
-    bool        m_bPlayerFound;
     int         m_iBumped;
     int         m_iActMotionOffset;
     int         m_iBeforeAct;

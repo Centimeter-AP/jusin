@@ -27,7 +27,7 @@ CPlayer::CPlayer()
 	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
 	m_pvecTile(nullptr), m_qltskrka(false), m_iMoney(0), m_iWaterTileOffset(0), m_bInWater(false),
-	m_bDebugMovable(true), m_bHit(false), m_bHasKey(false), m_iArmorIdx(0)
+	m_bDebugMovable(false), m_bHit(false), m_bHasKey(false), m_iArmorIdx(0)
 {
 }
 

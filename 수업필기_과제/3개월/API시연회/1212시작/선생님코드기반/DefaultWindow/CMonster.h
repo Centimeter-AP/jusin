@@ -37,6 +37,7 @@ protected:
     bool        m_bMove;
     float       m_fShadowY;
     bool        m_bCanChangeDir;
+    bool        m_bPlayerFound;
     int         m_iDamage;
 
     int         m_iMoney;

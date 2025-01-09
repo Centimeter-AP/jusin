@@ -455,6 +455,8 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 						{
 							playerItemslot.push_back(pTemp[i]);
 							static_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+							CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+							CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_general_ST.ogg", SOUND_EFFECT, g_fVolume);
 						}
 						break;
 					case ITEM_GOLD:
@@ -549,12 +551,14 @@ bool CTileMgr::Check_TileObject(int _tileIdx)
 						swap(playerItemslot.back(), pTemp[i]);
 
 						CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
-						CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_weapon.wav", SOUND_EFFECT, g_fVolume);
+						CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_general_ST.ogg", SOUND_EFFECT, g_fVolume);
 					}
 					else
 					{
 						playerItemslot.push_back(pTemp[i]);
 						static_cast<CItem*>(pTemp[i])->Set_OnMap(false);
+						CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+						CSoundMgr::Get_Instance()->PlaySound(L"sfx_pickup_general_ST.ogg", SOUND_EFFECT, g_fVolume);
 					}
 					break;
 				case ITEM_GOLD:

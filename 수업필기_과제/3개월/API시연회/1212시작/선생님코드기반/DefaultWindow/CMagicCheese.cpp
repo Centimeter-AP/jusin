@@ -20,7 +20,7 @@ void CMagicCheese::Initialize()
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY - 24.f;
 
     CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/mcheese.bmp", L"MagicCheese");
-    m_eRender = RENDER_MAPITEM;
+    m_eRender = RENDER_GAMEOBJECT;
     m_eItemType = ITEM_HEAL;
 }
 
@@ -73,8 +73,8 @@ void CMagicCheese::Render(HDC hDC)
     {
         Draw_Price(hDC);
     }
-    if (m_bSecretRevealed)
-    {
+    //if (m_bSecretRevealed)
+    //{
         if (m_bOnMap)
         {
             if (m_bIsPlayerOnTile == false)
@@ -85,14 +85,14 @@ void CMagicCheese::Render(HDC hDC)
                     (int)m_tInfo.fCX,			// 복사 받을 이미지의 가로, 세로
                     (int)m_tInfo.fCY,
                     hMemDC,						// 복사할 이미지 DC	
-                    m_iImgPosX,							// 비트맵 출력 시작 좌표(Left, top)
+                    0,							// 비트맵 출력 시작 좌표(Left, top)
                     0,
                     (int)m_tInfo.fCX,			// 복사할 이미지의 가로, 세로
                     (int)m_tInfo.fCY,
                     RGB(255, 0, 255));		// 제거할 색상
             }
         }
-    }
+    //}
 }
 
 void CMagicCheese::Release()
@@ -101,7 +101,7 @@ void CMagicCheese::Release()
 
 void CMagicCheese::Use_Item()
 {
-    static_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Set_MaxHP(-4);
+    static_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Set_MaxHP(4);
     static_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Set_HP(-4);
 
     CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);

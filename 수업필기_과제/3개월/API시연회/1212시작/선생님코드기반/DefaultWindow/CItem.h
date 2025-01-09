@@ -30,6 +30,7 @@ public:
     int         Get_TileIdx() { return m_iTileIdx; }
     ITEMLIST    Get_ItemType() { return m_eItemType; }
     int         Get_ImgPosX() { return m_iImgPosX; }
+	auto&       Get_ImgKey() { return m_pImgKey; }
 
     void        Find_TileIdx_OnMap();
     void        Find_Player_OnSameTile();

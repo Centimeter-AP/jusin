@@ -53,37 +53,40 @@ int CSkeleton::Update()
         return OBJ_DEAD;
     }
 
-    if (BEATMGR->Get_ObjectAbleToMove() == true)
+    if (m_bPlayerFound)
     {
-        if (m_eCurState == AFTER_ACT)
+        if (BEATMGR->Get_ObjectAbleToMove() == true)
         {
-            //BEATMGR->Set_ObjectAbleToMove(false);
-            m_eCurState = BEFORE_ACT;
-            m_iHeadTileIdx = m_iTileIdx;
-            m_iTileIdx = Find_MyTileIdx();
-            m_iBeforeAct = 1;
-            return OBJ_NOEVENT;
-        }
-        else
-        {
-            m_iBeforeAct = 0;
-            m_eCurState = AFTER_ACT;
-        }
+            if (m_eCurState == AFTER_ACT)
+            {
+                //BEATMGR->Set_ObjectAbleToMove(false);
+                m_eCurState = BEFORE_ACT;
+                m_iHeadTileIdx = m_iTileIdx;
+                m_iTileIdx = Find_MyTileIdx();
+                m_iBeforeAct = 1;
+                return OBJ_NOEVENT;
+            }
+            else
+            {
+                m_iBeforeAct = 0;
+                m_eCurState = AFTER_ACT;
+            }
 
-        m_iTileIdx = Find_MyTileIdx();
-        if (m_pTarget != nullptr)
-        {
-            Find_Player();
+            m_iTileIdx = Find_MyTileIdx();
+            if (m_pTarget != nullptr)
+            {
+                Find_Player();
+            }
+            if (Can_Move())
+            {
+                m_bMove = true;
+            }
+            else
+            {
+                m_iHeadTileIdx = m_iTileIdx;
+            }
+            //BEATMGR->Set_ObjectAbleToMove(false);
         }
-        if (Can_Move())
-        {
-            m_bMove = true;
-        }
-        else
-        {
-            m_iHeadTileIdx = m_iTileIdx;
-        }
-        //BEATMGR->Set_ObjectAbleToMove(false);
     }
 
     Jumping();
@@ -95,7 +98,14 @@ int CSkeleton::Update()
 
 void CSkeleton::Late_Update()
 {
-
+    int iDistance = abs(m_pTarget->Get_TileX() - Get_TileX()) + abs(m_pTarget->Get_TileY() - Get_TileY());
+    if (m_bPlayerFound == false)
+    {
+        if (iDistance <= 10)
+        {
+            m_bPlayerFound = true;
+        }
+    }
     __super::Move_Frame();
 
 }

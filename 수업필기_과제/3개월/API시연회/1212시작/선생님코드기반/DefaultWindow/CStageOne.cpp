@@ -28,7 +28,7 @@
 #include "CPlayerArmorUI.h"
 #include "CMagicCheese.h"
 
-CStageOne::CStageOne() :m_pBoss(nullptr)
+CStageOne::CStageOne() :m_pBoss(nullptr), m_bSecretOpened(false)
 {
 }
 
@@ -127,8 +127,12 @@ int CStageOne::Update()
 	{
 		if (m_bSecretOpened == false)
 		{
-			CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CMagicCheese>::Create_Item(true, 1176, 288));// 625 ÁÂÇ¥ 
-
+			CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CMagicCheese>::Create_Item(true, 648, 576));// 625 ÁÂÇ¥ 
+			m_bSecretOpened = true;
+			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT2);
+			CSoundMgr::Get_Instance()->PlaySound(L"sfx_secretfound.ogg", SOUND_EFFECT2, 0.3f);
+			CSoundMgr::Get_Instance()->StopSound(SOUND_VOCAL);
+			CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_teleport_04.ogg", SOUND_VOCAL, 0.2f);
 		}
 	}
 

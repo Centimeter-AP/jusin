@@ -17,7 +17,7 @@ CMonster::CMonster()
 	:m_fTime(0.f), m_fJumpPower(0.f)
 	, m_iHeadTileIdx(0), m_bMove(false), m_fShadowY(0.f)
 	, m_iDamage(0), m_iImgCX(0), m_iImgCY(0), m_bCanChangeDir(false), m_pvecTile(nullptr)
-	, m_iMoney(0)
+	, m_iMoney(0), m_bPlayerFound(false)
 {
 }
 

@@ -215,7 +215,7 @@ void CTauren::Late_Update()
     int iDistance = abs(m_pTarget->Get_TileX() - Get_TileX()) + abs(m_pTarget->Get_TileY() - Get_TileY());
 	if (m_bPlayerFound == false)
     {
-        if (iDistance <= 20)
+        if (iDistance <= 10)
         {
             m_bPlayerFound = true;
 			CSoundMgr::Get_Instance()->PlaySound(L"en_minotaur_cry.wav", SOUND_EFFECT3, 0.2f);

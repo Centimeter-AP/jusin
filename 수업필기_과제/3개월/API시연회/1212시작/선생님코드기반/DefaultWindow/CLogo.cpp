@@ -3,8 +3,9 @@
 #include "CBmpMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
+#include "CSoundMgr.h"
 
-CLogo::CLogo()
+CLogo::CLogo() :m_bStartBGM(false)
 {
 }
 
@@ -14,7 +15,7 @@ CLogo::~CLogo()
 }
 
 void CLogo::Initialize()
-{
+{ 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Title/Title_Screen_Button.bmp", L"Logo");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile.bmp", L"Tile");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Tile/Tile_Boss.bmp", L"Tile_Boss");
@@ -30,7 +31,12 @@ int CLogo::Update()
 		CSceneMgr::Get_Instance()->Set_Scene(SC_LOBBY);
 		return 0;
 	}
-
+	if (m_bStartBGM == false)
+	{
+		CSoundMgr::Get_Instance()->StopAll();
+		CSoundMgr::Get_Instance()->PlayBGM(L"zone1_3.ogg", 0.18f);
+		m_bStartBGM = true;
+	}
 
 	return 0;
 }

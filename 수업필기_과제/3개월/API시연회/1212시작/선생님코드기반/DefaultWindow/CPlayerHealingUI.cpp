@@ -33,23 +33,26 @@ void CPlayerHealingUI::Late_Update()
     if (m_pCurHealingItem == nullptr)
         m_bHasItem = false;
     else
+    {
         m_bHasItem = true;
+        m_pImgKey = static_cast<CItem*>(m_pCurHealingItem)->Get_ImgKey();
+    }
 }
 
 void CPlayerHealingUI::Render(HDC hDC)
 {
     HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"UI_Healing");
-    switch (m_eItemName)
-    {
-    case CPlayerHealingUI::NORMALCHEESE:
-        m_pImgKey = L"Apple";
-        break;
-    case CPlayerHealingUI::MAGICCHEESE:
-        m_pImgKey = L"MagicCheese";
-        break;
-    default:
-        break;
-    }
+    //switch (m_eItemName)
+    //{
+    //case CPlayerHealingUI::NORMALCHEESE:
+    //    m_pImgKey = L"Apple";
+    //    break;
+    //case CPlayerHealingUI::MAGICCHEESE:
+    //    m_pImgKey = L"MagicCheese";
+    //    break;
+    //default:
+    //    break;
+    //}
     HDC		hMemDCCur = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
 
     if (m_bHasItem)
