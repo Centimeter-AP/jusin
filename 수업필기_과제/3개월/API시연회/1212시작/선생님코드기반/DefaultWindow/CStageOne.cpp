@@ -26,6 +26,7 @@
 #include "CPlayerHealingUI.h"
 #include "CArmorGi.h"
 #include "CPlayerArmorUI.h"
+#include "CMagicCheese.h"
 
 CStageOne::CStageOne() :m_pBoss(nullptr)
 {
@@ -121,6 +122,14 @@ int CStageOne::Update()
 	else
 	{
 		m_bBeatOne = true;
+	}
+	if (GET_PLAYER->Get_TileIdx() == 624 || GET_PLAYER->Get_TileIdx() == 625 + TILEX)
+	{
+		if (m_bSecretOpened == false)
+		{
+			CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CMagicCheese>::Create_Item(true, 1176, 288));// 625 ÁÂÇ¥ 
+
+		}
 	}
 
 	CObjMgr::Get_Instance()->Update();

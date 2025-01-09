@@ -14,5 +14,6 @@ public:
 	void Release() override;
 private:
 	CObj* m_pBoss;
+	bool m_bSecretOpened;
 };
 
