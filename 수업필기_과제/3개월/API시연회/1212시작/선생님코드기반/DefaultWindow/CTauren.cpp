@@ -35,6 +35,7 @@ void CTauren::Initialize()
     m_tFrame.dwSpeed = 100;
     m_tFrame.dwTime = GetTickCount64();
 
+    m_iMoney = 200;
     m_pImgKey = L"MinotaursIdle_L";
     m_fJumpPower = 9.5f;
     Get_TileX();

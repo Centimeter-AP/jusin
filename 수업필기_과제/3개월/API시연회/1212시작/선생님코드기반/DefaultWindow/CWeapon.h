@@ -14,7 +14,7 @@ public:
 	virtual void Release()			PURE;
 
 	int		Get_Damage() { return m_iDamage; }
-
+	void	Set_Damage(int _iDamage) { m_iDamage = _iDamage; }
 public:
 	enum WEAPONTYPE { DAGGER_TYPE, LONGSWORD_TYPE, BROADSWORD_TYPE, WEAPONTYPE_END };
 	WEAPONTYPE	Get_WeaponType() { return m_eWeaponType; }

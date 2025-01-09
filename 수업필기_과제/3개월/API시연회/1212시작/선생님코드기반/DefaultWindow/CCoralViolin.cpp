@@ -125,6 +125,10 @@ int CCoralViolin::Update()
                         || m_iTileIdx - 1 == iPHTileIdx || m_iTileIdx - TILEX == iPHTileIdx)
                     {
                         GET_PLAYER->Set_HP(m_iDamage);
+                        if (static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_ARMOR).empty() == false)
+                        {
+                            GET_PLAYER->Set_HP(m_iDamage);
+                        }
                         CSoundMgr::Get_Instance()->StopSound(SOUND_VOCAL);
                         CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_VOCAL, g_fVolume);
                     }

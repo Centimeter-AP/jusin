@@ -27,7 +27,7 @@ CPlayer::CPlayer()
 	m_iHeadTileIdx(0), m_bMove(false), m_ePrevDir(DIR_LEFT), m_fShadowY(0.f),
 	m_bTemp(false), m_eCurState(IDLE), m_ePreState(IDLE),
 	m_pvecTile(nullptr), m_qltskrka(false), m_iMoney(0), m_iWaterTileOffset(0), m_bInWater(false),
-	m_bDebugMovable(true), m_bHit(false)
+	m_bDebugMovable(true), m_bHit(false), m_bHasKey(false), m_iArmorIdx(0)
 {
 }
 
@@ -73,8 +73,8 @@ void CPlayer::Initialize()
 	m_fJumpPower = 9.5f;
 	m_iHeadTileIdx = m_iTileIdx;
 
-	m_iMaxHP = 10;
-	m_iHP = 10;
+	m_iMaxHP = 6;
+	m_iHP = 6;
 
 	// 최초 플레이어 init할 때 필수로 들고있어야 하는 아이템들 여기서 생성 후 아이템리스트에 별도로 보관?
 	// 좀 비효율적인 것 같긴 한데 고민하느니 일단 만들기..
@@ -108,8 +108,12 @@ int CPlayer::Update()
 	//	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CWaterTile>::Create(m_iTileIdx));
 	//}
 
-	//m_tFrame.iMotion = m_Itemlist[ITEM_ARMOR].front()->Get_ArmorType();
+	if (m_Itemlist[ITEM_ARMOR].empty() == false)
+	{
+		m_iArmorIdx = 5;
+	}
 	// 0이 기본(옷없음), 1이 가죽, 2가 체인, 3이 플레이트
+	// 5가 도복
 
 
 	__super::Update_Rect();
@@ -183,7 +187,7 @@ void CPlayer::Render(HDC hDC)
 		(int)m_tInfo.fCY - m_iWaterTileOffset,	// 여기 줄임
 		hMemDCarmor,													
 		(int)m_tInfo.fCX * m_tFrame.iFrameStart,
-		(int)m_tInfo.fCY * m_tFrame.iMotion,
+		(int)m_tInfo.fCY * m_iArmorIdx,
 		PLAYERCX,
 		PLAYERCY - m_iWaterTileOffset,			// 여기도 줄임
 		RGB(255, 0, 255));
@@ -305,7 +309,7 @@ void CPlayer::Get_Item(CObj* _pItem)
 		break;
 	case ITEM_HEAL:
 		break;
-	case ITEM_BOMB:
+	case ITEM_GOLD:
 		break;
 	case ITEM_END:
 		break;
@@ -737,10 +741,16 @@ void CPlayer::Key_Input()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		//CBeatMgr::Get_Instance()->Plus_BeatCombo();
- 		m_iMoney += 100; 
+		CBeatMgr::Get_Instance()->Plus_BeatCombo();
+ 		//m_iMoney += 100; 
 		//m_bHit = true;
 		m_bDebugMovable = !m_bDebugMovable;
+		//m_bHasKey = !m_bHasKey;
+	}
+	if (CKeyMgr::Get_Instance()->Key_Down('F'))
+	{
+		m_iMoney += 100;
+		m_iHP = m_iMaxHP;
 	}
 
 }

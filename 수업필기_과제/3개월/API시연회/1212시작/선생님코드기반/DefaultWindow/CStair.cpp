@@ -20,27 +20,32 @@ void CStair::Initialize()
 
 int CStair::Update()
 {
-	if (GET_PLAYER->Get_TileIdx() == m_iTileIdx)
+	if (GET_PLAYER->Get_TileIdx() == m_iTileIdx && m_iTileIdx != 0)
 	{
 		if (m_iIsClosed == 0)
 		{
 			Interact_Stair();
 			return OBJ_NEXTSCENE;
 		}
-	}
-	if (static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx() == m_iTileIdx)
-	{
-		if (m_bIsPlayerOnTile == false)
+		else
 		{
-			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
-			CSoundMgr::Get_Instance()->PlaySound(L"sfx_error.wav", SOUND_EFFECT, 0.8f);
-			m_bIsPlayerOnTile = true;
+			if (m_bIsPlayerOnTile == false )
+			{
+				CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+				CSoundMgr::Get_Instance()->PlaySound(L"sfx_error.wav", SOUND_EFFECT, 0.8f);
+				m_bIsPlayerOnTile = true;
+			}
 		}
 	}
 	else
 	{
 		m_bIsPlayerOnTile = false;
 	}
+
+
+
+
+
 	__super::Update_Rect();
 	//m_iIsClosed = 1;
     return OBJ_NOEVENT;
@@ -48,7 +53,22 @@ int CStair::Update()
 
 void CStair::Late_Update()
 {
-
+	
+	//if (static_cast<CPlayer*>(GET_PLAYER)->Get_HeadTileIdx() == m_iTileIdx)
+	//{
+	//	{
+	//		if (m_bIsPlayerOnTile == false)
+	//		{
+	//			CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
+	//			CSoundMgr::Get_Instance()->PlaySound(L"sfx_error.wav", SOUND_EFFECT, 0.8f);
+	//			m_bIsPlayerOnTile = true;
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	m_bIsPlayerOnTile = false;
+	//}
 }
 
 void CStair::Render(HDC hDC)

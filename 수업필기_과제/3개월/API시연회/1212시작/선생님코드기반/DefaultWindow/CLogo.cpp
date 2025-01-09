@@ -27,7 +27,7 @@ int CLogo::Update()
 {
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_RETURN))
 	{
-		CSceneMgr::Get_Instance()->Set_Scene(SC_MENU);
+		CSceneMgr::Get_Instance()->Set_Scene(SC_LOBBY);
 		return 0;
 	}
 

@@ -26,7 +26,9 @@ public:
     int          Get_HeadTileIdx() { return m_iHeadTileIdx; }
     CObj*        Get_CurShovel() { return m_Itemlist[ITEM_SHOVEL].front(); }
     CObj*        Get_CurWeapon() { return m_Itemlist[ITEM_WEAPON].front(); }
-    list<CObj*>& Get_ItemSlot(int _iItemlist) { return m_Itemlist[_iItemlist]; }
+    CObj*        Get_CurHealing() { if (!m_Itemlist[ITEM_HEAL].empty()) return m_Itemlist[ITEM_HEAL].front(); else return nullptr; }
+    CObj*        Get_CurArmor() { if (!m_Itemlist[ITEM_ARMOR].empty()) return m_Itemlist[ITEM_ARMOR].front(); else return nullptr; }
+    list<CObj*>& Get_ItemSlot(int _iItemlist) {  return m_Itemlist[_iItemlist]; }
 	int          Get_Money() { return m_iMoney; }
 
 	void         Set_Money(int _iMoney) { m_iMoney += _iMoney; }
@@ -43,6 +45,9 @@ public:
     void        Set_FullHP() { m_iHP = m_iMaxHP; }
     void        Attack_Effect();
 	void        Set_Hit() { m_bHit = true; }
+	void        Set_HasKey(bool _bHasKey) { m_bHasKey = _bHasKey; }
+	bool        Get_HasKey() { return m_bHasKey; }  
+	void        Set_MaxHP(int _iMaxHP) { m_iMaxHP += _iMaxHP; }
 
 private:
     void        Key_Input();
@@ -93,5 +98,7 @@ private:
     list<CObj*> m_Itemlist[ITEM_END];
     int         m_iMoney;
 
+    bool        m_bHasKey;
+    int         m_iArmorIdx;
 };
 

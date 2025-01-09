@@ -28,6 +28,7 @@ void CSkeleton::Initialize()
     m_tFrame.dwSpeed = 100;
     m_tFrame.dwTime = GetTickCount64();
 
+    m_iMoney = 50;
     m_pImgKey = L"Skeleton";
     m_fJumpPower = 9.5f;
     Get_TileX();

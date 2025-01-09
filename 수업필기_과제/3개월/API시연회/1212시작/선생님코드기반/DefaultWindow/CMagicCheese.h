@@ -3,11 +3,17 @@
 class CMagicCheese :
     public CHealing
 {
-    // CHealing을(를) 통해 상속됨
+public:
+    CMagicCheese() : m_bSecretRevealed(false){}
+	virtual ~CMagicCheese() {}
     void Initialize() override;
     int Update() override;
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
+    virtual void Use_Item() override;
+
+private:
+	bool m_bSecretRevealed;
 };
 

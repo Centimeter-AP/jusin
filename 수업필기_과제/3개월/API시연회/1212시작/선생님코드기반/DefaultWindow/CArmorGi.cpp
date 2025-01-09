@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CApple.h"
+#include "CArmorGi.h"
 #include "CBmpMgr.h"
 #include "CScrollMgr.h"
 #include "CObjMgr.h"
@@ -7,24 +7,23 @@
 #include "CPlayer.h"
 #include "CSoundMgr.h"
 
-void CApple::Initialize()
+void CArmorGi::Initialize()
 {
     m_tInfo.fCX = 48.f;
     m_tInfo.fCY = 48.f;
-    m_pImgKey = L"Apple";
+    m_pImgKey = L"armor_gi";
     m_fSpeed = 2.f;
-    m_iImgPosX = 0;
-    m_iPrice = 100;
+    m_iPrice = 350;
 
     m_tInfo.fX = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fX;
     m_tInfo.fY = (*CTileMgr::Get_Instance()->Get_TileVec())[m_iTileIdx]->Get_Info().fY;
 
-    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/cheese.bmp", L"Apple");
+    CBmpMgr::Get_Instance()->Insert_Bmp(L"../content/texture/Item/armor_gi.bmp", L"armor_gi");
     m_eRender = RENDER_MAPITEM;
-    m_eItemType = ITEM_HEAL;
+    m_eItemType = ITEM_ARMOR;
 }
 
-int CApple::Update()
+int CArmorGi::Update()
 {
     if (m_bOnMap)
     {
@@ -50,10 +49,10 @@ int CApple::Update()
         }
     }
     __super::Update_Rect();
-	return 0;
+    return 0;
 }
 
-void CApple::Late_Update()
+void CArmorGi::Late_Update()
 {
     if (m_bOnMap)
     {
@@ -62,7 +61,7 @@ void CApple::Late_Update()
     }
 }
 
-void CApple::Render(HDC hDC)
+void CArmorGi::Render(HDC hDC)
 {
     HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(m_pImgKey);
 
@@ -92,15 +91,6 @@ void CApple::Render(HDC hDC)
     }
 }
 
-void CApple::Release()
+void CArmorGi::Release()
 {
-}
-
-void CApple::Use_Item()
-{
-	static_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Set_HP(-4);
-    CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
-    CSoundMgr::Get_Instance()->PlaySound(L"sfx_item_food.ogg", SOUND_EFFECT, 1.f);
-    
-	m_bDead = true;
 }

@@ -11,11 +11,13 @@
 #include "CSplash.h"
 #include "CWaterTile.h"
 #include "CMonsterEffect.h"
+#include "CGold.h"
 
 CMonster::CMonster()
 	:m_fTime(0.f), m_fJumpPower(0.f)
 	, m_iHeadTileIdx(0), m_bMove(false), m_fShadowY(0.f)
 	, m_iDamage(0), m_iImgCX(0), m_iImgCY(0), m_bCanChangeDir(false), m_pvecTile(nullptr)
+	, m_iMoney(0)
 {
 }
 
@@ -161,6 +163,11 @@ void CMonster::Render(HDC hDC)
 
 void CMonster::Release()
 {
+	if (m_iMoney > 0)
+	{
+		CObjMgr::Get_Instance()->Add_Object(OBJ_GOLD, CAbstractFactory<CGold>::Create(m_iTileIdx));
+		static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastGold())->Set_Price(m_iMoney);
+	}
 }
 
 void CMonster::Jumping()
@@ -319,6 +326,10 @@ void CMonster::BossMove()
 					|| m_iHeadTileIdx + TILEX + 1 == playerheadtile || m_iHeadTileIdx + TILEX + 2 == playerheadtile)
 				{
 					GET_PLAYER->Set_HP(6);
+					if (static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_ARMOR).empty() == false)
+					{
+						GET_PLAYER->Set_HP(6);
+					}
 					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
 				}
@@ -364,6 +375,10 @@ void CMonster::BossMove()
 				 || m_iHeadTileIdx + TILEX - 2 == playerheadtile)
 				{
 					GET_PLAYER->Set_HP(6);
+					if (static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_ARMOR).empty() == false)
+					{
+						GET_PLAYER->Set_HP(6);
+					}
 					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
 				}
@@ -406,6 +421,10 @@ void CMonster::BossMove()
 					|| m_iHeadTileIdx + TILEX * 2 + 1 == playerheadtile || m_iHeadTileIdx + TILEX * 2 - 1 == playerheadtile)
 				{
 					GET_PLAYER->Set_HP(6);
+					if (static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_ARMOR).empty() == false)
+					{
+						GET_PLAYER->Set_HP(6);
+					}
 					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
 				}
@@ -457,6 +476,10 @@ void CMonster::BossMove()
 				 || isplashidx - TILEX * 2 + 1 == playerheadtile || isplashidx - TILEX * 2 - 1 == playerheadtile)
 				{
 					GET_PLAYER->Set_HP(6);
+					if (static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_ARMOR).empty() == false)
+					{
+						GET_PLAYER->Set_HP(6);
+					}
 					CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 					CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
 				}
@@ -641,6 +664,10 @@ bool CMonster::Can_Move()
 	else if (iPHTileIdx == m_iHeadTileIdx)
 	{
 		GET_PLAYER->Set_HP(m_iDamage);
+		if (static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_ARMOR).empty() == false)
+		{
+			GET_PLAYER->Set_HP(m_iDamage);
+		}
 		CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
 		CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
 		Attack_Effect();

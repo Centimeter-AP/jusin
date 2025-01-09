@@ -291,6 +291,10 @@ void CCoralRiffBoss::Move_Phase()
                || m_iHeadTileIdx - TILEX * 2 + 1 == playerheadtile || m_iHeadTileIdx - TILEX * 2 - 1 == playerheadtile)
             {
                 GET_PLAYER->Set_HP(m_iDamage);
+                if (static_cast<CPlayer*>(GET_PLAYER)->Get_ItemSlot(ITEM_ARMOR).empty() == false)
+                {
+                    GET_PLAYER->Set_HP(m_iDamage);
+                }
                 CSoundMgr::Get_Instance()->StopSound(SOUND_EFFECT);
                 CSoundMgr::Get_Instance()->PlaySound(L"vo_cad_hurt_01.wav", SOUND_EFFECT, g_fVolume);
             }

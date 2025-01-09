@@ -19,7 +19,8 @@ public:
 	CObj* Get_LastItem()	{ return m_ObjList[OBJ_ITEM].back(); }
 	CObj* Get_LastBar()		{ return m_ObjList[OBJ_UI].back(); }
 	CObj* Get_LastStair()   { return m_ObjList[OBJ_STAIR].back(); }
-	CObj* Get_LastEffect() { return m_ObjList[OBJ_EFFECT].back(); }
+	CObj* Get_LastEffect()  { return m_ObjList[OBJ_EFFECT].back(); }
+	CObj* Get_LastGold()	{ return m_ObjList[OBJ_GOLD].back(); }
 	CObj* Get_Target(OBJID eID, CObj* pDst);
 
 	CObj* Is_Item_Exist(float fx, float fy);
@@ -28,7 +29,7 @@ public:
 	CObj* Is_Monster_Exist(float fx, float fy);
 	CObj* Is_Monster_Exist(int _iTileIdx);
 
-	void Get_Item(CItem* _pItem);
+	void	Get_Item(CItem* _pItem);
 	bool	Find_ifExist(OBJID eID, CObj* pObj);
 	bool	Check_IsPlayerEmpty() { return m_ObjList[OBJ_PLAYER].empty(); }
 

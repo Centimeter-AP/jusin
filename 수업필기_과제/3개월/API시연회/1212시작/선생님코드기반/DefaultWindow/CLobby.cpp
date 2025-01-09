@@ -13,6 +13,9 @@
 #include "CPlayerWeaponUI.h"
 #include "CStair.h"
 #include "CDummy.h"
+#include "CSarcophagus.h"
+#include "CGoldenKey.h"
+#include "CPlayerMoney.h"
 
 
 CLobby::CLobby()
@@ -59,6 +62,8 @@ void CLobby::Initialize()
 	static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_STAGEONE);
 	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(888, 456));
 	static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_BOSS);
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CSarcophagus>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerMoney>::Create());
 
 	CScrollMgr::Get_Instance()->Set_ScrollX(-430);
 	CScrollMgr::Get_Instance()->Set_ScrollY(330);

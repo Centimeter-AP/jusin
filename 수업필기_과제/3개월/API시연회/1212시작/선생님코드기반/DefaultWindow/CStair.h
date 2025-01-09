@@ -3,7 +3,7 @@
 class CStair : public CObj
 {
 public:
-	CStair(): m_iNextScene(SC_END), m_iIsClosed(0), m_bIsPlayerOnTile(false){}
+	CStair(): m_iNextScene(SC_END), m_iIsClosed(0), m_bIsPlayerOnTile(false), m_bIsFirstTime(true){}
 	virtual ~CStair() { Release(); }
 
 public:
@@ -22,5 +22,6 @@ private:
 	int		m_iIsClosed;
 	SCENEID	m_iNextScene;
 	bool	m_bIsPlayerOnTile;
+	bool	m_bIsFirstTime;
 };
 

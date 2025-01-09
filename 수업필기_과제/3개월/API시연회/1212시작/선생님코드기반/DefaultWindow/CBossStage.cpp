@@ -28,6 +28,10 @@
 #include "CKeyMgr.h"
 #include "CWaterTile.h"
 #include "CBossCutscene.h"
+#include "CGoldenKey.h"
+#include "CPlayerMoney.h"
+#include "CPlayerHealingUI.h"
+#include "CPlayerArmorUI.h"
 
 CBossStage::CBossStage() : m_bPlayerEntered(false), m_bPlayerCleared(false)
 , m_bPlayerEnteredCheck(false), m_bPlayerClearedCheck(false)
@@ -58,7 +62,10 @@ void CBossStage::Initialize()
 	BEATMGR->Set_BPMBOSS();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHealingUI>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerArmorUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerMoney>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
 	//CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(1320, 934));
 	//static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_BOSS);
@@ -184,6 +191,7 @@ int CBossStage::Update()
 		CTileMgr::Get_Instance()->Load_Wall2();
 		// 408 240 / 263
 
+		CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CGoldenKey>::Create());
 		CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(408, 264));
 		static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_LOBBY);
 		m_bPlayerClearedCheck = true;

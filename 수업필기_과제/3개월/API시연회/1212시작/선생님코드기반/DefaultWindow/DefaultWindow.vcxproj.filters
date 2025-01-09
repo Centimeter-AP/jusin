@@ -187,9 +187,6 @@
     <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerWeapon">
       <UniqueIdentifier>{e72396c7-cd87-43ad-a5c7-f7ba14a9310e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerBomb">
-      <UniqueIdentifier>{d03d84ca-9d08-4559-8511-2ddd11dfd46a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerMoney">
       <UniqueIdentifier>{9bfdabc9-e28f-46f2-b0f5-3b727fcd6323}</UniqueIdentifier>
     </Filter>
@@ -255,6 +252,15 @@
     </Filter>
     <Filter Include="01. Obj\08. Item\04. Money">
       <UniqueIdentifier>{fbf62ec6-5b7c-41fa-8fd3-a7df6741f91d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\NewFilter1">
+      <UniqueIdentifier>{976b50c1-f3c0-4fdb-8cc4-c2ccc9e33b67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerHealing">
+      <UniqueIdentifier>{5d127d34-6ca3-4092-8a9b-70ccaadd93a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\09. UI\PlayerUI\PlayerItem\PlayerArmor">
+      <UniqueIdentifier>{d03d84ca-9d08-4559-8511-2ddd11dfd46a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -510,9 +516,6 @@
     <ClInclude Include="CArmor.h">
       <Filter>01. Obj\08. Item\03. Armor</Filter>
     </ClInclude>
-    <ClInclude Include="CDiamond.h">
-      <Filter>01. Obj\08. Item\04. Money</Filter>
-    </ClInclude>
     <ClInclude Include="CGold.h">
       <Filter>01. Obj\08. Item\04. Money</Filter>
     </ClInclude>
@@ -521,6 +524,21 @@
     </ClInclude>
     <ClInclude Include="CMissInputText.h">
       <Filter>01. Obj\09. UI\BeatUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CSarcophagus.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerHealingUI.h">
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerHealing</Filter>
+    </ClInclude>
+    <ClInclude Include="CGoldenKey.h">
+      <Filter>01. Obj\08. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CArmorGi.h">
+      <Filter>01. Obj\08. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerArmorUI.h">
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerArmor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -761,14 +779,26 @@
     <ClCompile Include="CArmor.cpp">
       <Filter>01. Obj\08. Item\03. Armor</Filter>
     </ClCompile>
-    <ClCompile Include="CDiamond.cpp">
-      <Filter>01. Obj\08. Item\04. Money</Filter>
-    </ClCompile>
     <ClCompile Include="CGold.cpp">
       <Filter>01. Obj\08. Item\04. Money</Filter>
     </ClCompile>
     <ClCompile Include="CMissInputText.cpp">
       <Filter>01. Obj\09. UI\BeatUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSarcophagus.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerHealingUI.cpp">
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerHealing</Filter>
+    </ClCompile>
+    <ClCompile Include="CArmorGi.cpp">
+      <Filter>01. Obj\08. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoldenKey.cpp">
+      <Filter>01. Obj\08. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerArmorUI.cpp">
+      <Filter>01. Obj\09. UI\PlayerUI\PlayerItem\PlayerArmor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

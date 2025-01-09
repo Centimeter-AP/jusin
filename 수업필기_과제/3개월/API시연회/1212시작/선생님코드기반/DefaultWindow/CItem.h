@@ -22,7 +22,7 @@ public:
     void        Set_FrameTickerZero() { m_iFrameTicker = 0; }
 	void        Set_NeedGold(int _iNeedGold) { m_iPrice = _iNeedGold; }
 	void        Set_IsSelling(bool _bIsSelling) { m_bIsSelling = _bIsSelling; }
-
+	void        Set_Price(int _iPrice) { m_iPrice = _iPrice; }  
 	bool        Get_IsSelling() { return m_bIsSelling; }
 	int         Get_Price() { return m_iPrice; }
     bool        Get_OnMap() { return m_bOnMap; }

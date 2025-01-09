@@ -7,6 +7,8 @@
 #include "CBeatMgr.h"
 #include "CSoundMgr.h"
 #include "CMonsterHP.h"
+#include "CGold.h"
+#include "CAbstractFactory.h"
 
 void CBlueSlime::Initialize()
 {
@@ -31,6 +33,7 @@ void CBlueSlime::Initialize()
     m_pTarget = GET_PLAYER;
     m_eDir = DIR_UP;
 
+    m_iMoney = 20;
     m_tFrame.iFrameStart = 0;
     m_tFrame.iFrameEnd = 3;
     m_tFrame.iMotion = 0;
@@ -55,7 +58,8 @@ int CBlueSlime::Update()
 {
     if (m_bDead || m_iHP == 0)
     {
-        
+        //CObjMgr::Get_Instance()->Add_Object(OBJ_GOLD, CAbstractFactory<CGold>::Create(m_iTileIdx));
+        //static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastGold())->Set_Price(m_iMoney);
         CBeatMgr::Get_Instance()->Plus_BeatCombo();
         CSoundMgr::Get_Instance()->StopSound(SOUND_MONDEATH1);
         CSoundMgr::Get_Instance()->PlaySound(L"en_slime_death_01.wav", SOUND_MONDEATH1, 0.2f);
@@ -147,6 +151,9 @@ void CBlueSlime::Render(HDC hDC)
 void CBlueSlime::Release()
 {
     CObjMgr::Get_Instance()->Delete_Object(OBJ_UI, &m_HP_UI);
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_GOLD, CAbstractFactory<CGold>::Create(m_iTileIdx));
+ //   static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastGold())->Set_Price(m_iMoney);
+
 }
 
 void CBlueSlime::Play_HitSound()

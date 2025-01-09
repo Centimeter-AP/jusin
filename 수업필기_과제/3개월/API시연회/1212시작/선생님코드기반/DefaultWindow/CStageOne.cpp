@@ -23,6 +23,9 @@
 #include "CMerchant.h"
 #include "CApple.h"
 #include "CPlayerMoney.h"
+#include "CPlayerHealingUI.h"
+#include "CArmorGi.h"
+#include "CPlayerArmorUI.h"
 
 CStageOne::CStageOne() :m_pBoss(nullptr)
 {
@@ -53,14 +56,16 @@ void CStageOne::Initialize()
 	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
 	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CApple>::Create_Item(true, 1224, 288));
 	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CTitaniumShovel>::Create_Item(true, 1272, 288));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CArmorGi>::Create_Item(true, 1272, 288));
 	static_cast<CItem*>(CObjMgr::Get_Instance()->Get_LastItem())->Set_IsSelling(true);
 	//CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CDagger>::Create_Item(true, 452, 385));
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CHeartbeat>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHP>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerHealingUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerMoney>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerShovelUI>::Create());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerArmorUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CPlayerWeaponUI>::Create());
 	CObjMgr::Get_Instance()->Add_Object(OBJ_STAIR, CAbstractFactory<CStair>::Create(1320, 934));
 	static_cast<CStair*>(CObjMgr::Get_Instance()->Get_LastStair())->Set_NextScene(SC_BOSS);
