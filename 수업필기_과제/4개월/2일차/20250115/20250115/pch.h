@@ -10,33 +10,15 @@
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 
-#include <algorithm>
 #include <list>
-#include <map>
-#include <vector>
-#include <array>
-#include <chrono>
+#include <algorithm>
 
-#include <io.h>
-#include <iostream>
 #include <d3d9.h>
 #include <d3dx9.h>
+
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
-
-#include "fmod.h"
-#include "fmod.hpp"
-//#pragma comment(lib, "fmodex_vc.lib")
-// Debug 일 때
-#pragma comment(lib, "fmodL_vc.lib")
-// Release 일 때
-#pragma comment(lib, "fmod_vc.lib")
-
-#include "ole2.h"
-
-#include "gdiplus.h"
-#pragma comment(lib,"gdiplus")
 
 #ifdef _DEBUG
 
@@ -53,7 +35,5 @@
 #endif
 
 using namespace std;
-using namespace Gdiplus;
 
 #endif //PCH_H
-
