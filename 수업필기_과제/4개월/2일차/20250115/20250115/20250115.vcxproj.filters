@@ -57,6 +57,9 @@
     <ClInclude Include="CObj.h">
       <Filter>01. Obj</Filter>
     </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="20250115.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="CObj.cpp">
       <Filter>01. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

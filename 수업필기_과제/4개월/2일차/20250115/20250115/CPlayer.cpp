@@ -3,6 +3,7 @@
 
 CPlayer::CPlayer(): m_fAngle(0.f), m_fPosinAngle(0.f)
 {
+	
 }
 
 CPlayer::~CPlayer()
@@ -20,6 +21,14 @@ void CPlayer::Initialize()
 	LD = { 350.f, 350.f, 0.f };
 	RD = { 450.f, 350.f, 0.f };
 	Posin = { 400.f, 200.f, 0.f };
+
+	//HBRUSH PinkBrush = CreateSolidBrush(RGB(255, 220, 220));
+	//HBRUSH OldBrush = (HBRUSH)SelectObject(hdc, PinkBrush);
+
+	//POINT pPos[12]{ {400,150}, {320, 80},  {250, 50}, {150, 80}, {100, 200}, {150, 300}, {400, 500},
+	//					   {650, 300}, {700, 200},{650, 80}, {550, 50},  {480, 80} };
+	//Polygon(hdc, pPos, 12);
+
 }
 
 void CPlayer::Update()

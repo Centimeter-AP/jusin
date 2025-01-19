@@ -1,0 +1,42 @@
+cobjmgr 에 ckeymgr include
+
+if (CCollisionMgr::Collision_RectNear(m_ObjList[OBJ_OBSTACLE], m_ObjList[OBJ_PLAYER]))
+
+
+ GdiTransparentBlt(hDC,	// 복사 받을 DC1
+     m_tRect.left + iScrollX,	// 복사 받을 위치 좌표 X, Y	2
+     m_tRect.top + iScrollY,
+     (int)m_tInfo.fCX,		// 복사 받을 이미지의 가로, 세로4
+     (int)m_tInfo.fCY,
+     hMemDC,		// 복사할 이미지 DC	6
+     34,			// 비트맵 출력 시작 좌표(Left, top)7
+     1,
+     (int)m_tInfo.fCX,		// 복사할 이미지의 가로, 세로9
+     (int)m_tInfo.fCY,
+     RGB(128, 0, 128));	// 제거할 색상11
+
+
+AnimMgr::
+Render(HDC _hDC, const TCHAR* pImgKey)
+{
+	Animation.Render()
+}
+
+m_vecAnInfo[curframe].tTargetInfo.fX
+
+
+animmgr 가 animation 객체 생성 및 반환
+animation 이 vector<ANINFO> 소유?
+Render할 때 curFrame++ % TotalFrame
+animation->render(HDC _hDC, const TCHAR* _pImgKey)
+{
+	this->curFrame = (curFrame  + 1) % MaxFrame;
+	int param2 = m_vecAnInfo[curframe].tPosLT.fX + iScrollX; // tPosLT.fX = tTargetInfo.fX - tSize.fX * 0.5f
+	int param3 = m_vecAnInfo[curframe].tPosLT.fY + iScrollY; // tPosLT.fY = tTargetInfo.fY - tSize.fY * 0.5f
+	int param4 = m_vecAnInfo[curframe].tSize.fX;
+	int param5 = m_vecAnInfo[curframe].tSize.fY;
+	int param6 = CBmpMgr::Get_Instance()->Find_Image(L"Player_Run_Left");
+	int param7 = m_vecAnInfo[curframe].tImgLT.fX; // fX * curframe되어있는값
+	int param8 = m_vecAnInfo[curframe].tImgLT.fY; // 0
+	
+}
