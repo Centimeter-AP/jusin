@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "안할거같지만cub3d", "안할거같지만cub3d\안할거같지만cub3d.vcxproj", "{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Header", "Header", "{802C70A0-9F8E-4884-A2D8-1BB5597D6F8D}"
+	ProjectSection(SolutionItems) = preProject
+		Header\Define.h = Header\Define.h
+		Header\Enum.h = Header\Enum.h
+		Header\Functor.h = Header\Functor.h
+		Header\Include.h = Header\Include.h
+		Header\Struct.h = Header\Struct.h
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Debug|x64.ActiveCfg = Debug|x64
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Debug|x64.Build.0 = Debug|x64
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Debug|x86.ActiveCfg = Debug|Win32
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Debug|x86.Build.0 = Debug|Win32
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Release|x64.ActiveCfg = Release|x64
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Release|x64.Build.0 = Release|x64
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Release|x86.ActiveCfg = Release|Win32
+		{E2F0E533-2EFB-4A78-B7BC-965D043D5A6E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
